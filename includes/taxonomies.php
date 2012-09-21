@@ -18,6 +18,7 @@ function cpt_portfolio_register_taxonomies() {
 		'show_ui'           => true,
 		'show_in_nav_menus' => true,
 		'show_tagcloud'     => true,
+		'show_admin_column' => true,
 		'hierarchical'      => true,       // @todo Decide whether to go hierarchical or not.
 		'query_var'         => 'portfolio',
 
