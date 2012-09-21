@@ -63,6 +63,7 @@ function cpt_portfolio_register_post_types() {
 			'title',
 			'editor',
 			'excerpt',
+			'author',
 			'thumbnail'
 		),
 
