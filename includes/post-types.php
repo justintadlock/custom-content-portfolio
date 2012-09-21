@@ -14,11 +14,18 @@ function cpt_portfolio_register_post_types() {
 
 	/* Set up the arguments for the portfolio item post type. */
 	$args = array(
+		'description'         => '',
 		'public'              => true,
 		'publicly_queryable'  => true,
 		'show_in_nav_menus'   => true,
 		'show_in_admin_bar'   => true,
 		'exclude_from_search' => false,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'menu_position'       => null,
+		'menu_icon'           => null,
+		'can_export'          => true,
+		'delete_with_user'    => false,
 		'hierarchical'        => false,
 		'has_archive'         => $settings['portfolio_root'],
 		'query_var'           => 'portfolio_item',
