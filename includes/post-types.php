@@ -1,6 +1,6 @@
 <?php
 
-add_action( 'init', 'cpt_portfolio_register_post_types', 11 );
+add_action( 'init', 'cpt_portfolio_register_post_types' );
 
 /**
  * Registers post types needed by the plugin.

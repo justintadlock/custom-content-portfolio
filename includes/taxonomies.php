@@ -1,6 +1,6 @@
 <?php
 
-add_action( 'init', 'cpt_portfolio_register_taxonomies', 9 );
+add_action( 'init', 'cpt_portfolio_register_taxonomies' );
 
 /**
  * Register taxonomies for the plugin.
