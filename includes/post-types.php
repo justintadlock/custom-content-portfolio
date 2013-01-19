@@ -40,6 +40,9 @@ function cpt_portfolio_register_post_types() {
 			'read_post'              => 'read_portfolio_item',
 			'delete_post'            => 'delete_portfolio_item',
 
+			// primitive/meta caps
+			'create_posts'           => 'create_portfolio_items',
+
 			// primitive caps used outside of map_meta_cap()
 			'edit_posts'             => 'edit_portfolio_items',
 			'edit_others_posts'      => 'manage_portfolio',
