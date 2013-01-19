@@ -107,6 +107,7 @@ class CPT_Portfolio {
 		if ( !empty( $role ) ) {
 
 			$role->add_cap( 'manage_portfolio' );
+			$role->add_cap( 'create_portfolio_items' );
 			$role->add_cap( 'edit_portfolio_items' );
 		}
 	}
