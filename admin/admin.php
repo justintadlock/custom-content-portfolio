@@ -1,5 +1,68 @@
 <?php
 
+add_action( 'admin_menu', 'cpt_portfolio_admin' );
+
+function cpt_portfolio_admin() {
+	add_action( 'add_meta_boxes', 'cpt_portfolio_add_meta_boxes' );
+	add_action( 'save_post', 'cpt_portfolio_item_info_meta_box_save', 10, 2 );
+}
+
+function cpt_portfolio_add_meta_boxes( $post_type ) {
+
+	if ( 'portfolio_item' === $post_type ) {
+
+		add_meta_box( 
+			'cpt-portfolio-item-info', 
+			__( 'Project Info', 'cpt-portfolio' ), 
+			'cpt_portfolio_item_info_meta_box_display', 
+			$post_type, 
+			'side', 
+			'core'
+		);
+	}
+}
+
+function cpt_portfolio_item_info_meta_box_display( $post, $metabox ) {
+	wp_nonce_field( basename( __FILE__ ), 'cpt-portfolio-item-info-nonce' ); ?>
+
+	<p>
+		<label for="cpt-portfolio-item-url"><?php _e( 'Project <abbr title="Uniform Resource Locator">URL</abbr>', 'cpt-portfolio' ); ?></label>
+		<br />
+		<input type="text" name="cpt-portfolio-item-url" id="cpt-portfolio-item-url" value="<?php echo esc_url( get_post_meta( $post->ID, 'portfolio_item_url', true ) ); ?>" size="30" tabindex="30" style="width: 99%;" />
+	</p>
+
+
+	<?php
+}
+
+function cpt_portfolio_item_info_meta_box_save( $post_id, $post ) {
+
+	if ( !isset( $_POST['cpt-portfolio-item-info-nonce'] ) || !wp_verify_nonce( $_POST['cpt-portfolio-item-info-nonce'], basename( __FILE__ ) ) )
+		return $post_id;
+
+	$meta = array(
+		'portfolio_item_url' => esc_url( $_POST['cpt-portfolio-item-url'] )
+	);
+
+	foreach ( $meta as $meta_key => $new_meta_value ) {
+
+		/* Get the meta value of the custom field key. */
+		$meta_value = get_post_meta( $post_id, $meta_key, true );
+
+		/* If there is no new meta value but an old value exists, delete it. */
+		if ( current_user_can( 'delete_post_meta', $post_id, $meta_key ) && '' == $new_meta_value && $meta_value )
+			delete_post_meta( $post_id, $meta_key, $meta_value );
+
+		/* If a new meta value was added and there was no previous value, add it. */
+		elseif ( current_user_can( 'add_post_meta', $post_id, $meta_key ) && $new_meta_value && '' == $meta_value )
+			add_post_meta( $post_id, $meta_key, $new_meta_value, true );
+
+		/* If the new meta value does not match the old value, update it. */
+		elseif ( current_user_can( 'edit_post_meta', $post_id, $meta_key ) && $new_meta_value && $new_meta_value != $meta_value )
+			update_post_meta( $post_id, $meta_key, $new_meta_value );
+	}
+}
+
 // Waiting on @link http://core.trac.wordpress.org/ticket/9296
 add_action( 'admin_init', 'cpt_portfolio_admin_setup' );
 

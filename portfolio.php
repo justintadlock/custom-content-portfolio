@@ -9,6 +9,7 @@
  *
  * @package   CPTPortfolio
  * @version   0.1.0 - Alpha
+ * @since     0.1.0
  * @author    Justin Tadlock <justin@justintadlock.com>
  * @copyright Copyright (c) 2012, Justin Tadlock
  * @link      http://justintadlock.com
@@ -65,6 +66,7 @@ class CPT_Portfolio {
 	public function includes() {
 
 		require_once( CPT_PORTFOLIO_INCLUDES . 'functions.php' );
+		require_once( CPT_PORTFOLIO_INCLUDES . 'meta.php' );
 		require_once( CPT_PORTFOLIO_INCLUDES . 'post-types.php' );
 		require_once( CPT_PORTFOLIO_INCLUDES . 'taxonomies.php' );
 	}
