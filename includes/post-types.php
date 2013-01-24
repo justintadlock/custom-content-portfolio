@@ -1,11 +1,25 @@
 <?php
+/**
+ * File for registering custom post types.
+ *
+ * @package    CPTPortfolio
+ * @subpackage Includes
+ * @since      0.1.0
+ * @author     Justin Tadlock <justin@justintadlock.com>
+ * @copyright  Copyright (c) 2013, Justin Tadlock
+ * @link       http://themehybrid.com/plugins/cpt-portfolio
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ */
 
+/* Register custom post types on the 'init' hook. */
 add_action( 'init', 'cpt_portfolio_register_post_types' );
 
 /**
  * Registers post types needed by the plugin.
  *
- * @since 0.1.0
+ * @since  0.1.0
+ * @access public
+ * @return void
  */
 function cpt_portfolio_register_post_types() {
 
@@ -32,7 +46,7 @@ function cpt_portfolio_register_post_types() {
 		'capability_type'     => 'portfolio_item',
 		'map_meta_cap'        => true,
 
-		/* By default, only 2 caps are needed: 'manage_portfolio' and 'edit_portfolio_items'. */
+		/* Only 2 caps are needed: 'manage_portfolio', 'create_portfolio_items', and 'edit_portfolio_items'. */
 		'capabilities' => array(
 
 			// meta caps (don't assign these to roles)

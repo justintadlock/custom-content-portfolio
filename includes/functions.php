@@ -1,11 +1,26 @@
 <?php
+/**
+ * Various functions, filters, and actions used by the plugin.
+ *
+ * @package    CPTPortfolio
+ * @subpackage Includes
+ * @since      0.1.0
+ * @author     Justin Tadlock <justin@justintadlock.com>
+ * @copyright  Copyright (c) 2013, Justin Tadlock
+ * @link       http://themehybrid.com/plugins/cpt-portfolio
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ */
 
+/* Filter the post type archive title. */
 add_filter( 'post_type_archive_title', 'cpt_portfolio_post_type_archive_title' );
 
+/* Filter the post type permalink. */
 add_filter( 'post_type_link', 'cpt_portfolio_post_type_link', 10, 2 );
 
 /**
- * @since 0.1.0
+ * Returns the default settings for the plugin.
+ *
+ * @since  0.1.0
  * @access public
  * @return array
  */
@@ -21,9 +36,12 @@ function cpt_portfolio_get_default_settings() {
 }
 
 /**
- * @since 0.1.0
+ * Filter on 'post_type_archive_title' to allow for the use of the 'archive_title' label that isn't supported 
+ * by WordPress.  That's okay since we can roll our own labels.
+ *
+ * @since  0.1.0
  * @access public
- * @param string $title
+ * @param  string $title
  * @return string
  */
 function cpt_portfolio_post_type_archive_title( $title ) {
@@ -37,15 +55,17 @@ function cpt_portfolio_post_type_archive_title( $title ) {
 }
 
 /**
- * @since 0.1.0
+ * Filter on 'post_type_link' to allow users to use '%portfolio%' (the 'portfolio' taxonomy) in their 
+ * portfolio item URLs.
+ *
+ * @since  0.1.0
  * @access public
- * @param string $post_link
- * @param object $post
+ * @param  string $post_link
+ * @param  object $post
  * @return string
  */
 function cpt_portfolio_post_type_link( $post_link, $post ) {
 
-	// @todo apply filters for post type name.
 	if ( 'portfolio_item' !== $post->post_type )
 		return $post_link;
 

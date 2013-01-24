@@ -1,11 +1,25 @@
 <?php
+/**
+ * File for registering custom taxonomies.
+ *
+ * @package    CPTPortfolio
+ * @subpackage Includes
+ * @since      0.1.0
+ * @author     Justin Tadlock <justin@justintadlock.com>
+ * @copyright  Copyright (c) 2013, Justin Tadlock
+ * @link       http://themehybrid.com/plugins/cpt-portfolio
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ */
 
+/* Register taxonomies on the 'init' hook. */
 add_action( 'init', 'cpt_portfolio_register_taxonomies' );
 
 /**
  * Register taxonomies for the plugin.
  *
- * @since 0.1.0
+ * @since  0.1.0
+ * @access public
+ * @return void.
  */
 function cpt_portfolio_register_taxonomies() {
 

@@ -21,7 +21,9 @@ class CPT_Portfolio {
 	/**
 	 * PHP5 constructor method.
 	 *
-	 * @since 0.1.0
+	 * @since  0.1.0
+	 * @access public
+	 * @return void
 	 */
 	public function __construct() {
 
@@ -44,7 +46,9 @@ class CPT_Portfolio {
 	/**
 	 * Defines constants used by the plugin.
 	 *
-	 * @since 0.1.0
+	 * @since  0.1.0
+	 * @access public
+	 * @return void
 	 */
 	public function constants() {
 
@@ -61,7 +65,9 @@ class CPT_Portfolio {
 	/**
 	 * Loads the initial files needed by the plugin.
 	 *
-	 * @since 0.1.0
+	 * @since  0.1.0
+	 * @access public
+	 * @return void
 	 */
 	public function includes() {
 
@@ -74,7 +80,9 @@ class CPT_Portfolio {
 	/**
 	 * Loads the translation files.
 	 *
-	 * @since 0.1.0
+	 * @since  0.1.0
+	 * @access public
+	 * @return void
 	 */
 	public function i18n() {
 
@@ -85,20 +93,22 @@ class CPT_Portfolio {
 	/**
 	 * Loads the admin functions and files.
 	 *
-	 * @since 0.1.0
+	 * @since  0.1.0
+	 * @access public
+	 * @return void
 	 */
 	public function admin() {
 
-		/* Only load files if in the WordPress admin. */
-		if ( is_admin() ) {
+		if ( is_admin() )
 			require_once( CPT_PORTFOLIO_ADMIN . 'admin.php' );
-		}
 	}
 
 	/**
 	 * Method that runs only when the plugin is activated.
 	 *
-	 * @since 0.1.0
+	 * @since  0.1.0
+	 * @access public
+	 * @return void
 	 */
 	function activation() {
 

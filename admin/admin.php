@@ -1,12 +1,44 @@
 <?php
+/**
+ * Admin functions for the plugin.
+ *
+ * @package    CPTPortfolio
+ * @subpackage Admin
+ * @since      0.1.0
+ * @author     Justin Tadlock <justin@justintadlock.com>
+ * @copyright  Copyright (c) 2013, Justin Tadlock
+ * @link       http://themehybrid.com/plugins/cpt-portfolio
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ */
 
-add_action( 'admin_menu', 'cpt_portfolio_admin' );
+/* Set up the admin functionality. */
+add_action( 'admin_menu', 'cpt_portfolio_admin_setup' );
 
-function cpt_portfolio_admin() {
+/**
+ * Adds actions where needed for setting up the plugin's admin functionality.
+ *
+ * @since  0.1.0
+ * @access public
+ * @return void
+ */
+function cpt_portfolio_admin_setup() {
+
+	// Waiting on @link http://core.trac.wordpress.org/ticket/9296
+	//add_action( 'admin_init', 'cpt_portfolio_admin_setup' );
+
+	/* Add meta boxes an save metadata. */
 	add_action( 'add_meta_boxes', 'cpt_portfolio_add_meta_boxes' );
 	add_action( 'save_post', 'cpt_portfolio_item_info_meta_box_save', 10, 2 );
 }
 
+/**
+ * Registers new meta boxes for the 'portfolio_item' post editing screen in the admin.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  string  $post_type
+ * @return void
+ */
 function cpt_portfolio_add_meta_boxes( $post_type ) {
 
 	if ( 'portfolio_item' === $post_type ) {
@@ -22,7 +54,17 @@ function cpt_portfolio_add_meta_boxes( $post_type ) {
 	}
 }
 
+/**
+ * Displays the content of the portfolio item info meta box.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  object  $post
+ * @param  array   $metabox
+ * @return void
+ */
 function cpt_portfolio_item_info_meta_box_display( $post, $metabox ) {
+
 	wp_nonce_field( basename( __FILE__ ), 'cpt-portfolio-item-info-nonce' ); ?>
 
 	<p>
@@ -30,15 +72,25 @@ function cpt_portfolio_item_info_meta_box_display( $post, $metabox ) {
 		<br />
 		<input type="text" name="cpt-portfolio-item-url" id="cpt-portfolio-item-url" value="<?php echo esc_url( get_post_meta( $post->ID, 'portfolio_item_url', true ) ); ?>" size="30" tabindex="30" style="width: 99%;" />
 	</p>
-
-
 	<?php
+
+	/* Allow devs to hook in their own stuff here. */
+	do_action( 'cpt_portfolio_item_info_meta_box', $post, $metabox );
 }
 
+/**
+ * Saves the metadata for the portfolio item info meta box.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  int     $post_id
+ * @param  object  $post
+ * @return void
+ */
 function cpt_portfolio_item_info_meta_box_save( $post_id, $post ) {
 
 	if ( !isset( $_POST['cpt-portfolio-item-info-nonce'] ) || !wp_verify_nonce( $_POST['cpt-portfolio-item-info-nonce'], basename( __FILE__ ) ) )
-		return $post_id;
+		return;
 
 	$meta = array(
 		'portfolio_item_url' => esc_url( $_POST['cpt-portfolio-item-url'] )
@@ -63,19 +115,17 @@ function cpt_portfolio_item_info_meta_box_save( $post_id, $post ) {
 	}
 }
 
-// Waiting on @link http://core.trac.wordpress.org/ticket/9296
-add_action( 'admin_init', 'cpt_portfolio_admin_setup' );
-
 /**
- * @since 0.1.0
+ * Adds plugin settings.  At the moment, this function isn't being used because we're waiting for a bug fix
+ * in core.  For more information, see: http://core.trac.wordpress.org/ticket/9296
+ *
+ * @since  0.1.0
+ * @access public
+ * @return void
  */
-function cpt_portfolio_admin_setup() {
+function cpt_portfolio_admin_settings() {
 
-	/**
-	 * Register settings for the 'permalink' screen in the admin. Note this won't work until fixed 
-	 * in WP core.
-	 * @link http://core.trac.wordpress.org/ticket/9296
-	 */
+	/* Register settings for the 'permalink' screen in the admin. */
 	register_setting(
 		'permalink',
 		'plugin_cpt_portfolio',
@@ -120,7 +170,12 @@ function cpt_portfolio_admin_setup() {
 }
 
 /**
- * @since 0.1.0
+ * Validates the plugin settings.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  array  $settings
+ * @return array
  */
 function cpt_portfolio_validate_settings( $settings ) {
 
@@ -137,7 +192,11 @@ function cpt_portfolio_validate_settings( $settings ) {
 }
 
 /**
- * @since 0.1.0
+ * Adds the portfolio permalink section.
+ *
+ * @since  0.1.0
+ * @access public
+ * @return void
  */
 function cpt_portfolio_permalink_section() { ?>
 	<table class="form-table">
@@ -146,7 +205,11 @@ function cpt_portfolio_permalink_section() { ?>
 <?php }
 
 /**
- * @since 0.1.0
+ * Adds the portfolio root settings field.
+ *
+ * @since  0.1.0
+ * @access public
+ * @return void
  */
 function cpt_portfolio_root_field( $settings ) { ?>
 	<input type="text" name="plugin_cpt_portfolio[portfolio_root]" id="cpt-portfolio-root" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_root'] ); ?>" />
@@ -154,7 +217,11 @@ function cpt_portfolio_root_field( $settings ) { ?>
 <?php }
 
 /**
- * @since 0.1.0
+ * Adds the portfolio (taxonomy) base settings field.
+ *
+ * @since  0.1.0
+ * @access public
+ * @return void
  */
 function cpt_portfolio_base_field( $settings ) { ?>
 	<input type="text" name="plugin_cpt_portfolio[portfolio_base]" id="cpt-portfolio-base" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_base'] ); ?>" />
@@ -162,7 +229,11 @@ function cpt_portfolio_base_field( $settings ) { ?>
 <?php }
 
 /**
- * @since 0.1.0
+ * Adds the portfolio item (post type) base settings field.
+ *
+ * @since  0.1.0
+ * @access public
+ * @return void
  */
 function cpt_portfolio_item_base_field( $settings ) { ?>
 	<input type="text" name="plugin_cpt_portfolio[portfolio_item_base]" id="cpt-portfolio-item-base" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_item_base'] ); ?>" />
