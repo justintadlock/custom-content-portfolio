@@ -2,20 +2,20 @@
 /**
  * Various functions, filters, and actions used by the plugin.
  *
- * @package    CPTPortfolio
+ * @package    CustomContentPortfolio
  * @subpackage Includes
  * @since      0.1.0
  * @author     Justin Tadlock <justin@justintadlock.com>
  * @copyright  Copyright (c) 2013, Justin Tadlock
- * @link       http://themehybrid.com/plugins/cpt-portfolio
+ * @link       http://themehybrid.com/plugins/custom-content-portfolio
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
 /* Filter the post type archive title. */
-add_filter( 'post_type_archive_title', 'cpt_portfolio_post_type_archive_title' );
+add_filter( 'post_type_archive_title', 'cc_portfolio_post_type_archive_title' );
 
 /* Filter the post type permalink. */
-add_filter( 'post_type_link', 'cpt_portfolio_post_type_link', 10, 2 );
+add_filter( 'post_type_link', 'cc_portfolio_post_type_link', 10, 2 );
 
 /**
  * Returns the default settings for the plugin.
@@ -24,7 +24,7 @@ add_filter( 'post_type_link', 'cpt_portfolio_post_type_link', 10, 2 );
  * @access public
  * @return array
  */
-function cpt_portfolio_get_default_settings() {
+function cc_portfolio_get_default_settings() {
 
 	$settings = array(
 		'portfolio_root'      => 'portfolio',
@@ -44,7 +44,7 @@ function cpt_portfolio_get_default_settings() {
  * @param  string $title
  * @return string
  */
-function cpt_portfolio_post_type_archive_title( $title ) {
+function cc_portfolio_post_type_archive_title( $title ) {
 
 	if ( is_post_type_archive( 'portfolio_item' ) ) {
 		$post_type = get_post_type_object( 'portfolio_item' );
@@ -64,7 +64,7 @@ function cpt_portfolio_post_type_archive_title( $title ) {
  * @param  object $post
  * @return string
  */
-function cpt_portfolio_post_type_link( $post_link, $post ) {
+function cc_portfolio_post_type_link( $post_link, $post ) {
 
 	if ( 'portfolio_item' !== $post->post_type )
 		return $post_link;

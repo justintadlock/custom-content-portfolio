@@ -2,17 +2,17 @@
 /**
  * Admin functions for the plugin.
  *
- * @package    CPTPortfolio
+ * @package    CustomContentPortfolio
  * @subpackage Admin
  * @since      0.1.0
  * @author     Justin Tadlock <justin@justintadlock.com>
  * @copyright  Copyright (c) 2013, Justin Tadlock
- * @link       http://themehybrid.com/plugins/cpt-portfolio
+ * @link       http://themehybrid.com/plugins/custom-content-portfolio
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
 /* Set up the admin functionality. */
-add_action( 'admin_menu', 'cpt_portfolio_admin_setup' );
+add_action( 'admin_menu', 'cc_portfolio_admin_setup' );
 
 /**
  * Adds actions where needed for setting up the plugin's admin functionality.
@@ -21,14 +21,14 @@ add_action( 'admin_menu', 'cpt_portfolio_admin_setup' );
  * @access public
  * @return void
  */
-function cpt_portfolio_admin_setup() {
+function cc_portfolio_admin_setup() {
 
 	// Waiting on @link http://core.trac.wordpress.org/ticket/9296
-	//add_action( 'admin_init', 'cpt_portfolio_admin_setup' );
+	//add_action( 'admin_init', 'cc_portfolio_admin_setup' );
 
 	/* Add meta boxes an save metadata. */
-	add_action( 'add_meta_boxes', 'cpt_portfolio_add_meta_boxes' );
-	add_action( 'save_post', 'cpt_portfolio_item_info_meta_box_save', 10, 2 );
+	add_action( 'add_meta_boxes', 'cc_portfolio_add_meta_boxes' );
+	add_action( 'save_post', 'cc_portfolio_item_info_meta_box_save', 10, 2 );
 }
 
 /**
@@ -39,14 +39,14 @@ function cpt_portfolio_admin_setup() {
  * @param  string  $post_type
  * @return void
  */
-function cpt_portfolio_add_meta_boxes( $post_type ) {
+function cc_portfolio_add_meta_boxes( $post_type ) {
 
 	if ( 'portfolio_item' === $post_type ) {
 
 		add_meta_box( 
-			'cpt-portfolio-item-info', 
-			__( 'Project Info', 'cpt-portfolio' ), 
-			'cpt_portfolio_item_info_meta_box_display', 
+			'cc-portfolio-item-info', 
+			__( 'Project Info', 'cc-portfolio' ), 
+			'cc_portfolio_item_info_meta_box_display', 
 			$post_type, 
 			'side', 
 			'core'
@@ -63,19 +63,19 @@ function cpt_portfolio_add_meta_boxes( $post_type ) {
  * @param  array   $metabox
  * @return void
  */
-function cpt_portfolio_item_info_meta_box_display( $post, $metabox ) {
+function cc_portfolio_item_info_meta_box_display( $post, $metabox ) {
 
-	wp_nonce_field( basename( __FILE__ ), 'cpt-portfolio-item-info-nonce' ); ?>
+	wp_nonce_field( basename( __FILE__ ), 'cc-portfolio-item-info-nonce' ); ?>
 
 	<p>
-		<label for="cpt-portfolio-item-url"><?php _e( 'Project <abbr title="Uniform Resource Locator">URL</abbr>', 'cpt-portfolio' ); ?></label>
+		<label for="cc-portfolio-item-url"><?php _e( 'Project <abbr title="Uniform Resource Locator">URL</abbr>', 'cc-portfolio' ); ?></label>
 		<br />
-		<input type="text" name="cpt-portfolio-item-url" id="cpt-portfolio-item-url" value="<?php echo esc_url( get_post_meta( $post->ID, 'portfolio_item_url', true ) ); ?>" size="30" tabindex="30" style="width: 99%;" />
+		<input type="text" name="cc-portfolio-item-url" id="cc-portfolio-item-url" value="<?php echo esc_url( get_post_meta( $post->ID, 'portfolio_item_url', true ) ); ?>" size="30" tabindex="30" style="width: 99%;" />
 	</p>
 	<?php
 
 	/* Allow devs to hook in their own stuff here. */
-	do_action( 'cpt_portfolio_item_info_meta_box', $post, $metabox );
+	do_action( 'cc_portfolio_item_info_meta_box', $post, $metabox );
 }
 
 /**
@@ -87,13 +87,13 @@ function cpt_portfolio_item_info_meta_box_display( $post, $metabox ) {
  * @param  object  $post
  * @return void
  */
-function cpt_portfolio_item_info_meta_box_save( $post_id, $post ) {
+function cc_portfolio_item_info_meta_box_save( $post_id, $post ) {
 
-	if ( !isset( $_POST['cpt-portfolio-item-info-nonce'] ) || !wp_verify_nonce( $_POST['cpt-portfolio-item-info-nonce'], basename( __FILE__ ) ) )
+	if ( !isset( $_POST['cc-portfolio-item-info-nonce'] ) || !wp_verify_nonce( $_POST['cc-portfolio-item-info-nonce'], basename( __FILE__ ) ) )
 		return;
 
 	$meta = array(
-		'portfolio_item_url' => esc_url( $_POST['cpt-portfolio-item-url'] )
+		'portfolio_item_url' => esc_url( $_POST['cc-portfolio-item-url'] )
 	);
 
 	foreach ( $meta as $meta_key => $new_meta_value ) {
@@ -123,48 +123,48 @@ function cpt_portfolio_item_info_meta_box_save( $post_id, $post ) {
  * @access public
  * @return void
  */
-function cpt_portfolio_admin_settings() {
+function cc_portfolio_admin_settings() {
 
 	/* Register settings for the 'permalink' screen in the admin. */
 	register_setting(
 		'permalink',
-		'plugin_cpt_portfolio',
-		'cpt_portfolio_validate_settings'
+		'plugin_cc_portfolio',
+		'cc_portfolio_validate_settings'
 	);
 
 	/* Adds a new settings section to the 'permalink' screen. */
 	add_settings_section(
-		'cpt-portfolio-permalink',
-		__( 'Portfolio Settings', 'cpt-portfolio' ),
-		'cpt_portfolio_permalink_section',
+		'cc-portfolio-permalink',
+		__( 'Portfolio Settings', 'cc-portfolio' ),
+		'cc_portfolio_permalink_section',
 		'permalink'
 	);
 
 	/* Get the plugin settings. */
-	$settings = get_option( 'plugin_cpt_portfolio', cpt_portfolio_get_default_settings() );
+	$settings = get_option( 'plugin_cc_portfolio', cc_portfolio_get_default_settings() );
 
 	add_settings_field(
-		'cpt-portfolio-root',
-		__( 'Portfolio archive', 'cpt-portfolio' ),
-		'cpt_portfolio_root_field',
+		'cc-portfolio-root',
+		__( 'Portfolio archive', 'cc-portfolio' ),
+		'cc_portfolio_root_field',
 		'permalink',
-		'cpt-portfolio-permalink',
+		'cc-portfolio-permalink',
 		$settings
 	);
 	add_settings_field(
-		'cpt-portfolio-base',
-		__( 'Portfolio taxonomy slug', 'cpt-portfolio' ),
-		'cpt_portfolio_base_field',
+		'cc-portfolio-base',
+		__( 'Portfolio taxonomy slug', 'cc-portfolio' ),
+		'cc_portfolio_base_field',
 		'permalink',
-		'cpt-portfolio-permalink',
+		'cc-portfolio-permalink',
 		$settings
 	);
 	add_settings_field(
-		'cpt-portfolio-item-base',
-		__( 'Portfolio item slug', 'cpt-portfolio' ),
-		'cpt_portfolio_item_base_field',
+		'cc-portfolio-item-base',
+		__( 'Portfolio item slug', 'cc-portfolio' ),
+		'cc_portfolio_item_base_field',
 		'permalink',
-		'cpt-portfolio-permalink',
+		'cc-portfolio-permalink',
 		$settings
 	);
 }
@@ -177,7 +177,7 @@ function cpt_portfolio_admin_settings() {
  * @param  array  $settings
  * @return array
  */
-function cpt_portfolio_validate_settings( $settings ) {
+function cc_portfolio_validate_settings( $settings ) {
 
 	// @todo Sanitize for alphanumeric characters
 	// @todo Both the portfolio_base and portfolio_item_base can't match.
@@ -198,9 +198,9 @@ function cpt_portfolio_validate_settings( $settings ) {
  * @access public
  * @return void
  */
-function cpt_portfolio_permalink_section() { ?>
+function cc_portfolio_permalink_section() { ?>
 	<table class="form-table">
-		<?php do_settings_fields( 'permalink', 'cpt-portfolio' ); ?>
+		<?php do_settings_fields( 'permalink', 'cc-portfolio' ); ?>
 	</table>
 <?php }
 
@@ -211,8 +211,8 @@ function cpt_portfolio_permalink_section() { ?>
  * @access public
  * @return void
  */
-function cpt_portfolio_root_field( $settings ) { ?>
-	<input type="text" name="plugin_cpt_portfolio[portfolio_root]" id="cpt-portfolio-root" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_root'] ); ?>" />
+function cc_portfolio_root_field( $settings ) { ?>
+	<input type="text" name="plugin_cc_portfolio[portfolio_root]" id="cc-portfolio-root" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_root'] ); ?>" />
 	<code><?php echo home_url( $settings['portfolio_root'] ); ?></code> 
 <?php }
 
@@ -223,8 +223,8 @@ function cpt_portfolio_root_field( $settings ) { ?>
  * @access public
  * @return void
  */
-function cpt_portfolio_base_field( $settings ) { ?>
-	<input type="text" name="plugin_cpt_portfolio[portfolio_base]" id="cpt-portfolio-base" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_base'] ); ?>" />
+function cc_portfolio_base_field( $settings ) { ?>
+	<input type="text" name="plugin_cc_portfolio[portfolio_base]" id="cc-portfolio-base" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_base'] ); ?>" />
 	<code><?php echo trailingslashit( home_url( "{$settings['portfolio_root']}/{$settings['portfolio_base']}" ) ); ?>%portfolio%</code> 
 <?php }
 
@@ -235,8 +235,8 @@ function cpt_portfolio_base_field( $settings ) { ?>
  * @access public
  * @return void
  */
-function cpt_portfolio_item_base_field( $settings ) { ?>
-	<input type="text" name="plugin_cpt_portfolio[portfolio_item_base]" id="cpt-portfolio-item-base" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_item_base'] ); ?>" />
+function cc_portfolio_item_base_field( $settings ) { ?>
+	<input type="text" name="plugin_cc_portfolio[portfolio_item_base]" id="cc-portfolio-item-base" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_item_base'] ); ?>" />
 	<code><?php echo trailingslashit( home_url( "{$settings['portfolio_root']}/{$settings['portfolio_item_base']}" ) ); ?>%postname%</code> 
 <?php }
 

@@ -2,17 +2,17 @@
 /**
  * File for registering custom taxonomies.
  *
- * @package    CPTPortfolio
+ * @package    CustomContentPortfolio
  * @subpackage Includes
  * @since      0.1.0
  * @author     Justin Tadlock <justin@justintadlock.com>
  * @copyright  Copyright (c) 2013, Justin Tadlock
- * @link       http://themehybrid.com/plugins/cpt-portfolio
+ * @link       http://themehybrid.com/plugins/custom-content-portfolio
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
 /* Register taxonomies on the 'init' hook. */
-add_action( 'init', 'cpt_portfolio_register_taxonomies' );
+add_action( 'init', 'cc_portfolio_register_taxonomies' );
 
 /**
  * Register taxonomies for the plugin.
@@ -21,10 +21,10 @@ add_action( 'init', 'cpt_portfolio_register_taxonomies' );
  * @access public
  * @return void.
  */
-function cpt_portfolio_register_taxonomies() {
+function cc_portfolio_register_taxonomies() {
 
 	/* Get the plugin settings. */
-	$settings = get_option( 'plugin_cpt_portfolio', cpt_portfolio_get_default_settings() );
+	$settings = get_option( 'plugin_cc_portfolio', cc_portfolio_get_default_settings() );
 
 	/* Set up the arguments for the portfolio taxonomy. */
 	$args = array(
@@ -54,23 +54,23 @@ function cpt_portfolio_register_taxonomies() {
 
 		/* Labels used when displaying taxonomy and terms. */
 		'labels' => array(
-			'name'                       => __( 'Portfolios',                           'cpt-portfolio' ),
-			'singular_name'              => __( 'Portfolio',                            'cpt-portfolio' ),
-			'menu_name'                  => __( 'Portfolios',                           'cpt-portfolio' ),
-			'name_admin_bar'             => __( 'Portfolio',                            'cpt-portfolio' ),
-			'search_items'               => __( 'Search Portfolios',                    'cpt-portfolio' ),
-			'popular_items'              => __( 'Popular Portfolios',                   'cpt-portfolio' ),
-			'all_items'                  => __( 'All Portfolios',                       'cpt-portfolio' ),
-			'edit_item'                  => __( 'Edit Portfolio',                       'cpt-portfolio' ),
-			'view_item'                  => __( 'View Portfolio',                       'cpt-portfolio' ),
-			'update_item'                => __( 'Update Portfolio',                     'cpt-portfolio' ),
-			'add_new_item'               => __( 'Add New Portfolio',                    'cpt-portfolio' ),
-			'new_item_name'              => __( 'New Portfolio Name',                   'cpt-portfolio' ),
-			'separate_items_with_commas' => __( 'Separate portfolios with commas',      'cpt-portfolio' ),
-			'add_or_remove_items'        => __( 'Add or remove portfolios',             'cpt-portfolio' ),
-			'choose_from_most_used'      => __( 'Choose from the most used portfolios', 'cpt-portfolio' ),
-			'parent_item'                => __( 'Parent Portfolio',                     'cpt-portfolio' ),
-			'paent_item_colon'           => __( 'Parent Portfolio:',                    'cpt-portfolio' )
+			'name'                       => __( 'Portfolios',                           'cc-portfolio' ),
+			'singular_name'              => __( 'Portfolio',                            'cc-portfolio' ),
+			'menu_name'                  => __( 'Portfolios',                           'cc-portfolio' ),
+			'name_admin_bar'             => __( 'Portfolio',                            'cc-portfolio' ),
+			'search_items'               => __( 'Search Portfolios',                    'cc-portfolio' ),
+			'popular_items'              => __( 'Popular Portfolios',                   'cc-portfolio' ),
+			'all_items'                  => __( 'All Portfolios',                       'cc-portfolio' ),
+			'edit_item'                  => __( 'Edit Portfolio',                       'cc-portfolio' ),
+			'view_item'                  => __( 'View Portfolio',                       'cc-portfolio' ),
+			'update_item'                => __( 'Update Portfolio',                     'cc-portfolio' ),
+			'add_new_item'               => __( 'Add New Portfolio',                    'cc-portfolio' ),
+			'new_item_name'              => __( 'New Portfolio Name',                   'cc-portfolio' ),
+			'separate_items_with_commas' => __( 'Separate portfolios with commas',      'cc-portfolio' ),
+			'add_or_remove_items'        => __( 'Add or remove portfolios',             'cc-portfolio' ),
+			'choose_from_most_used'      => __( 'Choose from the most used portfolios', 'cc-portfolio' ),
+			'parent_item'                => __( 'Parent Portfolio',                     'cc-portfolio' ),
+			'paent_item_colon'           => __( 'Parent Portfolio:',                    'cc-portfolio' )
 		)
 	);
 

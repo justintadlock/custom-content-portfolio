@@ -2,21 +2,21 @@
 /**
  * Uninstall procedure for the plugin.
  *
- * @package    CPTPortfolio
+ * @package    CustomContentPortfolio
  * @since      0.1.0
  * @author     Justin Tadlock <justin@justintadlock.com>
  * @copyright  Copyright (c) 2013, Justin Tadlock
- * @link       http://themehybrid.com/plugins/cpt-portfolio
+ * @link       http://themehybrid.com/plugins/custom-content-portfolio
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
 /* Make sure we're actually uninstalling the plugin. */
 if ( !defined( 'WP_UNINSTALL_PLUGIN' ) )
-	wp_die( sprintf( __( '%s should only be called when uninstalling the plugin.', 'cpt-portfolio' ), '<code>' . __FILE__ . '</code>' ) );
+	wp_die( sprintf( __( '%s should only be called when uninstalling the plugin.', 'cc-portfolio' ), '<code>' . __FILE__ . '</code>' ) );
 
 /* === Delete plugin options. === */
 
-delete_option( 'plugin_cpt_portfolio' );
+delete_option( 'plugin_cc_portfolio' );
 
 /* === Remove capabilities added by the plugin. === */
 
