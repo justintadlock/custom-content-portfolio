@@ -11,6 +11,20 @@
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
+add_action('admin_head', 'cc_portfolio_head_style');
+
+function cc_portfolio_head_style() {
+        global $post_type;
+
+	if ( 'portfolio_item' === $post_type ) { ?>
+		<style type="text/css">
+			#icon-edit.icon32-posts-portfolio_item {
+				background: transparent url( '<?php echo CC_PORTFOLIO_URI . 'images/screen-icon.png'; ?>' ) no-repeat;
+			}
+		</style>
+	<?php }
+}
+
 /* Set up the admin functionality. */
 add_action( 'admin_menu', 'cc_portfolio_admin_setup' );
 

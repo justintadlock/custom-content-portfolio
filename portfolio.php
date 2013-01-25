@@ -58,6 +58,8 @@ class Custom_Content_Portfolio {
 		/* Set the constant path to the includes directory. */
 		define( 'CC_PORTFOLIO_INCLUDES', CC_PORTFOLIO_DIR . trailingslashit( 'includes' ) );
 
+		define( 'CC_PORTFOLIO_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
+
 		/* Set the constant path to the admin directory. */
 		define( 'CC_PORTFOLIO_ADMIN', CC_PORTFOLIO_DIR . trailingslashit( 'admin' ) );
 	}

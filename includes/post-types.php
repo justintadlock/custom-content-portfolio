@@ -37,7 +37,7 @@ function cc_portfolio_register_post_types() {
 		'show_ui'             => true,
 		'show_in_menu'        => true,
 		'menu_position'       => null,
-		'menu_icon'           => null,
+		'menu_icon'           => CC_PORTFOLIO_URI . 'images/menu-icon.png',
 		'can_export'          => true,
 		'delete_with_user'    => false,
 		'hierarchical'        => false,
