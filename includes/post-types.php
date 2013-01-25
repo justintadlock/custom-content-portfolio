@@ -46,7 +46,7 @@ function cc_portfolio_register_post_types() {
 		'capability_type'     => 'portfolio_item',
 		'map_meta_cap'        => true,
 
-		/* Only 2 caps are needed: 'manage_portfolio', 'create_portfolio_items', and 'edit_portfolio_items'. */
+		/* Only 3 caps are needed: 'manage_portfolio', 'create_portfolio_items', and 'edit_portfolio_items'. */
 		'capabilities' => array(
 
 			// meta caps (don't assign these to roles)
