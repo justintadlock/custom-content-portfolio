@@ -11,19 +11,9 @@
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-add_action('admin_head', 'cc_portfolio_head_style');
 
-function cc_portfolio_head_style() {
-        global $post_type;
 
-	if ( 'portfolio_item' === $post_type ) { ?>
-		<style type="text/css">
-			#icon-edit.icon32-posts-portfolio_item {
-				background: transparent url( '<?php echo CC_PORTFOLIO_URI . 'images/screen-icon.png'; ?>' ) no-repeat;
-			}
-		</style>
-	<?php }
-}
+
 
 /* Set up the admin functionality. */
 add_action( 'admin_menu', 'cc_portfolio_admin_setup' );
@@ -40,9 +30,73 @@ function cc_portfolio_admin_setup() {
 	// Waiting on @link http://core.trac.wordpress.org/ticket/9296
 	//add_action( 'admin_init', 'cc_portfolio_admin_setup' );
 
+
+	add_filter( 'manage_edit-portfolio_item_columns', 'cc_portfolio_edit_portfolio_item_columns' );
+	add_action( 'manage_portfolio_item_posts_custom_column', 'cc_portfolio_manage_portfolio_item_columns', 10, 2 );
+
+
 	/* Add meta boxes an save metadata. */
 	add_action( 'add_meta_boxes', 'cc_portfolio_add_meta_boxes' );
 	add_action( 'save_post', 'cc_portfolio_item_info_meta_box_save', 10, 2 );
+
+	/* Add 32px screen icon. */
+	add_action('admin_head', 'cc_portfolio_head_style');
+}
+
+/**
+ * Sets up custom columns on the portfolio items edit screen.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  array  $columns
+ * @return array
+ */
+function cc_portfolio_edit_portfolio_item_columns( $columns ) {
+
+	unset( $columns['title'] );
+	unset( $columns['taxonomy-portfolio'] );
+
+	$new_columns = array(
+		'cb' => '<input type="checkbox" />',
+		'title' => __( 'Portfolio Item', 'cc-portfolio' )
+	);
+
+	if ( current_theme_supports( 'post-thumbnails' ) )
+		$new_columns['thumbnail'] = __( 'Thumbnail', 'cc-portfolio' );
+
+	$new_columns['taxonomy-portfolio'] = __( 'Portfolio', 'cc-portfolio' );
+
+	return array_merge( $new_columns, $columns );
+}
+
+/**
+ * Displays the content of custom portfolio item columns on the edit screen.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  string  $column
+ * @param  int     $post_id
+ * @return void
+ */
+function cc_portfolio_manage_portfolio_item_columns( $column, $post_id ) {
+	global $post;
+
+	switch( $column ) {
+
+		case 'thumbnail' :
+
+			if ( has_post_thumbnail() )
+				the_post_thumbnail( array( 40, 40 ) );
+
+			elseif ( function_exists( 'get_the_image' ) )
+				get_the_image( array( 'image_scan' => true, 'width' => 40, 'height' => 40 ) );
+
+			break;
+
+		/* Just break out of the switch statement for everything else. */
+		default :
+			break;
+	}
 }
 
 /**
@@ -253,5 +307,24 @@ function cc_portfolio_item_base_field( $settings ) { ?>
 	<input type="text" name="plugin_cc_portfolio[portfolio_item_base]" id="cc-portfolio-item-base" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_item_base'] ); ?>" />
 	<code><?php echo trailingslashit( home_url( "{$settings['portfolio_root']}/{$settings['portfolio_item_base']}" ) ); ?>%postname%</code> 
 <?php }
+
+/**
+ * Overwrites the screen icon for portfolio screens in the admin.
+ *
+ * @since  0.1.0
+ * @access public
+ * @return void
+ */
+function cc_portfolio_head_style() {
+        global $post_type;
+
+	if ( 'portfolio_item' === $post_type ) { ?>
+		<style type="text/css">
+			#icon-edit.icon32-posts-portfolio_item {
+				background: transparent url( '<?php echo CC_PORTFOLIO_URI . 'images/screen-icon.png'; ?>' ) no-repeat;
+			}
+		</style>
+	<?php }
+}
 
 ?>
