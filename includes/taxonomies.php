@@ -69,8 +69,8 @@ function cc_portfolio_register_taxonomies() {
 			'separate_items_with_commas' => __( 'Separate portfolios with commas',      'cc-portfolio' ),
 			'add_or_remove_items'        => __( 'Add or remove portfolios',             'cc-portfolio' ),
 			'choose_from_most_used'      => __( 'Choose from the most used portfolios', 'cc-portfolio' ),
-			'parent_item'                => __( 'Parent Portfolio',                     'cc-portfolio' ),
-			'paent_item_colon'           => __( 'Parent Portfolio:',                    'cc-portfolio' )
+		//	'parent_item'                => __( 'Parent Portfolio',                     'cc-portfolio' ),
+		//	'paent_item_colon'           => __( 'Parent Portfolio:',                    'cc-portfolio' )
 		)
 	);
 
