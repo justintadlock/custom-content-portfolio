@@ -33,7 +33,7 @@ function cc_portfolio_register_taxonomies() {
 		'show_in_nav_menus' => true,
 		'show_tagcloud'     => true,
 		'show_admin_column' => true,
-		'hierarchical'      => true,       // @todo Decide whether to go hierarchical or not.
+		'hierarchical'      => false,
 		'query_var'         => 'portfolio',
 
 		/* Only 2 caps are needed: 'manage_portfolio' and 'edit_portfolio_items'. */
@@ -48,7 +48,7 @@ function cc_portfolio_register_taxonomies() {
 		'rewrite' => array(
 			'slug'         => !empty( $settings['portfolio_base'] ) ? "{$settings['portfolio_root']}/{$settings['portfolio_base']}" : $settings['portfolio_root'],
 			'with_front'   => false,
-			'hierarchical' => true,
+			'hierarchical' => false,
 			'ep_mask'      => EP_NONE
 		),
 
