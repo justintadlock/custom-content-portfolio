@@ -16,7 +16,7 @@ if ( !defined( 'WP_UNINSTALL_PLUGIN' ) )
 
 /* === Delete plugin options. === */
 
-delete_option( 'plugin_cc_portfolio' );
+delete_option( 'plugin_custom_content_portfolio' );
 
 /* === Remove capabilities added by the plugin. === */
 

@@ -12,13 +12,13 @@
  */
 
 /* Filter the post type archive title. */
-add_filter( 'post_type_archive_title', 'cc_portfolio_post_type_archive_title' );
+add_filter( 'post_type_archive_title', 'ccp_post_type_archive_title' );
 
 /* Filter the post type permalink. */
-add_filter( 'post_type_link', 'cc_portfolio_post_type_link', 10, 2 );
+add_filter( 'post_type_link', 'ccp_post_type_link', 10, 2 );
 
 /* Filter the breadcrumb trail items (Breadcrumb Trail script/plugin). */
-add_filter( 'breadcrumb_trail_items', 'cc_portfolio_breadcrumb_trail_items' );
+add_filter( 'breadcrumb_trail_items', 'ccp_breadcrumb_trail_items' );
 
 /**
  * Returns the default settings for the plugin.
@@ -27,7 +27,7 @@ add_filter( 'breadcrumb_trail_items', 'cc_portfolio_breadcrumb_trail_items' );
  * @access public
  * @return array
  */
-function cc_portfolio_get_default_settings() {
+function ccp_get_default_settings() {
 
 	$settings = array(
 		'portfolio_root'      => 'portfolio',
@@ -47,7 +47,7 @@ function cc_portfolio_get_default_settings() {
  * @param  string $title
  * @return string
  */
-function cc_portfolio_post_type_archive_title( $title ) {
+function ccp_post_type_archive_title( $title ) {
 
 	if ( is_post_type_archive( 'portfolio_item' ) ) {
 		$post_type = get_post_type_object( 'portfolio_item' );
@@ -67,7 +67,7 @@ function cc_portfolio_post_type_archive_title( $title ) {
  * @param  object $post
  * @return string
  */
-function cc_portfolio_post_type_link( $post_link, $post ) {
+function ccp_post_type_link( $post_link, $post ) {
 
 	if ( 'portfolio_item' !== $post->post_type )
 		return $post_link;
@@ -106,11 +106,11 @@ function cc_portfolio_post_type_link( $post_link, $post ) {
  * @param  array  $items
  * @return array
  */
-function cc_portfolio_breadcrumb_trail_items( $items ) {
+function ccp_breadcrumb_trail_items( $items ) {
 
 	if ( is_singular( 'portfolio_item' ) ) {
 
-		$settings = get_option( 'plugin_cc_portfolio', cc_portfolio_get_default_settings() );
+		$settings = get_option( 'plugin_custom_content_portfolio', ccp_get_default_settings() );
 
 		if ( false !== strpos( $settings['portfolio_item_base'], '%portfolio%' ) ) {
 			$post_id = get_queried_object_id();

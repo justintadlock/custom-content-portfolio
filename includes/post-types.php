@@ -12,7 +12,7 @@
  */
 
 /* Register custom post types on the 'init' hook. */
-add_action( 'init', 'cc_portfolio_register_post_types' );
+add_action( 'init', 'ccp_register_post_types' );
 
 /**
  * Registers post types needed by the plugin.
@@ -21,10 +21,10 @@ add_action( 'init', 'cc_portfolio_register_post_types' );
  * @access public
  * @return void
  */
-function cc_portfolio_register_post_types() {
+function ccp_register_post_types() {
 
 	/* Get the plugin settings. */
-	$settings = get_option( 'plugin_cc_portfolio', cc_portfolio_get_default_settings() );
+	$settings = get_option( 'plugin_custom_content_portfolio', ccp_get_default_settings() );
 
 	/* Set up the arguments for the portfolio item post type. */
 	$args = array(
@@ -37,7 +37,7 @@ function cc_portfolio_register_post_types() {
 		'show_ui'             => true,
 		'show_in_menu'        => true,
 		'menu_position'       => 12,
-		'menu_icon'           => CC_PORTFOLIO_URI . 'images/menu-icon.png',
+		'menu_icon'           => CCP_URI . 'images/menu-icon.png',
 		'can_export'          => true,
 		'delete_with_user'    => false,
 		'hierarchical'        => false,

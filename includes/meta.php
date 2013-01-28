@@ -12,7 +12,7 @@
  */
 
 /* Register meta on the 'init' hook. */
-add_action( 'init', 'cc_portfolio_register_meta' );
+add_action( 'init', 'ccp_register_meta' );
 
 /**
  * Registers custom metadata for the plugin.
@@ -21,9 +21,9 @@ add_action( 'init', 'cc_portfolio_register_meta' );
  * @access public
  * @return void
  */
-function cc_portfolio_register_meta() {
+function ccp_register_meta() {
 
-	register_meta( 'post', "portfolio_item_url", 'cc_portfolio_sanitize_meta' );
+	register_meta( 'post', 'portfolio_item_url', 'ccp_sanitize_meta' );
 }
 
 /**
@@ -38,7 +38,7 @@ function cc_portfolio_register_meta() {
  * @param  string $meta_type  The type of metadata (post, comment, user, etc.)
  * @return mixed  $meta_value
  */
-function cc_portfolio_sanitize_meta( $meta_value, $meta_key, $meta_type ) {
+function ccp_sanitize_meta( $meta_value, $meta_key, $meta_type ) {
 
 	if ( 'portfolio_item_url' === $meta_key )
 		return esc_url( $meta_value );

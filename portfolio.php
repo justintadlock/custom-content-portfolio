@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Custom Content - Portfolio
+ * Plugin Name: Custom Content Portfolio
  * Plugin URI: http://themehybrid.com/plugins/custom-content-portfolio
  * Description: Portfolio manager for WordPress.  This plugin allows you to manage, edit, and create new portfolio items in an unlimited number of portfolios.
  * Version: 0.1-alpha
@@ -53,15 +53,15 @@ class Custom_Content_Portfolio {
 	public function constants() {
 
 		/* Set constant path to the plugin directory. */
-		define( 'CC_PORTFOLIO_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
+		define( 'CCP_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 
 		/* Set the constant path to the includes directory. */
-		define( 'CC_PORTFOLIO_INCLUDES', CC_PORTFOLIO_DIR . trailingslashit( 'includes' ) );
+		define( 'CCP_INCLUDES', CCP_DIR . trailingslashit( 'includes' ) );
 
-		define( 'CC_PORTFOLIO_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
+		define( 'CCP_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 
 		/* Set the constant path to the admin directory. */
-		define( 'CC_PORTFOLIO_ADMIN', CC_PORTFOLIO_DIR . trailingslashit( 'admin' ) );
+		define( 'CCP_ADMIN', CCP_DIR . trailingslashit( 'admin' ) );
 	}
 
 	/**
@@ -73,10 +73,10 @@ class Custom_Content_Portfolio {
 	 */
 	public function includes() {
 
-		require_once( CC_PORTFOLIO_INCLUDES . 'functions.php' );
-		require_once( CC_PORTFOLIO_INCLUDES . 'meta.php' );
-		require_once( CC_PORTFOLIO_INCLUDES . 'post-types.php' );
-		require_once( CC_PORTFOLIO_INCLUDES . 'taxonomies.php' );
+		require_once( CCP_INCLUDES . 'functions.php' );
+		require_once( CCP_INCLUDES . 'meta.php' );
+		require_once( CCP_INCLUDES . 'post-types.php' );
+		require_once( CCP_INCLUDES . 'taxonomies.php' );
 	}
 
 	/**
@@ -89,7 +89,7 @@ class Custom_Content_Portfolio {
 	public function i18n() {
 
 		/* Load the translation of the plugin. */
-		//load_plugin_textdomain( 'cc-portfolio', false, 'cc-portfolio/languages' );
+		load_plugin_textdomain( 'custom-content-portfolio', false, 'custom-content-portfolio/languages' );
 	}
 
 	/**
@@ -102,7 +102,7 @@ class Custom_Content_Portfolio {
 	public function admin() {
 
 		if ( is_admin() )
-			require_once( CC_PORTFOLIO_ADMIN . 'admin.php' );
+			require_once( CCP_ADMIN . 'admin.php' );
 	}
 
 	/**

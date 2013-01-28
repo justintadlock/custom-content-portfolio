@@ -1,0 +1,1312 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Content Portfolio WordPress Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-01-28 02:57-0600\n"
+"PO-Revision-Date: 2013-01-28 02:58-0600\n"
+"Last-Translator: Justin Tadlock <justin@justintadlock.com>\n"
+"Language-Team:  <justin@justintadlock.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__;esc_attr__;esc_attr_e;_n;_x;esc_html__;"
+"esc_html_e;_x:1,2c;_n:1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: uninstall.php:15
+#, php-format
+msgid "%s should only be called when uninstalling the plugin."
+msgstr ""
+
+#: admin/admin.php:56 includes/post-types.php:97 includes/post-types.php:99
+msgid "Portfolio Item"
+msgstr ""
+
+#: admin/admin.php:60
+msgid "Thumbnail"
+msgstr ""
+
+#: admin/admin.php:62 includes/post-types.php:98 includes/post-types.php:111
+#: includes/taxonomies.php:58 includes/taxonomies.php:60
+msgid "Portfolio"
+msgstr ""
+
+#: admin/admin.php:111
+msgid "Project Info"
+msgstr ""
+
+#: admin/admin.php:134
+msgid "Project <abbr title=\"Uniform Resource Locator\">URL</abbr>"
+msgstr ""
+
+#: admin/admin.php:201
+msgid "Portfolio Settings"
+msgstr ""
+
+#: admin/admin.php:211
+msgid "Portfolio archive"
+msgstr ""
+
+#: admin/admin.php:219
+msgid "Portfolio taxonomy slug"
+msgstr ""
+
+#: admin/admin.php:227
+msgid "Portfolio item slug"
+msgstr ""
+
+#: includes/post-types.php:96 includes/post-types.php:108
+msgid "Portfolio Items"
+msgstr ""
+
+#: includes/post-types.php:100
+msgid "Add New"
+msgstr ""
+
+#: includes/post-types.php:101
+msgid "Add New Portfolio Item"
+msgstr ""
+
+#: includes/post-types.php:102
+msgid "Edit Portfolio Item"
+msgstr ""
+
+#: includes/post-types.php:103
+msgid "New Portfolio Item"
+msgstr ""
+
+#: includes/post-types.php:104
+msgid "View Portfolio Item"
+msgstr ""
+
+#: includes/post-types.php:105
+msgid "Search Portfolio"
+msgstr ""
+
+#: includes/post-types.php:106
+msgid "No portfolio items found"
+msgstr ""
+
+#: includes/post-types.php:107
+msgid "No portfolio items found in trash"
+msgstr ""
+
+#: includes/taxonomies.php:57 includes/taxonomies.php:59
+msgid "Portfolios"
+msgstr ""
+
+#: includes/taxonomies.php:61
+msgid "Search Portfolios"
+msgstr ""
+
+#: includes/taxonomies.php:62
+msgid "Popular Portfolios"
+msgstr ""
+
+#: includes/taxonomies.php:63
+msgid "All Portfolios"
+msgstr ""
+
+#: includes/taxonomies.php:64
+msgid "Edit Portfolio"
+msgstr ""
+
+#: includes/taxonomies.php:65
+msgid "View Portfolio"
+msgstr ""
+
+#: includes/taxonomies.php:66
+msgid "Update Portfolio"
+msgstr ""
+
+#: includes/taxonomies.php:67
+msgid "Add New Portfolio"
+msgstr ""
+
+#: includes/taxonomies.php:68
+msgid "New Portfolio Name"
+msgstr ""
+
+#: includes/taxonomies.php:69
+msgid "Separate portfolios with commas"
+msgstr ""
+
+#: includes/taxonomies.php:70
+msgid "Add or remove portfolios"
+msgstr ""
+
+#: includes/taxonomies.php:71
+msgid "Choose from the most used portfolios"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Role Manager"
+#~ msgstr "Naam"
+
+#, fuzzy
+#~ msgid "Roles"
+#~ msgstr "Reset"
+
+#, fuzzy
+#~ msgid "Documentation"
+#~ msgstr "Thema Documentatie"
+
+#, fuzzy
+#~ msgid "Support Forums"
+#~ msgstr "Bezoek de support forums."
+
+#, fuzzy
+#~ msgid "Support"
+#~ msgstr "Thema Ondersteuning:"
+
+#, fuzzy
+#~ msgid "Sidebar Widgets"
+#~ msgstr "Widgets invoegen:"
+
+#, fuzzy
+#~ msgid "Private Site"
+#~ msgstr "Primaire EnkelvoudigBericht"
+
+#, fuzzy
+#~ msgid "Version:"
+#~ msgstr "Thema versie:"
+
+#, fuzzy
+#~ msgid "Description:"
+#~ msgstr "Beschrijving"
+
+#, fuzzy
+#~ msgid "Theme Hybrid Support Forums"
+#~ msgstr "Thema Ondersteuning:"
+
+#, fuzzy
+#~ msgid "Theme Hybrid"
+#~ msgstr "Hybrid"
+
+#, fuzzy
+#~ msgid "Feed error message:"
+#~ msgstr "Feed afbeelding:"
+
+#, fuzzy
+#~ msgid "Role updated."
+#~ msgstr "Aanpassingen tonen?"
+
+#, fuzzy
+#~ msgid "Role Name"
+#~ msgstr "Naam"
+
+#, fuzzy
+#~ msgid "The %s role has been created."
+#~ msgstr "Er is een gebruikersaccount aangemaakt voor %1$s."
+
+#, fuzzy
+#~ msgid "Role Label"
+#~ msgstr "Zoek label:"
+
+#, fuzzy
+#~ msgid "Role Capabilities"
+#~ msgstr "Aanpassingen tonen?"
+
+#, fuzzy
+#~ msgid "Add Role"
+#~ msgstr "Bewerk"
+
+#, fuzzy
+#~ msgid "Has Users"
+#~ msgstr "Gebruikersnaam"
+
+#, fuzzy
+#~ msgid "No Users"
+#~ msgstr "Gebruikersnaam"
+
+#, fuzzy
+#~ msgid "Apply"
+#~ msgstr "Reageer"
+
+#, fuzzy
+#~ msgid "Users"
+#~ msgstr "Gebruikersnaam"
+
+#, fuzzy
+#~ msgid "Edit the %s role"
+#~ msgstr "Bewerk"
+
+#~ msgid "Edit"
+#~ msgstr "Bewerk"
+
+#, fuzzy
+#~ msgid "%s User"
+#~ msgstr "Voeg gebruiker toe"
+
+#, fuzzy
+#~ msgid "Members Settings"
+#~ msgstr "Hybrid Settings"
+
+#, fuzzy
+#~ msgid "Members"
+#~ msgstr "Hybrid Settings"
+
+#, fuzzy
+#~ msgid "Members Plugin Settings"
+#~ msgstr "Hybrid Settings"
+
+#, fuzzy
+#~ msgid "Login Form"
+#~ msgstr "Aanmelden"
+
+#, fuzzy
+#~ msgid "Log In"
+#~ msgstr "Aanmelden"
+
+#, fuzzy
+#~ msgid "Username"
+#~ msgstr "Gebruikersnaam"
+
+#~ msgid "Password"
+#~ msgstr "Wachtwoord"
+
+#, fuzzy
+#~ msgid "Remember Me"
+#~ msgstr "Herinner deze gegevens."
+
+#~ msgid "Title:"
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "\"Remember me\" checkbox?"
+#~ msgstr "Herinner deze gegevens."
+
+#, fuzzy
+#~ msgid "Check \"remember me\"?"
+#~ msgstr "Herinner deze gegevens."
+
+#, fuzzy
+#~ msgid "Display Name"
+#~ msgstr "Voornaam"
+
+#~ msgid "Email"
+#~ msgstr "Email"
+
+#, fuzzy
+#~ msgid "Nice Name"
+#~ msgstr "Naam"
+
+#, fuzzy
+#~ msgid "Post Count"
+#~ msgstr "Niet gevonden"
+
+#, fuzzy
+#~ msgid "Registered"
+#~ msgstr "Registreer"
+
+#, fuzzy
+#~ msgid "Login"
+#~ msgstr "Aanmelden"
+
+#, fuzzy
+#~ msgid "Welcome, %1$s!"
+#~ msgstr "Week %1$s"
+
+#, fuzzy
+#~ msgid "Password:"
+#~ msgstr "Wachtwoord"
+
+#, fuzzy
+#~ msgid "Select Components"
+#~ msgstr "Selecteer maand"
+
+#, fuzzy
+#~ msgid "Component"
+#~ msgstr "Reactie"
+
+#, fuzzy
+#~ msgid "Activate"
+#~ msgstr "Archieven"
+
+#, fuzzy
+#~ msgid "Active"
+#~ msgstr "Archieven"
+
+#, fuzzy
+#~ msgid "Inactive"
+#~ msgstr "Archieven"
+
+#, fuzzy
+#~ msgid "Username Label:"
+#~ msgstr "Gebruikersnaam*"
+
+#, fuzzy
+#~ msgid "Password Label:"
+#~ msgstr "Wachtwoord*"
+
+#~ msgid "Submit Text:"
+#~ msgstr "Verstuur tekst:"
+
+#, fuzzy
+#~ msgid "Remember User Text:"
+#~ msgstr "Herinner deze gegevens."
+
+#, fuzzy
+#~ msgid ""
+#~ "An advanced widget that gives you total control over the output of your "
+#~ "user lists."
+#~ msgstr ""
+#~ "Een geavanceerde widget die je de totale controle geeft over de output "
+#~ "van je pagina-links."
+
+#~ msgid "Limit:"
+#~ msgstr "Limiet:"
+
+#~ msgid "Order:"
+#~ msgstr "Volgorde:"
+
+#~ msgid "Order By:"
+#~ msgstr "Sorteer op:"
+
+#~ msgid "Include:"
+#~ msgstr "Omvat:"
+
+#~ msgid "Exclude:"
+#~ msgstr "Sluit uit:"
+
+#, fuzzy
+#~ msgid "Show full name?"
+#~ msgstr "Aanpassingen tonen?"
+
+#~ msgid "Save Changes"
+#~ msgstr "Bewaren"
+
+#, fuzzy
+#~ msgid "New user role has been added."
+#~ msgstr "Er is een gebruikersaccount aangemaakt voor %1$s."
+
+#~ msgid ""
+#~ "You tried going to %1$s, and it doesn't exist. All is not lost! You can "
+#~ "search for what you're looking for."
+#~ msgstr ""
+#~ "Je wilde naar  %1$s  gaan, maar dit bestaat niet.  Geen nood! Zoek hier "
+#~ "wat je zocht:"
+
+#~ msgid "Possibly Related"
+#~ msgstr "Mogelijk gerelateerd"
+
+#~ msgid "Continue reading"
+#~ msgstr "Lees hier verder"
+
+#~ msgid "Download &quot;%1$s&quot;"
+#~ msgstr "Download &quot;%1$s&quot;"
+
+#~ msgid "Pages:"
+#~ msgstr "Pagina's:"
+
+#~ msgid "Sorry, no applications matched your criteria."
+#~ msgstr "Sorry, er zijn geen toepassingen die met je criteria overeenkomen."
+
+#~ msgid "You are browsing the archive for %1$s."
+#~ msgstr "Je bladert nu door het archief voor %1$s."
+
+#~ msgid "By"
+#~ msgstr "Door"
+
+#~ msgid "on"
+#~ msgstr "op"
+
+#~ msgid "l, F jS, Y, g:i a"
+#~ msgstr "l, j F, Y, G:i"
+
+#~ msgid "F j, Y"
+#~ msgstr "j F, Y"
+
+#~ msgid "Posted in"
+#~ msgstr "Gepost in"
+
+#~ msgid "Tagged"
+#~ msgstr "Tags:"
+
+#~ msgid "Leave a response"
+#~ msgstr "Reageer"
+
+#~ msgid "1 Response"
+#~ msgstr "1 Reactie"
+
+#~ msgid "% Responses"
+#~ msgstr "% Reacties"
+
+#~ msgid "Sorry, there are no posts in this archive."
+#~ msgstr "Sorry, dit archief bevat geen berichten."
+
+#~ msgid "Archives by category"
+#~ msgstr "Archieven per rubriek"
+
+#~ msgid "Archives by month"
+#~ msgstr "Archieven per maand"
+
+#~ msgid "Sorry, no page matched your criteria."
+#~ msgstr "Sorry, er bestaat geen pagina die aan je criteria voldoet."
+
+#~ msgid "Sorry, no attachments matched your criteria."
+#~ msgstr "Sorry, er zijn geen bijlages die aan je criteria voldoen."
+
+#~ msgid "Sorry, no audio files matched your criteria."
+#~ msgstr "Sorry, er zijn geen geluidsbestanden die aan je criteria voldoen."
+
+#~ msgid "Send an email to %1$s"
+#~ msgstr "Stuur een email aan %1$s"
+
+#~ msgid "Email %1$s"
+#~ msgstr "Email %1$s"
+
+#~ msgid "%1$s hasn't written any posts yet."
+#~ msgstr "%1$s heeft nog geen berichten geschreven."
+
+#~ msgid "Nickname:"
+#~ msgstr "Bijnaam:"
+
+#~ msgid "Email:"
+#~ msgstr "Email:"
+
+#~ msgid "Website:"
+#~ msgstr "Website:"
+
+#~ msgid "AIM:"
+#~ msgstr "AIM:"
+
+#~ msgid "IM with %1$s"
+#~ msgstr "IM met %1$s"
+
+#~ msgid "Jabber:"
+#~ msgstr "Jabber:"
+
+#~ msgid "Yahoo:"
+#~ msgstr "Yahoo:"
+
+#~ msgid "Sorry, there are no posts in the %1$s category."
+#~ msgstr "Sorry, er zijn geen berichten in de rubriek %1$s. "
+
+#~ msgid "Please do not load this page directly. Thanks!"
+#~ msgstr "Gelieve deze pagina niet rechtstreeks te laden.  Dankjewel!"
+
+#~ msgid "No Responses"
+#~ msgstr "Geen reacties"
+
+#~ msgid "One Response"
+#~ msgstr "Een reactie"
+
+#~ msgid "Responses"
+#~ msgstr "Reacties"
+
+#~ msgid "to"
+#~ msgstr "naar"
+
+#~ msgid "%1$s at %2$s"
+#~ msgstr "%1$s op %2$s"
+
+#~ msgid "Permalink to comment"
+#~ msgstr "Permalink naar reactie"
+
+#~ msgid "Permalink"
+#~ msgstr "Permalink"
+
+#~ msgid "Your comment is awaiting moderation."
+#~ msgstr "Je reactie wacht op moderatie."
+
+#~ msgid ""
+#~ "Comments are closed, but <a href=\"%1$s\" title=\"Trackback URL for this "
+#~ "post\">trackbacks</a> and pingbacks are open."
+#~ msgstr ""
+#~ "Reageren is niet mogelijk, maar <a href=\"%1$s\" title=\"Trackback URL "
+#~ "for this post\">trackbacks</a> en pingbacks blijven open."
+
+#~ msgid "Comments are closed."
+#~ msgstr "Reageren is niet mogelijk."
+
+#~ msgid "Leave a Reply"
+#~ msgstr "Reageer"
+
+#~ msgid ""
+#~ "You must be <a href=\"%1$s\" title=\"Log in\">logged in</a> to post a "
+#~ "comment."
+#~ msgstr ""
+#~ "Je moet <a href=\"%1$s\" title=\"Log in\">ingelogd</a> zijn om te "
+#~ "reageren."
+
+#~ msgid "Logged in as <a href=\"%1$s\" title=\"%2$s\">%2$s</a>."
+#~ msgstr "Ingelogd als <a href=\"%1$s\" title=\"%2$s\">%2$s</a>."
+
+#~ msgid "Log out of this account"
+#~ msgstr "Afmelden."
+
+#~ msgid "Logout &raquo;"
+#~ msgstr "Afmelden &raquo;"
+
+#~ msgid "*"
+#~ msgstr "*"
+
+#~ msgid "Website"
+#~ msgstr "Website"
+
+#~ msgid "Submit"
+#~ msgstr "Verstuur"
+
+#~ msgid "Password Protected"
+#~ msgstr "Beveiligd met wachtwoord"
+
+#~ msgid "Enter the password to view comments."
+#~ msgstr "Voer wachtwoord in om reacties te lezen."
+
+#~ msgid "Leave a Reply to %s"
+#~ msgstr "Reageer op %s"
+
+#~ msgid "Click here to cancel reply."
+#~ msgstr "Klik hier om de reactie te annuleren."
+
+#~ msgid "F jS, Y"
+#~ msgstr "j F, Y"
+
+#~ msgid "Week %1$s of %2$s"
+#~ msgstr "Week %1$s van %2$s"
+
+#~ msgid "W"
+#~ msgstr "W"
+
+#~ msgid "Y"
+#~ msgstr "Y"
+
+#~ msgid "You are browsing the archive for week %1$s of %2$s."
+#~ msgstr "Je bekijkt het archief voor week %1$s van %2$s."
+
+#~ msgid "Sorry, there are no posts for %1$s."
+#~ msgstr "Sorry, maar er zijn geen berichten voor %1$s."
+
+#~ msgid "Sorry, no posts matched your criteria."
+#~ msgstr "Sorry, er zijn geen berichten die met je criteria overeenkomen."
+
+#~ msgid "Sorry, no images matched your criteria."
+#~ msgstr "Sorry, er zijn geen afbeeldingen die met je criteria overeenkomen."
+
+#~ msgid ""
+#~ "You are currently logged in as <a href=\"%1$s\" title=\"%2$s\">%2$s</a>."
+#~ msgstr ""
+#~ "Je bent momenteel ingelogd als <a href=\"%1$s\" title=\"%2$s\">%2$s</a>."
+
+#~ msgid ""
+#~ "You have successfully logged in as <a href=\"%1$s\" title=\"%2$s\">%2$s</"
+#~ "a>."
+#~ msgstr ""
+#~ "Je bent succesvol ingelogd als <a href=\"%1$s\" title=\"%2$s\">%2$s</a>."
+
+#~ msgid ""
+#~ "You must be <a href=\"%1$s\" title=\"Log in\">logged in</a> to view the "
+#~ "content of this page."
+#~ msgstr ""
+#~ "Je moet <a href=\"%1$s\" title=\"Log in\">ingelogd</a> zijn om de inhoud "
+#~ "van deze pagina te bekijken."
+
+#~ msgid ""
+#~ "If you're not currently a member, please take a moment to <a href=\"%1$s"
+#~ "\" title=\"Register\">register</a>."
+#~ msgstr ""
+#~ "Als je momenteel nog geen lid bent, neem dan een ogenblikje tijd om je te "
+#~ "<a href=\"%1$s\" title=\"Register\">registreren</a>."
+
+#~ msgid "You must enter a post title."
+#~ msgstr "Je moet een titel voor het bericht invoeren."
+
+#~ msgid "You must write something."
+#~ msgstr "Je moet hier iets schrijven."
+
+#~ msgid "Title"
+#~ msgstr "Titel"
+
+#~ msgid "Write"
+#~ msgstr "Schrijf"
+
+#~ msgid "Tags"
+#~ msgstr "Tags"
+
+#~ msgid "Publish"
+#~ msgstr "Publiceer"
+
+#~ msgid "You don't have the appropriate capabilities to publish posts."
+#~ msgstr "Je hebt niet de nodige rechten om berichten te publiceren."
+
+#~ msgid ""
+#~ "You must be <a href=\"%1$s\" title=\"Log in\">logged in</a> with "
+#~ "appropriate user capabilities to publish posts."
+#~ msgstr ""
+#~ "Je moet <a href=\"%1$s\" title=\"Log in\">ingelogd</a> zijn met de nodige "
+#~ "gebruikersrechten om berichten te kunnen publiceren."
+
+#~ msgid "A username is required for registration."
+#~ msgstr "Om te registreren is een gebruikersnaam nodig."
+
+#~ msgid "You must enter an email address."
+#~ msgstr "Je moet een email-adres invoeren."
+
+#~ msgid "You must enter a password."
+#~ msgstr "Je moet een wachtwoord invoeren."
+
+#~ msgid "You must enter your password twice."
+#~ msgstr "Je moet je wachtwoord tweemaal invoeren."
+
+#~ msgid "You must enter the same password twice."
+#~ msgstr "Je moet tweemaal hetzelfde wachtwoord invoeren."
+
+#~ msgid "User registration failed.  Please try again."
+#~ msgstr "Gebruikersregistratie mislukt.  Probeer opnieuw."
+
+#~ msgid ""
+#~ "You are logged in as <a href=\"%1$s\" title=\"%2$s\">%2$s</a>.  You don't "
+#~ "need another account."
+#~ msgstr ""
+#~ "Je bent ingelogd als <a href=\"%1$s\" title=\"%2$s\">%2$s</a>.  Je hebt "
+#~ "geen bijkomend account nodig."
+
+#~ msgid "Thank you for registering, %1$s."
+#~ msgstr "Bedankt voor je registratie, %1$s."
+
+#~ msgid "Users can register themselves or you can manually create users here."
+#~ msgstr ""
+#~ "Gebruikers kunnen zichzelf registreren of je kan hier handmatig "
+#~ "gebruikersaccounts aanmaken."
+
+#~ msgid ""
+#~ "Users cannot currently register themselves, but you can manually create "
+#~ "users here."
+#~ msgstr ""
+#~ "Gebruikers kunnen zichzelf niet registreren, maar je kan hier wel "
+#~ "handmatig gebruikersaccounts aanmaken."
+
+#~ msgid "Required fields are marked <span class=\"required\">*</span>"
+#~ msgstr ""
+#~ "Verplichte velden zijn aangeduid met <span class=\"required\">*</span>."
+
+#~ msgid "Last Name"
+#~ msgstr "Naam"
+
+#~ msgid "E-mail *"
+#~ msgstr "E-mail *"
+
+#~ msgid "Repeat Password *"
+#~ msgstr "Herhaal je wachtwoord*"
+
+#~ msgid "Biographical Information"
+#~ msgstr "Biografische informatie"
+
+#~ msgid "You are browsing the search results for &quot;%1$s&quot;"
+#~ msgstr "Je bekijkt hier de zoekresultaten voor  &quot;%1$s&quot;"
+
+#~ msgid "Maybe you'd like to try inputting different search terms."
+#~ msgstr "Misschien wil je andere zoektermen invoeren."
+
+#~ msgid "You are browsing the %1$s tag archive."
+#~ msgstr "Je bekijkt het archief voor de tag %1$s"
+
+#~ msgid "Sorry, there are no posts tagged %1$s."
+#~ msgstr "Sorry, er zijn geen berichten met de tag %1$s."
+
+#~ msgid "Sorry, no documents matched your criteria."
+#~ msgstr "Sorry, er zijn geen documenten die met je criteria overeenkomen."
+
+#~ msgid "Sorry, no videos matched your criteria."
+#~ msgstr "Sorry, er zijn geen video's die met je criteria overeenkomen."
+
+#~ msgid "Widget Template"
+#~ msgstr "Widget Template"
+
+#~ msgid "About This Theme"
+#~ msgstr "Over dit Thema"
+
+#~ msgid "Theme Description:"
+#~ msgstr "Thema Beschrijving:"
+
+#~ msgid "Theme Documentation:"
+#~ msgstr "Thema Documentatie:"
+
+#~ msgid "Get support for this theme"
+#~ msgstr "Ondersteuning voor dit thema"
+
+#~ msgid "Select your theme settings"
+#~ msgstr "Selecteer de settings voor je thema"
+
+#, fuzzy
+#~ msgid ""
+#~ "Select this if you want your primary widget inserts to default to the "
+#~ "home insert when nothing else is selected."
+#~ msgstr ""
+#~ "Selecteer dit als je wenst dat je primaire widgets standaard geladen "
+#~ "worden op de home-pagina als niet anders geselecteerd is."
+
+#, fuzzy
+#~ msgid ""
+#~ "Select this if you want your secondary widget inserts to default to the "
+#~ "home insert when nothing else is selected."
+#~ msgstr ""
+#~ "Selecteer dit als je wenst dat je secundaire widgets standaard geladen "
+#~ "worden op de home-pagina als niet anders geselecteerd is."
+
+#~ msgid "Stylesheets:"
+#~ msgstr "Stijlbladen (CSS)"
+
+#~ msgid ""
+#~ "Select this to have the theme automatically include a print stylesheet."
+#~ msgstr ""
+#~ "Selecteer dit als je wil dat het thema automatisch een 'print' stijlblad "
+#~ "insluit."
+
+#~ msgid "JavaScript:"
+#~ msgstr "JavaScript:"
+
+#~ msgid "Include the pull quote JavaScript."
+#~ msgstr "Inclusief pull quote JavaScript."
+
+#~ msgid "Feeds:"
+#~ msgstr "Feeds:"
+
+#~ msgid ""
+#~ "If you have a an alternate feed address, such as one from <a href="
+#~ "\"http://feedburner.com\" title=\"Feedburner\">Feedburner</a>, you can "
+#~ "enter it here to have the theme set your feed URL link.  If blank, the "
+#~ "theme will default to your WordPress RSS feed."
+#~ msgstr ""
+#~ "Wanneer je over een alternatief feed-adres beschikt, zoals van <a href="
+#~ "\"http://feedburner.com\" title=\"Feedburner\">Feedburner</a>, kan je dat "
+#~ "hier invoeren om het door het thema te laten gebruiken.  Als je dit "
+#~ "blanco laat, wordt de standaard WordPress RSS feed gebruikt."
+
+#~ msgid "Title &amp; Meta:"
+#~ msgstr "Titel &amp; Meta"
+
+#~ msgid "Use category slugs on single posts for your meta keywords?"
+#~ msgstr ""
+#~ "Gebruik categorie 'slug' als meta keywoord voor afzonderlijke berichten."
+
+#~ msgid "Use tag slugs on single posts for your meta keywords?"
+#~ msgstr "Gebruik tag 'slug' als meta keywoord voor afzonderlijke berichten."
+
+#~ msgid "Use the excerpt on single posts for your meta description?"
+#~ msgstr ""
+#~ "Uittreksel als meta-omschrijving gebruiken voor afzonderlijke berichten?"
+
+#~ msgid "Use the author bio on author archives for your meta description?"
+#~ msgstr ""
+#~ "Auteurs biografie als meta-omschrijving gebruiken voor afzonderlijke "
+#~ "berichten?"
+
+#~ msgid ""
+#~ "Use the category description on category archives for your meta "
+#~ "description?"
+#~ msgstr ""
+#~ "Rubriek-omschrijving als meta-omschrijving gebruiken voor afzonderlijke "
+#~ "berichten?"
+
+#~ msgid "Use the author's name on pages and posts as the meta author?"
+#~ msgstr ""
+#~ "Naam van de auteur als meta-auteur gebruiken op pagina's en berichten?"
+
+#~ msgid "Append site title to the end of the page name?"
+#~ msgstr "Site-naam toevoegen aan het eind van de pagina-naam?"
+
+#~ msgid ""
+#~ "You can change these settings in the box labeled <em>Hybrid Settings</em> "
+#~ "when writing a post or page."
+#~ msgstr ""
+#~ "Je kan deze settings aanpassen in het vak <em>Hybrid Settings</em> "
+#~ "wanneer je een bericht of pagina bewerkt."
+
+#~ msgid ""
+#~ "The <a href=\"%1$s\" title=\"All-In-One SEO Pack\">All-In-One SEO Pack</"
+#~ "a> and <a href=\"%2$s\" title=\"Headspace2\">Headspace2</a> plugins will "
+#~ "override these settings and the Indexing settings."
+#~ msgstr ""
+#~ "De <a href=\"%1$s\" title=\"All-In-One SEO Pack\">All-In-One SEO Pack</a> "
+#~ "en <a href=\"%2$s\" title=\"Headspace2\">Headspace2</a> plugins zullen "
+#~ "deze en de indexeringssettings overschrijven."
+
+#~ msgid "Indexing:"
+#~ msgstr "Indexeren:"
+
+#~ msgid ""
+#~ "Choose which pages of your blog get indexed by the search engines. Only "
+#~ "selected pages will be indexed.  If not selected, those pages will be "
+#~ "blocked."
+#~ msgstr ""
+#~ "Kies welke pagina's van je blog door zoekmachines kunnen ge&iuml;ndexeerd "
+#~ "worden.  Alleen de geselecteerde pagina's worden ge&iuml;ndexeerd.  Niet "
+#~ "geselecteerde pagina's worden geblokkeerd."
+
+#~ msgid ""
+#~ "Note: Some of these settings will render the Title &amp; Meta settings "
+#~ "moot.  Also, setting your site to privacy mode will override these "
+#~ "controls."
+#~ msgstr ""
+#~ "Let op: Sommige van deze settings kunnen conflicteren met de Titel &amp; "
+#~ "Meta settings.  Ook wanneer je je site in een beveiligde modus omzet, "
+#~ "worden deze settings overschreven."
+
+#~ msgid "Home page"
+#~ msgstr "Homepage"
+
+#~ msgid "Single posts"
+#~ msgstr "Afzonderlijke berichten"
+
+#~ msgid "Attachments"
+#~ msgstr "Bijlages"
+
+#~ msgid "Pages"
+#~ msgstr "Pagina's"
+
+#~ msgid "Date-based archives"
+#~ msgstr "Datum-gebaseerd archief"
+
+#~ msgid "Category archives"
+#~ msgstr "Archief per rubriek"
+
+#~ msgid "Tag archives"
+#~ msgstr "Archief op tags"
+
+#~ msgid "Search"
+#~ msgstr "Zoek"
+
+#~ msgid "404"
+#~ msgstr "404"
+
+#~ msgid "Avatars:"
+#~ msgstr "Avatars:"
+
+#~ msgid ""
+#~ "You can set a default avatar for users without one if you don't like the "
+#~ "choices WordPress offers you. Simply add the full path to the image file."
+#~ msgstr ""
+#~ "Je kan een standaard-avatar instellen voor gebruikers zonder avatar, "
+#~ "wanneer de keuze van WordPress je niet bevalt.  Voer daartoe hier het "
+#~ "complete pad naar de afbeelding in."
+
+#~ msgid "Comments:"
+#~ msgstr "Reacties:"
+
+#~ msgid "Check to use the comments popup window instead of regular comments."
+#~ msgstr ""
+#~ "Aanvinken om een popup-scherm voor reacties te gebruiken in plaats van "
+#~ "het gebruikelijke commentaarscherm."
+
+#~ msgid "WP 2.7+ only."
+#~ msgstr "Enkel voor WP 2.7+"
+
+#~ msgid "Footer Insert:"
+#~ msgstr "Inserts voor Footer:"
+
+#~ msgid ""
+#~ "You can place XHTML and JavaScript here to have it inserted automatically "
+#~ "into your theme.  If you have a script, such as one from Google "
+#~ "Analytics, this could be useful."
+#~ msgstr ""
+#~ "Je kan hier XHTML en Javascript plaatsen dat automatisch in de footer van "
+#~ "je thema wordt ingevoerd.  Dit kan van pas komen als je een script hebt "
+#~ "zoals dat van Google Analytics."
+
+#~ msgid ""
+#~ "Check this if you want the theme to auto-generate your site's copyright "
+#~ "and title in the footer."
+#~ msgstr ""
+#~ "Aanvinken wanneer je wil dat het thema automatisch een copyright voor je "
+#~ "site in de footer invoert."
+
+#~ msgid ""
+#~ "Want to show your love of WordPress?  Check this and a link will be added "
+#~ "to your footer back to WordPress.org."
+#~ msgstr ""
+#~ "Wil je laten zien hoezeer je WordPress waardeert? Vink dit aan om "
+#~ "automatisch een link naar WordPress.org aan de footer toe te voegen."
+
+#~ msgid ""
+#~ "Check this to have a link back to Theme Hybrid automatically appended to "
+#~ "your footer.  This is totally optional.  Really."
+#~ msgstr ""
+#~ "Aanvinken om automatisch een link naar Theme Hybrid aan je footer toe te "
+#~ "voegen.  Dit volkomen vrijwillig, echt waar!"
+
+#~ msgid ""
+#~ "For testing purposes, this will append a database query counter and page "
+#~ "load timer to your footer."
+#~ msgstr ""
+#~ "Voor test-doeleinden wordt hiermee een database-query teller en de "
+#~ "laadtijd van de pagina aan je footer toegevoegd."
+
+#~ msgid "Add a title that will be seen by search engines."
+#~ msgstr "Voeg een titel toe die door zoekmachines gezien wordt."
+
+#~ msgid "Add a description that will be seen by search engines."
+#~ msgstr "Voeg een beschrijving toe die door zoekmachines gezien wordt."
+
+#~ msgid "Keywords:"
+#~ msgstr "Trefwoorden:"
+
+#~ msgid "Add keywords that will be seen by search engines."
+#~ msgstr "Voeg trefwoorden toe die door zoekmachines gezien worden."
+
+#~ msgid "Series:"
+#~ msgstr "Series:"
+
+#~ msgid "Post the title of your series of articles here."
+#~ msgstr "Post hier de titel van je artikelseries."
+
+#~ msgid "Add an image URL here."
+#~ msgstr "Voeg hier de URL van een afbeelding toe."
+
+#~ msgid "Page Navigation:"
+#~ msgstr "Pagina Navigatie:"
+
+#~ msgid "Hybrid Theme Settings"
+#~ msgstr "Hybrid Theme Settings"
+
+#~ msgid "Settings saved."
+#~ msgstr "Settings opgeslagen."
+
+#~ msgid "Browse:"
+#~ msgstr "Blader:"
+
+#~ msgid "Home"
+#~ msgstr "Home"
+
+#~ msgid "Search results for &quot;%1$s&quot"
+#~ msgstr "Zoekresultaten voor &quot;%1$s&quot"
+
+#~ msgid "m"
+#~ msgstr "m"
+
+#~ msgid "F"
+#~ msgstr "F"
+
+#~ msgid "j"
+#~ msgstr "j"
+
+#~ msgid "404 Not Found"
+#~ msgstr "404 Niet Gevonden"
+
+#~ msgid "Log in to reply."
+#~ msgstr "Log in op te reageren."
+
+#~ msgid "This function has been removed or replaced by another function."
+#~ msgstr "Deze functie is verwijderd of vervangen door een andere functie."
+
+#~ msgid ""
+#~ "You can use these <acronym title=\"Extensible Hypertext Markup Language"
+#~ "\">XHTML</acronym> tags&#58;"
+#~ msgstr ""
+#~ "Je kan deze <acronym title=\"Extensible Hypertext Markup Language"
+#~ "\">XHTML</acronym> tags&#58; gebruiken."
+
+#~ msgid "Search this site..."
+#~ msgstr "Doorzoek deze site"
+
+#~ msgid "Copyright"
+#~ msgstr "Copyright"
+
+#~ msgid "Powered by"
+#~ msgstr "Aangedreven door "
+
+#~ msgid ""
+#~ "Powered by WordPress, state-of-the-art semantic personal publishing "
+#~ "platform"
+#~ msgstr ""
+#~ "Aangedreven door WordPress, het state-of-the-art semantische platform "
+#~ "voor iedereen."
+
+#~ msgid "WordPress"
+#~ msgstr "WordPress"
+
+#~ msgid "and"
+#~ msgstr "en"
+
+#~ msgid "Hybrid Theme Framework"
+#~ msgstr "Hybrid Theme Framework"
+
+#~ msgid "Articles in this series"
+#~ msgstr "Artikelen in deze serie"
+
+#~ msgid ""
+#~ "You have encountered an error. This is usually because you've changed "
+#~ "something in the core Hybrid theme files. Try undoing your last edit to "
+#~ "correct this issue. If this doesn't resolve it, head over to the support "
+#~ "forums for help."
+#~ msgstr ""
+#~ "Er is een fout opgetreden.  Dit gebeurt gewoonlijk nadat je iets hebt "
+#~ "gewijzigd in de kernbestanden van het Hybrid-thema.  Probeer je laatste "
+#~ "wijzigingen ongedaan te maken om dit op te lossen.  Als dat niet lukt, "
+#~ "kan je je tot de support forums richten voor hulp."
+
+#~ msgid "This page loaded in %1$s seconds with %2$s database queries."
+#~ msgstr "Deze pagina laadde in %1$s seconden met %2$s database queries."
+
+#~ msgid ": Page %1$s"
+#~ msgstr ":Pagina %1$s"
+
+#~ msgid "Search results for &quot;%1$s.&quot;"
+#~ msgstr "Zoekresultaten voor &quot;%1$s.&quot;"
+
+#~ msgid "Archive for %1$s"
+#~ msgstr "Archief voor %1$s"
+
+#~ msgid "Archive for week %1$s of %2$s"
+#~ msgstr "Archief voor week %1$s van %2$s"
+
+#~ msgid "Comment on &quot;%1$s&quot;"
+#~ msgstr "Reactie op &quot;%1$s&quot;"
+
+#~ msgid "Primary Home"
+#~ msgstr "Primair Home"
+
+#~ msgid "Primary Author"
+#~ msgstr "Primaire Auteur"
+
+#~ msgid "Primary Category"
+#~ msgstr "Primaire Rubriek"
+
+#~ msgid "Primary Date"
+#~ msgstr "Primaire Datum"
+
+#~ msgid "Primary Page"
+#~ msgstr "Primaire Pagina"
+
+#~ msgid "Primary Search"
+#~ msgstr "Primaire Zoekresultaten"
+
+#~ msgid "Primary Tag"
+#~ msgstr "Primaire Tag"
+
+#~ msgid "Primary 404"
+#~ msgstr "Primaire 404"
+
+#~ msgid "Secondary Home"
+#~ msgstr "Secundaire Home"
+
+#~ msgid "Secondary Author"
+#~ msgstr "Secundaire Auteur"
+
+#~ msgid "Secondary Category"
+#~ msgstr "Secundaire Rubriek"
+
+#~ msgid "Secondary Date"
+#~ msgstr "Secundaire Datum "
+
+#~ msgid "Secondary Page"
+#~ msgstr "Secundaire Pagina"
+
+#~ msgid "Secondary Search"
+#~ msgstr "Secundaire Zoekresultaten"
+
+#~ msgid "Secondary Single"
+#~ msgstr "Secundaire EnkelvoudigBericht"
+
+#~ msgid "Secondary Tag"
+#~ msgstr "Secundaire Tag"
+
+#~ msgid "Secondary 404"
+#~ msgstr "Secundaire 404"
+
+#~ msgid "Subsidiary Default"
+#~ msgstr "Bijkomende Standaard"
+
+#~ msgid "RSS 2.0"
+#~ msgstr "RSS 2.0"
+
+#~ msgid "RSS .92"
+#~ msgstr "RSS .92"
+
+#~ msgid "Atom 0.3"
+#~ msgstr "Atom 0.3"
+
+#~ msgid "Subsidiary Home"
+#~ msgstr "Subsidiair Home"
+
+#~ msgid "Previous Page"
+#~ msgstr "Vorige pagina"
+
+#~ msgid "Next Page"
+#~ msgstr "Volgende pagina"
+
+#~ msgid "Related Posts"
+#~ msgstr "Gerelateerde berichten"
+
+#~ msgid "Logout"
+#~ msgstr "Afmelden"
+
+#~ msgid "Select Year"
+#~ msgstr "Selecteer jaar"
+
+#~ msgid "Select Week"
+#~ msgstr "Selecteer week"
+
+#~ msgid "Select Day"
+#~ msgstr "Selecteer dag"
+
+#~ msgid "Select Post"
+#~ msgstr "Selecteer bericht"
+
+#~ msgid "Type:"
+#~ msgstr "Type:"
+
+#~ msgid "Format:"
+#~ msgstr "Format:"
+
+#~ msgid "Before:"
+#~ msgstr "Voor:"
+
+#~ msgid "After:"
+#~ msgstr "Na:"
+
+#~ msgid "Show post count?"
+#~ msgstr "Toon aantal berichten?"
+
+#~ msgid ""
+#~ "An advanced widget that gives you total control over the output of your "
+#~ "archives."
+#~ msgstr ""
+#~ "Een geavanceerde widget die je de totale controle geeft over de output "
+#~ "van je archieven."
+
+#~ msgid "Bookmarks"
+#~ msgstr "Favorieten"
+
+#~ msgid "Categories:"
+#~ msgstr "Rubrieken:"
+
+#~ msgid "Exclude Categories:"
+#~ msgstr "Uit te sluiten rubrieken:"
+
+#~ msgid "Category:"
+#~ msgstr "Rubriek:"
+
+#~ msgid "Category Order:"
+#~ msgstr "Rubriek volgorde:"
+
+#~ msgid "Order Categories By:"
+#~ msgstr "Sorteer rubrieken op:"
+
+#~ msgid "Include Bookmarks:"
+#~ msgstr "Inclusief favorieten:"
+
+#~ msgid "Exclude Bookmarks:"
+#~ msgstr "Exclusief favorieten:"
+
+#~ msgid "Bookmarks Order:"
+#~ msgstr "Favorieten volgorde:"
+
+#~ msgid "Order Bookmarks By:"
+#~ msgstr "Sorteer favorieten op:"
+
+#~ msgid "Between (Bookmark/Description):"
+#~ msgstr "Tussen (Favoriet/beschrijving)"
+
+#~ msgid "Categorize?"
+#~ msgstr "Rubriceer?"
+
+#~ msgid "Show description?"
+#~ msgstr "Beschrijving tonen?"
+
+#~ msgid "Hide invisible bookmarks?"
+#~ msgstr "Onzichtbare favorieten verbergen?"
+
+#~ msgid "Show private categories?"
+#~ msgstr "Private rubrieken tonen?"
+
+#~ msgid "Show rating?"
+#~ msgstr "Waardering tonen?"
+
+#~ msgid "Show images?"
+#~ msgstr "Afbeeldingen tonen?"
+
+#~ msgid ""
+#~ "An advanced widget that gives you total control over the output of your "
+#~ "bookmarks (links)."
+#~ msgstr ""
+#~ "Een geavanceerde widget die je de totale controle geeft over de output "
+#~ "van je favorieten (links)."
+
+#~ msgid "RSS"
+#~ msgstr "RSS"
+
+#~ msgid "Depth:"
+#~ msgstr "Diepte:"
+
+#~ msgid "Number:"
+#~ msgstr "Aantal:"
+
+#~ msgid "Child Of:"
+#~ msgstr "'Child' van :"
+
+#~ msgid "Hierarchical?"
+#~ msgstr "Hierarchisch?"
+
+#~ msgid "Show RSS feed?"
+#~ msgstr "Toon RSS feed?"
+
+#~ msgid "Use description for title?"
+#~ msgstr "Omschrijving gebruiken voor de titel?"
+
+#~ msgid "Show last updated?"
+#~ msgstr "Toon laatste aanpassing?"
+
+#~ msgid "Show count?"
+#~ msgstr "Toon aantal?"
+
+#~ msgid "Hide empty?"
+#~ msgstr "Lege verbergen?"
+
+#~ msgid ""
+#~ "An advanced widget that gives you total control over the output of your "
+#~ "category links."
+#~ msgstr ""
+#~ "Een geavanceerde widget die je de totale controle geeft over de output "
+#~ "van je rubrieken."
+
+#~ msgid "Categories"
+#~ msgstr "Rubrieken"
+
+#~ msgid "Sort Order:"
+#~ msgstr "Sorteervolgorde"
+
+#~ msgid "Meta Key:"
+#~ msgstr "Meta Key:"
+
+#~ msgid "Meta Value:"
+#~ msgstr "Meta Value:"
+
+#~ msgid "Show home?"
+#~ msgstr "Toon home?"
+
+#~ msgid "Show date?"
+#~ msgstr "Toon datum?"
+
+#~ msgid "Search Text:"
+#~ msgstr "Zoek tekst:"
+
+#~ msgid "Use theme's search form?"
+#~ msgstr "Zoekformulier van thema gebruiken?"
+
+#~ msgid ""
+#~ "An advanced widget that gives you total control over the output of your "
+#~ "search form."
+#~ msgstr ""
+#~ "Een geavanceerde widget die je de totale controle geeft over de output "
+#~ "van je zoekformulier."
+
+#~ msgid "Largest:"
+#~ msgstr "Grootste:"
+
+#~ msgid "Smallest:"
+#~ msgstr "Kleinste:"
+
+#~ msgid "Unit:"
+#~ msgstr "Eenheid:"
+
+#~ msgid ""
+#~ "An advanced widget that gives you total control over the output of your "
+#~ "tags."
+#~ msgstr ""
+#~ "Een geavanceerde widget die je de totale controle geeft over de output "
+#~ "van je tags."

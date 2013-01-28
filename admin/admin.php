@@ -11,12 +11,8 @@
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-
-
-
-
 /* Set up the admin functionality. */
-add_action( 'admin_menu', 'cc_portfolio_admin_setup' );
+add_action( 'admin_menu', 'ccp_admin_setup' );
 
 /**
  * Adds actions where needed for setting up the plugin's admin functionality.
@@ -25,22 +21,21 @@ add_action( 'admin_menu', 'cc_portfolio_admin_setup' );
  * @access public
  * @return void
  */
-function cc_portfolio_admin_setup() {
+function ccp_admin_setup() {
 
 	// Waiting on @link http://core.trac.wordpress.org/ticket/9296
-	//add_action( 'admin_init', 'cc_portfolio_admin_setup' );
+	//add_action( 'admin_init', 'ccp_admin_setup' );
 
-
-	add_filter( 'manage_edit-portfolio_item_columns', 'cc_portfolio_edit_portfolio_item_columns' );
-	add_action( 'manage_portfolio_item_posts_custom_column', 'cc_portfolio_manage_portfolio_item_columns', 10, 2 );
-
+	/* Custom columns on the edit portfolio items screen. */
+	add_filter( 'manage_edit-portfolio_item_columns', 'ccp_edit_portfolio_item_columns' );
+	add_action( 'manage_portfolio_item_posts_custom_column', 'ccp_manage_portfolio_item_columns', 10, 2 );
 
 	/* Add meta boxes an save metadata. */
-	add_action( 'add_meta_boxes', 'cc_portfolio_add_meta_boxes' );
-	add_action( 'save_post', 'cc_portfolio_item_info_meta_box_save', 10, 2 );
+	add_action( 'add_meta_boxes', 'ccp_add_meta_boxes' );
+	add_action( 'save_post', 'ccp_portfolio_item_info_meta_box_save', 10, 2 );
 
 	/* Add 32px screen icon. */
-	add_action('admin_head', 'cc_portfolio_head_style');
+	add_action( 'admin_head', 'ccp_admin_head_style' );
 }
 
 /**
@@ -51,7 +46,7 @@ function cc_portfolio_admin_setup() {
  * @param  array  $columns
  * @return array
  */
-function cc_portfolio_edit_portfolio_item_columns( $columns ) {
+function ccp_edit_portfolio_item_columns( $columns ) {
 
 	unset( $columns['title'] );
 	unset( $columns['taxonomy-portfolio'] );
@@ -78,7 +73,7 @@ function cc_portfolio_edit_portfolio_item_columns( $columns ) {
  * @param  int     $post_id
  * @return void
  */
-function cc_portfolio_manage_portfolio_item_columns( $column, $post_id ) {
+function ccp_manage_portfolio_item_columns( $column, $post_id ) {
 	global $post;
 
 	switch( $column ) {
@@ -107,14 +102,14 @@ function cc_portfolio_manage_portfolio_item_columns( $column, $post_id ) {
  * @param  string  $post_type
  * @return void
  */
-function cc_portfolio_add_meta_boxes( $post_type ) {
+function ccp_add_meta_boxes( $post_type ) {
 
 	if ( 'portfolio_item' === $post_type ) {
 
 		add_meta_box( 
-			'cc-portfolio-item-info', 
+			'ccp-item-info', 
 			__( 'Project Info', 'custom-content-portfolio' ), 
-			'cc_portfolio_item_info_meta_box_display', 
+			'ccp_portfolio_item_info_meta_box_display', 
 			$post_type, 
 			'side', 
 			'core'
@@ -131,19 +126,19 @@ function cc_portfolio_add_meta_boxes( $post_type ) {
  * @param  array   $metabox
  * @return void
  */
-function cc_portfolio_item_info_meta_box_display( $post, $metabox ) {
+function ccp_portfolio_item_info_meta_box_display( $post, $metabox ) {
 
-	wp_nonce_field( basename( __FILE__ ), 'cc-portfolio-item-info-nonce' ); ?>
+	wp_nonce_field( basename( __FILE__ ), 'ccp-portfolio-item-info-nonce' ); ?>
 
 	<p>
-		<label for="cc-portfolio-item-url"><?php _e( 'Project <abbr title="Uniform Resource Locator">URL</abbr>', 'custom-content-portfolio' ); ?></label>
+		<label for="ccp-portfolio-item-url"><?php _e( 'Project <abbr title="Uniform Resource Locator">URL</abbr>', 'custom-content-portfolio' ); ?></label>
 		<br />
-		<input type="text" name="cc-portfolio-item-url" id="cc-portfolio-item-url" value="<?php echo esc_url( get_post_meta( $post->ID, 'portfolio_item_url', true ) ); ?>" size="30" tabindex="30" style="width: 99%;" />
+		<input type="text" name="ccp-portfolio-item-url" id="ccp-portfolio-item-url" value="<?php echo esc_url( get_post_meta( $post->ID, 'portfolio_item_url', true ) ); ?>" size="30" tabindex="30" style="width: 99%;" />
 	</p>
 	<?php
 
 	/* Allow devs to hook in their own stuff here. */
-	do_action( 'cc_portfolio_item_info_meta_box', $post, $metabox );
+	do_action( 'ccp_item_info_meta_box', $post, $metabox );
 }
 
 /**
@@ -155,13 +150,13 @@ function cc_portfolio_item_info_meta_box_display( $post, $metabox ) {
  * @param  object  $post
  * @return void
  */
-function cc_portfolio_item_info_meta_box_save( $post_id, $post ) {
+function ccp_portfolio_item_info_meta_box_save( $post_id, $post ) {
 
-	if ( !isset( $_POST['cc-portfolio-item-info-nonce'] ) || !wp_verify_nonce( $_POST['cc-portfolio-item-info-nonce'], basename( __FILE__ ) ) )
+	if ( !isset( $_POST['ccp-portfolio-item-info-nonce'] ) || !wp_verify_nonce( $_POST['ccp-portfolio-item-info-nonce'], basename( __FILE__ ) ) )
 		return;
 
 	$meta = array(
-		'portfolio_item_url' => esc_url( $_POST['cc-portfolio-item-url'] )
+		'portfolio_item_url' => esc_url( $_POST['ccp-portfolio-item-url'] )
 	);
 
 	foreach ( $meta as $meta_key => $new_meta_value ) {
@@ -191,48 +186,48 @@ function cc_portfolio_item_info_meta_box_save( $post_id, $post ) {
  * @access public
  * @return void
  */
-function cc_portfolio_admin_settings() {
+function ccp_plugin_settings() {
 
 	/* Register settings for the 'permalink' screen in the admin. */
 	register_setting(
 		'permalink',
-		'plugin_cc_portfolio',
-		'cc_portfolio_validate_settings'
+		'plugin_custom_content_portfolio',
+		'ccp_validate_settings'
 	);
 
 	/* Adds a new settings section to the 'permalink' screen. */
 	add_settings_section(
-		'cc-portfolio-permalink',
+		'ccp-permalink',
 		__( 'Portfolio Settings', 'custom-content-portfolio' ),
-		'cc_portfolio_permalink_section',
+		'ccp_permalink_section',
 		'permalink'
 	);
 
 	/* Get the plugin settings. */
-	$settings = get_option( 'plugin_cc_portfolio', cc_portfolio_get_default_settings() );
+	$settings = get_option( 'plugin_ccp', ccp_get_default_settings() );
 
 	add_settings_field(
-		'cc-portfolio-root',
+		'ccp-root',
 		__( 'Portfolio archive', 'custom-content-portfolio' ),
-		'cc_portfolio_root_field',
+		'ccp_root_field',
 		'permalink',
-		'cc-portfolio-permalink',
+		'ccp-permalink',
 		$settings
 	);
 	add_settings_field(
-		'cc-portfolio-base',
+		'ccp-base',
 		__( 'Portfolio taxonomy slug', 'custom-content-portfolio' ),
-		'cc_portfolio_base_field',
+		'ccp_base_field',
 		'permalink',
-		'cc-portfolio-permalink',
+		'ccp-permalink',
 		$settings
 	);
 	add_settings_field(
-		'cc-portfolio-item-base',
+		'ccp-item-base',
 		__( 'Portfolio item slug', 'custom-content-portfolio' ),
-		'cc_portfolio_item_base_field',
+		'ccp_item_base_field',
 		'permalink',
-		'cc-portfolio-permalink',
+		'ccp-permalink',
 		$settings
 	);
 }
@@ -245,7 +240,7 @@ function cc_portfolio_admin_settings() {
  * @param  array  $settings
  * @return array
  */
-function cc_portfolio_validate_settings( $settings ) {
+function ccp_validate_settings( $settings ) {
 
 	// @todo Sanitize for alphanumeric characters
 	// @todo Both the portfolio_base and portfolio_item_base can't match.
@@ -266,7 +261,7 @@ function cc_portfolio_validate_settings( $settings ) {
  * @access public
  * @return void
  */
-function cc_portfolio_permalink_section() { ?>
+function ccp_permalink_section() { ?>
 	<table class="form-table">
 		<?php do_settings_fields( 'permalink', 'custom-content-portfolio' ); ?>
 	</table>
@@ -279,8 +274,8 @@ function cc_portfolio_permalink_section() { ?>
  * @access public
  * @return void
  */
-function cc_portfolio_root_field( $settings ) { ?>
-	<input type="text" name="plugin_cc_portfolio[portfolio_root]" id="cc-portfolio-root" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_root'] ); ?>" />
+function ccp_root_field( $settings ) { ?>
+	<input type="text" name="plugin_ccp[portfolio_root]" id="ccp-portfolio-root" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_root'] ); ?>" />
 	<code><?php echo home_url( $settings['portfolio_root'] ); ?></code> 
 <?php }
 
@@ -291,8 +286,8 @@ function cc_portfolio_root_field( $settings ) { ?>
  * @access public
  * @return void
  */
-function cc_portfolio_base_field( $settings ) { ?>
-	<input type="text" name="plugin_cc_portfolio[portfolio_base]" id="cc-portfolio-base" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_base'] ); ?>" />
+function ccp_base_field( $settings ) { ?>
+	<input type="text" name="plugin_ccp[portfolio_base]" id="ccp-portfolio-base" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_base'] ); ?>" />
 	<code><?php echo trailingslashit( home_url( "{$settings['portfolio_root']}/{$settings['portfolio_base']}" ) ); ?>%portfolio%</code> 
 <?php }
 
@@ -303,8 +298,8 @@ function cc_portfolio_base_field( $settings ) { ?>
  * @access public
  * @return void
  */
-function cc_portfolio_item_base_field( $settings ) { ?>
-	<input type="text" name="plugin_cc_portfolio[portfolio_item_base]" id="cc-portfolio-item-base" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_item_base'] ); ?>" />
+function ccp_item_base_field( $settings ) { ?>
+	<input type="text" name="plugin_ccp[portfolio_item_base]" id="ccp-portfolio-item-base" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_item_base'] ); ?>" />
 	<code><?php echo trailingslashit( home_url( "{$settings['portfolio_root']}/{$settings['portfolio_item_base']}" ) ); ?>%postname%</code> 
 <?php }
 
@@ -315,13 +310,13 @@ function cc_portfolio_item_base_field( $settings ) { ?>
  * @access public
  * @return void
  */
-function cc_portfolio_head_style() {
+function ccp_admin_head_style() {
         global $post_type;
 
 	if ( 'portfolio_item' === $post_type ) { ?>
 		<style type="text/css">
 			#icon-edit.icon32-posts-portfolio_item {
-				background: transparent url( '<?php echo CC_PORTFOLIO_URI . 'images/screen-icon.png'; ?>' ) no-repeat;
+				background: transparent url( '<?php echo CCP_URI . 'images/screen-icon.png'; ?>' ) no-repeat;
 			}
 		</style>
 	<?php }

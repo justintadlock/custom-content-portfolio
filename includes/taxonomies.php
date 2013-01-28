@@ -12,7 +12,7 @@
  */
 
 /* Register taxonomies on the 'init' hook. */
-add_action( 'init', 'cc_portfolio_register_taxonomies' );
+add_action( 'init', 'ccp_register_taxonomies' );
 
 /**
  * Register taxonomies for the plugin.
@@ -21,10 +21,10 @@ add_action( 'init', 'cc_portfolio_register_taxonomies' );
  * @access public
  * @return void.
  */
-function cc_portfolio_register_taxonomies() {
+function ccp_register_taxonomies() {
 
 	/* Get the plugin settings. */
-	$settings = get_option( 'plugin_cc_portfolio', cc_portfolio_get_default_settings() );
+	$settings = get_option( 'plugin_custom_content_portfolio', ccp_get_default_settings() );
 
 	/* Set up the arguments for the portfolio taxonomy. */
 	$args = array(
