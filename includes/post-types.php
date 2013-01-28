@@ -93,22 +93,22 @@ function cc_portfolio_register_post_types() {
 
 		/* Labels used when displaying the posts. */
 		'labels' => array(
-			'name'               => __( 'Portfolio Items',                   'cc-portfolio' ),
-			'singular_name'      => __( 'Portfolio Item',                    'cc-portfolio' ),
-			'menu_name'          => __( 'Portfolio',                         'cc-portfolio' ),
-			'name_admin_bar'     => __( 'Portfolio Item',                    'cc-portfolio' ),
-			'add_new'            => __( 'Add New',                           'cc-portfolio' ),
-			'add_new_item'       => __( 'Add New Portfolio Item',            'cc-portfolio' ),
-			'edit_item'          => __( 'Edit Portfolio Item',               'cc-portfolio' ),
-			'new_item'           => __( 'New Portfolio Item',                'cc-portfolio' ),
-			'view_item'          => __( 'View Portfolio Item',               'cc-portfolio' ),
-			'search_items'       => __( 'Search Portfolio',                  'cc-portfolio' ),
-			'not_found'          => __( 'No portfolio items found',          'cc-portfolio' ),
-			'not_found_in_trash' => __( 'No portfolio items found in trash', 'cc-portfolio' ),
-			'all_items'          => __( 'Portfolio Items',                   'cc-portfolio' ),
+			'name'               => __( 'Portfolio Items',                   'custom-content-portfolio' ),
+			'singular_name'      => __( 'Portfolio Item',                    'custom-content-portfolio' ),
+			'menu_name'          => __( 'Portfolio',                         'custom-content-portfolio' ),
+			'name_admin_bar'     => __( 'Portfolio Item',                    'custom-content-portfolio' ),
+			'add_new'            => __( 'Add New',                           'custom-content-portfolio' ),
+			'add_new_item'       => __( 'Add New Portfolio Item',            'custom-content-portfolio' ),
+			'edit_item'          => __( 'Edit Portfolio Item',               'custom-content-portfolio' ),
+			'new_item'           => __( 'New Portfolio Item',                'custom-content-portfolio' ),
+			'view_item'          => __( 'View Portfolio Item',               'custom-content-portfolio' ),
+			'search_items'       => __( 'Search Portfolio',                  'custom-content-portfolio' ),
+			'not_found'          => __( 'No portfolio items found',          'custom-content-portfolio' ),
+			'not_found_in_trash' => __( 'No portfolio items found in trash', 'custom-content-portfolio' ),
+			'all_items'          => __( 'Portfolio Items',                   'custom-content-portfolio' ),
 
 			// Custom labels b/c WordPress doesn't have anything to handle this.
-			'archive_title'      => __( 'Portfolio',                         'cc-portfolio' ),
+			'archive_title'      => __( 'Portfolio',                         'custom-content-portfolio' ),
 		)
 	);
 

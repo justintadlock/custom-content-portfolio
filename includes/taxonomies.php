@@ -54,23 +54,21 @@ function cc_portfolio_register_taxonomies() {
 
 		/* Labels used when displaying taxonomy and terms. */
 		'labels' => array(
-			'name'                       => __( 'Portfolios',                           'cc-portfolio' ),
-			'singular_name'              => __( 'Portfolio',                            'cc-portfolio' ),
-			'menu_name'                  => __( 'Portfolios',                           'cc-portfolio' ),
-			'name_admin_bar'             => __( 'Portfolio',                            'cc-portfolio' ),
-			'search_items'               => __( 'Search Portfolios',                    'cc-portfolio' ),
-			'popular_items'              => __( 'Popular Portfolios',                   'cc-portfolio' ),
-			'all_items'                  => __( 'All Portfolios',                       'cc-portfolio' ),
-			'edit_item'                  => __( 'Edit Portfolio',                       'cc-portfolio' ),
-			'view_item'                  => __( 'View Portfolio',                       'cc-portfolio' ),
-			'update_item'                => __( 'Update Portfolio',                     'cc-portfolio' ),
-			'add_new_item'               => __( 'Add New Portfolio',                    'cc-portfolio' ),
-			'new_item_name'              => __( 'New Portfolio Name',                   'cc-portfolio' ),
-			'separate_items_with_commas' => __( 'Separate portfolios with commas',      'cc-portfolio' ),
-			'add_or_remove_items'        => __( 'Add or remove portfolios',             'cc-portfolio' ),
-			'choose_from_most_used'      => __( 'Choose from the most used portfolios', 'cc-portfolio' ),
-		//	'parent_item'                => __( 'Parent Portfolio',                     'cc-portfolio' ),
-		//	'paent_item_colon'           => __( 'Parent Portfolio:',                    'cc-portfolio' )
+			'name'                       => __( 'Portfolios',                           'custom-content-portfolio' ),
+			'singular_name'              => __( 'Portfolio',                            'custom-content-portfolio' ),
+			'menu_name'                  => __( 'Portfolios',                           'custom-content-portfolio' ),
+			'name_admin_bar'             => __( 'Portfolio',                            'custom-content-portfolio' ),
+			'search_items'               => __( 'Search Portfolios',                    'custom-content-portfolio' ),
+			'popular_items'              => __( 'Popular Portfolios',                   'custom-content-portfolio' ),
+			'all_items'                  => __( 'All Portfolios',                       'custom-content-portfolio' ),
+			'edit_item'                  => __( 'Edit Portfolio',                       'custom-content-portfolio' ),
+			'view_item'                  => __( 'View Portfolio',                       'custom-content-portfolio' ),
+			'update_item'                => __( 'Update Portfolio',                     'custom-content-portfolio' ),
+			'add_new_item'               => __( 'Add New Portfolio',                    'custom-content-portfolio' ),
+			'new_item_name'              => __( 'New Portfolio Name',                   'custom-content-portfolio' ),
+			'separate_items_with_commas' => __( 'Separate portfolios with commas',      'custom-content-portfolio' ),
+			'add_or_remove_items'        => __( 'Add or remove portfolios',             'custom-content-portfolio' ),
+			'choose_from_most_used'      => __( 'Choose from the most used portfolios', 'custom-content-portfolio' ),
 		)
 	);
 

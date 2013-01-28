@@ -12,7 +12,7 @@
 
 /* Make sure we're actually uninstalling the plugin. */
 if ( !defined( 'WP_UNINSTALL_PLUGIN' ) )
-	wp_die( sprintf( __( '%s should only be called when uninstalling the plugin.', 'cc-portfolio' ), '<code>' . __FILE__ . '</code>' ) );
+	wp_die( sprintf( __( '%s should only be called when uninstalling the plugin.', 'custom-content-portfolio' ), '<code>' . __FILE__ . '</code>' ) );
 
 /* === Delete plugin options. === */
 

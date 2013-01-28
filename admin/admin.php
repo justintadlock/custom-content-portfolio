@@ -58,13 +58,13 @@ function cc_portfolio_edit_portfolio_item_columns( $columns ) {
 
 	$new_columns = array(
 		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Portfolio Item', 'cc-portfolio' )
+		'title' => __( 'Portfolio Item', 'custom-content-portfolio' )
 	);
 
 	if ( current_theme_supports( 'post-thumbnails' ) )
-		$new_columns['thumbnail'] = __( 'Thumbnail', 'cc-portfolio' );
+		$new_columns['thumbnail'] = __( 'Thumbnail', 'custom-content-portfolio' );
 
-	$new_columns['taxonomy-portfolio'] = __( 'Portfolio', 'cc-portfolio' );
+	$new_columns['taxonomy-portfolio'] = __( 'Portfolio', 'custom-content-portfolio' );
 
 	return array_merge( $new_columns, $columns );
 }
@@ -113,7 +113,7 @@ function cc_portfolio_add_meta_boxes( $post_type ) {
 
 		add_meta_box( 
 			'cc-portfolio-item-info', 
-			__( 'Project Info', 'cc-portfolio' ), 
+			__( 'Project Info', 'custom-content-portfolio' ), 
 			'cc_portfolio_item_info_meta_box_display', 
 			$post_type, 
 			'side', 
@@ -136,7 +136,7 @@ function cc_portfolio_item_info_meta_box_display( $post, $metabox ) {
 	wp_nonce_field( basename( __FILE__ ), 'cc-portfolio-item-info-nonce' ); ?>
 
 	<p>
-		<label for="cc-portfolio-item-url"><?php _e( 'Project <abbr title="Uniform Resource Locator">URL</abbr>', 'cc-portfolio' ); ?></label>
+		<label for="cc-portfolio-item-url"><?php _e( 'Project <abbr title="Uniform Resource Locator">URL</abbr>', 'custom-content-portfolio' ); ?></label>
 		<br />
 		<input type="text" name="cc-portfolio-item-url" id="cc-portfolio-item-url" value="<?php echo esc_url( get_post_meta( $post->ID, 'portfolio_item_url', true ) ); ?>" size="30" tabindex="30" style="width: 99%;" />
 	</p>
@@ -203,7 +203,7 @@ function cc_portfolio_admin_settings() {
 	/* Adds a new settings section to the 'permalink' screen. */
 	add_settings_section(
 		'cc-portfolio-permalink',
-		__( 'Portfolio Settings', 'cc-portfolio' ),
+		__( 'Portfolio Settings', 'custom-content-portfolio' ),
 		'cc_portfolio_permalink_section',
 		'permalink'
 	);
@@ -213,7 +213,7 @@ function cc_portfolio_admin_settings() {
 
 	add_settings_field(
 		'cc-portfolio-root',
-		__( 'Portfolio archive', 'cc-portfolio' ),
+		__( 'Portfolio archive', 'custom-content-portfolio' ),
 		'cc_portfolio_root_field',
 		'permalink',
 		'cc-portfolio-permalink',
@@ -221,7 +221,7 @@ function cc_portfolio_admin_settings() {
 	);
 	add_settings_field(
 		'cc-portfolio-base',
-		__( 'Portfolio taxonomy slug', 'cc-portfolio' ),
+		__( 'Portfolio taxonomy slug', 'custom-content-portfolio' ),
 		'cc_portfolio_base_field',
 		'permalink',
 		'cc-portfolio-permalink',
@@ -229,7 +229,7 @@ function cc_portfolio_admin_settings() {
 	);
 	add_settings_field(
 		'cc-portfolio-item-base',
-		__( 'Portfolio item slug', 'cc-portfolio' ),
+		__( 'Portfolio item slug', 'custom-content-portfolio' ),
 		'cc_portfolio_item_base_field',
 		'permalink',
 		'cc-portfolio-permalink',
@@ -268,7 +268,7 @@ function cc_portfolio_validate_settings( $settings ) {
  */
 function cc_portfolio_permalink_section() { ?>
 	<table class="form-table">
-		<?php do_settings_fields( 'permalink', 'cc-portfolio' ); ?>
+		<?php do_settings_fields( 'permalink', 'custom-content-portfolio' ); ?>
 	</table>
 <?php }
 
