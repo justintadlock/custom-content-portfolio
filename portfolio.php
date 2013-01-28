@@ -69,10 +69,11 @@ class Custom_Content_Portfolio {
 		/* Set constant path to the plugin directory. */
 		define( 'CCP_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 
+		/* Set the constant path to the plugin directory URI. */
+		define( 'CCP_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
+
 		/* Set the constant path to the includes directory. */
 		define( 'CCP_INCLUDES', CCP_DIR . trailingslashit( 'includes' ) );
-
-		define( 'CCP_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 
 		/* Set the constant path to the admin directory. */
 		define( 'CCP_ADMIN', CCP_DIR . trailingslashit( 'admin' ) );
