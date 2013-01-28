@@ -31,7 +31,7 @@ function cc_portfolio_register_post_types() {
 		'description'         => '',
 		'public'              => true,
 		'publicly_queryable'  => true,
-		'show_in_nav_menus'   => true,
+		'show_in_nav_menus'   => false,
 		'show_in_admin_bar'   => true,
 		'exclude_from_search' => false,
 		'show_ui'             => true,
