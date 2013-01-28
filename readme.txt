@@ -24,11 +24,15 @@ If you're looking for a theme that was designed specifically to work with this p
 
 Just because your theme isn't designed to work with this plugin doesn't mean it won't work.  You might just have to tinker around with some CSS to make it look good on your site.  Or, better yet, ask your theme developer to support this plugin.
 
-**Plugin Features:**
+**Plugin Features**
 
 * Portfolio Items:  Allows you to create portfolio items to put into an unlimited number of portfolios.
 * Portfolios:  Organize your projects how you see fit (they work sort of like tags and categories).
 * Admin:  Everything is built right into the WordPress admin.  It'll look and feel just like adding posts and pages, so there's not a huge learning curve.
+
+**Credits**
+
+Special thanks to WooThemes for their <a href="http://www.woothemes.com/2009/09/woofunction-178-amazing-web-design-icon">icon set</a> (released under the <a href="http://www.gnu.org/licenses/gpl.html">GPL license</a>).  The folder icon is used for the admin menu and screen.
 
 == Installation ==
 
