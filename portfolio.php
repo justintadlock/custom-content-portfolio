@@ -3,7 +3,7 @@
  * Plugin Name: Custom Content Portfolio
  * Plugin URI: http://themehybrid.com/plugins/custom-content-portfolio
  * Description: Portfolio manager for WordPress.  This plugin allows you to manage, edit, and create new portfolio items in an unlimited number of portfolios.
- * Version: 0.1
+ * Version: 1.0.0-beta-1
  * Author: Justin Tadlock
  * Author URI: http://justintadlock.com
  *
@@ -22,8 +22,7 @@
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @package   CustomContentPortfolio
- * @version   0.1.0
- * @since     0.1.0
+ * @version   1.0.0
  * @author    Justin Tadlock <justin@justintadlock.com>
  * @copyright Copyright (c) 2013, Justin Tadlock
  * @link      http://themehybrid.com/plugins/custom-content-portfolio
