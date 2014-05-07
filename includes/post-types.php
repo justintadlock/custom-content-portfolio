@@ -37,7 +37,7 @@ function ccp_register_post_types() {
 		'show_ui'             => true,
 		'show_in_menu'        => true,
 		'menu_position'       => 12,
-		'menu_icon'           => CCP_URI . 'images/menu-icon.png',
+		'menu_icon'           => 'dashicons-portfolio',
 		'can_export'          => true,
 		'delete_with_user'    => false,
 		'hierarchical'        => false,
