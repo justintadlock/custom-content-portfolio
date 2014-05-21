@@ -88,6 +88,7 @@ class Custom_Content_Portfolio {
 	public function includes() {
 
 		require_once( CCP_INCLUDES . 'functions.php' );
+		require_once( CCP_INCLUDES . 'template.php' );
 		require_once( CCP_INCLUDES . 'meta.php' );
 		require_once( CCP_INCLUDES . 'post-types.php' );
 		require_once( CCP_INCLUDES . 'taxonomies.php' );
