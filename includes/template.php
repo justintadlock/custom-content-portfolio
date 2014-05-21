@@ -12,6 +12,23 @@
  */
 
 /**
+ * Returns the portfolio item URL.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  int    $post_id
+ * @return string
+ */
+function ccp_get_portfolio_item_url( $post_id = '' ) {
+
+	$post_id = !empty( $post_id ) ? absint( $post_id ) : get_the_ID();
+
+	$url = get_post_meta( $post_id, 'portfolio_item_url', true );
+
+	return !empty( $url ) ? esc_url( $url ) : '';
+}
+
+/**
  * Displays the portfolio item link.
  *
  * @since  1.0.0
@@ -36,21 +53,21 @@ function ccp_get_portfolio_item_link( $args = array() ) {
 	$html = '';
 
 	$defaults = array(
-		'text'   => '%s',
-		'before' => '',
-		'after'  => '',
-		'wrap'   => '<a %s>%s</a>',
+		'post_id' => get_the_ID(),
+		'text'    => '%s',
+		'before'  => '',
+		'after'   => '',
+		'wrap'    => '<a %s>%s</a>',
 	);
 
 	$args = wp_parse_args( $args, $defaults );
 
-
-	$url = get_post_meta( get_the_ID(), 'portfolio_item_url', true );
+	$url = ccp_get_portfolio_item_url( $args['post_id'] );
 
 	if ( !empty( $url ) ) {
 
-		$text = sprintf( $args['text'], esc_html( $url ) );
-		$attr = sprintf( 'class="portfolio-item-link" href="%s"', esc_url( $url ) );
+		$text = sprintf( $args['text'], $url );
+		$attr = sprintf( 'class="portfolio-item-link" href="%s"', $url );
 
 		$html .= $args['before'];
 		$html .= sprintf( $args['wrap'], $attr, $text );
