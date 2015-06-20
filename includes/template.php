@@ -23,7 +23,7 @@ function ccp_get_portfolio_item_url( $post_id = '' ) {
 
 	$post_id = !empty( $post_id ) ? absint( $post_id ) : get_the_ID();
 
-	$url = get_post_meta( $post_id, 'portfolio_item_url', true );
+	$url = get_post_meta( $post_id, 'url', true );
 
 	return !empty( $url ) ? esc_url( $url ) : '';
 }

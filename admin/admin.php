@@ -27,8 +27,8 @@ function ccp_admin_setup() {
 	//add_action( 'admin_init', 'ccp_admin_setup' );
 
 	/* Custom columns on the edit portfolio items screen. */
-	add_filter( 'manage_edit-portfolio_item_columns', 'ccp_edit_portfolio_item_columns' );
-	add_action( 'manage_portfolio_item_posts_custom_column', 'ccp_manage_portfolio_item_columns', 10, 2 );
+	add_filter( 'manage_edit-portfolio_project_columns', 'ccp_edit_portfolio_item_columns' );
+	add_action( 'manage_portfolio_project_posts_custom_column', 'ccp_manage_portfolio_item_columns', 10, 2 );
 
 	/* Add meta boxes an save metadata. */
 	add_action( 'add_meta_boxes', 'ccp_add_meta_boxes' );
@@ -53,13 +53,13 @@ function ccp_edit_portfolio_item_columns( $columns ) {
 
 	$new_columns = array(
 		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Portfolio Item', 'custom-content-portfolio' )
+		'title' => __( 'Project', 'custom-content-portfolio' )
 	);
 
 	if ( current_theme_supports( 'post-thumbnails' ) )
 		$new_columns['thumbnail'] = __( 'Thumbnail', 'custom-content-portfolio' );
 
-	$new_columns['taxonomy-portfolio'] = __( 'Portfolio', 'custom-content-portfolio' );
+	//$new_columns['taxonomy-portfolio'] = __( 'Portfolio', 'custom-content-portfolio' );
 
 	return array_merge( $new_columns, $columns );
 }
@@ -104,14 +104,14 @@ function ccp_manage_portfolio_item_columns( $column, $post_id ) {
  */
 function ccp_add_meta_boxes( $post_type ) {
 
-	if ( 'portfolio_item' === $post_type ) {
+	if ( 'portfolio_project' === $post_type ) {
 
-		add_meta_box( 
-			'ccp-item-info', 
-			__( 'Project Info', 'custom-content-portfolio' ), 
-			'ccp_portfolio_item_info_meta_box_display', 
-			$post_type, 
-			'side', 
+		add_meta_box(
+			'ccp-item-info',
+			__( 'Project Info', 'custom-content-portfolio' ),
+			'ccp_portfolio_item_info_meta_box_display',
+			$post_type,
+			'side',
 			'core'
 		);
 	}
@@ -133,7 +133,7 @@ function ccp_portfolio_item_info_meta_box_display( $post, $metabox ) {
 	<p>
 		<label for="ccp-portfolio-item-url"><?php _e( 'Project <abbr title="Uniform Resource Locator">URL</abbr>', 'custom-content-portfolio' ); ?></label>
 		<br />
-		<input type="text" name="ccp-portfolio-item-url" id="ccp-portfolio-item-url" value="<?php echo esc_url( get_post_meta( $post->ID, 'portfolio_item_url', true ) ); ?>" size="30" tabindex="30" style="width: 99%;" />
+		<input type="text" name="ccp-portfolio-item-url" id="ccp-portfolio-item-url" value="<?php echo esc_url( get_post_meta( $post->ID, 'url', true ) ); ?>" size="30" tabindex="30" style="width: 99%;" />
 	</p>
 	<?php
 
@@ -156,7 +156,7 @@ function ccp_portfolio_item_info_meta_box_save( $post_id, $post ) {
 		return;
 
 	$meta = array(
-		'portfolio_item_url' => esc_url( $_POST['ccp-portfolio-item-url'] )
+		'url' => esc_url_raw( $_POST['ccp-portfolio-item-url'] )
 	);
 
 	foreach ( $meta as $meta_key => $new_meta_value ) {
@@ -276,7 +276,7 @@ function ccp_permalink_section() { ?>
  */
 function ccp_root_field( $settings ) { ?>
 	<input type="text" name="plugin_ccp[portfolio_root]" id="ccp-portfolio-root" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_root'] ); ?>" />
-	<code><?php echo home_url( $settings['portfolio_root'] ); ?></code> 
+	<code><?php echo home_url( $settings['portfolio_root'] ); ?></code>
 <?php }
 
 /**
@@ -288,7 +288,7 @@ function ccp_root_field( $settings ) { ?>
  */
 function ccp_base_field( $settings ) { ?>
 	<input type="text" name="plugin_ccp[portfolio_base]" id="ccp-portfolio-base" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_base'] ); ?>" />
-	<code><?php echo trailingslashit( home_url( "{$settings['portfolio_root']}/{$settings['portfolio_base']}" ) ); ?>%portfolio%</code> 
+	<code><?php echo trailingslashit( home_url( "{$settings['portfolio_root']}/{$settings['portfolio_base']}" ) ); ?>%portfolio%</code>
 <?php }
 
 /**
@@ -300,7 +300,7 @@ function ccp_base_field( $settings ) { ?>
  */
 function ccp_item_base_field( $settings ) { ?>
 	<input type="text" name="plugin_ccp[portfolio_item_base]" id="ccp-portfolio-item-base" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_item_base'] ); ?>" />
-	<code><?php echo trailingslashit( home_url( "{$settings['portfolio_root']}/{$settings['portfolio_item_base']}" ) ); ?>%postname%</code> 
+	<code><?php echo trailingslashit( home_url( "{$settings['portfolio_root']}/{$settings['portfolio_item_base']}" ) ); ?>%postname%</code>
 <?php }
 
 /**

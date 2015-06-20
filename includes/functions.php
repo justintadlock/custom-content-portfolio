@@ -49,8 +49,8 @@ function ccp_get_default_settings() {
  */
 function ccp_post_type_archive_title( $title ) {
 
-	if ( is_post_type_archive( 'portfolio_item' ) ) {
-		$post_type = get_post_type_object( 'portfolio_item' );
+	if ( is_post_type_archive( 'portfolio_project' ) ) {
+		$post_type = get_post_type_object( 'portfolio_project' );
 		$title = isset( $post_type->labels->archive_title ) ? $post_type->labels->archive_title : $title;
 	}
 
@@ -69,14 +69,14 @@ function ccp_post_type_archive_title( $title ) {
  */
 function ccp_post_type_link( $post_link, $post ) {
 
-	if ( 'portfolio_item' !== $post->post_type )
+	if ( 'portfolio_project' !== $post->post_type )
 		return $post_link;
 
 	/* Allow %portfolio% in the custom post type permalink. */
 	if ( false !== strpos( $post_link, '%portfolio%' ) ) {
 	
 		/* Get the terms. */
-		$terms = get_the_terms( $post, 'portfolio' ); // @todo apply filters to tax name.
+		$terms = get_the_terms( $post, 'portfolio_category' ); // @todo apply filters to tax name.
 
 		/* Check that terms were returned. */
 		if ( $terms ) {
@@ -86,7 +86,7 @@ function ccp_post_type_link( $post_link, $post ) {
 			$post_link = str_replace( '%portfolio%', $terms[0]->slug, $post_link );
 
 		} else {
-			$post_link = str_replace( '%portfolio%', 'item', $post_link );
+			$post_link = str_replace( '%portfolio%', 'project', $post_link );
 		}
 	}
 
@@ -108,19 +108,19 @@ function ccp_post_type_link( $post_link, $post ) {
  */
 function ccp_breadcrumb_trail_items( $items ) {
 
-	if ( is_singular( 'portfolio_item' ) ) {
+	if ( is_singular( 'portfolio_project' ) ) {
 
 		$settings = get_option( 'plugin_custom_content_portfolio', ccp_get_default_settings() );
 
 		if ( false !== strpos( $settings['portfolio_item_base'], '%portfolio%' ) ) {
 			$post_id = get_queried_object_id();
 
-			$terms = get_the_terms( $post_id, 'portfolio' );
+			$terms = get_the_terms( $post_id, 'portfolio_category' );
 
 			if ( !empty( $terms ) ) {
 
 				usort( $terms, '_usort_terms_by_ID' );
-				$term = get_term( $terms[0], 'portfolio' );
+				$term = get_term( $terms[0], 'portfolio_category' );
 				$term_id = $term->term_id;
 
 				$parents = array();
@@ -128,10 +128,10 @@ function ccp_breadcrumb_trail_items( $items ) {
 				while ( $term_id ) {
 
 					/* Get the parent term. */
-					$term = get_term( $term_id, 'portfolio' );
+					$term = get_term( $term_id, 'portfolio_category' );
 
 					/* Add the formatted term link to the array of parent terms. */
-					$parents[] = '<a href="' . get_term_link( $term, 'portfolio' ) . '" title="' . esc_attr( $term->name ) . '">' . $term->name . '</a>';
+					$parents[] = '<a href="' . get_term_link( $term, 'portfolio_category' ) . '" title="' . esc_attr( $term->name ) . '">' . $term->name . '</a>';
 
 					/* Set the parent term's parent as the parent ID. */
 					$term_id = $term->parent;

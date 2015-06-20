@@ -23,12 +23,12 @@ add_action( 'init', 'ccp_register_meta' );
  */
 function ccp_register_meta() {
 
-	register_meta( 'post', 'portfolio_item_url', 'ccp_sanitize_meta' );
+	register_meta( 'post', 'url', 'ccp_sanitize_meta', '__return_false' );
 }
 
 /**
- * Callback function for sanitizing meta when add_metadata() or update_metadata() is called by WordPress. 
- * If a developer wants to set up a custom method for sanitizing the data, they should use the 
+ * Callback function for sanitizing meta when add_metadata() or update_metadata() is called by WordPress.
+ * If a developer wants to set up a custom method for sanitizing the data, they should use the
  * "sanitize_{$meta_type}_meta_{$meta_key}" filter hook to do so.
  *
  * @since  0.1.0
@@ -40,7 +40,7 @@ function ccp_register_meta() {
  */
 function ccp_sanitize_meta( $meta_value, $meta_key, $meta_type ) {
 
-	if ( 'portfolio_item_url' === $meta_key )
+	if ( 'url' === $meta_key )
 		return esc_url( $meta_value );
 
 	return strip_tags( $meta_value );

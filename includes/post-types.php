@@ -41,24 +41,24 @@ function ccp_register_post_types() {
 		'can_export'          => true,
 		'delete_with_user'    => false,
 		'hierarchical'        => false,
-		'has_archive'         => $settings['portfolio_root'],
-		'query_var'           => 'portfolio_item',
-		'capability_type'     => 'portfolio_item',
+		'has_archive'         => 'portfolio',
+		'query_var'           => 'portfolio_project',
+		'capability_type'     => 'portfolio_project',
 		'map_meta_cap'        => true,
 
-		/* Only 3 caps are needed: 'manage_portfolio', 'create_portfolio_items', and 'edit_portfolio_items'. */
+		/* Only 3 caps are needed: 'manage_portfolio', 'create_portfolio_projects', and 'edit_portfolio_projects'. */
 		'capabilities' => array(
 
 			// meta caps (don't assign these to roles)
-			'edit_post'              => 'edit_portfolio_item',
-			'read_post'              => 'read_portfolio_item',
-			'delete_post'            => 'delete_portfolio_item',
+			'edit_post'              => 'edit_portfolio_project',
+			'read_post'              => 'read_portfolio_project',
+			'delete_post'            => 'delete_portfolio_project',
 
 			// primitive/meta caps
-			'create_posts'           => 'create_portfolio_items',
+			'create_posts'           => 'create_portfolio_projects',
 
 			// primitive caps used outside of map_meta_cap()
-			'edit_posts'             => 'edit_portfolio_items',
+			'edit_posts'             => 'edit_portfolio_projects',
 			'edit_others_posts'      => 'manage_portfolio',
 			'publish_posts'          => 'manage_portfolio',
 			'read_private_posts'     => 'read',
@@ -69,13 +69,13 @@ function ccp_register_post_types() {
 			'delete_private_posts'   => 'manage_portfolio',
 			'delete_published_posts' => 'manage_portfolio',
 			'delete_others_posts'    => 'manage_portfolio',
-			'edit_private_posts'     => 'edit_portfolio_items',
-			'edit_published_posts'   => 'edit_portfolio_items'
+			'edit_private_posts'     => 'edit_portfolio_projects',
+			'edit_published_posts'   => 'edit_portfolio_projects'
 		),
 
 		/* The rewrite handles the URL structure. */
 		'rewrite' => array(
-			'slug'       => !empty( $settings['portfolio_item_base'] ) ? "{$settings['portfolio_root']}/{$settings['portfolio_item_base']}" : $settings['portfolio_root'],
+			'slug'       => 'portfolio/project',
 			'with_front' => false,
 			'pages'      => true,
 			'feeds'      => true,
@@ -113,7 +113,7 @@ function ccp_register_post_types() {
 	);
 
 	/* Register the portfolio item post type. */
-	register_post_type( 'portfolio_item', $args );
+	register_post_type( 'portfolio_project', $args );
 }
 
 ?>

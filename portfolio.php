@@ -41,19 +41,19 @@ class Custom_Content_Portfolio {
 	public function __construct() {
 
 		/* Set the constants needed by the plugin. */
-		add_action( 'plugins_loaded', array( &$this, 'constants' ), 1 );
+		add_action( 'plugins_loaded', array( $this, 'constants' ), 1 );
 
 		/* Internationalize the text strings used. */
-		add_action( 'plugins_loaded', array( &$this, 'i18n' ), 2 );
+		add_action( 'plugins_loaded', array( $this, 'i18n' ), 2 );
 
 		/* Load the functions files. */
-		add_action( 'plugins_loaded', array( &$this, 'includes' ), 3 );
+		add_action( 'plugins_loaded', array( $this, 'includes' ), 3 );
 
 		/* Load the admin files. */
-		add_action( 'plugins_loaded', array( &$this, 'admin' ), 4 );
+		add_action( 'plugins_loaded', array( $this, 'admin' ), 4 );
 
 		/* Register activation hook. */
-		register_activation_hook( __FILE__, array( &$this, 'activation' ) );
+		register_activation_hook( __FILE__, array( $this, 'activation' ) );
 	}
 
 	/**
@@ -129,15 +129,25 @@ class Custom_Content_Portfolio {
 	 */
 	function activation() {
 
+		// Temp. code to make sure post types and taxonomies are correct.
+		global $wpdb;
+
+		$wpdb->query( "UPDATE {$wpdb->posts}         SET post_type = 'portfolio_project'  WHERE post_type = 'portfolio_item'" );
+		$wpdb->query( "UPDATE {$wpdb->postmeta}      SET meta_key  = 'portfolio_item_url' WHERE meta_key  = 'url'"            );
+		$wpdb->query( "UPDATE {$wpdb->term_taxonomy} SET taxonomy  = 'portfolio_category' WHERE taxonomy  = 'portfolio'"      );
+
 		/* Get the administrator role. */
-		$role =& get_role( 'administrator' );
+		$role = get_role( 'administrator' );
 
 		/* If the administrator role exists, add required capabilities for the plugin. */
 		if ( !empty( $role ) ) {
 
-			$role->add_cap( 'manage_portfolio' );
-			$role->add_cap( 'create_portfolio_items' );
-			$role->add_cap( 'edit_portfolio_items' );
+			$role->add_cap( 'manage_portfolio'          );
+			$role->add_cap( 'create_portfolio_projects' );
+			$role->add_cap( 'edit_portfolio_projects'   );
+
+			$role->remove_cap( 'create_portfolio_items' );
+			$role->remove_cap( 'edit_portfolio_items'   );
 		}
 	}
 }
