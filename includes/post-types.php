@@ -93,19 +93,19 @@ function ccp_register_post_types() {
 
 		/* Labels used when displaying the posts. */
 		'labels' => array(
-			'name'               => __( 'Portfolio Items',                   'custom-content-portfolio' ),
-			'singular_name'      => __( 'Portfolio Item',                    'custom-content-portfolio' ),
+			'name'               => __( 'Projects',                   'custom-content-portfolio' ),
+			'singular_name'      => __( 'Project',                    'custom-content-portfolio' ),
 			'menu_name'          => __( 'Portfolio',                         'custom-content-portfolio' ),
-			'name_admin_bar'     => __( 'Portfolio Item',                    'custom-content-portfolio' ),
-			'add_new'            => __( 'Add New',                           'custom-content-portfolio' ),
-			'add_new_item'       => __( 'Add New Portfolio Item',            'custom-content-portfolio' ),
-			'edit_item'          => __( 'Edit Portfolio Item',               'custom-content-portfolio' ),
-			'new_item'           => __( 'New Portfolio Item',                'custom-content-portfolio' ),
-			'view_item'          => __( 'View Portfolio Item',               'custom-content-portfolio' ),
-			'search_items'       => __( 'Search Portfolio',                  'custom-content-portfolio' ),
-			'not_found'          => __( 'No portfolio items found',          'custom-content-portfolio' ),
-			'not_found_in_trash' => __( 'No portfolio items found in trash', 'custom-content-portfolio' ),
-			'all_items'          => __( 'Portfolio Items',                   'custom-content-portfolio' ),
+			'name_admin_bar'     => __( 'Project',                    'custom-content-portfolio' ),
+			'add_new'            => __( 'New Project',                           'custom-content-portfolio' ),
+			'add_new_item'       => __( 'Add New Project',            'custom-content-portfolio' ),
+			'edit_item'          => __( 'Edit Project',               'custom-content-portfolio' ),
+			'new_item'           => __( 'New Project',                'custom-content-portfolio' ),
+			'view_item'          => __( 'View Project',               'custom-content-portfolio' ),
+			'search_items'       => __( 'Search Projects',                  'custom-content-portfolio' ),
+			'not_found'          => __( 'No projects found',          'custom-content-portfolio' ),
+			'not_found_in_trash' => __( 'No projects found in trash', 'custom-content-portfolio' ),
+			'all_items'          => __( 'Projects',                   'custom-content-portfolio' ),
 
 			// Custom labels b/c WordPress doesn't have anything to handle this.
 			'archive_title'      => __( 'Portfolio',                         'custom-content-portfolio' ),
