@@ -17,8 +17,8 @@ add_filter( 'post_type_archive_title', 'ccp_post_type_archive_title' );
 /* Filter the post type permalink. */
 add_filter( 'post_type_link', 'ccp_post_type_link', 10, 2 );
 
-/* Filter the breadcrumb trail items (Breadcrumb Trail script/plugin). */
-add_filter( 'breadcrumb_trail_items', 'ccp_breadcrumb_trail_items' );
+// Filter the Breadcrumb Trail plugin args.
+add_filter( 'breadcrumb_trail_args', 'ccp_breadcrumb_trail_args', 15 );
 
 /**
  * Returns the default settings for the plugin.
@@ -39,7 +39,7 @@ function ccp_get_default_settings() {
 }
 
 /**
- * Filter on 'post_type_archive_title' to allow for the use of the 'archive_title' label that isn't supported 
+ * Filter on 'post_type_archive_title' to allow for the use of the 'archive_title' label that isn't supported
  * by WordPress.  That's okay since we can roll our own labels.
  *
  * @since  0.1.0
@@ -58,7 +58,7 @@ function ccp_post_type_archive_title( $title ) {
 }
 
 /**
- * Filter on 'post_type_link' to allow users to use '%portfolio%' (the 'portfolio' taxonomy) in their 
+ * Filter on 'post_type_link' to allow users to use '%portfolio%' (the 'portfolio' taxonomy) in their
  * portfolio item URLs.
  *
  * @since  0.1.0
@@ -74,7 +74,7 @@ function ccp_post_type_link( $post_link, $post ) {
 
 	/* Allow %portfolio% in the custom post type permalink. */
 	if ( false !== strpos( $post_link, '%portfolio%' ) ) {
-	
+
 		/* Get the terms. */
 		$terms = get_the_terms( $post, 'portfolio_category' ); // @todo apply filters to tax name.
 
@@ -94,57 +94,33 @@ function ccp_post_type_link( $post_link, $post ) {
 }
 
 /**
- * Filters the 'breadcrumb_trail_items' hook from the Breadcrumb Trail plugin and the script version 
- * included in the Hybrid Core framework.  At best, this is a neat hack to add the portfolio to the 
- * single view of portfolio items based off the '%portfolio%' rewrite tag.  At worst, it's potentially 
- * a huge management nightmare in the long term.  A better solution is definitely needed baked right 
- * into Breadcrumb Trail itself that takes advantage of its built-in features for figuring out this type 
- * of thing.
+ * Filters the Breadcrumb Trail plugin arguments.  We're basically just telling it to show the
+ * `portfolio_category` taxonomy when viewing single portfolio projects.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @access public
- * @param  array  $items
+ * @param  array  $args
  * @return array
  */
-function ccp_breadcrumb_trail_items( $items ) {
+function ccp_breadcrumb_trail_args( $args ) {
 
-	if ( is_singular( 'portfolio_project' ) ) {
+	if ( !isset( $args['post_taxonomy']['portfolio_project'] ) )
+		$args['post_taxonomy']['portfolio_project'] = 'portfolio_category';
 
-		$settings = get_option( 'plugin_custom_content_portfolio', ccp_get_default_settings() );
-
-		if ( false !== strpos( $settings['portfolio_item_base'], '%portfolio%' ) ) {
-			$post_id = get_queried_object_id();
-
-			$terms = get_the_terms( $post_id, 'portfolio_category' );
-
-			if ( !empty( $terms ) ) {
-
-				usort( $terms, '_usort_terms_by_ID' );
-				$term = get_term( $terms[0], 'portfolio_category' );
-				$term_id = $term->term_id;
-
-				$parents = array();
-
-				while ( $term_id ) {
-
-					/* Get the parent term. */
-					$term = get_term( $term_id, 'portfolio_category' );
-
-					/* Add the formatted term link to the array of parent terms. */
-					$parents[] = '<a href="' . get_term_link( $term, 'portfolio_category' ) . '" title="' . esc_attr( $term->name ) . '">' . $term->name . '</a>';
-
-					/* Set the parent term's parent as the parent ID. */
-					$term_id = $term->parent;
-				}
-
-				$items   = array_splice( $items, 0, -1 );
-				$items   = array_merge( $items, array_reverse( $parents ) );
-				$items[] = single_post_title( '', false );
-			}
-		}
-	}
-
-	return $items;
+	return $args;
 }
 
-?>
+/**
+ * Filters the 'breadcrumb_trail_items' hook from the Breadcrumb Trail plugin and the script version
+ * included in the Hybrid Core framework.  At best, this is a neat hack to add the portfolio to the
+ * single view of portfolio items based off the '%portfolio%' rewrite tag.  At worst, it's potentially
+ * a huge management nightmare in the long term.  A better solution is definitely needed baked right
+ * into Breadcrumb Trail itself that takes advantage of its built-in features for figuring out this type
+ * of thing.
+ *
+ * @since      0.1.0
+ * @deprecated 1.0.0
+ */
+function ccp_breadcrumb_trail_items( $items ) {
+	return $items;
+}
