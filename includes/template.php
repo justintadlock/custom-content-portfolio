@@ -19,7 +19,7 @@
  * @param  int    $post_id
  * @return string
  */
-function ccp_get_portfolio_item_url( $post_id = '' ) {
+function ccp_get_project_url( $post_id = '' ) {
 
 	$post_id = !empty( $post_id ) ? absint( $post_id ) : get_the_ID();
 
@@ -36,8 +36,8 @@ function ccp_get_portfolio_item_url( $post_id = '' ) {
  * @param  array  $args
  * @return void
  */
-function ccp_portfolio_item_link( $args = array() ) {
-	echo ccp_get_portfolio_item_link( $args );
+function ccp_project_link( $args = array() ) {
+	echo ccp_get_project_link( $args );
 }
 
 /**
@@ -48,7 +48,7 @@ function ccp_portfolio_item_link( $args = array() ) {
  * @param  array  $args
  * @return string
  */
-function ccp_get_portfolio_item_link( $args = array() ) {
+function ccp_get_project_link( $args = array() ) {
 
 	$html = '';
 
@@ -62,7 +62,7 @@ function ccp_get_portfolio_item_link( $args = array() ) {
 
 	$args = wp_parse_args( $args, $defaults );
 
-	$url = ccp_get_portfolio_item_url( $args['post_id'] );
+	$url = ccp_get_project_url( $args['post_id'] );
 
 	if ( !empty( $url ) ) {
 
