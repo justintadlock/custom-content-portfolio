@@ -11,7 +11,22 @@
  */
 
 /**
- * Returns the portfolio item URL.
+ * Outputs the portfolio project URL.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  int     $post_id
+ * @return void
+ */
+function ccp_project_url( $post_id = '' ) {
+
+	$url = ccp_get_project_url( $post_id );
+
+	echo $url ? esc_url( $url ) : '';
+}
+
+/**
+ * Returns the portfolio project URL.
  *
  * @since  1.0.0
  * @access public
@@ -22,9 +37,7 @@ function ccp_get_project_url( $post_id = '' ) {
 
 	$post_id = $post_id ? absint( $post_id ) : get_the_ID();
 
-	$url = get_post_meta( $post_id, 'url', true );
-
-	return $url ? esc_url( $url ) : '';
+	return get_post_meta( $post_id, 'url', true );
 }
 
 /**
@@ -66,7 +79,7 @@ function ccp_get_project_link( $args = array() ) {
 	if ( $url ) {
 
 		$text = sprintf( $args['text'], $url );
-		$attr = sprintf( 'class="portfolio-item-link" href="%s"', $url );
+		$attr = sprintf( 'class="portfolio-item-link" href="%s"', esc_url( $url ) );
 
 		$html .= $args['before'];
 		$html .= sprintf( $args['wrap'], $attr, $text );
