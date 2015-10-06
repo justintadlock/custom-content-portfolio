@@ -4,14 +4,13 @@
  *
  * @package    CustomContentPortfolio
  * @subpackage Includes
- * @since      0.1.0
  * @author     Justin Tadlock <justin@justintadlock.com>
  * @copyright  Copyright (c) 2013, Justin Tadlock
  * @link       http://themehybrid.com/plugins/custom-content-portfolio
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-/* Register taxonomies on the 'init' hook. */
+# Register taxonomies on the 'init' hook.
 add_action( 'init', 'ccp_register_taxonomies', 9 );
 
 /**
@@ -23,11 +22,11 @@ add_action( 'init', 'ccp_register_taxonomies', 9 );
  */
 function ccp_register_taxonomies() {
 
-	/* Get the plugin settings. */
+	// Get the plugin settings.
 	$settings = get_option( 'plugin_custom_content_portfolio', ccp_get_default_settings() );
 
-	/* Set up the arguments for the portfolio taxonomy. */
-	$category_args = array(
+	// Set up the arguments for the portfolio category taxonomy.
+	$cat_args = array(
 		'public'            => true,
 		'show_ui'           => true,
 		'show_in_nav_menus' => true,
@@ -36,7 +35,7 @@ function ccp_register_taxonomies() {
 		'hierarchical'      => true,
 		'query_var'         => 'portfolio_category',
 
-		/* Only 2 caps are needed: 'manage_portfolio' and 'edit_portfolio_items'. */
+		// Only 2 caps are needed: 'manage_portfolio' and 'edit_portfolio_projects'.
 		'capabilities' => array(
 			'manage_terms' => 'manage_portfolio',
 			'edit_terms'   => 'manage_portfolio',
@@ -44,7 +43,7 @@ function ccp_register_taxonomies() {
 			'assign_terms' => 'edit_portfolio_projects',
 		),
 
-		/* The rewrite handles the URL structure. */
+		// The rewrite handles the URL structure.
 		'rewrite' => array(
 			'slug'         => 'portfolio/category',
 			'with_front'   => false,
@@ -52,7 +51,7 @@ function ccp_register_taxonomies() {
 			'ep_mask'      => EP_NONE
 		),
 
-		/* Labels used when displaying taxonomy and terms. */
+		// Labels used when displaying taxonomy and terms.
 		'labels' => array(
 			'name'                       => __( 'Portfolios',                           'custom-content-portfolio' ),
 			'singular_name'              => __( 'Portfolio',                            'custom-content-portfolio' ),
@@ -72,7 +71,7 @@ function ccp_register_taxonomies() {
 		)
 	);
 
-	/* Set up the arguments for the portfolio taxonomy. */
+	// Set up the arguments for the portfolio tag taxonomy.
 	$tag_args = array(
 		'public'            => true,
 		'show_ui'           => true,
@@ -82,7 +81,7 @@ function ccp_register_taxonomies() {
 		'hierarchical'      => false,
 		'query_var'         => 'portfolio_tag',
 
-		/* Only 2 caps are needed: 'manage_portfolio' and 'edit_portfolio_items'. */
+		// Only 2 caps are needed: 'manage_portfolio' and 'edit_portfolio_projects'.
 		'capabilities' => array(
 			'manage_terms' => 'manage_portfolio',
 			'edit_terms'   => 'manage_portfolio',
@@ -90,7 +89,7 @@ function ccp_register_taxonomies() {
 			'assign_terms' => 'edit_portfolio_projects',
 		),
 
-		/* The rewrite handles the URL structure. */
+		// The rewrite handles the URL structure.
 		'rewrite' => array(
 			'slug'         => 'portfolio/tags',
 			'with_front'   => false,
@@ -98,7 +97,7 @@ function ccp_register_taxonomies() {
 			'ep_mask'      => EP_NONE
 		),
 
-		/* Labels used when displaying taxonomy and terms. */
+		// Labels used when displaying taxonomy and terms.
 		'labels' => array(
 			'name'                       => __( 'Tags',                           'custom-content-portfolio' ),
 			'singular_name'              => __( 'Tag',                            'custom-content-portfolio' ),
@@ -118,9 +117,7 @@ function ccp_register_taxonomies() {
 		)
 	);
 
-	/* Register the 'portfolio' taxonomy. */
-	register_taxonomy( 'portfolio_category', array( 'portfolio_project' ), $category_args );
-	register_taxonomy( 'portfolio_tag',      array( 'portfolio_project' ), $tag_args      );
+	// Register the taxonomies.
+	register_taxonomy( 'portfolio_category', array( 'portfolio_project' ), $cat_args );
+	register_taxonomy( 'portfolio_tag',      array( 'portfolio_project' ), $tag_args );
 }
-
-?>

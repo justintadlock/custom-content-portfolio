@@ -1,24 +1,24 @@
 <?php
 /**
  * Plugin Name: Custom Content Portfolio
- * Plugin URI: http://themehybrid.com/plugins/custom-content-portfolio
+ * Plugin URI:  http://themehybrid.com/plugins/custom-content-portfolio
  * Description: Portfolio manager for WordPress.  This plugin allows you to manage, edit, and create new portfolio items in an unlimited number of portfolios.
- * Version: 1.0.0-beta-1
- * Author: Justin Tadlock
- * Author URI: http://justintadlock.com
+ * Version:     1.0.0-beta-1
+ * Author:      Justin Tadlock
+ * Author URI:  http://justintadlock.com
  *
- * The Custom Content Portfolio plugin was created to solve the problem of theme developers continuing 
- * to incorrectly add custom post types to handle portfolios within their themes.  This plugin allows 
- * any theme developer to build a "portfolio" theme without having to code the functionality.  This 
- * gives more time for design and makes users happy because their data isn't lost when they switch to 
- * a new theme.  Oh, and, this plugin lets creative folk put together a portfolio of their work on 
+ * The Custom Content Portfolio plugin was created to solve the problem of theme developers continuing
+ * to incorrectly add custom post types to handle portfolios within their themes.  This plugin allows
+ * any theme developer to build a "portfolio" theme without having to code the functionality.  This
+ * gives more time for design and makes users happy because their data isn't lost when they switch to
+ * a new theme.  Oh, and, this plugin lets creative folk put together a portfolio of their work on
  * their site.
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
- * General Public License version 2, as published by the Free Software Foundation.  You may NOT assume 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License version 2, as published by the Free Software Foundation.  You may NOT assume
  * that you can use any other version of the GPL.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @package   CustomContentPortfolio
@@ -40,19 +40,19 @@ class Custom_Content_Portfolio {
 	 */
 	public function __construct() {
 
-		/* Set the constants needed by the plugin. */
+		// Set the constants needed by the plugin.
 		add_action( 'plugins_loaded', array( $this, 'constants' ), 1 );
 
-		/* Internationalize the text strings used. */
+		// Internationalize the text strings used.
 		add_action( 'plugins_loaded', array( $this, 'i18n' ), 2 );
 
-		/* Load the functions files. */
+		// Load the functions files.
 		add_action( 'plugins_loaded', array( $this, 'includes' ), 3 );
 
-		/* Load the admin files. */
+		// Load the admin files.
 		add_action( 'plugins_loaded', array( $this, 'admin' ), 4 );
 
-		/* Register activation hook. */
+		// Register activation hook.
 		register_activation_hook( __FILE__, array( $this, 'activation' ) );
 	}
 
@@ -65,16 +65,16 @@ class Custom_Content_Portfolio {
 	 */
 	public function constants() {
 
-		/* Set constant path to the plugin directory. */
+		// Set constant path to the plugin directory.
 		define( 'CCP_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 
-		/* Set the constant path to the plugin directory URI. */
+		// Set the constant path to the plugin directory URI.
 		define( 'CCP_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 
-		/* Set the constant path to the includes directory. */
+		// Set the constant path to the includes directory.
 		define( 'CCP_INCLUDES', CCP_DIR . trailingslashit( 'includes' ) );
 
-		/* Set the constant path to the admin directory. */
+		// Set the constant path to the admin directory.
 		define( 'CCP_ADMIN', CCP_DIR . trailingslashit( 'admin' ) );
 	}
 
@@ -103,7 +103,7 @@ class Custom_Content_Portfolio {
 	 */
 	public function i18n() {
 
-		/* Load the translation of the plugin. */
+		// Load the translation of the plugin.
 		load_plugin_textdomain( 'custom-content-portfolio', false, 'custom-content-portfolio/languages' );
 	}
 
@@ -136,11 +136,11 @@ class Custom_Content_Portfolio {
 		$wpdb->query( "UPDATE {$wpdb->postmeta}      SET meta_key  = 'portfolio_item_url' WHERE meta_key  = 'url'"            );
 		$wpdb->query( "UPDATE {$wpdb->term_taxonomy} SET taxonomy  = 'portfolio_category' WHERE taxonomy  = 'portfolio'"      );
 
-		/* Get the administrator role. */
+		// Get the administrator role.
 		$role = get_role( 'administrator' );
 
-		/* If the administrator role exists, add required capabilities for the plugin. */
-		if ( !empty( $role ) ) {
+		// If the administrator role exists, add required capabilities for the plugin.
+		if ( ! empty( $role ) ) {
 
 			$role->add_cap( 'manage_portfolio'          );
 			$role->add_cap( 'create_portfolio_projects' );
@@ -153,5 +153,3 @@ class Custom_Content_Portfolio {
 }
 
 new Custom_Content_Portfolio();
-
-?>

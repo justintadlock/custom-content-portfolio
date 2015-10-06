@@ -4,14 +4,13 @@
  *
  * @package    CustomContentPortfolio
  * @subpackage Includes
- * @since      0.1.0
  * @author     Justin Tadlock <justin@justintadlock.com>
  * @copyright  Copyright (c) 2013, Justin Tadlock
  * @link       http://themehybrid.com/plugins/custom-content-portfolio
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-/* Register meta on the 'init' hook. */
+# Register meta on the 'init' hook.
 add_action( 'init', 'ccp_register_meta' );
 
 /**
@@ -23,7 +22,7 @@ add_action( 'init', 'ccp_register_meta' );
  */
 function ccp_register_meta() {
 
-	register_meta( 'post', 'url', 'ccp_sanitize_meta', '__return_false' );
+	register_meta( 'post', 'url', 'esc_url_raw', '__return_false' );
 }
 
 /**
@@ -45,5 +44,3 @@ function ccp_sanitize_meta( $meta_value, $meta_key, $meta_type ) {
 
 	return strip_tags( $meta_value );
 }
-
-?>

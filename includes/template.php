@@ -4,7 +4,6 @@
  *
  * @package    CustomContentPortfolio
  * @subpackage Includes
- * @since      1.0.0
  * @author     Justin Tadlock <justin@justintadlock.com>
  * @copyright  Copyright (c) 2013, Justin Tadlock
  * @link       http://themehybrid.com/plugins/custom-content-portfolio
@@ -21,11 +20,11 @@
  */
 function ccp_get_project_url( $post_id = '' ) {
 
-	$post_id = !empty( $post_id ) ? absint( $post_id ) : get_the_ID();
+	$post_id = $post_id ? absint( $post_id ) : get_the_ID();
 
 	$url = get_post_meta( $post_id, 'url', true );
 
-	return !empty( $url ) ? esc_url( $url ) : '';
+	return $url ? esc_url( $url ) : '';
 }
 
 /**
@@ -64,7 +63,7 @@ function ccp_get_project_link( $args = array() ) {
 
 	$url = ccp_get_project_url( $args['post_id'] );
 
-	if ( !empty( $url ) ) {
+	if ( $url ) {
 
 		$text = sprintf( $args['text'], $url );
 		$attr = sprintf( 'class="portfolio-item-link" href="%s"', $url );

@@ -4,20 +4,19 @@
  *
  * @package    CustomContentPortfolio
  * @subpackage Includes
- * @since      0.1.0
  * @author     Justin Tadlock <justin@justintadlock.com>
  * @copyright  Copyright (c) 2013, Justin Tadlock
  * @link       http://themehybrid.com/plugins/custom-content-portfolio
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-/* Filter the post type archive title. */
+# Filter the post type archive title.
 add_filter( 'post_type_archive_title', 'ccp_post_type_archive_title' );
 
-/* Filter the post type permalink. */
+# Filter the post type permalink.
 add_filter( 'post_type_link', 'ccp_post_type_link', 10, 2 );
 
-// Filter the Breadcrumb Trail plugin args.
+# Filter the Breadcrumb Trail plugin args.
 add_filter( 'breadcrumb_trail_args', 'ccp_breadcrumb_trail_args', 15 );
 
 /**
@@ -72,13 +71,13 @@ function ccp_post_type_link( $post_link, $post ) {
 	if ( 'portfolio_project' !== $post->post_type )
 		return $post_link;
 
-	/* Allow %portfolio% in the custom post type permalink. */
+	// Allow %portfolio% in the custom post type permalink.
 	if ( false !== strpos( $post_link, '%portfolio%' ) ) {
 
-		/* Get the terms. */
+		// Get the terms.
 		$terms = get_the_terms( $post, 'portfolio_category' ); // @todo apply filters to tax name.
 
-		/* Check that terms were returned. */
+		// Check that terms were returned.
 		if ( $terms ) {
 
 			usort( $terms, '_usort_terms_by_ID' );
@@ -104,7 +103,7 @@ function ccp_post_type_link( $post_link, $post ) {
  */
 function ccp_breadcrumb_trail_args( $args ) {
 
-	if ( !isset( $args['post_taxonomy']['portfolio_project'] ) )
+	if ( ! isset( $args['post_taxonomy']['portfolio_project'] ) )
 		$args['post_taxonomy']['portfolio_project'] = 'portfolio_category';
 
 	return $args;

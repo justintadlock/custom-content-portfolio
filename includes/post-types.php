@@ -4,14 +4,13 @@
  *
  * @package    CustomContentPortfolio
  * @subpackage Includes
- * @since      0.1.0
  * @author     Justin Tadlock <justin@justintadlock.com>
  * @copyright  Copyright (c) 2013, Justin Tadlock
  * @link       http://themehybrid.com/plugins/custom-content-portfolio
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-/* Register custom post types on the 'init' hook. */
+# Register custom post types on the 'init' hook.
 add_action( 'init', 'ccp_register_post_types' );
 
 /**
@@ -23,11 +22,11 @@ add_action( 'init', 'ccp_register_post_types' );
  */
 function ccp_register_post_types() {
 
-	/* Get the plugin settings. */
+	// Get the plugin settings.
 	$settings = get_option( 'plugin_custom_content_portfolio', ccp_get_default_settings() );
 
-	/* Set up the arguments for the portfolio item post type. */
-	$args = array(
+	// Set up the arguments for the portfolio item post type.
+	$project_args = array(
 		'description'         => '',
 		'public'              => true,
 		'publicly_queryable'  => true,
@@ -46,7 +45,7 @@ function ccp_register_post_types() {
 		'capability_type'     => 'portfolio_project',
 		'map_meta_cap'        => true,
 
-		/* Only 3 caps are needed: 'manage_portfolio', 'create_portfolio_projects', and 'edit_portfolio_projects'. */
+		// Only 3 caps are needed: 'manage_portfolio', 'create_portfolio_projects', and 'edit_portfolio_projects'.
 		'capabilities' => array(
 
 			// meta caps (don't assign these to roles)
@@ -73,7 +72,7 @@ function ccp_register_post_types() {
 			'edit_published_posts'   => 'edit_portfolio_projects'
 		),
 
-		/* The rewrite handles the URL structure. */
+		// The rewrite handles the URL structure.
 		'rewrite' => array(
 			'slug'       => 'portfolio/project',
 			'with_front' => false,
@@ -82,7 +81,7 @@ function ccp_register_post_types() {
 			'ep_mask'    => EP_PERMALINK,
 		),
 
-		/* What features the post type supports. */
+		// What features the post type supports.
 		'supports' => array(
 			'title',
 			'editor',
@@ -91,29 +90,27 @@ function ccp_register_post_types() {
 			'thumbnail'
 		),
 
-		/* Labels used when displaying the posts. */
+		// Labels used when displaying the posts.
 		'labels' => array(
 			'name'               => __( 'Projects',                   'custom-content-portfolio' ),
 			'singular_name'      => __( 'Project',                    'custom-content-portfolio' ),
-			'menu_name'          => __( 'Portfolio',                         'custom-content-portfolio' ),
+			'menu_name'          => __( 'Portfolio',                  'custom-content-portfolio' ),
 			'name_admin_bar'     => __( 'Project',                    'custom-content-portfolio' ),
-			'add_new'            => __( 'New Project',                           'custom-content-portfolio' ),
+			'add_new'            => __( 'New Project',                'custom-content-portfolio' ),
 			'add_new_item'       => __( 'Add New Project',            'custom-content-portfolio' ),
 			'edit_item'          => __( 'Edit Project',               'custom-content-portfolio' ),
 			'new_item'           => __( 'New Project',                'custom-content-portfolio' ),
 			'view_item'          => __( 'View Project',               'custom-content-portfolio' ),
-			'search_items'       => __( 'Search Projects',                  'custom-content-portfolio' ),
+			'search_items'       => __( 'Search Projects',            'custom-content-portfolio' ),
 			'not_found'          => __( 'No projects found',          'custom-content-portfolio' ),
 			'not_found_in_trash' => __( 'No projects found in trash', 'custom-content-portfolio' ),
 			'all_items'          => __( 'Projects',                   'custom-content-portfolio' ),
 
 			// Custom labels b/c WordPress doesn't have anything to handle this.
-			'archive_title'      => __( 'Portfolio',                         'custom-content-portfolio' ),
+			'archive_title'      => __( 'Portfolio',                  'custom-content-portfolio' ),
 		)
 	);
 
-	/* Register the portfolio item post type. */
-	register_post_type( 'portfolio_project', $args );
+	// Register the post types.
+	register_post_type( 'portfolio_project', $project_args );
 }
-
-?>

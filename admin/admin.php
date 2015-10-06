@@ -3,15 +3,14 @@
  * Admin functions for the plugin.
  *
  * @package    CustomContentPortfolio
- * @subpackage Admin
- * @since      0.1.0
+ * @subpackage Admi
  * @author     Justin Tadlock <justin@justintadlock.com>
  * @copyright  Copyright (c) 2013, Justin Tadlock
  * @link       http://themehybrid.com/plugins/custom-content-portfolio
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-/* Set up the admin functionality. */
+# Set up the admin functionality.
 add_action( 'admin_menu', 'ccp_admin_setup' );
 
 /**
@@ -26,15 +25,15 @@ function ccp_admin_setup() {
 	// Waiting on @link http://core.trac.wordpress.org/ticket/9296
 	//add_action( 'admin_init', 'ccp_admin_setup' );
 
-	/* Custom columns on the edit portfolio items screen. */
+	// Custom columns on the edit portfolio items screen.
 	add_filter( 'manage_edit-portfolio_project_columns', 'ccp_edit_portfolio_item_columns' );
 	add_action( 'manage_portfolio_project_posts_custom_column', 'ccp_manage_portfolio_item_columns', 10, 2 );
 
-	/* Add meta boxes an save metadata. */
+	// Add meta boxes an save metadata.
 	add_action( 'add_meta_boxes', 'ccp_add_meta_boxes' );
 	add_action( 'save_post', 'ccp_portfolio_item_info_meta_box_save', 10, 2 );
 
-	/* Add 32px screen icon. */
+	// Add 32px screen icon.
 	add_action( 'admin_head', 'ccp_admin_head_style' );
 }
 
@@ -74,7 +73,6 @@ function ccp_edit_portfolio_item_columns( $columns ) {
  * @return void
  */
 function ccp_manage_portfolio_item_columns( $column, $post_id ) {
-	global $post;
 
 	switch( $column ) {
 
@@ -88,7 +86,7 @@ function ccp_manage_portfolio_item_columns( $column, $post_id ) {
 
 			break;
 
-		/* Just break out of the switch statement for everything else. */
+		// Just break out of the switch statement for everything else.
 		default :
 			break;
 	}
@@ -161,14 +159,14 @@ function ccp_portfolio_item_info_meta_box_save( $post_id, $post ) {
 
 	foreach ( $meta as $meta_key => $new_meta_value ) {
 
-		/* Get the meta value of the custom field key. */
+		// Get the meta value of the custom field key.
 		$meta_value = get_post_meta( $post_id, $meta_key, true );
 
-		/* If there is no new meta value but an old value exists, delete it. */
+		// If there is no new meta value but an old value exists, delete it.
 		if ( current_user_can( 'delete_post_meta', $post_id, $meta_key ) && '' == $new_meta_value && $meta_value )
 			delete_post_meta( $post_id, $meta_key, $meta_value );
 
-		/* If a new meta value was added and there was no previous value, add it. */
+		// If a new meta value was added and there was no previous value, add it.
 		elseif ( current_user_can( 'add_post_meta', $post_id, $meta_key ) && $new_meta_value && '' == $meta_value )
 			add_post_meta( $post_id, $meta_key, $new_meta_value, true );
 
@@ -321,5 +319,3 @@ function ccp_admin_head_style() {
 		</style>
 	<?php }
 }
-
-?>
