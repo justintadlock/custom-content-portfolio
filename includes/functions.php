@@ -48,10 +48,8 @@ function ccp_get_default_settings() {
  */
 function ccp_post_type_archive_title( $title ) {
 
-	if ( is_post_type_archive( 'portfolio_project' ) ) {
-		$post_type = get_post_type_object( 'portfolio_project' );
-		$title = isset( $post_type->labels->archive_title ) ? $post_type->labels->archive_title : $title;
-	}
+	if ( is_post_type_archive( 'portfolio_project' ) )
+		$title = get_post_type_object( 'portfolio_project' )->labels->archive_title;
 
 	return $title;
 }
