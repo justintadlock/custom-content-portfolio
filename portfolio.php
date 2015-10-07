@@ -93,6 +93,7 @@ class Custom_Content_Portfolio {
 		require_once( CCP_INCLUDES . 'meta.php' );
 		require_once( CCP_INCLUDES . 'post-types.php' );
 		require_once( CCP_INCLUDES . 'taxonomies.php' );
+		require_once( CCP_INCLUDES . 'deprecated.php' );
 	}
 
 	/**

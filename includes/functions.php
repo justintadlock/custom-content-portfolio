@@ -88,18 +88,3 @@ function ccp_breadcrumb_trail_args( $args ) {
 
 	return $args;
 }
-
-/**
- * Filters the 'breadcrumb_trail_items' hook from the Breadcrumb Trail plugin and the script version
- * included in the Hybrid Core framework.  At best, this is a neat hack to add the portfolio to the
- * single view of portfolio items based off the '%portfolio%' rewrite tag.  At worst, it's potentially
- * a huge management nightmare in the long term.  A better solution is definitely needed baked right
- * into Breadcrumb Trail itself that takes advantage of its built-in features for figuring out this type
- * of thing.
- *
- * @since      0.1.0
- * @deprecated 1.0.0
- */
-function ccp_breadcrumb_trail_items( $items ) {
-	return $items;
-}

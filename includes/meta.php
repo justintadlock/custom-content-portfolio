@@ -68,23 +68,3 @@ function ccp_delete_project_meta( $post_id, $meta_key ) {
 
 	return delete_post_meta( $post_id, $meta_key );
 }
-
-/**
- * Callback function for sanitizing meta when add_metadata() or update_metadata() is called by WordPress.
- * If a developer wants to set up a custom method for sanitizing the data, they should use the
- * "sanitize_{$meta_type}_meta_{$meta_key}" filter hook to do so.
- *
- * @since  0.1.0
- * @access public
- * @param  mixed  $meta_value The value of the data to sanitize.
- * @param  string $meta_key   The meta key name.
- * @param  string $meta_type  The type of metadata (post, comment, user, etc.)
- * @return mixed  $meta_value
- */
-function ccp_sanitize_meta( $meta_value, $meta_key, $meta_type ) {
-
-	if ( 'url' === $meta_key )
-		return esc_url( $meta_value );
-
-	return strip_tags( $meta_value );
-}
