@@ -13,6 +13,9 @@
 # Register custom post types on the 'init' hook.
 add_action( 'init', 'ccp_register_post_types' );
 
+# Filter the "enter title here" text.
+add_filter( 'enter_title_here', 'ccp_enter_title_here', 10, 2 );
+
 /**
  * Registers post types needed by the plugin.
  *
@@ -110,4 +113,18 @@ function ccp_register_post_types() {
 
 	// Register the post types.
 	register_post_type( 'portfolio_project', $project_args );
+}
+
+/**
+ * Custom "enter title here" text.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  string  $title
+ * @param  object  $post
+ * @return string
+ */
+function ccp_enter_title_here( $title, $post ) {
+
+	return 'portfolio_project' === $post->post_type ? esc_html__( 'Enter project title', 'custom-content-portfolio' ) : '';
 }
