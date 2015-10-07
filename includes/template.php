@@ -11,6 +11,50 @@
  */
 
 /**
+ * Makes sure the post ID is an absolute integer if passed in.  Else, returns the result 
+ * of `get_the_ID()`.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  int     $post_id
+ * @return int
+ */
+function ccp_get_project_id( $post_id = '' ) {
+
+	return $post_id ? absint( $post_id ) : get_the_ID();
+}
+
+/**
+ * Checks if the project has the "complete" post status.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  int     $post_id
+ * @return bool
+ */
+function ccp_is_project_complete( $post_id = '' ) {
+
+	$post_id = ccp_get_project_id( $post_id );
+
+	return apply_filters( 'ccp_is_project_complete', ccp_get_complete_post_status() === get_post_status( $post_id ) );
+}
+
+/**
+ * Checks if the project has the "in_progress" post status.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  int     $post_id
+ * @return bool
+ */
+function ccp_is_project_in_progress( $post_id = '' ) {
+
+	$post_id = ccp_get_project_id( $post_id );
+
+	return apply_filters( 'ccp_is_project_in_progress', ccp_get_in_progress_post_status() === get_post_status( $post_id ) );
+}
+
+/**
  * Outputs the project URL.
  *
  * @since  1.0.0
