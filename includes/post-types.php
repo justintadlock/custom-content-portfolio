@@ -22,9 +22,6 @@ add_action( 'init', 'ccp_register_post_types' );
  */
 function ccp_register_post_types() {
 
-	// Get the plugin settings.
-	$settings = get_option( 'plugin_custom_content_portfolio', ccp_get_default_settings() );
-
 	// Set up the arguments for the portfolio item post type.
 	$project_args = array(
 		'description'         => '',
@@ -40,7 +37,7 @@ function ccp_register_post_types() {
 		'can_export'          => true,
 		'delete_with_user'    => false,
 		'hierarchical'        => false,
-		'has_archive'         => 'portfolio',
+		'has_archive'         => ccp_get_portfolio_rewrite_base(),
 		'query_var'           => 'portfolio_project',
 		'capability_type'     => 'portfolio_project',
 		'map_meta_cap'        => true,
@@ -74,7 +71,7 @@ function ccp_register_post_types() {
 
 		// The rewrite handles the URL structure.
 		'rewrite' => array(
-			'slug'       => 'portfolio/project',
+			'slug'       => ccp_get_project_rewrite_slug(),
 			'with_front' => false,
 			'pages'      => true,
 			'feeds'      => true,

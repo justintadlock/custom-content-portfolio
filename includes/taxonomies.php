@@ -45,7 +45,7 @@ function ccp_register_taxonomies() {
 
 		// The rewrite handles the URL structure.
 		'rewrite' => array(
-			'slug'         => 'portfolio/category',
+			'slug'         => ccp_get_category_rewrite_slug(),
 			'with_front'   => false,
 			'hierarchical' => false,
 			'ep_mask'      => EP_NONE
@@ -91,7 +91,7 @@ function ccp_register_taxonomies() {
 
 		// The rewrite handles the URL structure.
 		'rewrite' => array(
-			'slug'         => 'portfolio/tags',
+			'slug'         => ccp_get_tag_rewrite_slug(),
 			'with_front'   => false,
 			'hierarchical' => false,
 			'ep_mask'      => EP_NONE

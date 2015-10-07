@@ -20,24 +20,6 @@ add_filter( 'post_type_link', 'ccp_post_type_link', 10, 2 );
 add_filter( 'breadcrumb_trail_args', 'ccp_breadcrumb_trail_args', 15 );
 
 /**
- * Returns the default settings for the plugin.
- *
- * @since  0.1.0
- * @access public
- * @return array
- */
-function ccp_get_default_settings() {
-
-	$settings = array(
-		'portfolio_root'      => 'portfolio',
-		'portfolio_base'      => '',          // defaults to 'portfolio_root'
-		'portfolio_item_base' => '%portfolio%'
-	);
-
-	return $settings;
-}
-
-/**
  * Filter on 'post_type_archive_title' to allow for the use of the 'archive_title' label that isn't supported
  * by WordPress.  That's okay since we can roll our own labels.
  *
