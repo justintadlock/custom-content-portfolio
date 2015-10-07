@@ -22,7 +22,51 @@ add_action( 'init', 'ccp_register_meta' );
  */
 function ccp_register_meta() {
 
-	register_meta( 'post', 'url', 'esc_url_raw', '__return_false' );
+	register_meta( 'post', 'url',    'esc_url_raw',       '__return_false' );
+	register_meta( 'post', 'client', 'wp_strip_all_tags', '__return_false' );
+}
+
+/**
+ * Returns project metadata.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  int     $post_id
+ * @param  string  $meta_key
+ * @return mixed
+ */
+function ccp_get_project_meta( $post_id, $meta_key ) {
+
+	return get_post_meta( $post_id, $meta_key, true );
+}
+
+/**
+ * Adds/updates project metadata.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  int     $post_id
+ * @param  string  $meta_key
+ * @param  mixed   $meta_value
+ * @return bool
+ */
+function ccp_set_project_meta( $post_id, $meta_key, $meta_value ) {
+
+	return update_post_meta( $post_id, $meta_key, $meta_value );
+}
+
+/**
+ * Deletes project metadata.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  int     $post_id
+ * @param  string  $meta_key
+ * @return mixed
+ */
+function ccp_delete_project_meta( $post_id, $meta_key ) {
+
+	return delete_post_meta( $post_id, $meta_key );
 }
 
 /**

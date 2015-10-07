@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Tags for theme authors
+ * Template Tags for theme authors to use in their theme templates.
  *
  * @package    CustomContentPortfolio
  * @subpackage Includes
@@ -11,7 +11,7 @@
  */
 
 /**
- * Outputs the portfolio project URL.
+ * Outputs the project URL.
  *
  * @since  1.0.0
  * @access public
@@ -26,7 +26,7 @@ function ccp_project_url( $post_id = '' ) {
 }
 
 /**
- * Returns the portfolio project URL.
+ * Returns the project URL.
  *
  * @since  1.0.0
  * @access public
@@ -37,11 +37,11 @@ function ccp_get_project_url( $post_id = '' ) {
 
 	$post_id = $post_id ? absint( $post_id ) : get_the_ID();
 
-	return get_post_meta( $post_id, 'url', true );
+	return apply_filters( 'ccp_get_project_url', ccp_get_project_meta( $post_id, 'url' ), $post_id );
 }
 
 /**
- * Displays the portfolio item link.
+ * Displays the project link.
  *
  * @since  1.0.0
  * @access public
@@ -53,7 +53,7 @@ function ccp_project_link( $args = array() ) {
 }
 
 /**
- * Returns a link to the porfolio item URL if it has been set.
+ * Returns the project link.
  *
  * @since  1.0.0
  * @access public
@@ -74,17 +74,65 @@ function ccp_get_project_link( $args = array() ) {
 
 	$args = wp_parse_args( $args, $defaults );
 
-	$url = ccp_get_project_url( $args['post_id'] );
+	$url = ccp_get_project_meta( $args['post_id'], 'url' );
 
 	if ( $url ) {
 
 		$text = sprintf( $args['text'], $url );
-		$attr = sprintf( 'class="portfolio-item-link" href="%s"', esc_url( $url ) );
+		$attr = sprintf( 'class="project-link" href="%s"', esc_url( $url ) );
 
 		$html .= $args['before'];
 		$html .= sprintf( $args['wrap'], $attr, $text );
 		$html .= $args['after'];
 	}
 
-	return $html;
+	return apply_filters( 'ccp_get_project_link', $html, $args['post_id'] );
+}
+
+/**
+ * Prints the project client.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  array  $args
+ * @return void
+ */
+function ccp_project_client( $args = array() ) {
+	echo ccp_get_project_client( $args );
+}
+
+/**
+ * Returns the project client.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  array  $args
+ * @return string
+ */
+function ccp_get_project_client( $args = array() ) {
+
+	$html = '';
+
+	$defaults = array(
+		'post_id' => get_the_ID(),
+		'text'    => '%s',
+		'before'  => '',
+		'after'   => '',
+		'wrap'    => '<span %s>%s</span>',
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	$client = ccp_get_project_meta( $args['post_id'], 'client' );
+
+	if ( $client ) {
+
+		$text = sprintf( $args['text'], $client );
+
+		$html .= $args['before'];
+		$html .= sprintf( $args['wrap'], 'class="project-client"', $text );
+		$html .= $args['after'];
+	}
+
+	return apply_filters( 'ccp_get_project_client', $html, $args['post_id'] );
 }
