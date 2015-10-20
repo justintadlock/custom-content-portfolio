@@ -29,10 +29,6 @@ function ccp_admin_setup() {
 	add_filter( 'manage_edit-portfolio_project_columns', 'ccp_edit_portfolio_item_columns' );
 	add_action( 'manage_portfolio_project_posts_custom_column', 'ccp_manage_portfolio_item_columns', 10, 2 );
 
-	// Add meta boxes an save metadata.
-	add_action( 'add_meta_boxes', 'ccp_add_meta_boxes' );
-	add_action( 'save_post', 'ccp_portfolio_item_info_meta_box_save', 10, 2 );
-
 	// Add 32px screen icon.
 	add_action( 'admin_head', 'ccp_admin_head_style' );
 }
@@ -89,90 +85,6 @@ function ccp_manage_portfolio_item_columns( $column, $post_id ) {
 		// Just break out of the switch statement for everything else.
 		default :
 			break;
-	}
-}
-
-/**
- * Registers new meta boxes for the 'portfolio_item' post editing screen in the admin.
- *
- * @since  0.1.0
- * @access public
- * @param  string  $post_type
- * @return void
- */
-function ccp_add_meta_boxes( $post_type ) {
-
-	if ( 'portfolio_project' === $post_type ) {
-
-		add_meta_box(
-			'ccp-item-info',
-			__( 'Project Info', 'custom-content-portfolio' ),
-			'ccp_portfolio_item_info_meta_box_display',
-			$post_type,
-			'side',
-			'core'
-		);
-	}
-}
-
-/**
- * Displays the content of the portfolio item info meta box.
- *
- * @since  0.1.0
- * @access public
- * @param  object  $post
- * @param  array   $metabox
- * @return void
- */
-function ccp_portfolio_item_info_meta_box_display( $post, $metabox ) {
-
-	wp_nonce_field( basename( __FILE__ ), 'ccp-portfolio-item-info-nonce' ); ?>
-
-	<p>
-		<label for="ccp-portfolio-item-url"><?php _e( 'Project <abbr title="Uniform Resource Locator">URL</abbr>', 'custom-content-portfolio' ); ?></label>
-		<br />
-		<input type="text" name="ccp-portfolio-item-url" id="ccp-portfolio-item-url" value="<?php echo esc_url( get_post_meta( $post->ID, 'url', true ) ); ?>" size="30" tabindex="30" style="width: 99%;" />
-	</p>
-	<?php
-
-	/* Allow devs to hook in their own stuff here. */
-	do_action( 'ccp_item_info_meta_box', $post, $metabox );
-}
-
-/**
- * Saves the metadata for the portfolio item info meta box.
- *
- * @since  0.1.0
- * @access public
- * @param  int     $post_id
- * @param  object  $post
- * @return void
- */
-function ccp_portfolio_item_info_meta_box_save( $post_id, $post ) {
-
-	if ( !isset( $_POST['ccp-portfolio-item-info-nonce'] ) || !wp_verify_nonce( $_POST['ccp-portfolio-item-info-nonce'], basename( __FILE__ ) ) )
-		return;
-
-	$meta = array(
-		'url' => esc_url_raw( $_POST['ccp-portfolio-item-url'] )
-	);
-
-	foreach ( $meta as $meta_key => $new_meta_value ) {
-
-		// Get the meta value of the custom field key.
-		$meta_value = get_post_meta( $post_id, $meta_key, true );
-
-		// If there is no new meta value but an old value exists, delete it.
-		if ( current_user_can( 'delete_post_meta', $post_id, $meta_key ) && '' == $new_meta_value && $meta_value )
-			delete_post_meta( $post_id, $meta_key, $meta_value );
-
-		// If a new meta value was added and there was no previous value, add it.
-		elseif ( current_user_can( 'add_post_meta', $post_id, $meta_key ) && $new_meta_value && '' == $meta_value )
-			add_post_meta( $post_id, $meta_key, $new_meta_value, true );
-
-		/* If the new meta value does not match the old value, update it. */
-		elseif ( current_user_can( 'edit_post_meta', $post_id, $meta_key ) && $new_meta_value && $new_meta_value != $meta_value )
-			update_post_meta( $post_id, $meta_key, $new_meta_value );
 	}
 }
 

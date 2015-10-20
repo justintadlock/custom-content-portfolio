@@ -119,8 +119,10 @@ class Custom_Content_Portfolio {
 	 */
 	public function admin() {
 
-		if ( is_admin() )
+		if ( is_admin() ) {
 			require_once( CCP_ADMIN . 'admin.php' );
+			require_once( CCP_ADMIN . 'class-meta-box-project-details.php' );
+		}
 	}
 
 	/**

@@ -10,8 +10,6 @@
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-
-
 /**
  * Callback function for sanitizing meta when add_metadata() or update_metadata() is called by WordPress.
  * If a developer wants to set up a custom method for sanitizing the data, they should use the
@@ -46,3 +44,21 @@ function ccp_sanitize_meta( $meta_value, $meta_key, $meta_type ) {
 function ccp_breadcrumb_trail_items( $items ) {
 	return $items;
 }
+
+/**
+ * @since      0.1.0
+ * @deprecated 1.0.0
+ */
+function ccp_add_meta_boxes() {}
+
+/**
+ * @since      0.1.0
+ * @deprecated 1.0.0
+ */
+function ccp_portfolio_item_info_meta_box_display() {}
+
+/**
+ * @since      0.1.0
+ * @deprecated 1.0.0
+ */
+function ccp_portfolio_item_info_meta_box_save() {}
