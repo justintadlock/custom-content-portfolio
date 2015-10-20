@@ -40,18 +40,13 @@ function ccp_admin_setup() {
  */
 function ccp_edit_portfolio_item_columns( $columns ) {
 
-	unset( $columns['title'] );
-	unset( $columns['taxonomy-portfolio'] );
-
 	$new_columns = array(
-		'cb' => '<input type="checkbox" />',
+		'cb'    => $columns['cb'],
 		'title' => __( 'Project', 'custom-content-portfolio' )
 	);
 
 	if ( current_theme_supports( 'post-thumbnails' ) )
 		$new_columns['thumbnail'] = __( 'Thumbnail', 'custom-content-portfolio' );
-
-	//$new_columns['taxonomy-portfolio'] = __( 'Portfolio', 'custom-content-portfolio' );
 
 	return array_merge( $new_columns, $columns );
 }
@@ -67,21 +62,13 @@ function ccp_edit_portfolio_item_columns( $columns ) {
  */
 function ccp_manage_portfolio_item_columns( $column, $post_id ) {
 
-	switch( $column ) {
+	if ( 'thumbnail' === $column ) {
 
-		case 'thumbnail' :
+		if ( has_post_thumbnail() )
+			the_post_thumbnail( array( 40, 40 ) );
 
-			if ( has_post_thumbnail() )
-				the_post_thumbnail( array( 40, 40 ) );
-
-			elseif ( function_exists( 'get_the_image' ) )
-				get_the_image( array( 'image_scan' => true, 'width' => 40, 'height' => 40 ) );
-
-			break;
-
-		// Just break out of the switch statement for everything else.
-		default :
-			break;
+		elseif ( function_exists( 'get_the_image' ) )
+			get_the_image( array( 'scan' => true, 'width' => 40, 'height' => 40, 'link' => false ) );
 	}
 }
 
