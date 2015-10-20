@@ -28,9 +28,6 @@ function ccp_admin_setup() {
 	// Custom columns on the edit portfolio items screen.
 	add_filter( 'manage_edit-portfolio_project_columns', 'ccp_edit_portfolio_item_columns' );
 	add_action( 'manage_portfolio_project_posts_custom_column', 'ccp_manage_portfolio_item_columns', 10, 2 );
-
-	// Add 32px screen icon.
-	add_action( 'admin_head', 'ccp_admin_head_style' );
 }
 
 /**
@@ -212,22 +209,3 @@ function ccp_item_base_field( $settings ) { ?>
 	<input type="text" name="plugin_ccp[portfolio_item_base]" id="ccp-portfolio-item-base" class="regular-text code" value="<?php echo esc_attr( $settings['portfolio_item_base'] ); ?>" />
 	<code><?php echo trailingslashit( home_url( "{$settings['portfolio_root']}/{$settings['portfolio_item_base']}" ) ); ?>%postname%</code>
 <?php }
-
-/**
- * Overwrites the screen icon for portfolio screens in the admin.
- *
- * @since  0.1.0
- * @access public
- * @return void
- */
-function ccp_admin_head_style() {
-        global $post_type;
-
-	if ( 'portfolio_item' === $post_type ) { ?>
-		<style type="text/css">
-			#icon-edit.icon32-posts-portfolio_item {
-				background: transparent url( '<?php echo CCP_URI . 'images/screen-icon.png'; ?>' ) no-repeat;
-			}
-		</style>
-	<?php }
-}

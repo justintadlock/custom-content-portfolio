@@ -62,3 +62,10 @@ function ccp_portfolio_item_info_meta_box_display() {}
  * @deprecated 1.0.0
  */
 function ccp_portfolio_item_info_meta_box_save() {}
+
+
+/**
+ * @since      0.1.0
+ * @deprecated 1.0.0
+ */
+function ccp_admin_head_style() {}
