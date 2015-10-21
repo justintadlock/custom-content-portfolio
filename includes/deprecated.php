@@ -80,3 +80,9 @@ function ccp_root_field() {}
 function ccp_base_field() {}
 
 function ccp_item_base_field() {}
+
+function ccp_admin_setup() {}
+
+function ccp_edit_portfolio_item_columns() {}
+
+function ccp_manage_portfolio_item_columns() {}
