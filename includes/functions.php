@@ -30,8 +30,8 @@ add_filter( 'breadcrumb_trail_args', 'ccp_breadcrumb_trail_args', 15 );
  */
 function ccp_post_type_archive_title( $title ) {
 
-	if ( is_post_type_archive( 'portfolio_project' ) )
-		$title = get_post_type_object( 'portfolio_project' )->labels->archive_title;
+	if ( is_post_type_archive( ccp_get_project_post_type() ) )
+		$title = get_post_type_object( ccp_get_project_post_type() )->labels->archive_title;
 
 	return $title;
 }
@@ -48,7 +48,7 @@ function ccp_post_type_archive_title( $title ) {
  */
 function ccp_post_type_link( $post_link, $post ) {
 
-	if ( 'portfolio_project' !== $post->post_type )
+	if ( ccp_get_project_post_type() !== $post->post_type )
 		return $post_link;
 
 	// Allow %portfolio% in the custom post type permalink.
@@ -83,8 +83,10 @@ function ccp_post_type_link( $post_link, $post ) {
  */
 function ccp_breadcrumb_trail_args( $args ) {
 
-	if ( ! isset( $args['post_taxonomy']['portfolio_project'] ) )
-		$args['post_taxonomy']['portfolio_project'] = 'portfolio_category';
+	$project_type = ccp_get_project_post_type();
+
+	if ( ! isset( $args['post_taxonomy'][ $project_type ] ) )
+		$args['post_taxonomy'][ $project_type ] = 'portfolio_category';
 
 	return $args;
 }

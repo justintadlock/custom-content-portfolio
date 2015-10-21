@@ -3,7 +3,7 @@
  * Admin functions for the plugin.
  *
  * @package    CustomContentPortfolio
- * @subpackage Admi
+ * @subpackage Admin
  * @author     Justin Tadlock <justin@justintadlock.com>
  * @copyright  Copyright (c) 2013, Justin Tadlock
  * @link       http://themehybrid.com/plugins/custom-content-portfolio
@@ -22,9 +22,11 @@ add_action( 'admin_menu', 'ccp_admin_setup' );
  */
 function ccp_admin_setup() {
 
+	$project_type = ccp_get_project_post_type();
+
 	// Custom columns on the edit portfolio items screen.
-	add_filter( 'manage_edit-portfolio_project_columns', 'ccp_edit_portfolio_item_columns' );
-	add_action( 'manage_portfolio_project_posts_custom_column', 'ccp_manage_portfolio_item_columns', 10, 2 );
+	add_filter( "manage_edit-{$project_type}_columns",        'ccp_edit_portfolio_item_columns'          );
+	add_action( "manage_{$project_type}_posts_custom_column", 'ccp_manage_portfolio_item_columns', 10, 2 );
 }
 
 /**

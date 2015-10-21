@@ -25,8 +25,10 @@ final class CCP_Meta_Box_Project_Details {
 	 */
 	public function load() {
 
+		$project_type = ccp_get_project_post_type();
+
 		// Add custom meta boxes.
-		add_action( 'add_meta_boxes_portfolio_project', array( $this, 'add_meta_boxes' ) );
+		add_action( "add_meta_boxes_{$project_type}", array( $this, 'add_meta_boxes' ) );
 
 		// Save metadata on post save.
 		add_action( 'save_post', array( $this, 'update' ) );
@@ -41,7 +43,7 @@ final class CCP_Meta_Box_Project_Details {
 	 */
 	public function add_meta_boxes() {
 
-		add_meta_box( 'ccp-project-details', esc_html__( 'Project Details', 'custom-content-portfolio' ), array( $this, 'meta_box' ), 'portfolio_project', 'side', 'core' );
+		add_meta_box( 'ccp-project-details', esc_html__( 'Project Details', 'custom-content-portfolio' ), array( $this, 'meta_box' ), ccp_get_project_post_type(), 'side', 'core' );
 	}
 
 	/**

@@ -116,6 +116,6 @@ function ccp_register_taxonomies() {
 	);
 
 	// Register the taxonomies.
-	register_taxonomy( 'portfolio_category', array( 'portfolio_project' ), $cat_args );
-	register_taxonomy( 'portfolio_tag',      array( 'portfolio_project' ), $tag_args );
+	register_taxonomy( 'portfolio_category', array( ccp_get_project_post_type() ), $cat_args );
+	register_taxonomy( 'portfolio_tag',      array( ccp_get_project_post_type() ), $tag_args );
 }

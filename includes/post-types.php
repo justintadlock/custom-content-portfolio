@@ -20,6 +20,90 @@ add_filter( 'enter_title_here', 'ccp_enter_title_here', 10, 2 );
 add_filter( 'post_updated_messages', 'ccp_post_updated_messages' );
 
 /**
+ * Returns the name of the project post type.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return string
+ */
+function ccp_get_project_post_type() {
+
+	return apply_filters( 'ccp_get_project_post_type', 'portfolio_project' );
+}
+
+/**
+ * Returns the capabilities for the project post type.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return array
+ */
+function ccp_get_project_capabilities() {
+
+	$caps = array(
+
+		// meta caps (don't assign these to roles)
+		'edit_post'              => 'edit_portfolio_project',
+		'read_post'              => 'read_portfolio_project',
+		'delete_post'            => 'delete_portfolio_project',
+
+		// primitive/meta caps
+		'create_posts'           => 'create_portfolio_projects',
+
+		// primitive caps used outside of map_meta_cap()
+		'edit_posts'             => 'edit_portfolio_projects',
+		'edit_others_posts'      => 'manage_portfolio',
+		'publish_posts'          => 'manage_portfolio',
+		'read_private_posts'     => 'read',
+
+		// primitive caps used inside of map_meta_cap()
+		'read'                   => 'read',
+		'delete_posts'           => 'manage_portfolio',
+		'delete_private_posts'   => 'manage_portfolio',
+		'delete_published_posts' => 'manage_portfolio',
+		'delete_others_posts'    => 'manage_portfolio',
+		'edit_private_posts'     => 'edit_portfolio_projects',
+		'edit_published_posts'   => 'edit_portfolio_projects'
+	);
+
+	return apply_filters( 'ccp_get_project_capabilities', $caps );
+}
+
+/**
+ * Returns the labels for the project post type.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return array
+ */
+function ccp_get_project_labels() {
+
+	$labels = array(
+		'name'                  => __( 'Projects',                   'custom-content-portfolio' ),
+		'singular_name'         => __( 'Project',                    'custom-content-portfolio' ),
+		'menu_name'             => __( 'Portfolio',                  'custom-content-portfolio' ),
+		'name_admin_bar'        => __( 'Project',                    'custom-content-portfolio' ),
+		'add_new'               => __( 'New Project',                'custom-content-portfolio' ),
+		'add_new_item'          => __( 'Add New Project',            'custom-content-portfolio' ),
+		'edit_item'             => __( 'Edit Project',               'custom-content-portfolio' ),
+		'new_item'              => __( 'New Project',                'custom-content-portfolio' ),
+		'view_item'             => __( 'View Project',               'custom-content-portfolio' ),
+		'search_items'          => __( 'Search Projects',            'custom-content-portfolio' ),
+		'not_found'             => __( 'No projects found',          'custom-content-portfolio' ),
+		'not_found_in_trash'    => __( 'No projects found in trash', 'custom-content-portfolio' ),
+		'all_items'             => __( 'Projects',                   'custom-content-portfolio' ),
+		'featured_image'        => __( 'Project Image',              'custom-content-portfolio' ),
+		'set_featured_image'    => __( 'Set project image',          'custom-content-portfolio' ),
+		'remove_featured_image' => __( 'Remove project image',       'custom-content-portfolio' ),
+
+		// Custom labels b/c WordPress doesn't have anything to handle this.
+		'archive_title'         => ccp_get_portfolio_title(),
+	);
+
+	return apply_filters( 'ccp_get_project_labels', $labels );
+}
+
+/**
  * Registers post types needed by the plugin.
  *
  * @since  0.1.0
@@ -28,7 +112,7 @@ add_filter( 'post_updated_messages', 'ccp_post_updated_messages' );
  */
 function ccp_register_post_types() {
 
-	// Set up the arguments for the portfolio item post type.
+	// Set up the arguments for the portfolio project post type.
 	$project_args = array(
 		'description'         => ccp_get_portfolio_description(),
 		'public'              => true,
@@ -44,36 +128,11 @@ function ccp_register_post_types() {
 		'delete_with_user'    => false,
 		'hierarchical'        => false,
 		'has_archive'         => ccp_get_portfolio_rewrite_base(),
-		'query_var'           => 'portfolio_project',
+		'query_var'           => ccp_get_project_post_type(),
 		'capability_type'     => 'portfolio_project',
 		'map_meta_cap'        => true,
-
-		// Only 3 caps are needed: 'manage_portfolio', 'create_portfolio_projects', and 'edit_portfolio_projects'.
-		'capabilities' => array(
-
-			// meta caps (don't assign these to roles)
-			'edit_post'              => 'edit_portfolio_project',
-			'read_post'              => 'read_portfolio_project',
-			'delete_post'            => 'delete_portfolio_project',
-
-			// primitive/meta caps
-			'create_posts'           => 'create_portfolio_projects',
-
-			// primitive caps used outside of map_meta_cap()
-			'edit_posts'             => 'edit_portfolio_projects',
-			'edit_others_posts'      => 'manage_portfolio',
-			'publish_posts'          => 'manage_portfolio',
-			'read_private_posts'     => 'read',
-
-			// primitive caps used inside of map_meta_cap()
-			'read'                   => 'read',
-			'delete_posts'           => 'manage_portfolio',
-			'delete_private_posts'   => 'manage_portfolio',
-			'delete_published_posts' => 'manage_portfolio',
-			'delete_others_posts'    => 'manage_portfolio',
-			'edit_private_posts'     => 'edit_portfolio_projects',
-			'edit_published_posts'   => 'edit_portfolio_projects'
-		),
+		'capabilities'        => ccp_get_project_capabilities(),
+		'labels'              => ccp_get_project_labels(),
 
 		// The rewrite handles the URL structure.
 		'rewrite' => array(
@@ -91,34 +150,11 @@ function ccp_register_post_types() {
 			'excerpt',
 			'author',
 			'thumbnail'
-		),
-
-		// Labels used when displaying the posts.
-		'labels' => array(
-			'name'                  => __( 'Projects',                   'custom-content-portfolio' ),
-			'singular_name'         => __( 'Project',                    'custom-content-portfolio' ),
-			'menu_name'             => __( 'Portfolio',                  'custom-content-portfolio' ),
-			'name_admin_bar'        => __( 'Project',                    'custom-content-portfolio' ),
-			'add_new'               => __( 'New Project',                'custom-content-portfolio' ),
-			'add_new_item'          => __( 'Add New Project',            'custom-content-portfolio' ),
-			'edit_item'             => __( 'Edit Project',               'custom-content-portfolio' ),
-			'new_item'              => __( 'New Project',                'custom-content-portfolio' ),
-			'view_item'             => __( 'View Project',               'custom-content-portfolio' ),
-			'search_items'          => __( 'Search Projects',            'custom-content-portfolio' ),
-			'not_found'             => __( 'No projects found',          'custom-content-portfolio' ),
-			'not_found_in_trash'    => __( 'No projects found in trash', 'custom-content-portfolio' ),
-			'all_items'             => __( 'Projects',                   'custom-content-portfolio' ),
-			'featured_image'        => __( 'Project Image',              'custom-content-portfolio' ),
-			'set_featured_image'    => __( 'Set project image',          'custom-content-portfolio' ),
-			'remove_featured_image' => __( 'Remove project image',       'custom-content-portfolio' ),
-
-			// Custom labels b/c WordPress doesn't have anything to handle this.
-			'archive_title'      => ccp_get_portfolio_title(),
 		)
 	);
 
 	// Register the post types.
-	register_post_type( 'portfolio_project', $project_args );
+	register_post_type( ccp_get_project_post_type(), $project_args );
 }
 
 /**
@@ -132,7 +168,7 @@ function ccp_register_post_types() {
  */
 function ccp_enter_title_here( $title, $post ) {
 
-	return 'portfolio_project' === $post->post_type ? esc_html__( 'Enter project title', 'custom-content-portfolio' ) : '';
+	return ccp_get_project_post_type() === $post->post_type ? esc_html__( 'Enter project title', 'custom-content-portfolio' ) : '';
 }
 
 /**
@@ -148,7 +184,9 @@ function ccp_enter_title_here( $title, $post ) {
 function ccp_post_updated_messages( $messages ) {
 	global $post, $post_ID;
 
-	if ( 'portfolio_project' !== $post->post_type )
+	$project_type = ccp_get_project_post_type();
+
+	if ( $project_type !== $post->post_type )
 		return $messages;
 
 	// Get permalink and preview URLs.
@@ -164,7 +202,7 @@ function ccp_post_updated_messages( $messages ) {
 	$view_link      = sprintf( ' <a href="%1$s">%2$s</a>',                 esc_url( $permalink ),   esc_html__( 'View project',    'custom-content-portfolio' ) );
 
 	// Post updated messages.
-	$messages['portfolio_project'] = array(
+	$messages[ $project_type ] = array(
 		 1 => esc_html__( 'Project updated.', 'custom-content-portfolio' ) . $view_link,
 		 4 => esc_html__( 'Project updated.', 'custom-content-portfolio' ),
 		 // Translators: %s is the date and time of the revision.

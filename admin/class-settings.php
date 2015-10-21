@@ -48,7 +48,7 @@ final class CCP_Settings_Page {
 
 		// Create the settings page.
 		$this->settings_page = add_submenu_page(
-			'edit.php?post_type=portfolio_project',
+			'edit.php?post_type=' . ccp_get_project_post_type(),
 			esc_html__( 'Portfolio Settings', 'custom-content-portfolio' ),
 			esc_html__( 'Settings',           'custom-content-portfolio' ),
 			apply_filters( 'ccp_settings_capability', 'manage_options' ),
