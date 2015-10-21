@@ -98,6 +98,12 @@ function ccp_get_category_labels() {
 		'add_new_item'               => __( 'Add New Category',                     'custom-content-portfolio' ),
 		'new_item_name'              => __( 'New Category Name',                    'custom-content-portfolio' ),
 		'not_found'                  => __( 'No categories found.',                 'custom-content-portfolio' ),
+		'no_terms'                   => __( 'No categories',                        'custom-content-portfolio' ),
+		'pagination'                 => __( 'Categories list navigation',           'custom-content-portfolio' ),
+		'list'                       => __( 'Categories list',                      'custom-content-portfolio' ),
+
+		// Hierarchical only.
+		'select_name'                => __( 'Select Category',                      'custom-content-portfolio' ),
 		'parent_item'                => __( 'Parent Category',                      'custom-content-portfolio' ),
 		'parent_item_colon'          => __( 'Parent Category:',                     'custom-content-portfolio' ),
 	);
@@ -127,10 +133,15 @@ function ccp_get_tag_labels() {
 		'update_item'                => __( 'Update Tag',                     'custom-content-portfolio' ),
 		'add_new_item'               => __( 'Add New Tag',                    'custom-content-portfolio' ),
 		'new_item_name'              => __( 'New Tag Name',                   'custom-content-portfolio' ),
+		'not_found'                  => __( 'No tags found.',                 'custom-content-portfolio' ),
+		'no_terms'                   => __( 'No tags',                        'custom-content-portfolio' ),
+		'pagination'                 => __( 'Tags list navigation',           'custom-content-portfolio' ),
+		'list'                       => __( 'Tags list',                      'custom-content-portfolio' ),
+
+		// Non-hierarchical only.
 		'separate_items_with_commas' => __( 'Separate tags with commas',      'custom-content-portfolio' ),
 		'add_or_remove_items'        => __( 'Add or remove tags',             'custom-content-portfolio' ),
 		'choose_from_most_used'      => __( 'Choose from the most used tags', 'custom-content-portfolio' ),
-		'not_found'                  => __( 'No tags found.',                 'custom-content-portfolio' ),
 	);
 
 	return apply_filters( 'ccp_get_tag_labels', $labels );
