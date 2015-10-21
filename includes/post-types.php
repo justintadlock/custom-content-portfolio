@@ -16,6 +16,9 @@ add_action( 'init', 'ccp_register_post_types' );
 # Filter the "enter title here" text.
 add_filter( 'enter_title_here', 'ccp_enter_title_here', 10, 2 );
 
+# Filter the post updated messages.
+add_filter( 'post_updated_messages', 'ccp_post_updated_messages' );
+
 /**
  * Registers post types needed by the plugin.
  *
@@ -130,4 +133,48 @@ function ccp_register_post_types() {
 function ccp_enter_title_here( $title, $post ) {
 
 	return 'portfolio_project' === $post->post_type ? esc_html__( 'Enter project title', 'custom-content-portfolio' ) : '';
+}
+
+/**
+ * Adds custom post updated messages on the edit post screen.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  array  $messages
+ * @global object $post
+ * @global int    $post_ID
+ * @return array
+ */
+function ccp_post_updated_messages( $messages ) {
+	global $post, $post_ID;
+
+	if ( 'portfolio_project' !== $post->post_type )
+		return $messages;
+
+	// Get permalink and preview URLs.
+	$permalink   = get_permalink( $post_ID );
+	$preview_url = get_preview_post_link( $post );
+
+	// Translators: Scheduled project date format. See http://php.net/date
+	$scheduled_date = date_i18n( __( 'M j, Y @ H:i', 'custom-content-portfolio' ), strtotime( $post->post_date ) );
+
+	// Set up view links.
+	$preview_link   = sprintf( ' <a target="_blank" href="%1$s">%2$s</a>', esc_url( $preview_url ), esc_html__( 'Preview project', 'custom-content-portfolio' ) );
+	$scheduled_link = sprintf( ' <a target="_blank" href="%1$s">%2$s</a>', esc_url( $permalink ),   esc_html__( 'Preview project', 'custom-content-portfolio' ) );
+	$view_link      = sprintf( ' <a href="%1$s">%2$s</a>',                 esc_url( $permalink ),   esc_html__( 'View project',    'custom-content-portfolio' ) );
+
+	// Post updated messages.
+	$messages['portfolio_project'] = array(
+		 1 => esc_html__( 'Project updated.', 'custom-content-portfolio' ) . $view_link,
+		 4 => esc_html__( 'Project updated.', 'custom-content-portfolio' ),
+		 // Translators: %s is the date and time of the revision.
+		 5 => isset( $_GET['revision'] ) ? sprintf( esc_html__( 'Project restored to revision from %s.', 'custom-content-portfolio' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+		 6 => esc_html__( 'Project published.', 'custom-content-portfolio' ) . $view_link,
+		 7 => esc_html__( 'Project saved.', 'custom-content-portfolio' ),
+		 8 => esc_html__( 'Project submitted.', 'custom-content-portfolio' ) . $preview_link,
+		 9 => sprintf( esc_html__( 'Project scheduled for: %s.', 'custom-content-portfolio' ), "<strong>{$scheduled_date}</strong>" ) . $scheduled_link,
+		10 => esc_html__( 'Project draft updated.', 'custom-content-portfolio' ) . $preview_link,
+	);
+
+	return $messages;
 }
