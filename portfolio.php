@@ -168,6 +168,7 @@ final class CCP_Plugin {
 
 		// Load admin files.
 		if ( is_admin() ) {
+			require_once( $this->dir_path . 'admin/functions-admin.php'                );
 			require_once( $this->dir_path . 'admin/class-projects.php'                 );
 			require_once( $this->dir_path . 'admin/class-meta-box-project-details.php' );
 			require_once( $this->dir_path . 'admin/class-settings.php'                 );
