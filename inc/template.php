@@ -79,7 +79,7 @@ function ccp_project_url( $post_id = '' ) {
  */
 function ccp_get_project_url( $post_id = '' ) {
 
-	$post_id = $post_id ? absint( $post_id ) : get_the_ID();
+	$post_id = ccp_get_project_id( $post_id );
 
 	return apply_filters( 'ccp_get_project_url', ccp_get_project_meta( $post_id, 'url' ), $post_id );
 }
@@ -109,7 +109,7 @@ function ccp_get_project_link( $args = array() ) {
 	$html = '';
 
 	$defaults = array(
-		'post_id' => get_the_ID(),
+		'post_id' => ccp_get_project_id(),
 		'text'    => '%s',
 		'before'  => '',
 		'after'   => '',
@@ -158,7 +158,7 @@ function ccp_get_project_client( $args = array() ) {
 	$html = '';
 
 	$defaults = array(
-		'post_id' => get_the_ID(),
+		'post_id' => ccp_get_project_id(),
 		'text'    => '%s',
 		'before'  => '',
 		'after'   => '',
