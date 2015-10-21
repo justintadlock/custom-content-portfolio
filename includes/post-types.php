@@ -160,7 +160,7 @@ function ccp_register_post_types() {
 	);
 
 	// Register the post types.
-	register_post_type( ccp_get_project_post_type(), $project_args );
+	register_post_type( ccp_get_project_post_type(), apply_filters( 'ccp_project_post_type_args', $project_args ) );
 }
 
 /**

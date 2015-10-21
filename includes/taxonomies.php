@@ -188,6 +188,6 @@ function ccp_register_taxonomies() {
 	);
 
 	// Register the taxonomies.
-	register_taxonomy( ccp_get_category_taxonomy(), array( ccp_get_project_post_type() ), $cat_args );
-	register_taxonomy( ccp_get_tag_taxonomy(),      array( ccp_get_project_post_type() ), $tag_args );
+	register_taxonomy( ccp_get_category_taxonomy(), ccp_get_project_post_type(), apply_filters( 'ccp_category_taxonomy_args', $cat_args ) );
+	register_taxonomy( ccp_get_tag_taxonomy(),      ccp_get_project_post_type(), apply_filters( 'ccp_tag_taxonomy_args',      $tag_args ) );
 }
