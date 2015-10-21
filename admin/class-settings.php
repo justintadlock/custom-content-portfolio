@@ -238,7 +238,7 @@ final class CCP_Settings_Page {
 		<label>
 			<input type="text" name="ccp_settings[project_rewrite_base]" value="<?php echo esc_attr( ccp_get_project_rewrite_base() ); ?>" />
 			<br />
-			<span class="description"><?php printf( esc_html__( 'The base slug for portfolio projects: %s.', 'custom-content-portfolio' ), '<code>' . esc_url( home_url( ccp_get_project_rewrite_slug() ) ) . '</code>' ); ?></span>
+			<span class="description"><?php printf( esc_html__( 'The base slug for portfolio projects: %s.', 'custom-content-portfolio' ), '<code>' . esc_url( home_url( ccp_get_project_rewrite_slug() . '/example-project' ) ) . '</code>' ); ?></span>
 		</label>
 	<?php }
 
@@ -254,7 +254,7 @@ final class CCP_Settings_Page {
 		<label>
 			<input type="text" name="ccp_settings[category_rewrite_base]" value="<?php echo esc_attr( ccp_get_category_rewrite_base() ); ?>" />
 			<br />
-			<span class="description"><?php printf( esc_html__( 'The base slug for portfolio categories: %s.', 'custom-content-portfolio' ), '<code>' . esc_url( home_url( ccp_get_category_rewrite_slug() ) ) . '</code>' ); ?></span>
+			<span class="description"><?php printf( esc_html__( 'The base slug for portfolio categories: %s.', 'custom-content-portfolio' ), '<code>' . esc_url( home_url( ccp_get_category_rewrite_slug() . '/example-category' ) ) . '</code>' ); ?></span>
 		</label>
 	<?php }
 
@@ -270,7 +270,7 @@ final class CCP_Settings_Page {
 		<label>
 			<input type="text" name="ccp_settings[tag_rewrite_base]" value="<?php echo esc_attr( ccp_get_tag_rewrite_base() ); ?>" />
 			<br />
-			<span class="description"><?php printf( esc_html__( 'The base slug for portfolio tags: %s.', 'custom-content-portfolio' ), '<code>' . esc_url( home_url( ccp_get_tag_rewrite_slug() ) ) . '</code>' ); ?></span>
+			<span class="description"><?php printf( esc_html__( 'The base slug for portfolio tags: %s.', 'custom-content-portfolio' ), '<code>' . esc_url( home_url( ccp_get_tag_rewrite_slug() . '/example-tag' ) ) . '</code>' ); ?></span>
 		</label>
 	<?php }
 
