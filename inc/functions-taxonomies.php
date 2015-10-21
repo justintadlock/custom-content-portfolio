@@ -47,9 +47,9 @@ function ccp_get_tag_taxonomy() {
 function ccp_get_category_capabilities() {
 
 	$caps = array(
-		'manage_terms' => 'manage_portfolio',
-		'edit_terms'   => 'manage_portfolio',
-		'delete_terms' => 'manage_portfolio',
+		'manage_terms' => 'manage_portfolio_categories',
+		'edit_terms'   => 'manage_portfolio_categories',
+		'delete_terms' => 'manage_portfolio_categories',
 		'assign_terms' => 'edit_portfolio_projects'
 	);
 
@@ -66,9 +66,9 @@ function ccp_get_category_capabilities() {
 function ccp_get_tag_capabilities() {
 
 	$caps = array(
-		'manage_terms' => 'manage_portfolio',
-		'edit_terms'   => 'manage_portfolio',
-		'delete_terms' => 'manage_portfolio',
+		'manage_terms' => 'manage_portfolio_tags',
+		'edit_terms'   => 'manage_portfolio_tags',
+		'delete_terms' => 'manage_portfolio_tags',
 		'assign_terms' => 'edit_portfolio_projects',
 	);
 

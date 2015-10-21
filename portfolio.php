@@ -223,14 +223,29 @@ final class CCP_Plugin {
 		$role = get_role( 'administrator' );
 
 		// If the administrator role exists, add required capabilities for the plugin.
-		if ( ! empty( $role ) ) {
+		if ( ! is_null( $role ) ) {
 
-			$role->add_cap( 'manage_portfolio'          );
-			$role->add_cap( 'create_portfolio_projects' );
-			$role->add_cap( 'edit_portfolio_projects'   );
-
+			// Remove old caps.
+			$role->remove_cap( 'manage_portfolio'       );
 			$role->remove_cap( 'create_portfolio_items' );
 			$role->remove_cap( 'edit_portfolio_items'   );
+
+			// Taxonomy caps.
+			$role->add_cap( 'manage_portfolio_categories' );
+			$role->add_cap( 'manage_portfolio_tags'       );
+
+			// Post type caps.
+			$role->add_cap( 'create_portfolio_projects'           );
+			$role->add_cap( 'edit_portfolio_projects'             );
+			$role->add_cap( 'edit_others_portfolio_projects'      );
+			$role->add_cap( 'publish_portfolio_projects'          );
+			$role->add_cap( 'read_private_portfolio_projects'     );
+			$role->add_cap( 'delete_portfolio_projects'           );
+			$role->add_cap( 'delete_private_portfolio_projects'   );
+			$role->add_cap( 'delete_published_portfolio_projects' );
+			$role->add_cap( 'delete_others_portfolio_projects'    );
+			$role->add_cap( 'edit_private_portfolio_projects'     );
+			$role->add_cap( 'edit_published_portfolio_projects'   );
 		}
 	}
 }

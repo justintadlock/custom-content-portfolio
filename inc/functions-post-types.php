@@ -52,18 +52,18 @@ function ccp_get_project_capabilities() {
 
 		// primitive caps used outside of map_meta_cap()
 		'edit_posts'             => 'edit_portfolio_projects',
-		'edit_others_posts'      => 'manage_portfolio',
-		'publish_posts'          => 'manage_portfolio',
-		'read_private_posts'     => 'read',
+		'edit_others_posts'      => 'edit_others_portfolio_projects',
+		'publish_posts'          => 'publish_portfolio_projects',
+		'read_private_posts'     => 'read_private_portfolio_projects',
 
 		// primitive caps used inside of map_meta_cap()
 		'read'                   => 'read',
-		'delete_posts'           => 'manage_portfolio',
-		'delete_private_posts'   => 'manage_portfolio',
-		'delete_published_posts' => 'manage_portfolio',
-		'delete_others_posts'    => 'manage_portfolio',
-		'edit_private_posts'     => 'edit_portfolio_projects',
-		'edit_published_posts'   => 'edit_portfolio_projects'
+		'delete_posts'           => 'delete_portfolio_projects',
+		'delete_private_posts'   => 'delete_private_portfolio_projects',
+		'delete_published_posts' => 'delete_published_portfolio_projects',
+		'delete_others_posts'    => 'delete_others_portfolio_projects',
+		'edit_private_posts'     => 'edit_private_portfolio_projects',
+		'edit_published_posts'   => 'edit_published_portfolio_projects'
 	);
 
 	return apply_filters( 'ccp_get_project_capabilities', $caps );
