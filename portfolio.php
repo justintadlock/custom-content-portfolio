@@ -155,14 +155,14 @@ final class CCP_Plugin {
 	private function includes() {
 
 		// Load includes.
-		require_once( $this->dir_path . 'includes/functions.php'         );
-		require_once( $this->dir_path . 'includes/functions-options.php' );
-		require_once( $this->dir_path . 'includes/template.php'          );
-		require_once( $this->dir_path . 'includes/meta.php'              );
-		require_once( $this->dir_path . 'includes/post-types.php'        );
-		require_once( $this->dir_path . 'includes/post-statuses.php'     );
-		require_once( $this->dir_path . 'includes/taxonomies.php'        );
-		require_once( $this->dir_path . 'includes/deprecated.php'        );
+		require_once( $this->dir_path . 'inc/functions.php'         );
+		require_once( $this->dir_path . 'inc/functions-options.php' );
+		require_once( $this->dir_path . 'inc/template.php'          );
+		require_once( $this->dir_path . 'inc/meta.php'              );
+		require_once( $this->dir_path . 'inc/post-types.php'        );
+		require_once( $this->dir_path . 'inc/post-statuses.php'     );
+		require_once( $this->dir_path . 'inc/taxonomies.php'        );
+		require_once( $this->dir_path . 'inc/deprecated.php'        );
 
 		// Load admin files.
 		if ( is_admin() ) {
