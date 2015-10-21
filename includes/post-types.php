@@ -27,7 +27,7 @@ function ccp_register_post_types() {
 
 	// Set up the arguments for the portfolio item post type.
 	$project_args = array(
-		'description'         => '',
+		'description'         => ccp_get_portfolio_description(),
 		'public'              => true,
 		'publicly_queryable'  => true,
 		'show_in_nav_menus'   => false,
@@ -107,7 +107,7 @@ function ccp_register_post_types() {
 			'all_items'          => __( 'Projects',                   'custom-content-portfolio' ),
 
 			// Custom labels b/c WordPress doesn't have anything to handle this.
-			'archive_title'      => __( 'Portfolio',                  'custom-content-portfolio' ),
+			'archive_title'      => ccp_get_portfolio_title(),
 		)
 	);
 
