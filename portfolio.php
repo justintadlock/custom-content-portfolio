@@ -122,6 +122,7 @@ class Custom_Content_Portfolio {
 		if ( is_admin() ) {
 			require_once( CCP_ADMIN . 'admin.php' );
 			require_once( CCP_ADMIN . 'class-meta-box-project-details.php' );
+			require_once( CCP_ADMIN . 'class-settings.php' );
 		}
 	}
 
