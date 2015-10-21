@@ -29,108 +29,183 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-class Custom_Content_Portfolio {
+/**
+ * Singleton class that sets up and initializes the plugin.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return void
+ */
+final class CCP_Plugin {
 
 	/**
-	 * PHP5 constructor method.
+	 * Directory path to the plugin folder.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
+	public $dir_path = '';
+
+	/**
+	 * Directory URI to the plugin folder.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
+	public $dir_uri = '';
+
+	/**
+	 * Returns the instance.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return object
+	 */
+	public static function get_instance() {
+
+		static $instance = null;
+
+		if ( is_null( $instance ) ) {
+			$instance = new self;
+			$instance->setup();
+			$instance->includes();
+			$instance->setup_actions();
+		}
+
+		return $instance;
+	}
+
+	/**
+	 * Constructor method.
+	 *
+	 * @since  1.0.0
+	 * @access private
+	 * @return void
+	 */
+	private function __construct() {}
+
+	/**
+	 * Magic method to output a string if trying to use the object as a string.
+	 *
+	 * @since  1.0.0
 	 * @access public
 	 * @return void
 	 */
-	public function __construct() {
+	public function __toString() {
+		return 'custom-content-portfolio';
+	}
 
-		// Set the constants needed by the plugin.
-		add_action( 'plugins_loaded', array( $this, 'constants' ), 1 );
+	/**
+	 * Magic method to keep the object from being cloned.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function __clone() {
+		_doing_it_wrong( __FUNCTION__, __( 'Whoah, partner!', 'custom-content-portfolio' ), '1.0.0' );
+	}
+
+	/**
+	 * Magic method to keep the object from being unserialized.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function __wakeup() {
+		_doing_it_wrong( __FUNCTION__, __( 'Whoah, partner!', 'custom-content-portfolio' ), '1.0.0' );
+	}
+
+	/**
+	 * Magic method to prevent a fatal error when calling a method that doesn't exist.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function __call( $method = '', $args = array() ) {
+		_doing_it_wrong( "Custom_Content_Portfolio::{$method}", __( 'Method does not exist.', 'custom-content-portfolio' ), '1.0.0' );
+		unset( $method, $args );
+		return null;
+	}
+
+	/**
+	 * Initial plugin setup.
+	 *
+	 * @since  1.0.0
+	 * @access private
+	 * @return void
+	 */
+	private function setup() {
+
+		$this->dir_path = trailingslashit( plugin_dir_path( __FILE__ ) );
+		$this->dir_uri  = trailingslashit( plugin_dir_url(  __FILE__ ) );
+	}
+
+	/**
+	 * Loads include and admin files for the plugin.
+	 *
+	 * @since  1.0.0
+	 * @access private
+	 * @return void
+	 */
+	private function includes() {
+
+		// Load includes.
+		require_once( $this->dir_path . 'includes/functions.php'         );
+		require_once( $this->dir_path . 'includes/functions-options.php' );
+		require_once( $this->dir_path . 'includes/template.php'          );
+		require_once( $this->dir_path . 'includes/meta.php'              );
+		require_once( $this->dir_path . 'includes/post-types.php'        );
+		require_once( $this->dir_path . 'includes/post-statuses.php'     );
+		require_once( $this->dir_path . 'includes/taxonomies.php'        );
+		require_once( $this->dir_path . 'includes/deprecated.php'        );
+
+		// Load admin files.
+		if ( is_admin() ) {
+			require_once( $this->dir_path . 'admin/class-projects.php'                 );
+			require_once( $this->dir_path . 'admin/class-meta-box-project-details.php' );
+			require_once( $this->dir_path . 'admin/class-settings.php'                 );
+		}
+	}
+
+	/**
+	 * Sets up initial actions.
+	 *
+	 * @since  1.0.0
+	 * @access private
+	 * @return void
+	 */
+	private function setup_actions() {
 
 		// Internationalize the text strings used.
 		add_action( 'plugins_loaded', array( $this, 'i18n' ), 2 );
-
-		// Load the functions files.
-		add_action( 'plugins_loaded', array( $this, 'includes' ), 3 );
-
-		// Load the admin files.
-		add_action( 'plugins_loaded', array( $this, 'admin' ), 4 );
 
 		// Register activation hook.
 		register_activation_hook( __FILE__, array( $this, 'activation' ) );
 	}
 
 	/**
-	 * Defines constants used by the plugin.
-	 *
-	 * @since  0.1.0
-	 * @access public
-	 * @return void
-	 */
-	public function constants() {
-
-		// Set constant path to the plugin directory.
-		define( 'CCP_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
-
-		// Set the constant path to the plugin directory URI.
-		define( 'CCP_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
-
-		// Set the constant path to the includes directory.
-		define( 'CCP_INCLUDES', CCP_DIR . trailingslashit( 'includes' ) );
-
-		// Set the constant path to the admin directory.
-		define( 'CCP_ADMIN', CCP_DIR . trailingslashit( 'admin' ) );
-	}
-
-	/**
-	 * Loads the initial files needed by the plugin.
-	 *
-	 * @since  0.1.0
-	 * @access public
-	 * @return void
-	 */
-	public function includes() {
-
-		require_once( CCP_INCLUDES . 'functions.php' );
-		require_once( CCP_INCLUDES . 'functions-options.php' );
-		require_once( CCP_INCLUDES . 'template.php' );
-		require_once( CCP_INCLUDES . 'meta.php' );
-		require_once( CCP_INCLUDES . 'post-types.php' );
-		require_once( CCP_INCLUDES . 'post-statuses.php' );
-		require_once( CCP_INCLUDES . 'taxonomies.php' );
-		require_once( CCP_INCLUDES . 'deprecated.php' );
-	}
-
-	/**
 	 * Loads the translation files.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @access public
 	 * @return void
 	 */
 	public function i18n() {
 
-		// Load the translation of the plugin.
-		load_plugin_textdomain( 'custom-content-portfolio', false, 'custom-content-portfolio/languages' );
-	}
-
-	/**
-	 * Loads the admin functions and files.
-	 *
-	 * @since  0.1.0
-	 * @access public
-	 * @return void
-	 */
-	public function admin() {
-
-		if ( is_admin() ) {
-			require_once( CCP_ADMIN . 'class-projects.php' );
-			require_once( CCP_ADMIN . 'class-meta-box-project-details.php' );
-			require_once( CCP_ADMIN . 'class-settings.php' );
-		}
+		load_plugin_textdomain( 'custom-content-portfolio', false, trailingslashit( dirname( plugin_basename( __FILE__ ) ) ) . 'languages' );
 	}
 
 	/**
 	 * Method that runs only when the plugin is activated.
 	 *
-	 * @since  0.1.0
+	 * @since  1.0.0
 	 * @access public
+	 * @global $wpdb
 	 * @return void
 	 */
 	function activation() {
@@ -158,4 +233,17 @@ class Custom_Content_Portfolio {
 	}
 }
 
-new Custom_Content_Portfolio();
+/**
+ * Gets the instance of the `CCP_Plugin` class.  This function is useful for quickly grabbing data
+ * used throughout the plugin.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return object
+ */
+function ccp_plugin() {
+	return CCP_Plugin::get_instance();
+}
+
+// Let's do this thang!
+ccp_plugin();
