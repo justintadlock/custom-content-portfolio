@@ -62,7 +62,7 @@ final class CCP_Settings_Page {
 			add_action( 'admin_init', array( $this, 'register_settings' ) );
 
 			// Add help tabs.
-		//	add_action( "load-{$this->settings_page}", array( $this, 'add_help_tabs' ) );
+			add_action( "load-{$this->settings_page}", array( $this, 'add_help_tabs' ) );
 
 			// Enqueue scripts/styles.
 		//	add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
@@ -309,25 +309,66 @@ final class CCP_Settings_Page {
 		// Get the current screen.
 		$screen = get_current_screen();
 
-	/**
-		// Roles/Caps help tab.
+		// General settings help tab.
 		$screen->add_help_tab(
 			array(
-				'id'       => 'roles-caps',
-				'title'    => esc_html__( 'Role and Capabilities', 'custom-content-portfolio' ),
-				'callback' => array( $this, 'help_tab_roles_caps' )
+				'id'       => 'general',
+				'title'    => esc_html__( 'General Settings', 'custom-content-portfolio' ),
+				'callback' => array( $this, 'help_tab_general' )
 			)
 		);
-	/**/
 
-		// Get docs and help links.
-	//	$docs_link = sprintf( '<li><a href="https://github.com/justintadlock/members/blob/master/readme.md">%s</a></li>', esc_html__( 'Documentation',  'custom-content-portfolio' ) );
-	//	$help_link = sprintf( '<li><a href="http://themehybrid.com/board/topics">%s</a></li>',                            esc_html__( 'Support Forums', 'custom-content-portfolio' ) );
-	//	$tut_link  = sprintf( '<li><a href="http://justintadlock.com/archives/2009/08/30/users-roles-and-capabilities-in-wordpress">%s</a></li>', esc_html__( 'Users, Roles, and Capabilities', 'custom-content-portfolio' ) );
+		// Permalinks settings help tab.
+		$screen->add_help_tab(
+			array(
+				'id'       => 'permalinks',
+				'title'    => esc_html__( 'Permalinks', 'custom-content-portfolio' ),
+				'callback' => array( $this, 'help_tab_permalinks' )
+			)
+		);
 
 		// Set the help sidebar.
-	//	$screen->set_help_sidebar( members_get_help_sidebar_text() );
+		$screen->set_help_sidebar( ccp_get_help_sidebar_text() );
 	}
+
+	/**
+	 * Displays the general settings help tab.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function help_tab_general() { ?>
+
+		<ul>
+			<li><?php _e( '<strong>Title:</strong> Allows you to set the title for the portfolio section on your site. This is general shown on the portfolio projects archive, but themes and other plugins may use it in other ways.', 'custom-content-portfolio' ); ?></li>
+			<li><?php _e( '<strong>Description:</strong> This is the description for your portfolio. Some themes may display this on the portfolio projects archive.', 'custom-content-portfolio' ); ?></li>
+		</ul>
+	<?php }
+
+	/**
+	 * Displays the permalinks help tab.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function help_tab_permalinks() { ?>
+
+		<ul>
+			<li><?php _e( '<strong>Portfolio Base:</strong> The primary URL for the portfolio section on your site. It lists your portfolio projects.', 'custom-content-portfolio' ); ?></li>
+			<li>
+				<?php _e( '<strong>Project Slug:</strong> The slug for single portfolio projects. You can use something custom, leave this field empty, or use one of the following tags:', 'custom-content-portfolio' ); ?>
+				<ul>
+					<li><?php printf( esc_html__( '%s - The project author name.', 'custom-content-portfolio' ), '<code>%author%</code>' ); ?></li>
+					<li><?php printf( esc_html__( '%s - The project category.', 'custom-content-portfolio' ), '<code>%' . ccp_get_category_taxonomy() . '%</code>' ); ?></li>
+					<li><?php printf( esc_html__( '%s - The project tag.', 'custom-content-portfolio' ), '<code>%' . ccp_get_tag_taxonomy() . '%</code>' ); ?></li>
+				</ul>
+			</li>
+			<li><?php _e( '<strong>Category Slug:</strong> The base slug used for portfolio category archives.', 'custom-content-portfolio' ); ?></li>
+			<li><?php _e( '<strong>Tag Slug:</strong> The base slug used for portfolio tag archives.', 'custom-content-portfolio' ); ?></li>
+		</ul>
+	<?php }
 
 	/**
 	 * Returns the instance.
