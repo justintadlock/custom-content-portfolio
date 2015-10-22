@@ -29,7 +29,10 @@ function ccp_get_author_rewrite_base() {
 }
 
 function ccp_get_project_rewrite_slug() {
-	$slug = trailingslashit( ccp_get_portfolio_rewrite_base() ) . ccp_get_project_rewrite_base();
+	$portfolio_base = ccp_get_portfolio_rewrite_base();
+	$project_base   = ccp_get_project_rewrite_base();
+
+	$slug = $project_base ? trailingslashit( $portfolio_base ) . $project_base : $portfolio_base;
 
 	return apply_filters( 'ccp_get_project_rewrite_slug', $slug );
 }

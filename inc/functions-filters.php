@@ -37,39 +37,76 @@ function ccp_post_type_archive_title( $title ) {
 }
 
 /**
- * Filter on 'post_type_link' to allow users to use '%portfolio%' (the 'portfolio' taxonomy) in their
- * portfolio item URLs.
+ * Filter on `post_type_link` to make sure that single portfolio projects have the correct 
+ * permalink.
  *
  * @since  0.1.0
  * @access public
- * @param  string $post_link
- * @param  object $post
+ * @param  string  $post_link
+ * @param  object  $post
  * @return string
  */
 function ccp_post_type_link( $post_link, $post ) {
 
+	// Bail if this isn't a portfolio project.
 	if ( ccp_get_project_post_type() !== $post->post_type )
 		return $post_link;
 
-	// Allow %portfolio% in the custom post type permalink.
-	if ( false !== strpos( $post_link, '%portfolio%' ) ) {
+	$cat_taxonomy = ccp_get_category_taxonomy();
+	$tag_taxonomy = ccp_get_tag_taxonomy();
+
+	$author = $category = $tag = '';
+
+	// Check for the category.
+	if ( false !== strpos( $post_link, "%{$cat_taxonomy}%" ) ) {
 
 		// Get the terms.
-		$terms = get_the_terms( $post, 'portfolio_category' ); // @todo apply filters to tax name.
+		$terms = get_the_terms( $post, $cat_taxonomy );
 
 		// Check that terms were returned.
 		if ( $terms ) {
 
 			usort( $terms, '_usort_terms_by_ID' );
 
-			$post_link = str_replace( '%portfolio%', $terms[0]->slug, $post_link );
-
-		} else {
-			$post_link = str_replace( '%portfolio%', 'project', $post_link );
+			$category = $terms[0]->slug;
 		}
 	}
 
-	return $post_link;
+	// Check for the tag.
+	if ( false !== strpos( $post_link, "%{$tag_taxonomy}%" ) ) {
+
+		// Get the terms.
+		$terms = get_the_terms( $post, $tag_taxonomy );
+
+		// Check that terms were returned.
+		if ( $terms ) {
+
+			usort( $terms, '_usort_terms_by_ID' );
+
+			$tag = $terms[0]->slug;
+		}
+	}
+
+	// Check for the author.
+	if ( false !== strpos( $post_link, '%author%' ) ) {
+
+		$authordata = get_userdata( $post->post_author );
+		$author     = $authordata->user_nicename;
+	}
+
+	$rewrite_tags = array(
+		'%portfolio_category%',
+		'%portfolio_tag%',
+		'%author%'
+	);
+
+	$map_tags = array(
+		$category,
+		$tag,
+		$author
+	);
+
+	return str_replace( $rewrite_tags, $map_tags, $post_link );
 }
 
 /**

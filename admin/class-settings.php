@@ -129,11 +129,11 @@ final class CCP_Settings_Page {
 	function validate_settings( $settings ) {
 
 		// Text boxes that cannot be empty.
-		$settings['portfolio_rewrite_base'] = $settings['portfolio_rewrite_base'] ? sanitize_title_with_dashes( $settings['portfolio_rewrite_base'] ) : 'portfolio';
-		$settings['project_rewrite_base']   = $settings['project_rewrite_base']   ? sanitize_title_with_dashes( $settings['project_rewrite_base']   ) : 'project';
-		$settings['category_rewrite_base']  = $settings['category_rewrite_base']  ? sanitize_title_with_dashes( $settings['category_rewrite_base']  ) : 'categories';
-		$settings['tag_rewrite_base']       = $settings['tag_rewrite_base']       ? sanitize_title_with_dashes( $settings['tag_rewrite_base']       ) : 'tags';
-		$settings['portfolio_title']        = $settings['portfolio_title']        ? strip_tags( $settings['portfolio_title'] )                        : esc_html__( 'Portfolio', 'custom-content-portfolio' );
+		$settings['portfolio_rewrite_base'] = $settings['portfolio_rewrite_base'] ? strip_tags( $settings['portfolio_rewrite_base'] ) : 'portfolio';
+		$settings['project_rewrite_base']   = $settings['project_rewrite_base']   ? strip_tags( $settings['project_rewrite_base']   ) : '';
+		$settings['category_rewrite_base']  = $settings['category_rewrite_base']  ? strip_tags( $settings['category_rewrite_base']  ) : 'categories';
+		$settings['tag_rewrite_base']       = $settings['tag_rewrite_base']       ? strip_tags( $settings['tag_rewrite_base']       ) : 'tags';
+		$settings['portfolio_title']        = $settings['portfolio_title']        ? strip_tags( $settings['portfolio_title'] )        : esc_html__( 'Portfolio', 'custom-content-portfolio' );
 
 		// Kill evil scripts.
 		$settings['portfolio_description'] = stripslashes( wp_filter_post_kses( addslashes( $settings['portfolio_description'] ) ) );
@@ -166,7 +166,7 @@ final class CCP_Settings_Page {
 	public function field_portfolio_title() { ?>
 
 		<label>
-			<input type="text" name="ccp_settings[portfolio_title]" value="<?php echo esc_attr( ccp_get_portfolio_title() ); ?>" />
+			<input type="text" class="regular-text" name="ccp_settings[portfolio_title]" value="<?php echo esc_attr( ccp_get_portfolio_title() ); ?>" />
 			<br />
 			<span class="description"><?php esc_html_e( 'The name of your portfolio. Maybe used for the portfolio page title and other places, depending on your theme.', 'custom-content-portfolio' ); ?></span>
 		</label>
@@ -220,9 +220,8 @@ final class CCP_Settings_Page {
 	public function field_portfolio_rewrite_base() { ?>
 
 		<label>
-			<input type="text" name="ccp_settings[portfolio_rewrite_base]" value="<?php echo esc_attr( ccp_get_portfolio_rewrite_base() ); ?>" />
-			<br />
-			<span class="description"><?php printf( esc_html__( 'The base slug for the portfolio section of the site: %s.', 'custom-content-portfolio' ), '<code>' . esc_url( home_url( ccp_get_portfolio_rewrite_base() ) ) . '</code>' ); ?></span>
+			<code><?php echo esc_url( home_url( '/' ) ); ?></code>
+			<input type="text" class="regular-text code" name="ccp_settings[portfolio_rewrite_base]" value="<?php echo esc_attr( ccp_get_portfolio_rewrite_base() ); ?>" />
 		</label>
 	<?php }
 
@@ -236,9 +235,8 @@ final class CCP_Settings_Page {
 	public function field_project_rewrite_base() { ?>
 
 		<label>
-			<input type="text" name="ccp_settings[project_rewrite_base]" value="<?php echo esc_attr( ccp_get_project_rewrite_base() ); ?>" />
-			<br />
-			<span class="description"><?php printf( esc_html__( 'The base slug for portfolio projects: %s.', 'custom-content-portfolio' ), '<code>' . esc_url( home_url( ccp_get_project_rewrite_slug() . '/example-project' ) ) . '</code>' ); ?></span>
+			<code><?php echo esc_url( home_url( ccp_get_portfolio_rewrite_base() . '/' ) ); ?></code>
+			<input type="text" class="regular-text code" name="ccp_settings[project_rewrite_base]" value="<?php echo esc_attr( ccp_get_project_rewrite_base() ); ?>" />
 		</label>
 	<?php }
 
@@ -252,9 +250,8 @@ final class CCP_Settings_Page {
 	public function field_category_rewrite_base() { ?>
 
 		<label>
-			<input type="text" name="ccp_settings[category_rewrite_base]" value="<?php echo esc_attr( ccp_get_category_rewrite_base() ); ?>" />
-			<br />
-			<span class="description"><?php printf( esc_html__( 'The base slug for portfolio categories: %s.', 'custom-content-portfolio' ), '<code>' . esc_url( home_url( ccp_get_category_rewrite_slug() . '/example-category' ) ) . '</code>' ); ?></span>
+			<code><?php echo esc_url( home_url( ccp_get_portfolio_rewrite_base() . '/' ) ); ?></code>
+			<input type="text" class="regular-text code" name="ccp_settings[category_rewrite_base]" value="<?php echo esc_attr( ccp_get_category_rewrite_base() ); ?>" />
 		</label>
 	<?php }
 
@@ -268,9 +265,8 @@ final class CCP_Settings_Page {
 	public function field_tag_rewrite_base() { ?>
 
 		<label>
-			<input type="text" name="ccp_settings[tag_rewrite_base]" value="<?php echo esc_attr( ccp_get_tag_rewrite_base() ); ?>" />
-			<br />
-			<span class="description"><?php printf( esc_html__( 'The base slug for portfolio tags: %s.', 'custom-content-portfolio' ), '<code>' . esc_url( home_url( ccp_get_tag_rewrite_slug() . '/example-tag' ) ) . '</code>' ); ?></span>
+			<code><?php echo esc_url( home_url( ccp_get_portfolio_rewrite_base() . '/' ) ); ?></code>
+			<input type="text" class="regular-text code" name="ccp_settings[tag_rewrite_base]" value="<?php echo esc_attr( ccp_get_tag_rewrite_base() ); ?>" />
 		</label>
 	<?php }
 
