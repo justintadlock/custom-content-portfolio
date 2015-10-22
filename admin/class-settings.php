@@ -283,7 +283,9 @@ final class CCP_Settings_Page {
 	 */
 	public function settings_page() {
 
-		flush_rewrite_rules(); ?>
+		// Flush the rewrite rules if the settings were updated.
+		if ( isset( $_GET['settings-updated'] ) )
+			flush_rewrite_rules(); ?>
 
 		<div class="wrap">
 			<h1><?php esc_html_e( 'Portfolio Settings', 'custom-content-portfolio' ); ?></h1>
