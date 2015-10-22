@@ -116,6 +116,7 @@ final class CCP_Settings_Page {
 		add_settings_field( 'project_rewrite_base',   esc_html__( 'Project Slug',   'custom-content-portfolio' ), array( $this, 'field_project_rewrite_base'   ), $this->settings_page, 'permalinks' );
 		add_settings_field( 'category_rewrite_base',  esc_html__( 'Category Slug',  'custom-content-portfolio' ), array( $this, 'field_category_rewrite_base'  ), $this->settings_page, 'permalinks' );
 		add_settings_field( 'tag_rewrite_base',       esc_html__( 'Tag Slug',       'custom-content-portfolio' ), array( $this, 'field_tag_rewrite_base'       ), $this->settings_page, 'permalinks' );
+		add_settings_field( 'author_rewrite_base',    esc_html__( 'Author Slug',    'custom-content-portfolio' ), array( $this, 'field_author_rewrite_base'    ), $this->settings_page, 'permalinks' );
 	}
 
 	/**
@@ -133,6 +134,7 @@ final class CCP_Settings_Page {
 		$settings['project_rewrite_base']   = $settings['project_rewrite_base']   ? strip_tags( $settings['project_rewrite_base']   ) : '';
 		$settings['category_rewrite_base']  = $settings['category_rewrite_base']  ? strip_tags( $settings['category_rewrite_base']  ) : 'categories';
 		$settings['tag_rewrite_base']       = $settings['tag_rewrite_base']       ? strip_tags( $settings['tag_rewrite_base']       ) : 'tags';
+		$settings['author_rewrite_base']    = $settings['author_rewrite_base']    ? strip_tags( $settings['author_rewrite_base']    ) : 'authors';
 		$settings['portfolio_title']        = $settings['portfolio_title']        ? strip_tags( $settings['portfolio_title'] )        : esc_html__( 'Portfolio', 'custom-content-portfolio' );
 
 		// Kill evil scripts.
@@ -271,6 +273,21 @@ final class CCP_Settings_Page {
 	<?php }
 
 	/**
+	 * Author rewrite base field callback.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function field_author_rewrite_base() { ?>
+
+		<label>
+			<code><?php echo esc_url( home_url( ccp_get_portfolio_rewrite_base() . '/' ) ); ?></code>
+			<input type="text" class="regular-text code" name="ccp_settings[author_rewrite_base]" value="<?php echo esc_attr( ccp_get_author_rewrite_base() ); ?>" />
+		</label>
+	<?php }
+
+	/**
 	 * Renders the settings page.
 	 *
 	 * @since  1.0.0
@@ -367,6 +384,7 @@ final class CCP_Settings_Page {
 			</li>
 			<li><?php _e( '<strong>Category Slug:</strong> The base slug used for portfolio category archives.', 'custom-content-portfolio' ); ?></li>
 			<li><?php _e( '<strong>Tag Slug:</strong> The base slug used for portfolio tag archives.', 'custom-content-portfolio' ); ?></li>
+			<li><?php _e( '<strong>Author Slug:</strong> The base slug used for portfolio author archives.', 'custom-content-portfolio' ); ?></li>
 		</ul>
 	<?php }
 

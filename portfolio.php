@@ -158,6 +158,7 @@ final class CCP_Plugin {
 		require_once( $this->dir_path . 'inc/functions-filters.php'       );
 		require_once( $this->dir_path . 'inc/functions-options.php'       );
 		require_once( $this->dir_path . 'inc/functions-meta.php'          );
+		require_once( $this->dir_path . 'inc/functions-rewrite.php'       );
 		require_once( $this->dir_path . 'inc/functions-post-types.php'    );
 		require_once( $this->dir_path . 'inc/functions-post-statuses.php' );
 		require_once( $this->dir_path . 'inc/functions-taxonomies.php'    );
