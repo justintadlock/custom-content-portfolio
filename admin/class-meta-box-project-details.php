@@ -82,17 +82,17 @@ final class CCP_Meta_Box_Project_Details {
 
 		<p>
 			<label>
-				<?php esc_html_e( 'URL', 'custom-content-portfolio' ); ?>
-				<input type="text" class="widefat" name="ccp_project_url" value="<?php echo esc_url( ccp_get_project_meta( $post->ID, 'url' ) ); ?>" placeholder="http://example.com" />
-				<span class="description"><?php esc_html_e( 'Enter the URL of the project Web page.', 'custom-content-portfolio' ); ?></span>
+				<strong><?php esc_html_e( 'URL', 'custom-content-portfolio' ); ?></strong>
+				<input type="text" class="widefat code" name="ccp_project_url" value="<?php echo esc_url( ccp_get_project_meta( $post->ID, 'url' ) ); ?>" placeholder="http://example.com" />
+				<span class="howto"><?php esc_html_e( 'Enter the URL of the project Web page.', 'custom-content-portfolio' ); ?></span>
 			</label>
 		</p>
 
 		<p>
 			<label>
-				<?php esc_html_e( 'Client', 'custom-content-portfolio' ); ?>
+				<strong><?php esc_html_e( 'Client', 'custom-content-portfolio' ); ?></strong>
 				<input type="text" class="widefat" name="ccp_project_client" value="<?php echo esc_attr( ccp_get_project_meta( $post->ID, 'client' ) ); ?>" placeholder="<?php esc_attr_e( 'John Doe', 'custom-content-portfolio' ); ?>" />
-				<span class="description"><?php esc_html_e( 'Enter the name of the client for the project.', 'custom-content-portfolio' ); ?></span>
+				<span class="howto"><?php esc_html_e( 'Enter the name of the client for the project.', 'custom-content-portfolio' ); ?></span>
 			</label>
 		</p>
 
@@ -123,10 +123,11 @@ final class CCP_Meta_Box_Project_Details {
 	public function get_year_field( $name, $value ) {
 
 		return sprintf(
-			'<label><span class="screen-reader-text">%s</span><input type="text" name="%s" value="%s" size="4" maxlength="4" autocomplete="off" /></label>',
+			'<label><span class="screen-reader-text">%s</span><input type="text" name="%s" value="%s" placeholder="%s" size="4" maxlength="4" autocomplete="off" /></label>',
 			esc_html__( 'Year', 'custom-content-portfolio' ),
 			esc_attr( $name ),
-			esc_attr( $value )
+			esc_attr( $value ),
+			esc_attr( date( 'Y' ) )
 		);
 	}
 
@@ -179,10 +180,11 @@ final class CCP_Meta_Box_Project_Details {
 	public function get_day_field( $name, $value ) {
 
 		return sprintf(
-			'<label><span class="screen-reader-text">%s</span><input type="text" name="%s" value="%s" size="2" maxlength="2" autocomplete="off" /></label>',
+			'<label><span class="screen-reader-text">%s</span><input type="text" name="%s" value="%s" placeholder="%s" size="2" maxlength="2" autocomplete="off" /></label>',
 			esc_html__( 'Day', 'custom-content-portfolio' ),
 			esc_attr( $name ),
-			esc_attr( $value )
+			esc_attr( $value ),
+			esc_attr( date( 'd' ) )
 		);
 	}
 
@@ -238,9 +240,9 @@ final class CCP_Meta_Box_Project_Details {
 		$old_start_date = ccp_get_project_meta( $post_id, 'start_date' );
 
 		// Get the posted year, month, and day.
-		$s_year  = isset( $_POST['ccp_project_start_year'] )  ? absint( $_POST['ccp_project_start_year']  ) : '';
-		$s_month = isset( $_POST['ccp_project_start_month'] ) ? absint( $_POST['ccp_project_start_month'] ) : '';
-		$s_day   = isset( $_POST['ccp_project_start_day'] )   ? absint( $_POST['ccp_project_start_day']   ) : '';
+		$s_year  = isset( $_POST['ccp_project_start_year'] )  ? zeroise( absint( $_POST['ccp_project_start_year']  ), 4 ) : '';
+		$s_month = isset( $_POST['ccp_project_start_month'] ) ? zeroise( absint( $_POST['ccp_project_start_month'] ), 2 ) : '';
+		$s_day   = isset( $_POST['ccp_project_start_day'] )   ? zeroise( absint( $_POST['ccp_project_start_day']   ), 2 ) : '';
 
 		// If we have a year, month, and day, get the new date.
 		$new_start_date = $s_year && $s_month && $s_day ? "{$s_year}-{$s_month}-{$s_day} 00:00:00" : '';
@@ -259,9 +261,9 @@ final class CCP_Meta_Box_Project_Details {
 		$old_end_date = ccp_get_project_meta( $post_id, 'end_date' );
 
 		// Get the posted year, month, and day.
-		$e_year  = isset( $_POST['ccp_project_end_year'] )  ? absint( $_POST['ccp_project_end_year']  ) : '';
-		$e_month = isset( $_POST['ccp_project_end_month'] ) ? absint( $_POST['ccp_project_end_month'] ) : '';
-		$e_day   = isset( $_POST['ccp_project_end_day'] )   ? absint( $_POST['ccp_project_end_day']   ) : '';
+		$e_year  = isset( $_POST['ccp_project_end_year'] )  ? zeroise( absint( $_POST['ccp_project_end_year']  ), 4 ) : '';
+		$e_month = isset( $_POST['ccp_project_end_month'] ) ? zeroise( absint( $_POST['ccp_project_end_month'] ), 2 ) : '';
+		$e_day   = isset( $_POST['ccp_project_end_day'] )   ? zeroise( absint( $_POST['ccp_project_end_day']   ), 2 ) : '';
 
 		// If we have a year, month, and day, get the new date.
 		$new_end_date = $e_year && $e_month && $e_day ? "{$e_year}-{$e_month}-{$e_day} 00:00:00" : '';
