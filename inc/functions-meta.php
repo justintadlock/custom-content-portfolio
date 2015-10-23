@@ -24,6 +24,7 @@ function ccp_register_meta() {
 
 	register_meta( 'post', 'url',        'esc_url_raw',       '__return_false' );
 	register_meta( 'post', 'client',     'wp_strip_all_tags', '__return_false' );
+	register_meta( 'post', 'location',   'wp_strip_all_tags', '__return_false' );
 	register_meta( 'post', 'start_date', 'wp_strip_all_tags', '__return_false' );
 	register_meta( 'post', 'end_date',   'wp_strip_all_tags', '__return_false' );
 }

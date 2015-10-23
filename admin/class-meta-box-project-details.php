@@ -97,6 +97,14 @@ final class CCP_Meta_Box_Project_Details {
 		</p>
 
 		<p>
+			<label>
+				<strong><?php esc_html_e( 'Location', 'custom-content-portfolio' ); ?></strong>
+				<input type="text" class="widefat" name="ccp_project_location" value="<?php echo esc_attr( ccp_get_project_meta( $post->ID, 'location' ) ); ?>" placeholder="<?php esc_attr_e( 'Highland Home, AL', 'custom-content-portfolio' ); ?>" />
+				<span class="howto"><?php esc_html_e( 'Enter the physical location of the project.', 'custom-content-portfolio' ); ?></span>
+			</label>
+		</p>
+
+		<p>
 			<strong><?php esc_html_e( 'Start Date', 'custom-content-portfolio' ); ?></strong>
 			<br />
 			<?php // Translators: 1: month, 2: day, 3: year.
@@ -233,6 +241,22 @@ final class CCP_Meta_Box_Project_Details {
 		// If the new client doesn't match the old client, set it.
 		else if ( $new_client !== $old_client )
 			ccp_set_project_meta( $post_id, 'client', $new_client );
+
+		/* === Project Location === */
+
+		// Get the old location.
+		$old_location = ccp_get_project_meta( $post_id, 'location' );
+
+		// Get the new location.
+		$new_location = isset( $_POST['ccp_project_location'] ) ? strip_tags( $_POST['ccp_project_location'] ) : '';
+
+		// If we have don't have a new location but do have an old one, delete it.
+		if ( '' == $new_location && $old_location )
+			ccp_delete_project_meta( $post_id, 'location' );
+
+		// If the new location doesn't match the old location, set it.
+		else if ( $new_location !== $old_location )
+			ccp_set_project_meta( $post_id, 'location', $new_location );
 
 		/* === Project Start Date === */
 
