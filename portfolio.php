@@ -56,6 +56,9 @@ final class CCP_Plugin {
 	 */
 	public $dir_uri = '';
 
+	public $js_uri = '';
+	public $css_uri = '';
+
 	/**
 	 * Returns the instance.
 	 *
@@ -143,6 +146,9 @@ final class CCP_Plugin {
 
 		$this->dir_path = trailingslashit( plugin_dir_path( __FILE__ ) );
 		$this->dir_uri  = trailingslashit( plugin_dir_url(  __FILE__ ) );
+
+		$this->js_uri  = trailingslashit( $this->dir_uri . 'js'  );
+		$this->css_uri = trailingslashit( $this->dir_uri . 'css' );
 	}
 
 	/**
@@ -171,7 +177,8 @@ final class CCP_Plugin {
 		if ( is_admin() ) {
 			require_once( $this->dir_path . 'admin/functions-admin.php'                );
 			require_once( $this->dir_path . 'admin/class-projects.php'                 );
-			require_once( $this->dir_path . 'admin/class-meta-box-project-details.php' );
+			require_once( $this->dir_path . 'admin/class-project-edit.php'             );
+			require_once( $this->dir_path . 'admin/class-project-details-manager.php'  );
 			require_once( $this->dir_path . 'admin/class-settings.php'                 );
 		}
 	}
