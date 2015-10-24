@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Cap control class.
+ * Date control class.
  *
  * @since  1.0.0
  * @access public

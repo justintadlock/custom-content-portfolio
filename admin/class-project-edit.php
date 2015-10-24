@@ -40,8 +40,10 @@ final class CCP_Project_Edit {
 		if ( empty( $screen->post_type ) || $project_type !== $screen->post_type )
 			return;
 
+		// Create a new project details manager.
 		$this->manager = new CCP_Project_Details_Manager();
 
+		// Enqueue scripts and styles.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 
 		// @todo - make a meta box.
@@ -51,18 +53,40 @@ final class CCP_Project_Edit {
 		add_action( 'save_post', array( $this, 'update' ) );
 	}
 
+	/**
+	 * Load scripts and styles.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
 	public function enqueue() {
 
 		wp_enqueue_style( 'ccp-admin' );
-
 		wp_enqueue_script( 'ccp-edit-project' );
 	}
 
+	/**
+	 * Output the project details box.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  object  $post
+	 * @return void
+	 */
 	public function project_details_box( $post ) {
 
 		$this->manager->display( $post->ID );
 	}
 
+	/**
+	 * Save project details settings on post save.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  int     $post_id
+	 * @return void
+	 */
 	public function update( $post_id ) {
 
 		$this->manager->update( $post_id );

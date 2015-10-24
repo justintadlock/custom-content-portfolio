@@ -1,13 +1,20 @@
 <?php
 
 /**
- * Cap control class.
+ * Date setting class.
  *
  * @since  1.0.0
  * @access public
  */
 class CCP_Project_Details_Setting_Date extends CCP_Project_Details_Setting {
 
+	/**
+	 * Gets the posted value of the setting.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return mixed
+	 */
 	public function get_posted_value() {
 
 		// Get the posted year, month, and day.

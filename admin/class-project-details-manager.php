@@ -46,10 +46,12 @@ final class CCP_Project_Details_Manager {
 	 */
 	public function __construct() {
 
+		// Load the base section, control, and setting classes.
 		require_once( ccp_plugin()->dir_path . 'admin/class-project-details-section.php' );
 		require_once( ccp_plugin()->dir_path . 'admin/class-project-details-control.php' );
 		require_once( ccp_plugin()->dir_path . 'admin/class-project-details-setting.php' );
 
+		// Load sub section, control, and setting classes.
 		require_once( ccp_plugin()->dir_path . 'admin/class-project-details-control-date.php' );
 		require_once( ccp_plugin()->dir_path . 'admin/class-project-details-control-excerpt.php' );
 		require_once( ccp_plugin()->dir_path . 'admin/class-project-details-setting-date.php' );
