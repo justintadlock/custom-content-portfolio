@@ -169,9 +169,124 @@ final class CCP_Project_Details_Manager {
 		$this->settings[ $name ] = new $setting_object( $this, $name, $args );
 	}
 
+	/**
+	 * Unregisters a section object.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string  $name
+	 * @return void
+	 */
+	public function unregister_section( $name ) {
+
+		if ( $this->section_exists( $name ) )
+			unset( $this->sections[ $name ] );
+	}
+
+	/**
+	 * Unregisters a control object.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string  $name
+	 * @return void
+	 */
+	public function unregister_control( $name ) {
+
+		if ( $this->control_exists( $name ) )
+			unset( $this->controls[ $name ] );
+	}
+
+	/**
+	 * Unregisters a setting object.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string  $name
+	 * @return void
+	 */
+	public function unregister_setting( $name ) {
+
+		if ( $this->setting_exists( $name ) )
+			unset( $this->settings[ $name ] );
+	}
+
+	/**
+	 * Returns a section object.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string  $name
+	 * @return object|bool
+	 */
+	public function get_section( $name ) {
+
+		return $this->section_exists( $name ) ? $this->sections[ $name ] : false;
+	}
+
+	/**
+	 * Returns a control object.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string  $name
+	 * @return object|bool
+	 */
+	public function get_control( $name ) {
+
+		return $this->control_exists( $name ) ? $this->controls[ $name ] : false;
+	}
+
+	/**
+	 * Returns a setting object.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string  $name
+	 * @return object|bool
+	 */
 	public function get_setting( $name ) {
 
-		return isset( $this->settings[ $name ] ) ? $this->settings[ $name ] : false;
+		return $this->setting_exists( $name ) ? $this->settings[ $name ] : false;
+	}
+
+	/**
+	 * Checks if a section exists.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string  $name
+	 * @return bool
+	 */
+	public function section_exists( $name ) {
+
+		return isset( $this->sections[ $name ] );
+	}
+
+	/**
+	 * Checks if a control exists.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string  $name
+	 * @return bool
+	 */
+	public function control_exists( $name ) {
+
+		return isset( $this->controls[ $name ] );
+	}
+
+	/**
+	 * Checks if a setting exists.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string  $name
+	 * @return bool
+	 */
+	public function setting_exists( $name ) {
+
+		return isset( $this->settings[ $name ] );
 	}
 
 	/**
