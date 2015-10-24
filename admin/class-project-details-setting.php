@@ -86,9 +86,9 @@ class CCP_Project_Details_Setting {
 	 * @access public
 	 * @return mixed
 	 */
-	public function get_value() {
+	public function get_value( $post_id ) {
 
-		return ccp_get_project_meta( $this->manager->post_id, $this->name );
+		return ccp_get_project_meta( $post_id, $this->name );
 	}
 
 	/**
@@ -127,17 +127,17 @@ class CCP_Project_Details_Setting {
 	 * @access public
 	 * @return void
 	 */
-	public function save() {
+	public function save( $post_id ) {
 
-		$old_value = $this->get_value();
+		$old_value = $this->get_value( $post_id );
 		$new_value = $this->get_posted_value();
 
 		// If we have don't have a new value but do have an old one, delete it.
 		if ( '' == $new_value && $old_value )
-			ccp_delete_project_meta( $this->manager->post_id, $this->name );
+			ccp_delete_project_meta( $post_id, $this->name );
 
 		// If the new value doesn't match the old value, set it.
 		else if ( $new_value !== $old_value )
-			ccp_set_project_meta( $this->manager->post_id, $this->name, $new_value );
+			ccp_set_project_meta( $post_id, $this->name, $new_value );
 	}
 }

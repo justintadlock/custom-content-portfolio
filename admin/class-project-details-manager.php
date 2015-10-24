@@ -9,24 +9,6 @@
 final class CCP_Project_Details_Manager {
 
 	/**
-	 * The post object.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @var    object
-	 */
-	public $post;
-
-	/**
-	 * The post ID.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @var    int
-	 */
-	public $post_id = 0;
-
-	/**
 	 * Array of sections.
 	 *
 	 * @since  1.0.0
@@ -62,10 +44,7 @@ final class CCP_Project_Details_Manager {
 	 * @param  array   $has_caps
 	 * @return void
 	 */
-	public function __construct( $post ) {
-
-		$this->post    = $post;
-		$this->post_id = $post->ID;
+	public function __construct() {
 
 		require_once( ccp_plugin()->dir_path . 'admin/class-project-details-section.php' );
 		require_once( ccp_plugin()->dir_path . 'admin/class-project-details-control.php' );
@@ -106,7 +85,6 @@ final class CCP_Project_Details_Manager {
 
 		$defaults = array(
 			'label'   => '',
-			'post'    => $this->post,
 			'icon'    => 'dashicons-admin-generic',
 			'object'  => 'CCP_Project_Details_Section'
 		);
@@ -134,7 +112,6 @@ final class CCP_Project_Details_Manager {
 			'description' => '',
 			'section'     => '',
 			'setting'     => $name,
-			'post'        => $this->post,
 			'object'      => 'CCP_Project_Details_Control'
 		);
 
@@ -158,7 +135,6 @@ final class CCP_Project_Details_Manager {
 
 		$defaults = array(
 			'sanitize_callback' => '',
-			'post'              => $this->post,
 			'object'            => 'CCP_Project_Details_Setting'
 		);
 
@@ -296,7 +272,7 @@ final class CCP_Project_Details_Manager {
 	 * @access public
 	 * @return void
 	 */
-	public function display() { ?>
+	public function display( $post_id ) { ?>
 
 		<div id="ccp-project-tabs" class="postbox">
 
@@ -305,8 +281,8 @@ final class CCP_Project_Details_Manager {
 			<div class="inside">
 
 				<div class="ccp-project-manager">
-					<?php $this->nav(); ?>
-					<?php $this->content(); ?>
+					<?php $this->nav( $post_id ); ?>
+					<?php $this->content( $post_id ); ?>
 				</div><!-- .ccp-project-manager -->
 
 			</div><!-- .inside -->
@@ -345,7 +321,7 @@ final class CCP_Project_Details_Manager {
 	 * @access public
 	 * @return void
 	 */
-	public function content() { ?>
+	public function content( $post_id ) { ?>
 
 		<div class="ccp-project-sections">
 
@@ -358,7 +334,7 @@ final class CCP_Project_Details_Manager {
 					<?php if ( $section->name === $control->section ) : ?>
 
 						<div id="<?php echo esc_attr( "ccp-project-control-{$control->name}" ); ?>" class="ccp-project-control <?php echo esc_attr( "ccp-project-control-{$control->name}" ); ?>">
-							<?php $control->content_template(); ?>
+							<?php $control->content_template( $post_id ); ?>
 						</div><!-- .ccp-project-control -->
 
 					<?php endif; ?>
@@ -379,9 +355,9 @@ final class CCP_Project_Details_Manager {
 	 * @access public
 	 * @return void
 	 */
-	public function update() {
+	public function update( $post_id ) {
 
 		foreach ( $this->settings as $setting )
-			$setting->save();
+			$setting->save( $post_id );
 	}
 }

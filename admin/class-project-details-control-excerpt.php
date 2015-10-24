@@ -8,8 +8,8 @@
  */
 class CCP_Project_Details_Control_Excerpt extends CCP_Project_Details_Control {
 
-	public function get_value() {
-		return $this->manager->post->post_excerpt;
+	public function get_value( $post_id ) {
+		return get_post( $post_id )->post_excerpt;
 	}
 
 	/**
@@ -19,13 +19,13 @@ class CCP_Project_Details_Control_Excerpt extends CCP_Project_Details_Control {
 	 * @access public
 	 * @return void
 	 */
-	public function content_template() { ?>
+	public function content_template( $post_id ) { ?>
 
 		<?php if ( $this->label ) : ?>
 			<label for="excerpt"><span class="ccp-label"><?php echo esc_html( $this->label ); ?></span></label>
 		<?php endif; ?>
 
-		<textarea class="widefat" name="excerpt" id="excerpt" rows="15" cols="40"><?php echo esc_textarea( $this->get_value() ); ?></textarea>
+		<textarea class="widefat" name="excerpt" id="excerpt" rows="15" cols="40"><?php echo esc_textarea( $this->get_value( $post_id ) ); ?></textarea>
 
 		<?php if ( $this->description ) : ?>
 			<span class="ccp-description description"><?php echo $this->description; ?></span>

@@ -95,11 +95,11 @@ class CCP_Project_Details_Control {
 	 * @access public
 	 * @return mixed
 	 */
-	public function get_value() {
+	public function get_value( $post_id ) {
 
 		$setting = $this->manager->get_setting( $this->setting );
 
-		return $setting ? $setting->get_value() : false;
+		return $setting ? $setting->get_value( $post_id ) : false;
 	}
 
 	/**
@@ -109,14 +109,14 @@ class CCP_Project_Details_Control {
 	 * @access public
 	 * @return void
 	 */
-	public function content_template() { ?>
+	public function content_template( $post_id ) { ?>
 
 		<label>
 			<?php if ( $this->label ) : ?>
 				<span class="ccp-label"><?php echo esc_html( $this->label ); ?></span>
 			<?php endif; ?>
 
-			<input type="text" class="widefat" name="<?php echo esc_attr( "ccp_setting_{$this->setting}" ); ?>" value="<?php echo esc_attr( $this->get_value() ); ?>" />
+			<input type="text" class="widefat" name="<?php echo esc_attr( "ccp_setting_{$this->setting}" ); ?>" value="<?php echo esc_attr( $this->get_value( $post_id ) ); ?>" />
 
 			<?php if ( $this->description ) : ?>
 				<span class="ccp-description description"><?php echo $this->description; ?></span>

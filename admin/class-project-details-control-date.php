@@ -15,10 +15,10 @@ class CCP_Project_Details_Control_Date extends CCP_Project_Details_Control {
 	 * @access public
 	 * @return void
 	 */
-	public function content_template() {
+	public function content_template( $post_id ) {
 
 		// Get project start/end dates.
-		$date = $this->get_value();
+		$date = $this->get_value( $post_id );
 
 		// Get the individual years, months, and days.
 		$year  = $date ? mysql2date( 'Y', $date, false ) : '';

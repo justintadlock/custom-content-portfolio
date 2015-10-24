@@ -40,13 +40,15 @@ final class CCP_Project_Edit {
 		if ( empty( $screen->post_type ) || $project_type !== $screen->post_type )
 			return;
 
+		$this->manager = new CCP_Project_Details_Manager();
+
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 
 		// @todo - make a meta box.
 		add_action( 'edit_form_after_editor', array( $this, 'project_details_box' ) );
 
 		// Save metadata on post save.
-		add_action( 'save_post', array( $this, 'update' ), 10, 2 );
+		add_action( 'save_post', array( $this, 'update' ) );
 	}
 
 	public function enqueue() {
@@ -58,20 +60,12 @@ final class CCP_Project_Edit {
 
 	public function project_details_box( $post ) {
 
-		$this->manager = new CCP_Project_Details_Manager( $post );
-
-		$this->manager->display();
+		$this->manager->display( $post->ID );
 	}
 
-	public function update( $post_id, $post = '' ) {
+	public function update( $post_id ) {
 
-		if ( ! $post )
-			$post = get_post( $post_id );
-
-		if ( ! $this->manager )
-			$this->manager = new CCP_Project_Details_Manager( $post );
-
-		$this->manager->update();
+		$this->manager->update( $post_id );
 	}
 
 	/**
