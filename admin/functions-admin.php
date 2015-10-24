@@ -29,6 +29,9 @@ add_action( 'ccp_project_details_manager_register', 'ccp_project_details_registe
  */
 function ccp_project_details_register( $manager ) {
 
+	/* === Register Sections === */
+
+	// General section.
 	$manager->register_section( 'general',
 		array(
 			'label' => esc_html__( 'General', 'custom-content-portfolio' ),
@@ -36,6 +39,7 @@ function ccp_project_details_register( $manager ) {
 		)
 	);
 
+	// Date section.
 	$manager->register_section( 'date',
 		array(
 			'label' => esc_html__( 'Date', 'custom-content-portfolio' ),
@@ -43,6 +47,7 @@ function ccp_project_details_register( $manager ) {
 		)
 	);
 
+	// Description section.
 	$manager->register_section( 'description',
 		array(
 			'label' => esc_html__( 'Description', 'custom-content-portfolio' ),
@@ -50,65 +55,61 @@ function ccp_project_details_register( $manager ) {
 		)
 	);
 
-	$manager->register_control( 'url',
-		array(
-			'section'     => 'general',
-			'label'       => esc_html__( 'URL', 'custom-content-portfolio' ),
-			'description' => esc_html__( 'Enter the URL of the project Web page.', 'custom-content-portfolio' )
-		)
+	/* === Register Controls === */
+
+	$url_args = array(
+		'section'     => 'general',
+		'label'       => esc_html__( 'URL', 'custom-content-portfolio' ),
+		'description' => esc_html__( 'Enter the URL of the project Web page.', 'custom-content-portfolio' )
 	);
 
-	$manager->register_control( 'client',
-		array(
-			'section'     => 'general',
-			'label'       => esc_html__( 'Client', 'custom-content-portfolio' ),
-			'description' => esc_html__( 'Enter the name of the client for the project.', 'custom-content-portfolio' )
-		)
+	$client_args = array(
+		'section'     => 'general',
+		'label'       => esc_html__( 'Client', 'custom-content-portfolio' ),
+		'description' => esc_html__( 'Enter the name of the client for the project.', 'custom-content-portfolio' )
 	);
 
-	$manager->register_control( 'location',
-		array(
-			'section'     => 'general',
-			'label'       => esc_html__( 'Location', 'custom-content-portfolio' ),
-			'description' => esc_html__( 'Enter the physical location of the project.', 'custom-content-portfolio' )
-		)
+	$location_args = array(
+		'section'     => 'general',
+		'label'       => esc_html__( 'Location', 'custom-content-portfolio' ),
+		'description' => esc_html__( 'Enter the physical location of the project.', 'custom-content-portfolio' )
 	);
 
-	$manager->register_control( 'start_date',
-		array(
-			'object'      => 'CCP_Project_Details_Control_Date',
-			'section'     => 'date',
-			'label'       => esc_html__( 'Start Date', 'custom-content-portfolio' ),
-			'description' => esc_html__( 'Select the date the project began.', 'custom-content-portfolio' )
-		)
+	$start_date_args = array(
+		'section'     => 'date',
+		'label'       => esc_html__( 'Start Date', 'custom-content-portfolio' ),
+		'description' => esc_html__( 'Select the date the project began.', 'custom-content-portfolio' )
 	);
 
-	$manager->register_control( 'end_date',
-		array(
-			'object'      => 'CCP_Project_Details_Control_Date',
-			'section'     => 'date',
-			'label'       => esc_html__( 'End Date', 'custom-content-portfolio' ),
-			'description' => esc_html__( 'Select the date the project was completed.', 'custom-content-portfolio' )
-		)
+	$end_date_args = array(
+		'section'     => 'date',
+		'label'       => esc_html__( 'End Date', 'custom-content-portfolio' ),
+		'description' => esc_html__( 'Select the date the project was completed.', 'custom-content-portfolio' )
 	);
 
-	if ( ! post_type_supports( ccp_get_project_post_type(), 'excerpt' ) ) {
+	$excerpt_args = array(
+		'section'     => 'description',
+		'label'       => esc_html__( 'Description', 'custom-content-portfolio' ),
+		'description' => esc_html__( 'Write a short description (excerpt) of the project.', 'custom-content-portfolio' )
+	);
 
-		$manager->register_control( 'excerpt',
-			array(
-				'object'      => 'CCP_Project_Details_Control_Excerpt',
-				'section'     => 'description',
-				'label'       => esc_html__( 'Description', 'custom-content-portfolio' ),
-				'description' => esc_html__( 'Write a short description (excerpt) of the project.', 'custom-content-portfolio' )
-			)
-		);
-	}
+	$manager->register_control( new CCP_Project_Details_Control(      $manager, 'url',        $url_args        ) );
+	$manager->register_control( new CCP_Project_Details_Control(      $manager, 'client',     $client_args     ) );
+	$manager->register_control( new CCP_Project_Details_Control(      $manager, 'location',   $location_args   ) );
+	$manager->register_control( new CCP_Project_Details_Control_Date( $manager, 'start_date', $start_date_args ) );
+	$manager->register_control( new CCP_Project_Details_Control_Date( $manager, 'end_date',   $end_date_args   ) );
+
+	if ( ! post_type_supports( ccp_get_project_post_type(), 'excerpt' ) )
+		$manager->register_control( new CCP_Project_Details_Control_Excerpt( $manager, 'excerpt', $excerpt_args ) );
+
+	/* === Register Settings === */
 
 	$manager->register_setting( 'url',      array( 'sanitize_callback' => 'esc_url_raw'       ) );
 	$manager->register_setting( 'client',   array( 'sanitize_callback' => 'wp_strip_all_tags' ) );
 	$manager->register_setting( 'location', array( 'sanitize_callback' => 'wp_strip_all_tags' ) );
-	$manager->register_setting( 'start_date', array( 'object' => 'CCP_Project_Details_Setting_Date' ) );
-	$manager->register_setting( 'end_date', array( 'object' => 'CCP_Project_Details_Setting_Date' ) );
+
+	$manager->register_setting( new CCP_Project_Details_Setting_Date( $manager, 'start_date' ) );
+	$manager->register_setting( new CCP_Project_Details_Setting_Date( $manager, 'end_date' ) );
 }
 
 /**

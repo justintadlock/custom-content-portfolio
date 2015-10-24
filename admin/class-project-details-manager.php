@@ -79,23 +79,17 @@ final class CCP_Project_Details_Manager {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  string  $name
-	 * @param  array   $args
+	 * @param  object|string  $section
+	 * @param  array          $args
 	 * @return void
 	 */
-	public function register_section( $name, $args = array() ) {
+	public function register_section( $section, $args = array() ) {
 
-		$defaults = array(
-			'label'   => '',
-			'icon'    => 'dashicons-admin-generic',
-			'object'  => 'CCP_Project_Details_Section'
-		);
+		if ( ! is_object( $section ) )
+			$section = new CCP_Project_Details_Section( $this, $section, $args );
 
-		$args = wp_parse_args( $args, $defaults );
-
-		$section_object = $args['object'];
-
-		$this->sections[ $name ] = new $section_object( $this, $name, $args );
+		if ( ! $this->section_exists( $section->name ) )
+			$this->sections[ $section->name ] = $section;
 	}
 
 	/**
@@ -103,25 +97,17 @@ final class CCP_Project_Details_Manager {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  string  $name
-	 * @param  array   $args
+	 * @param  object|string  $control
+	 * @param  array          $args
 	 * @return void
 	 */
-	public function register_control( $name, $args = array() ) {
+	public function register_control( $control, $args = array() ) {
 
-		$defaults = array(
-			'label'       => '',
-			'description' => '',
-			'section'     => '',
-			'setting'     => $name,
-			'object'      => 'CCP_Project_Details_Control'
-		);
+		if ( ! is_object( $control ) )
+			$control = new CCP_Project_Details_Control( $this, $control, $args );
 
-		$args = wp_parse_args( $args, $defaults );
-
-		$control_object = $args['object'];
-
-		$this->controls[ $name ] = new $control_object( $this, $name, $args );
+		if ( ! $this->control_exists( $control->name ) )
+			$this->controls[ $control->name ] = $control;
 	}
 
 	/**
@@ -129,22 +115,17 @@ final class CCP_Project_Details_Manager {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  string  $name
-	 * @param  array   $args
+	 * @param  object|string  $setting
+	 * @param  array          $args
 	 * @return void
 	 */
-	public function register_setting( $name, $args = array() ) {
+	public function register_setting( $setting, $args = array() ) {
 
-		$defaults = array(
-			'sanitize_callback' => '',
-			'object'            => 'CCP_Project_Details_Setting'
-		);
+		if ( ! is_object( $setting ) )
+			$setting = new CCP_Project_Details_Setting( $this, $setting, $args );
 
-		$args = wp_parse_args( $args, $defaults );
-
-		$setting_object = $args['object'];
-
-		$this->settings[ $name ] = new $setting_object( $this, $name, $args );
+		if ( ! $this->setting_exists( $setting->name ) )
+			$this->settings[ $setting->name ] = $setting;
 	}
 
 	/**
