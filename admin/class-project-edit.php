@@ -8,6 +8,13 @@
  */
 final class CCP_Project_Edit {
 
+	/**
+	 * Holds the fields manager instance.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    object
+	 */
 	public $manager = '';
 
 	/**
@@ -40,13 +47,16 @@ final class CCP_Project_Edit {
 		if ( empty( $screen->post_type ) || $project_type !== $screen->post_type )
 			return;
 
+		// Load the fields manager.
+		require_once( ccp_plugin()->dir_path . 'admin/fields-manager/class-manager.php' );
+
 		// Create a new project details manager.
 		$this->manager = new CCP_Fields_Manager( 'project_details' );
 
 		// Enqueue scripts and styles.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 
-		// @todo - make a meta box.
+		// Output the project details box.
 		add_action( 'edit_form_after_editor', array( $this, 'project_details_box' ) );
 
 		// Save metadata on post save.
