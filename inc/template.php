@@ -34,9 +34,24 @@ function ccp_get_project_id( $post_id = '' ) {
  */
 function ccp_is_project_complete( $post_id = '' ) {
 
-	$post_id = ccp_get_project_id( $post_id );
+	$post_id    = ccp_get_project_id( $post_id );
+	$completed  = true;
+	$start_date = ccp_get_project_meta( $post_id, 'start_date' );
+	$end_date   = ccp_get_project_meta( $post_id, 'end_date'   );
 
-	return apply_filters( 'ccp_is_project_complete', ccp_get_complete_post_status() === get_post_status( $post_id ) );
+	// If we have a start date but no end date, project is incomplete.
+	if ( $start_date && ! $end_date )
+		$completed = false;
+
+	// Compare the start and end dates if we have both.
+	else if ( $start_date && $end_date )
+		$completed = mysql2date( 'Ymd', $start_date, false ) < mysql2date( 'Ymd', $end_date, false );
+
+	// Make sure current date is greater than or equal to end date.
+	if ( $end_date )
+		$completed = date( 'Ymd' ) >= mysql2date( 'Ymd', $end_date, false );
+
+	return apply_filters( 'ccp_is_project_complete', $completed, $post_id );
 }
 
 /**
@@ -49,9 +64,20 @@ function ccp_is_project_complete( $post_id = '' ) {
  */
 function ccp_is_project_in_progress( $post_id = '' ) {
 
-	$post_id = ccp_get_project_id( $post_id );
+	$post_id     = ccp_get_project_id( $post_id );
+	$in_progress = false;
+	$start_date  = ccp_get_project_meta( $post_id, 'start_date' );
+	$end_date    = ccp_get_project_meta( $post_id, 'end_date'   );
 
-	return apply_filters( 'ccp_is_project_in_progress', ccp_get_in_progress_post_status() === get_post_status( $post_id ) );
+	// If we have a start date, the project is in progress.
+	if ( $start_date )
+		$in_progress = true;
+
+	// If we have an end date, make sure current date is less than it.
+	if ( $end_date )
+		$in_progress = date( 'Ymd' ) < mysql2date( 'Ymd', $end_date, false );
+
+	return apply_filters( 'ccp_is_project_in_progress', $in_progress, $post_id );
 }
 
 /**
