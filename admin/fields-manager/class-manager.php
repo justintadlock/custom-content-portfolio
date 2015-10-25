@@ -331,7 +331,7 @@ class CCP_Fields_Manager {
 
 					<?php if ( $section->name === $control->section ) : ?>
 
-						<div id="<?php echo esc_attr( "ccp-fields-control-{$control->name}" ); ?>" class="ccp-fields-control <?php echo esc_attr( "ccp-fields-control-{$control->name}" ); ?>">
+						<div id="<?php echo esc_attr( "ccp-fields-control-{$control->name}" ); ?>" class="ccp-fields-control <?php echo esc_attr( "ccp-fields-control-type-{$control->type}" ); ?>">
 							<?php $control->content_template( $post_id ); ?>
 						</div><!-- .ccp-fields-control -->
 
