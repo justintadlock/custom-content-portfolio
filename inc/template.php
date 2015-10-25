@@ -25,6 +25,36 @@ function ccp_get_project_id( $post_id = '' ) {
 }
 
 /**
+ * Checks if viewing a single project.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  mixed  $post
+ * @return bool
+ */
+function ccp_is_single_project( $post = '' ) {
+
+	$is_single = is_singular( ccp_get_project_post_type() );
+
+	if ( $is_single && $post )
+		$is_single = is_single( $post );
+
+	return apply_filters( 'ccp_is_single_project', $is_single, $post );
+}
+
+/**
+ * Checks if viewing the project archive.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return bool
+ */
+function ccp_is_project_archive() {
+
+	return apply_filters( 'ccp_is_project_archive', is_post_type_archive( ccp_get_project_post_type() ) );
+}
+
+/**
  * Checks if the project has the "complete" post status.
  *
  * @since  1.0.0
