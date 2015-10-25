@@ -6,7 +6,7 @@
  * @since  1.0.0
  * @access public
  */
-class CCP_Project_Details_Setting {
+class CCP_Fields_Setting {
 
 	/**
 	 * Stores the project details manager object.

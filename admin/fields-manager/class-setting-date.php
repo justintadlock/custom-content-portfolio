@@ -6,7 +6,7 @@
  * @since  1.0.0
  * @access public
  */
-class CCP_Project_Details_Setting_Date extends CCP_Project_Details_Setting {
+class CCP_Fields_Setting_Date extends CCP_Fields_Setting {
 
 	/**
 	 * Gets the posted value of the setting.

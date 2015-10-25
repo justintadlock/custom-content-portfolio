@@ -19,7 +19,7 @@
 
 /* Tabs wrapper. */
 
-.ccp-project-manager {
+.ccp-fields-manager {
 	overflow:   hidden;
 	background: #fff;
 	background: linear-gradient( 90deg, #fafafa 0%, #fafafa 20%, #fff 20%, #fff 100% );
@@ -27,14 +27,14 @@
 
 	@media only screen and ( max-width: 782px ) {
 
-		.ccp-project-manager {
+		.ccp-fields-manager {
 			background: linear-gradient( 90deg, #fafafa 0%, #fafafa 48px, #fff 48px, #fff 100% );
 		}
 	}
 
 	/* Tab nav. */
 
-	.ccp-project-sections-nav {
+	.ccp-fields-nav {
 		position:         relative;
 		float:            left;
 		list-style:       none;
@@ -47,7 +47,7 @@
 		box-sizing:       border-box;
 	}
 
-		.ccp-project-sections-nav li {
+		.ccp-fields-nav li {
 			display:     block;
 			position:    relative;
 			margin:      0;
@@ -55,7 +55,7 @@
 			line-height: 20px;
 		}
 
-			.ccp-project-sections-nav li a {
+			.ccp-fields-nav li a {
 				display:         block;
 				margin:          0;
 				padding:         10px;
@@ -65,12 +65,12 @@
 				box-shadow:      none;
 			}
 
-				.ccp-project-sections-nav li a .dashicons {
+				.ccp-fields-nav li a .dashicons {
 					line-height:  20px;
 					margin-right: 3px;
 				}
 
-			.ccp-project-sections-nav li[aria-selected="true"] a {
+			.ccp-fields-nav li[aria-selected="true"] a {
 				position:         relative;
 				font-weight:      bold;
 				color:            #555;
@@ -79,21 +79,21 @@
 
 	@media only screen and ( max-width: 782px ) {
 
-		.ccp-project-sections-nav { width: 48px; }
+		.ccp-fields-nav { width: 48px; }
 
-		.ccp-project-sections-nav li a .dashicons {
+		.ccp-fields-nav li a .dashicons {
 			width:       24px;
 			height:      24px;
 			font-size:   24px;
 			line-height: 24px;
 		}
 
-			.ccp-project-sections-nav li .dashicons::before {
+			.ccp-fields-nav li .dashicons::before {
 				width:  24px;
 				height: 24px;
 			}
 
-		.ccp-project-sections-nav li .label {
+		.ccp-fields-nav li .label {
 			overflow: hidden;
 			position: absolute;
 			top:      -1000em;
@@ -105,7 +105,7 @@
 
 	/* Tab content wrapper */
 
-	.ccp-project-sections {
+	.ccp-fields-content {
 		float:       left;
 		width:       80%;
 		margin-left: -1px;
@@ -114,7 +114,7 @@
 
 	@media only screen and ( max-width: 782px ) {
 
-		.ccp-project-sections {
+		.ccp-fields-content {
 			width: calc( 100% - 48px );
 		}
 	}
@@ -122,18 +122,18 @@
 
 /* === Content === */
 
-.ccp-project-section {
+.ccp-fields-section {
 		padding:     12px 12px 0;
 		box-sizing: border-box;
 }
 
-.ccp-project-control {
+.ccp-fields-control {
 	margin-bottom: 20px;
 }
 
-	.ccp-label { font-weight: bold; display: inline-block; margin-bottom: 2px; }
+	.ccp-fields-label { font-weight: bold; display: inline-block; margin-bottom: 2px; }
 
-.ccp-project-control #excerpt {
+.ccp-fields-control #excerpt {
 	height: 125px;
 	margin: 0;
 }

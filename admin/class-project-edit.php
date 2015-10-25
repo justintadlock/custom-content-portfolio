@@ -41,7 +41,7 @@ final class CCP_Project_Edit {
 			return;
 
 		// Create a new project details manager.
-		$this->manager = new CCP_Project_Details_Manager();
+		$this->manager = new CCP_Fields_Manager( 'project_details' );
 
 		// Enqueue scripts and styles.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
@@ -74,10 +74,18 @@ final class CCP_Project_Edit {
 	 * @param  object  $post
 	 * @return void
 	 */
-	public function project_details_box( $post ) {
+	public function project_details_box( $post ) { ?>
 
-		$this->manager->display( $post->ID );
-	}
+		<div id="ccp-project-tabs" class="postbox">
+
+			<h3><?php printf( esc_html__( 'Project Details: %s', 'members' ), '<span class="ccp-which-tab"></span>' ); ?></h3>
+
+			<div class="inside">
+				<?php $this->manager->display( $post->ID ); ?>
+			</div><!-- .inside -->
+
+		</div><!-- .postbox -->
+	<?php }
 
 	/**
 	 * Save project details settings on post save.

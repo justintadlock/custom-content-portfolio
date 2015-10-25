@@ -6,12 +6,11 @@
  * @since  1.0.0
  * @access public
  */
-class CCP_Project_Details_Control {
+class CCP_Fields_Control {
 
 	/**
-	 * Stores the project details manager object.
+	 * Stores the manager object.
 	 *
-	 * @see    CCP_Project_Details_Manager
 	 * @since  1.0.0
 	 * @access public
 	 * @var    object
@@ -113,13 +112,13 @@ class CCP_Project_Details_Control {
 
 		<label>
 			<?php if ( $this->label ) : ?>
-				<span class="ccp-label"><?php echo esc_html( $this->label ); ?></span>
+				<span class="ccp-fields-label"><?php echo esc_html( $this->label ); ?></span>
 			<?php endif; ?>
 
 			<input type="text" class="widefat" name="<?php echo esc_attr( "ccp_setting_{$this->setting}" ); ?>" value="<?php echo esc_attr( $this->get_value( $post_id ) ); ?>" />
 
 			<?php if ( $this->description ) : ?>
-				<span class="ccp-description description"><?php echo $this->description; ?></span>
+				<span class="ccp-fields-description description"><?php echo $this->description; ?></span>
 			<?php endif; ?>
 		</label>
 	<?php }

@@ -6,10 +6,10 @@
  * @since  1.0.0
  * @access public
  */
-class CCP_Project_Details_Control_Date extends CCP_Project_Details_Control {
+class CCP_Fields_Control_Date extends CCP_Fields_Control {
 
 	/**
-	 * Adds custom data to the json array. This data is passed to the Underscore template.
+	 * Outputs the content template.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -32,16 +32,16 @@ class CCP_Project_Details_Control_Date extends CCP_Project_Details_Control {
 
 		<label>
 			<?php if ( $this->label ) : ?>
-				<span class="ccp-label"><?php echo esc_html( $this->label ); ?></span>
+				<span class="ccp-fields-label"><?php echo esc_html( $this->label ); ?></span>
+				<br />
 			<?php endif; ?>
 
-			<br />
 			<?php // Translators: 1: month, 2: day, 3: year.
 			printf( __( '%1$s %2$s, %3$s', 'custom-content-portfolio' ), $month_field, $day_field, $year_field ); ?>
 
 			<?php if ( $this->description ) : ?>
 				<br />
-				<span class="ccp-description description"><?php echo $this->description; ?></span>
+				<span class="ccp-fields-description description"><?php echo $this->description; ?></span>
 			<?php endif; ?>
 		</label>
 	<?php }

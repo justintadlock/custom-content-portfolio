@@ -6,7 +6,7 @@
  * @since  1.0.0
  * @access public
  */
-class CCP_Project_Details_Section {
+class CCP_Fields_Section {
 
 	/**
 	 * Stores the project details manager object.
@@ -44,6 +44,15 @@ class CCP_Project_Details_Section {
 	 * @var    string
 	 */
 	public $label = '';
+
+	/**
+	 * Description for the section.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
+	public $description = '';
 
 	/**
 	 * Creates a new section object.
