@@ -312,7 +312,10 @@ class CCP_Fields_Manager {
 	 * @access public
 	 * @return void
 	 */
-	public function content( $post_id ) { ?>
+	public function content( $post_id ) {
+
+		// Nonce field to validate on save.
+		wp_nonce_field( "ccp_{$this->name}_nonce", "ccp_{$this->name}" ); ?>
 
 		<div class="ccp-fields-content">
 
@@ -351,6 +354,10 @@ class CCP_Fields_Manager {
 	 * @return void
 	 */
 	public function update( $post_id ) {
+
+		// Verify the nonce.
+		if ( ! isset( $_POST["ccp_{$this->name}"] ) || ! wp_verify_nonce( $_POST["ccp_{$this->name}"], "ccp_{$this->name}_nonce" ) )
+			return;
 
 		foreach ( $this->settings as $setting )
 			$setting->save( $post_id );

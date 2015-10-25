@@ -137,7 +137,7 @@ class CCP_Fields_Control {
 	 */
 	public function get_attr() {
 
-		$defaults = array( 'name' => "ccp_setting_{$this->setting}" );
+		$defaults = array( 'name' => "ccp_{$this->manager->name}_setting_{$this->setting}" );
 
 		return wp_parse_args( $this->attr, $defaults );
 	}

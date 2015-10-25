@@ -9,9 +9,8 @@
 class CCP_Fields_Setting {
 
 	/**
-	 * Stores the project details manager object.
+	 * Stores the manager object.
 	 *
-	 * @see    CCP_Project_Details_Manager
 	 * @since  1.0.0
 	 * @access public
 	 * @var    object
@@ -76,7 +75,7 @@ class CCP_Fields_Setting {
 		$this->name    = $name;
 
 		if ( $this->sanitize_callback )
-			add_filter( "ccp_project_details_sanitize_{$this->name}", $this->sanitize_callback, 10, 2 );
+			add_filter( "ccp_{$this->manager->name}_sanitize_{$this->name}", $this->sanitize_callback, 10, 2 );
 	}
 
 	/**
@@ -102,8 +101,8 @@ class CCP_Fields_Setting {
 
 		$value = '';
 
-		if ( isset( $_POST[ "ccp_setting_{$this->name}" ] ) )
-			$value = $_POST[ "ccp_setting_{$this->name}" ];
+		if ( isset( $_POST[ "ccp_{$this->manager->name}_setting_{$this->name}" ] ) )
+			$value = $_POST[ "ccp_{$this->manager->name}_setting_{$this->name}" ];
 
 		return $this->sanitize( $value );
 	}
@@ -117,7 +116,7 @@ class CCP_Fields_Setting {
 	 */
 	public function sanitize( $value ) {
 
-		return apply_filters( "ccp_project_details_sanitize_{$this->name}", $value, $this );
+		return apply_filters( "ccp_{$this->manager->name}_sanitize_{$this->name}", $value, $this );
 	}
 
 	/**

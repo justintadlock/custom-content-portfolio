@@ -26,9 +26,9 @@ class CCP_Fields_Control_Date extends CCP_Fields_Control {
 		$day   = $date ? mysql2date( 'd', $date, false ) : '';
 
 		// Get the year, month, and day form fields.
-		$year_field  = $this->get_year_field( "ccp_setting_{$this->setting}_year",   $year  );
-		$month_field = $this->get_month_field( "ccp_setting_{$this->setting}_month", $month );
-		$day_field   = $this->get_day_field( "ccp_setting_{$this->setting}_day",     $day   ); ?>
+		$year_field  = $this->get_year_field( "ccp_{$this->manager->name}_setting_{$this->setting}_year",   $year  );
+		$month_field = $this->get_month_field( "ccp_{$this->manager->name}_setting_{$this->setting}_month", $month );
+		$day_field   = $this->get_day_field( "ccp_{$this->manager->name}_setting_{$this->setting}_day",     $day   ); ?>
 
 		<label>
 			<?php if ( $this->label ) : ?>
