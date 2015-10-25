@@ -74,8 +74,10 @@ The official support forum for this plugin is located at <a href="http://themehy
 
 == Screenshots ==
 
-1. Admin Screenshot
-2. Theme Screenshot
+1. Projects management admin screen.
+2. Edit project admin screen.
+3. Project image media modal.
+4. Portfolio settings admin screen.
 
 == Changelog ==
 
