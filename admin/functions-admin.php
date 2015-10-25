@@ -59,18 +59,21 @@ function ccp_project_details_register( $manager ) {
 
 	$url_args = array(
 		'section'     => 'general',
+		'attr'        => array( 'class' => 'widefat', 'placeholder' => 'http://themehybrid.com' ),
 		'label'       => esc_html__( 'URL', 'custom-content-portfolio' ),
 		'description' => esc_html__( 'Enter the URL of the project Web page.', 'custom-content-portfolio' )
 	);
 
 	$client_args = array(
 		'section'     => 'general',
+		'attr'        => array( 'class' => 'widefat', 'placeholder' => __( 'Jane Doe', 'custom-content-portfolio' ) ),
 		'label'       => esc_html__( 'Client', 'custom-content-portfolio' ),
 		'description' => esc_html__( 'Enter the name of the client for the project.', 'custom-content-portfolio' )
 	);
 
 	$location_args = array(
 		'section'     => 'general',
+		'attr'        => array( 'class' => 'widefat', 'placeholder' => __( 'Highland Home, AL', 'custom-content-portfolio' ) ),
 		'label'       => esc_html__( 'Location', 'custom-content-portfolio' ),
 		'description' => esc_html__( 'Enter the physical location of the project.', 'custom-content-portfolio' )
 	);
@@ -89,6 +92,8 @@ function ccp_project_details_register( $manager ) {
 
 	$excerpt_args = array(
 		'section'     => 'description',
+		'type'        => 'textarea',
+		'attr'        => array( 'id' => 'excerpt', 'name' => 'excerpt' ),
 		'label'       => esc_html__( 'Description', 'custom-content-portfolio' ),
 		'description' => esc_html__( 'Write a short description (excerpt) of the project.', 'custom-content-portfolio' )
 	);

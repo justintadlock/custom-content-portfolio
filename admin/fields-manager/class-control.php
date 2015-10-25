@@ -63,12 +63,39 @@ class CCP_Fields_Control {
 	public $setting = '';
 
 	/**
+	 * The type of setting.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
+	public $type = 'text';
+
+	/**
+	 * Form field attributes.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    array
+	 */
+	public $attr = '';
+
+	/**
+	 * Choices for fields with multiple choices.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    array
+	 */
+	public $choices = '';
+
+	/**
 	 * Creates a new control object.
 	 *
 	 * @since  1.0.0
 	 * @access public
 	 * @param  object  $manager
-	 * @param  string  $cap
+	 * @param  string  $name
 	 * @param  array   $args
 	 * @return void
 	 */
@@ -102,22 +129,188 @@ class CCP_Fields_Control {
 	}
 
 	/**
-	 * Adds custom data to the json array. This data is passed to the Underscore template.
+	 * Gets the attributes for the control.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return array
+	 */
+	public function get_attr() {
+
+		$defaults = array( 'name' => "ccp_setting_{$this->setting}" );
+
+		return wp_parse_args( $this->attr, $defaults );
+	}
+
+	/**
+	 * Prints the attributes for the control.
 	 *
 	 * @since  1.0.0
 	 * @access public
 	 * @return void
 	 */
-	public function content_template( $post_id ) { ?>
+	public function attr() {
+
+		foreach ( $this->get_attr() as $attr => $value )
+			printf( '%s="%s" ', esc_html( $attr ), esc_attr( $value ) );
+	}
+
+	/**
+	 * Outputs the HTML for the control.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  int    $post_id
+	 * @return void
+	 */
+	public function content_template( $post_id ) {
+
+		if ( 'textarea' === $this->type )
+			$this->template_textarea( $post_id );
+
+		else if ( 'select' === $this->type )
+			$this->template_select( $post_id );
+
+		else if ( 'radio' === $this->type )
+			$this->template_radio( $post_id );
+
+		else if ( 'checkbox' === $this->type )
+			$this->template_checkbox( $post_id );
+
+		else
+			$this->template_text( $post_id );
+	}
+
+	/**
+	 * Outputs the HTML for a text input control.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  int     $post_id
+	 * @return void
+	 */
+	public function template_text( $post_id ) { ?>
+
+		<label>
+			<?php if ( $this->label ) : ?>
+				<span class="ccp-fields-label"><?php echo esc_html( $this->label ); ?></span>
+				<br />
+			<?php endif; ?>
+
+			<input type="<?php echo esc_attr( $this->type ); ?>" value="<?php echo esc_attr( $this->get_value( $post_id ) ); ?>" <?php $this->attr(); ?> />
+
+			<?php if ( $this->description ) : ?>
+				<br />
+				<span class="ccp-fields-description description"><?php echo $this->description; ?></span>
+			<?php endif; ?>
+		</label>
+	<?php }
+
+	/**
+	 * Outputs the HTML for a textarea control.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  int     $post_id
+	 * @return void
+	 */
+	public function template_textarea( $post_id ) { ?>
 
 		<label>
 			<?php if ( $this->label ) : ?>
 				<span class="ccp-fields-label"><?php echo esc_html( $this->label ); ?></span>
 			<?php endif; ?>
 
-			<input type="text" class="widefat" name="<?php echo esc_attr( "ccp_setting_{$this->setting}" ); ?>" value="<?php echo esc_attr( $this->get_value( $post_id ) ); ?>" />
+			<textarea <?php $this->attr(); ?>><?php echo esc_textarea( $this->get_value( $post_id ) ); ?></textarea>
 
 			<?php if ( $this->description ) : ?>
+				<span class="ccp-fields-description description"><?php echo $this->description; ?></span>
+			<?php endif; ?>
+		</label>
+	<?php }
+
+	/**
+	 * Outputs the HTML for a drop-down select control.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  int     $post_id
+	 * @return void
+	 */
+	public function template_select( $post_id ) { ?>
+
+		<label>
+			<?php if ( $this->label ) : ?>
+				<span class="ccp-fields-label"><?php echo esc_html( $this->label ); ?></span>
+				<br />
+			<?php endif; ?>
+
+			<?php if ( $this->description ) : ?>
+				<span class="ccp-fields-description description"><?php echo $this->description; ?></span>
+				<br />
+			<?php endif; ?>
+
+			<select <?php $this->attr(); ?>>
+
+				<?php foreach ( $this->choices as $choice => $label ) : ?>
+
+					<option value="<?php echo esc_attr( $choice ); ?>" <?php selected( $this->get_value( $post_id ), $choice ); ?>><?php echo esc_html( $label ); ?></option>
+
+				<?php endforeach; ?>
+
+			</select>
+		</label>
+	<?php }
+
+	/**
+	 * Outputs the HTML for a radio input control.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  int     $post_id
+	 * @return void
+	 */
+	public function template_radio( $post_id ) { ?>
+
+		<?php if ( $this->label ) : ?>
+			<span class="ccp-fields-label"><?php echo esc_html( $this->label ); ?></span>
+			<br />
+		<?php endif; ?>
+
+		<?php if ( $this->description ) : ?>
+			<span class="ccp-fields-description description"><?php echo $this->description; ?></span>
+			<br />
+		<?php endif; ?>
+
+		<?php foreach ( $this->choices as $choice => $label ) : ?>
+
+			<label>
+				<input type="radio" value="<?php echo esc_attr( $choice ); ?>" <?php checked( $this->get_value( $post_id ), $choice ); ?> <?php $this->attr(); ?> />
+				<?php echo esc_html( $label ); ?><br />
+			</label>
+
+		<?php endforeach; ?>
+	<?php }
+
+	/**
+	 * Outputs the HTML for a checkbox input control.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  int     $post_id
+	 * @return void
+	 */
+	public function template_checkbox( $post_id ) { ?>
+
+		<label>
+			<input type="checkbox" value="<?php echo esc_attr( $this->get_value( $post_id ) ); ?>" <?php $this->attr(); ?><?php selected( $this->get_value( $post_id ) ); ?> />
+
+			<?php if ( $this->label ) : ?>
+				<span class="ccp-fields-label"><?php echo esc_html( $this->label ); ?></span>
+			<?php endif; ?>
+
+			<?php if ( $this->description ) : ?>
+				<br />
 				<span class="ccp-fields-description description"><?php echo $this->description; ?></span>
 			<?php endif; ?>
 		</label>
