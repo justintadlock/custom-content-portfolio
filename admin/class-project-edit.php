@@ -61,6 +61,9 @@ final class CCP_Project_Edit {
 
 		// Save metadata on post save.
 		add_action( 'save_post', array( $this, 'update' ) );
+
+		// Filter the post author drop-down.
+		add_filter( 'wp_dropdown_users_args', array( $this, 'dropdown_users_args' ), 10, 2 );
 	}
 
 	/**
@@ -108,6 +111,51 @@ final class CCP_Project_Edit {
 	public function update( $post_id ) {
 
 		$this->manager->update( $post_id );
+	}
+
+	/**
+	 * Filter on the post author drop-down (used in the "Author" meta box) to only show users
+	 * of roles that have the correct capability for editing portfolio projects.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array   $args
+	 * @param  array   $r
+	 * @global object  $wp_roles
+	 * @global object  $post
+	 * @return array
+	 */
+	function dropdown_users_args( $args, $r ) {
+		global $wp_roles, $post;
+
+		// WP version 4.4.0 check. Bail if we can't use the `role__in` argument.
+		if ( ! method_exists( 'WP_User_Query', 'fill_query_vars' ) )
+			return $args;
+
+		// Check that this is the correct drop-down.
+		if ( 'post_author_override' === $r['name'] && ccp_get_project_post_type() === $post->post_type ) {
+
+			$roles = array();
+
+			// Loop through the available roles.
+			foreach ( $wp_roles->roles as $name => $role ) {
+
+				// Get the edit posts cap.
+				$cap = get_post_type_object( ccp_get_project_post_type() )->cap->edit_posts;
+
+				// If the role is granted the edit posts cap, add it.
+				if ( isset( $role['capabilities'][ $cap ] ) && true === $role['capabilities'][ $cap ] )
+					$roles[] = $name;
+			}
+
+			// If we have roles, change the args to only get users of those roles.
+			if ( $roles ) {
+				$args['who']      = '';
+				$args['role__in'] = $roles;
+			}
+		}
+
+		return $args;
 	}
 
 	/**

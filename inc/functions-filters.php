@@ -37,7 +37,7 @@ function ccp_post_type_archive_title( $title ) {
 }
 
 /**
- * Filter on `post_type_link` to make sure that single portfolio projects have the correct 
+ * Filter on `post_type_link` to make sure that single portfolio projects have the correct
  * permalink.
  *
  * @since  0.1.0
