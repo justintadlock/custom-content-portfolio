@@ -16,6 +16,9 @@ add_filter( 'post_type_archive_title', 'ccp_post_type_archive_title' );
 # Filter the post type permalink.
 add_filter( 'post_type_link', 'ccp_post_type_link', 10, 2 );
 
+# Filter the post author link.
+add_filter( 'author_link', 'ccp_author_link_filter', 10, 3 );
+
 # Filter the Breadcrumb Trail plugin args.
 add_filter( 'breadcrumb_trail_args', 'ccp_breadcrumb_trail_args', 15 );
 
@@ -107,6 +110,32 @@ function ccp_post_type_link( $post_link, $post ) {
 	);
 
 	return str_replace( $rewrite_tags, $map_tags, $post_link );
+}
+
+/**
+ * Filter on `author_link` to change the URL when viewing a portfolio project. The new link
+ * should point to the portfolio author archive.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  string  $url
+ * @param  int     $author_id
+ * @param  string  $nicename
+ * @return string
+ */
+function ccp_author_link_filter( $url, $author_id, $nicename ) {
+	global $wp_rewrite;
+
+	if ( $nicename && ccp_get_project_post_type() === get_post_type() ) {
+
+		if ( $wp_rewrite->using_permalinks() )
+			$url = home_url( user_trailingslashit( trailingslashit( ccp_get_author_rewrite_slug() ) . $nicename ) );
+
+		else
+			$url = add_query_arg( array( 'post_type' => ccp_get_project_post_type(), 'author_name' => $nicename ), home_url( '/' ) );
+	}
+
+	return $url;
 }
 
 /**
