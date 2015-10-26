@@ -1,5 +1,10 @@
 <?php
 
+# Filter post format support for projects.
+add_action( 'load-post.php',     'ccp_post_format_support_filter' );
+add_action( 'load-post-new.php', 'ccp_post_format_support_filter' );
+add_action( 'load-edit.php',     'ccp_post_format_support_filter' );
+
 add_action( 'admin_enqueue_scripts', 'ccp_admin_register_scripts', 0 );
 add_action( 'admin_enqueue_scripts', 'ccp_admin_register_styles',  0 );
 
@@ -115,6 +120,43 @@ function ccp_project_details_register( $manager ) {
 
 	$manager->register_setting( new CCP_Fields_Setting_Date( $manager, 'start_date' ) );
 	$manager->register_setting( new CCP_Fields_Setting_Date( $manager, 'end_date' ) );
+}
+
+/**
+ * If a theme supports post formats, limit project to only only the audio, image,
+ * gallery, and video formats.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return void
+ */
+function ccp_post_format_support_filter() {
+
+	$screen       = get_current_screen();
+	$project_type = ccp_get_project_post_type();
+
+	// Bail if not on the projects screen.
+	if ( empty( $screen->post_type ) || $project_type !== $screen->post_type )
+		return;
+
+	// Check if the current theme supports formats.
+	if ( current_theme_supports( 'post-formats' ) ) {
+
+		$allowed = array( 'audio', 'image', 'gallery', 'video' );
+		$formats = get_theme_support( 'post-formats' );
+
+		// If we have formats, add t
+		if ( isset( $formats[0] ) ) {
+			$new_formats = array_intersect( $formats[0], $allowed );
+
+			// Remove post formats support.
+			remove_theme_support( 'post-formats' );
+
+			// If the theme supports the allowed formats, add support for them.
+			if ( $new_formats )
+				add_theme_support( 'post-formats', $new_formats );
+		}
+	}
 }
 
 /**
