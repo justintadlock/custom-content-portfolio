@@ -10,8 +10,16 @@
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
+# Add custom rewrite rules.
 add_action( 'init', 'ccp_rewrite_rules', 5 );
 
+/**
+ * Adds custom rewrite rules for the plugin.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return void
+ */
 function ccp_rewrite_rules() {
 
 	$project_type = ccp_get_project_post_type();

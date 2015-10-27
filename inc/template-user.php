@@ -10,6 +10,14 @@
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
+/**
+ * Conditional tag to check if viewing a project author archive.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  mixed  $author
+ * @return bool
+ */
 function ccp_is_author( $author = '' ) {
 
 	return apply_filters( 'ccp_is_author', ccp_is_project_archive() && is_author( $author ) );

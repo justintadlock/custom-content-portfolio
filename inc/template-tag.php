@@ -10,6 +10,14 @@
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
+/**
+ * Conditional tag to check if viewing a portfolio tag archive.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  mixed  $term
+ * @return bool
+ */
 function ccp_is_tag( $term = '' ) {
 
 	return apply_filters( 'ccp_is_tag', is_tax( ccp_get_tag_taxonomy(), $term ) );
