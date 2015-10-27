@@ -13,6 +13,10 @@
 # Filter the post type archive title.
 add_filter( 'post_type_archive_title', 'ccp_post_type_archive_title' );
 
+# Filter the archive title and description.
+add_filter( 'get_the_archive_title',       'ccp_get_the_archive_title',       5 );
+add_filter( 'get_the_archive_description', 'ccp_get_the_archive_description', 5 );
+
 # Filter the post type permalink.
 add_filter( 'post_type_link', 'ccp_post_type_link', 10, 2 );
 
@@ -33,10 +37,34 @@ add_filter( 'breadcrumb_trail_args', 'ccp_breadcrumb_trail_args', 15 );
  */
 function ccp_post_type_archive_title( $title ) {
 
-	if ( is_post_type_archive( ccp_get_project_post_type() ) )
-		$title = get_post_type_object( ccp_get_project_post_type() )->labels->archive_title;
+	return ccp_is_project_archive() ? get_post_type_object( ccp_get_project_post_type() )->labels->archive_title : $title;
+}
 
-	return $title;
+/**
+ * Filters the archive title. Note that we need this additional filter because core WP does
+ * things like add "Archives:" in front of the archive title.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  string  $title
+ * @return string
+ */
+function ccp_get_the_archive_title( $title ) {
+
+	return ccp_is_project_archive() ? post_type_archive_title( '', false ) : $title;
+}
+
+/**
+ * Filters the archive description.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  string  $desc
+ * @return string
+ */
+function ccp_get_the_archive_description( $desc ) {
+
+	return ccp_is_project_archive() && ! $desc ? ccp_get_portfolio_description() : $desc;
 }
 
 /**
