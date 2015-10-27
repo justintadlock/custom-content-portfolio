@@ -11,7 +11,6 @@
  * @link       http://themehybrid.com/plugins/custom-content-portfolio
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
- */
 
 /**
  * Handles building the fields manager.
