@@ -180,7 +180,7 @@ final class CCP_Settings_Page {
 		<label>
 			<input type="text" class="regular-text" name="ccp_settings[portfolio_title]" value="<?php echo esc_attr( ccp_get_portfolio_title() ); ?>" />
 			<br />
-			<span class="description"><?php esc_html_e( 'The name of your portfolio. Maybe used for the portfolio page title and other places, depending on your theme.', 'custom-content-portfolio' ); ?></span>
+			<span class="description"><?php esc_html_e( 'The name of your portfolio. May be used for the portfolio page title and other places, depending on your theme.', 'custom-content-portfolio' ); ?></span>
 		</label>
 	<?php }
 
