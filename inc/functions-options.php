@@ -1,4 +1,14 @@
 <?php
+/**
+ * Plugin options functions.
+ *
+ * @package    CustomContentPortfolio
+ * @subpackage Includes
+ * @author     Justin Tadlock <justin@justintadlock.com>
+ * @copyright  Copyright (c) 2013-2015, Justin Tadlock
+ * @link       http://themehybrid.com/plugins/custom-content-portfolio
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ */
 
 function ccp_get_portfolio_title() {
 	return apply_filters( 'ccp_get_portfolio_title', ccp_get_setting( 'portfolio_title' ) );

@@ -1,4 +1,14 @@
 <?php
+/**
+ * Admin-related functions and filters.
+ *
+ * @package    CustomContentPortfolio
+ * @subpackage Admin
+ * @author     Justin Tadlock <justin@justintadlock.com>
+ * @copyright  Copyright (c) 2013-2015, Justin Tadlock
+ * @link       http://themehybrid.com/plugins/custom-content-portfolio
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ */
 
 # Register scripts and styles.
 add_action( 'admin_enqueue_scripts', 'ccp_admin_register_scripts', 0 );

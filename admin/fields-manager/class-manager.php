@@ -3,6 +3,14 @@
  * Custom fields manager.  The purpose of this class is to offer a mini framework for putting
  * together a "manager box" that can be used for handling custom fields.  This box contains
  * sections and controls.  These can be tabbed or have any type of interface.
+ *
+ * @package    CustomContentPortfolio
+ * @subpackage Admin
+ * @author     Justin Tadlock <justin@justintadlock.com>
+ * @copyright  Copyright (c) 2013-2015, Justin Tadlock
+ * @link       http://themehybrid.com/plugins/custom-content-portfolio
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ */
  */
 
 /**

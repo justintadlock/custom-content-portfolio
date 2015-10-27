@@ -1,4 +1,14 @@
 <?php
+/**
+ * Plugin settings screen.
+ *
+ * @package    CustomContentPortfolio
+ * @subpackage Admin
+ * @author     Justin Tadlock <justin@justintadlock.com>
+ * @copyright  Copyright (c) 2013-2015, Justin Tadlock
+ * @link       http://themehybrid.com/plugins/custom-content-portfolio
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ */
 
 /**
  * Sets up and handles the plugin settings screen.
