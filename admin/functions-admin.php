@@ -118,14 +118,12 @@ function ccp_project_details_register( $manager ) {
 		'description' => esc_html__( 'Write a short description (excerpt) of the project.', 'custom-content-portfolio' )
 	);
 
-	$manager->register_control( new CCP_Fields_Control(      $manager, 'url',        $url_args        ) );
-	$manager->register_control( new CCP_Fields_Control(      $manager, 'client',     $client_args     ) );
-	$manager->register_control( new CCP_Fields_Control(      $manager, 'location',   $location_args   ) );
-	$manager->register_control( new CCP_Fields_Control_Date( $manager, 'start_date', $start_date_args ) );
-	$manager->register_control( new CCP_Fields_Control_Date( $manager, 'end_date',   $end_date_args   ) );
-
-	if ( ! post_type_supports( ccp_get_project_post_type(), 'excerpt' ) )
-		$manager->register_control( new CCP_Fields_Control_Excerpt( $manager, 'excerpt', $excerpt_args ) );
+	$manager->register_control( new CCP_Fields_Control(         $manager, 'url',        $url_args        ) );
+	$manager->register_control( new CCP_Fields_Control(         $manager, 'client',     $client_args     ) );
+	$manager->register_control( new CCP_Fields_Control(         $manager, 'location',   $location_args   ) );
+	$manager->register_control( new CCP_Fields_Control_Date(    $manager, 'start_date', $start_date_args ) );
+	$manager->register_control( new CCP_Fields_Control_Date(    $manager, 'end_date',   $end_date_args   ) );
+	$manager->register_control( new CCP_Fields_Control_Excerpt( $manager, 'excerpt',    $excerpt_args    ) );
 
 	/* === Register Settings === */
 

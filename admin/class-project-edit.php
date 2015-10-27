@@ -59,6 +59,9 @@ final class CCP_Project_Edit {
 		// Output the project details box.
 		add_action( 'edit_form_after_editor', array( $this, 'project_details_box' ) );
 
+		// Add/Remove meta boxes.
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
+
 		// Save metadata on post save.
 		add_action( 'save_post', array( $this, 'update' ) );
 
@@ -77,6 +80,19 @@ final class CCP_Project_Edit {
 
 		wp_enqueue_style( 'ccp-admin' );
 		wp_enqueue_script( 'ccp-edit-project' );
+	}
+
+	/**
+	 * Adds/Removes meta boxes.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string  $post_type
+	 * @return void
+	 */
+	public function add_meta_boxes( $post_type ) {
+
+		remove_meta_box( 'postexcerpt', $post_type, 'normal' );
 	}
 
 	/**

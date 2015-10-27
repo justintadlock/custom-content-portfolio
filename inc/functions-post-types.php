@@ -153,6 +153,7 @@ function ccp_register_post_types() {
 		'supports' => array(
 			'title',
 			'editor',
+			'excerpt',
 			'author',
 			'thumbnail',
 			'post-formats'
