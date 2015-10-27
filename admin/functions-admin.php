@@ -123,6 +123,18 @@ function ccp_project_details_register( $manager ) {
 }
 
 /**
+ * Returns an array of post formats allowed for the project post type.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return array
+ */
+function ccp_get_allowed_project_formats() {
+
+	return apply_filters( 'ccp_get_allowed_project_formats', array( 'audio', 'gallery', 'image', 'video' ) );
+}
+
+/**
  * If a theme supports post formats, limit project to only only the audio, image,
  * gallery, and video formats.
  *
@@ -142,12 +154,11 @@ function ccp_post_format_support_filter() {
 	// Check if the current theme supports formats.
 	if ( current_theme_supports( 'post-formats' ) ) {
 
-		$allowed = array( 'audio', 'image', 'gallery', 'video' );
 		$formats = get_theme_support( 'post-formats' );
 
 		// If we have formats, add t
 		if ( isset( $formats[0] ) ) {
-			$new_formats = array_intersect( $formats[0], $allowed );
+			$new_formats = array_intersect( $formats[0], ccp_get_allowed_project_formats() );
 
 			// Remove post formats support.
 			remove_theme_support( 'post-formats' );
