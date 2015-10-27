@@ -1,13 +1,24 @@
 <?php
 
+# Register scripts and styles.
+add_action( 'admin_enqueue_scripts', 'ccp_admin_register_scripts', 0 );
+add_action( 'admin_enqueue_scripts', 'ccp_admin_register_styles',  0 );
+
+# Registers project details box sections, controls, and settings.
+add_action( 'ccp_project_details_manager_register', 'ccp_project_details_register', 5 );
+
 # Filter post format support for projects.
 add_action( 'load-post.php',     'ccp_post_format_support_filter' );
 add_action( 'load-post-new.php', 'ccp_post_format_support_filter' );
 add_action( 'load-edit.php',     'ccp_post_format_support_filter' );
 
-add_action( 'admin_enqueue_scripts', 'ccp_admin_register_scripts', 0 );
-add_action( 'admin_enqueue_scripts', 'ccp_admin_register_styles',  0 );
-
+/**
+ * Registers admin scripts.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return void
+ */
 function ccp_admin_register_scripts() {
 
 	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
@@ -15,15 +26,19 @@ function ccp_admin_register_scripts() {
 	wp_register_script( 'ccp-edit-project', ccp_plugin()->js_uri . "edit-project{$min}.js", array( 'jquery' ), '', true );
 }
 
+/**
+ * Registers admin styles.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return void
+ */
 function ccp_admin_register_styles() {
 
 	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 	wp_register_style( 'ccp-admin', ccp_plugin()->css_uri . "admin{$min}.css" );
 }
-
-# Registers default groups.
-add_action( 'ccp_project_details_manager_register', 'ccp_project_details_register', 5 );
 
 /**
  * Registers the default cap groups.
