@@ -77,6 +77,27 @@ final class CCP_Project_Edit {
 
 		// Filter the post author drop-down.
 		add_filter( 'wp_dropdown_users_args', array( $this, 'dropdown_users_args' ), 10, 2 );
+
+		// Title and editor help tab.
+		$screen->add_help_tab(
+			array(
+				'id'       => 'title_editor',
+				'title'    => esc_html__( 'Title and Editor', 'custom-content-portfolio' ),
+				'callback' => array( $this, 'help_tab_title_editor' )
+			)
+		);
+
+		// Project details help tab.
+		$screen->add_help_tab(
+			array(
+				'id'       => 'project_details',
+				'title'    => esc_html__( 'Project Details', 'custom-content-portfolio' ),
+				'callback' => array( $this, 'help_tab_project_details' )
+			)
+		);
+
+		// Set the help sidebar.
+		$screen->set_help_sidebar( ccp_get_help_sidebar_text() );
 	}
 
 	/**
@@ -183,6 +204,44 @@ final class CCP_Project_Edit {
 
 		return $args;
 	}
+
+	/**
+	 * Displays the title and editor help tab.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function help_tab_title_editor() { ?>
+
+		<ul>
+			<li><?php _e( "<strong>Title:</strong> Enter a title for your project. After you enter a title, you'll see the permalink below, which you can edit.", 'custom-content-portfolio' ); ?></li>
+			<li><?php _e( '<strong>Editor:</strong> The editor allows you to add or edit content for your project. You can insert text, media, or shortcodes.', 'custom-content-portfolio' ); ?></li>
+		</ul>
+	<?php }
+
+	/**
+	 * Displays the project details help tab.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function help_tab_project_details() { ?>
+
+		<p>
+			<?php esc_html_e( 'The Project Details meta box allows you to customize the details of your project. All fields are optional.', 'custom-content-portfolio' ); ?>
+		</p>
+
+		<ul>
+			<li><?php _e( '<strong>URL:</strong> The URL to the Web site or page associated with the project, such as a client Web site.', 'custom-content-portfolio' ); ?></li>
+			<li><?php _e( '<strong>Client:</strong> The name of the client the project was built for.', 'custom-content-portfolio' ); ?></li>
+			<li><?php _e( '<strong>Location:</strong> A physical location where the project took place (e.g., Highland Home, AL, USA).', 'custom-content-portfolio' ); ?></li>
+			<li><?php _e( '<strong>Start Date:</strong> The date the project began.', 'custom-content-portfolio' ); ?></li>
+			<li><?php _e( '<strong>End Date:</strong> The date the project was completed.', 'custom-content-portfolio' ); ?></li>
+			<li><?php _e( '<strong>Description:</strong> A short summary of the project. Some themes may show this on archive pages.', 'custom-content-portfolio' ); ?></li>
+		</ul>
+	<?php }
 
 	/**
 	 * Returns the instance.
