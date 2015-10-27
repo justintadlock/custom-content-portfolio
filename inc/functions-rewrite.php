@@ -28,3 +28,58 @@ function ccp_rewrite_rules() {
 	add_rewrite_rule( $author_slug . '/([^/]+)/page/?([0-9]{1,})/?$', 'index.php?post_type=' . $project_type . '&author_name=$matches[1]&paged=$matches[2]', 'top' );
 	add_rewrite_rule( $author_slug . '/([^/]+)/?$',                   'index.php?post_type=' . $project_type . '&author_name=$matches[1]',                   'top' );
 }
+
+/**
+ * Returns the project rewrite slug used for single projects.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return string
+ */
+function ccp_get_project_rewrite_slug() {
+	$portfolio_base = ccp_get_portfolio_rewrite_base();
+	$project_base   = ccp_get_project_rewrite_base();
+
+	$slug = $project_base ? trailingslashit( $portfolio_base ) . $project_base : $portfolio_base;
+
+	return apply_filters( 'ccp_get_project_rewrite_slug', $slug );
+}
+
+/**
+ * Returns the category rewrite slug used for category archives.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return string
+ */
+function ccp_get_category_rewrite_slug() {
+	$slug = trailingslashit( ccp_get_portfolio_rewrite_base() ) . ccp_get_category_rewrite_base();
+
+	return apply_filters( 'ccp_get_category_rewrite_slug', $slug );
+}
+
+/**
+ * Returns the tag rewrite slug used for tag archives.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return string
+ */
+function ccp_get_tag_rewrite_slug() {
+	$slug = trailingslashit( ccp_get_portfolio_rewrite_base() ) . ccp_get_tag_rewrite_base();
+
+	return apply_filters( 'ccp_get_tag_rewrite_slug', $slug );
+}
+
+/**
+ * Returns the author rewrite slug used for author archives.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return string
+ */
+function ccp_get_author_rewrite_slug() {
+	$slug = trailingslashit( ccp_get_portfolio_rewrite_base() ) . ccp_get_author_rewrite_base();
+
+	return apply_filters( 'ccp_get_author_rewrite_slug', $slug );
+}
