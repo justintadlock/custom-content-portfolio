@@ -23,6 +23,9 @@ add_filter( 'post_type_link', 'ccp_post_type_link', 10, 2 );
 # Filter the post author link.
 add_filter( 'author_link', 'ccp_author_link_filter', 10, 3 );
 
+# Force taxonomy term selection.
+add_action( 'save_post', 'ccp_force_term_selection' );
+
 # Filter the Breadcrumb Trail plugin args.
 add_filter( 'breadcrumb_trail_args', 'ccp_breadcrumb_trail_args', 15 );
 
@@ -167,6 +170,79 @@ function ccp_author_link_filter( $url, $author_id, $nicename ) {
 }
 
 /**
+ * If a project has `%portfolio_category%` or `%portfolio_tag%` in its permalink structure,
+ * it must have a term set for the taxonomy.  This function is a callback on `save_post`
+ * that checks if a term is set.  If not, it forces the first term of the taxonomy to be
+ * the selected term.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  int    $post_id
+ * @return void
+ */
+function ccp_force_term_selection( $post_id ) {
+
+	if ( ccp_get_project_post_type() === get_post_type( $post_id ) ) {
+
+		$project_base = ccp_get_project_rewrite_base();
+		$cat_tax      = ccp_get_category_taxonomy();
+		$tag_tax      = ccp_get_tag_taxonomy();
+
+		if ( false !== strpos( $project_base, "%{$cat_tax}%" ) )
+			ccp_set_term_if_none( $post_id, $cat_tax, ccp_get_default_category() );
+
+		if ( false !== strpos( $project_base, "%{$tag_tax}%" ) )
+			ccp_set_term_if_none( $post_id, $tag_tax, ccp_get_default_tag() );
+	}
+}
+
+/**
+ * Checks if a post has a term of the given taxonomy.  If not, set it with the first
+ * term available from the taxonomy.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  int     $post_id
+ * @param  string  $taxonomy
+ * @param  int     $default
+ * @return void
+ */
+function ccp_set_term_if_none( $post_id, $taxonomy, $default = 0 ) {
+
+	// Get the current post terms.
+	$terms = wp_get_post_terms( $post_id, $taxonomy );
+
+	// If no terms are set, let's roll.
+	if ( ! $terms ) {
+
+		$new_term = false;
+
+		// Get the default term if set.
+		if ( $default )
+			$new_term = get_term( $default, $taxonomy );
+
+		// If no default term or if there's an error, get the first term.
+		if ( ! $new_term || is_wp_error( $new_term ) ) {
+			$available = get_terms( $taxonomy, array( 'number' => 1 ) );
+
+			// Get the first term.
+			$new_term = $available ? array_shift( $available ) : false;
+		}
+
+		// Only run if there are taxonomy terms.
+		if ( $new_term ) {
+			$tax_object = get_taxonomy( $taxonomy );
+
+			// Use the ID for hierarchical taxonomies. Use the slug for non-hierarchical.
+			$slug_or_id = $tax_object->hierarchical ? $new_term->term_id : $new_term->slug;
+
+			// Set the new post term.
+			wp_set_post_terms( $post_id, $slug_or_id, $taxonomy, true );
+		}
+	}
+}
+
+/**
  * Filters the Breadcrumb Trail plugin arguments.  We're basically just telling it to show the
  * `portfolio_category` taxonomy when viewing single portfolio projects.
  *
@@ -178,9 +254,10 @@ function ccp_author_link_filter( $url, $author_id, $nicename ) {
 function ccp_breadcrumb_trail_args( $args ) {
 
 	$project_type = ccp_get_project_post_type();
+	$project_base = ccp_get_project_rewrite_base();
 
-	if ( ! isset( $args['post_taxonomy'][ $project_type ] ) )
-		$args['post_taxonomy'][ $project_type ] = 'portfolio_category';
+	if ( false === strpos( $project_base, '%' ) && ! isset( $args['post_taxonomy'][ $project_type ] ) )
+		$args['post_taxonomy'][ $project_type ] = ccp_get_category_taxonomy();
 
 	return $args;
 }

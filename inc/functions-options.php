@@ -89,6 +89,28 @@ function ccp_get_author_rewrite_base() {
 }
 
 /**
+ * Returns the default category term ID.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return int
+ */
+function ccp_get_default_category() {
+	return apply_filters( 'ccp_get_default_category', 0 );
+}
+
+/**
+ * Returns the default tag term ID.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return int
+ */
+function ccp_get_default_tag() {
+	return apply_filters( 'ccp_get_default_tag', 0 );
+}
+
+/**
  * Returns a plugin setting.
  *
  * @since  1.0.0
