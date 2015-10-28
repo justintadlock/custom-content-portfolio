@@ -47,6 +47,10 @@ final class CCP_Admin_Projects {
 		if ( empty( $screen->post_type ) || $project_type !== $screen->post_type )
 			return;
 
+		// Category and tag table filters.
+		add_action( 'restrict_manage_posts', array( $this, 'categories_dropdown' ) );
+		add_action( 'restrict_manage_posts', array( $this, 'tags_dropdown'       ) );
+
 		// Custom columns on the edit portfolio items screen.
 		add_filter( "manage_edit-{$project_type}_columns",        array( $this, 'columns' )              );
 		add_action( "manage_{$project_type}_posts_custom_column", array( $this, 'custom_column' ), 10, 2 );
@@ -101,6 +105,56 @@ final class CCP_Admin_Projects {
 			.fixed .column-taxonomy-portfolio_tag { width: 15%; }
 		}</style>
 	<?php }
+
+	/**
+	 * Renders a categories dropdown below the table nav.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function categories_dropdown() {
+
+		$this->terms_dropdown( ccp_get_category_taxonomy() );
+	}
+
+	/**
+	 * Renders a tags dropdown below the table nav.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function tags_dropdown() {
+
+		$this->terms_dropdown( ccp_get_tag_taxonomy() );
+	}
+
+	/**
+	 * Renders a terms dropdown based on the given taxonomy.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function terms_dropdown( $taxonomy ) {
+
+		$tax_object = get_taxonomy( $taxonomy );
+
+		$value = isset( $_GET[ $taxonomy ] ) ? esc_attr( $_GET[ $taxonomy ] ) : '';
+		$terms = get_terms( $taxonomy );
+
+		if ( $terms ) {
+			printf( '<select name="%s" class="postform">', esc_attr( $taxonomy ) );
+
+			printf( '<option value=""%s>%s</option>', selected( '', $value, false ), $tax_object->labels->all_items );
+
+			foreach ( $terms as $term )
+				printf( '<option value="%s"%s>%s (%s)</option>', esc_attr( $term->slug ), selected( $term->slug, $value, false ), esc_html( $term->name ), esc_html( $term->count ) );
+
+			echo '</select>';
+		}
+	}
 
 	/**
 	 * Sets up custom columns on the projects edit screen.
