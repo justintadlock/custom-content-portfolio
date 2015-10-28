@@ -157,7 +157,7 @@ function ccp_post_type_link( $post_link, $post ) {
 function ccp_author_link_filter( $url, $author_id, $nicename ) {
 	global $wp_rewrite;
 
-	if ( $nicename && ccp_get_project_post_type() === get_post_type() ) {
+	if ( $nicename && ccp_is_project() ) {
 
 		if ( $wp_rewrite->using_permalinks() )
 			$url = home_url( user_trailingslashit( trailingslashit( ccp_get_author_rewrite_slug() ) . $nicename ) );
@@ -182,7 +182,7 @@ function ccp_author_link_filter( $url, $author_id, $nicename ) {
  */
 function ccp_force_term_selection( $post_id ) {
 
-	if ( ccp_get_project_post_type() === get_post_type( $post_id ) ) {
+	if ( ccp_is_project( $post_id ) ) {
 
 		$project_base = ccp_get_project_rewrite_base();
 		$cat_tax      = ccp_get_category_taxonomy();

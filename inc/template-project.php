@@ -55,6 +55,21 @@ function ccp_is_project_archive() {
 }
 
 /**
+ * Checks if the current post is a project.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  int     $post_id
+ * @return bool
+ */
+function ccp_is_project( $post_id = '' ) {
+
+	$post_id = ccp_get_project_id( $post_id );
+
+	return apply_filters( 'ccp_is_project', ccp_get_project_post_type() === get_post_type( $post_id ), $post_id );
+}
+
+/**
  * Checks if the project has the "complete" post status.
  *
  * @since  1.0.0
