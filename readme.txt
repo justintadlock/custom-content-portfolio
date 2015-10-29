@@ -78,6 +78,7 @@ The official support forum for this plugin is located at <a href="http://themehy
 2. Edit project admin screen.
 3. Project image media modal.
 4. Portfolio settings admin screen.
+5. Screenshot of the portfolio on the front end.
 
 == Changelog ==
 
