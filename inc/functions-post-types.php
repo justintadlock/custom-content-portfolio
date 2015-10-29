@@ -156,7 +156,11 @@ function ccp_register_post_types() {
 			'excerpt',
 			'author',
 			'thumbnail',
-			'post-formats'
+			'post-formats',
+
+			// Theme/Plugin feature support.
+			'custom-background', // Custom Background Extended
+			'custom-header',     // Custom Header Extended
 		)
 	);
 
