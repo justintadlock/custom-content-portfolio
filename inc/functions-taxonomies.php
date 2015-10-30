@@ -216,7 +216,7 @@ function ccp_register_taxonomies() {
 		'show_tagcloud'     => true,
 		'show_admin_column' => true,
 		'hierarchical'      => true,
-		'query_var'         => 'portfolio_category',
+		'query_var'         => ccp_get_category_taxonomy(),
 		'capabilities'      => ccp_get_category_capabilities(),
 		'labels'            => ccp_get_category_labels(),
 
@@ -237,7 +237,7 @@ function ccp_register_taxonomies() {
 		'show_tagcloud'     => true,
 		'show_admin_column' => true,
 		'hierarchical'      => false,
-		'query_var'         => 'portfolio_tag',
+		'query_var'         => ccp_get_tag_taxonomy(),
 		'capabilities'      => ccp_get_tag_capabilities(),
 		'labels'            => ccp_get_tag_labels(),
 
