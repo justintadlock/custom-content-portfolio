@@ -1,69 +1,63 @@
 jQuery( document ).ready( function() {
 
+	/* === Edit sticky status in the "Publish" meta box. === */
 
-	/* Get the original post status in the case the user clicks "Cancel". */
-	var orig_status = jQuery( 'select[name=ccp_project_type] option:selected' ).val();
+	var sticky_checkbox = jQuery( 'input[name=ccp_project_sticky]' );
+	var is_sticky       = jQuery( sticky_checkbox ).prop( 'checked' );
 
-	/* When user clicks the "Edit" post status link. */
-	jQuery( 'a.ccp-edit-project-type' ).click(
+	// When user clicks the "Edit" sticky link.
+	jQuery( 'a.ccp-edit-sticky' ).click(
 		function( j ) {
 			j.preventDefault();
 
-			/* Grab the original status again in case user clicks "OK" or "Cancel" more than once. */
-			orig_status = jQuery( 'select[name=ccp_project_type] option:selected' ).val();
+			// Grab the original status again in case user clicks "OK" or "Cancel" more than once.
+			is_sticky = jQuery( sticky_checkbox ).prop( 'checked' );
 
-			/* Hide this link. */
+			// Hide this link.
 			jQuery( this ).hide();
 
-			/* Open the post status select section. */
-			jQuery( '#ccp-project-type-select' ).slideToggle();
+			// Open the sticky edit.
+			jQuery( '#ccp-sticky-edit' ).slideToggle();
 		}
 	);
 
 	/* When the user clicks the "OK" post status button. */
-	jQuery( 'a.ccp-save-project-type' ).click(
+	jQuery( 'a.ccp-save-sticky' ).click(
 		function( j ) {
 			j.preventDefault();
 
-			/* Close the post status select section. */
-			jQuery( '#ccp-project-type-select' ).slideToggle();
+			// Close the sticky edit.
+			jQuery( '#ccp-sticky-edit' ).slideToggle();
 
-			/* Show the hidden "Edit" link. */
-			jQuery( 'a.ccp-edit-project-type' ).show();
+			// Show the hidden "Edit" link.
+			jQuery( 'a.ccp-edit-sticky' ).show();
 		}
 	);
 
-	/* When the user clicks the "Cancel" post status link. */
-	jQuery( 'a.ccp-cancel-project-type' ).click(
+	// When the user clicks the "Cancel" edit sticky link.
+	jQuery( 'a.ccp-cancel-sticky' ).click(
 		function( j ) {
 			j.preventDefault();
 
-			/* Close the post status select section. */
-			jQuery( '#ccp-project-type-select' ).slideToggle();
+			// Close the sticky edit.
+			jQuery( '#ccp-sticky-edit' ).slideToggle();
 
-			/* Show the hidden "Edit" link. */
-			jQuery( 'a.ccp-edit-project-type' ).show();
+			// Show the hidden "Edit" link.
+			jQuery( 'a.ccp-edit-sticky' ).show();
 
-			/* Check the original status radio since we're canceling. */
-			jQuery( 'option[value="' + orig_status + '"]' ).prop( 'selected', true ).trigger( 'change' );
-
-			/* Change the post status text. */
-			/*jQuery( 'strong.ccp-current-project-type' ).text(
-				jQuery( 'option[value="' + orig_status + '"]' ).text()
-			);*/
+			// Set the original checked/not-checked since we're canceling.
+			jQuery( sticky_checkbox ).prop( 'checked', is_sticky ).trigger( 'change' );
 		}
 	);
 
-	/* When a new status is selected, change the post status text to match the selected status. */
-	jQuery( 'select[name=ccp_project_type]' ).change(
+	// When the sticky status changes.
+	jQuery( sticky_checkbox ).change(
 		function() {
-			jQuery( 'strong.ccp-current-project-type' ).text(
-				jQuery( 'option:selected', this ).text()
+			jQuery( 'strong.ccp-sticky-status' ).text(
+				jQuery( sticky_checkbox ).prop( 'checked' ) ? ccp_i18n.label_sticky : ccp_i18n.label_not_sticky
 			);
 		}
 	);
-
-
 
 	/* ====== Tabs ====== */
 

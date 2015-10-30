@@ -113,24 +113,27 @@ final class CCP_Project_Edit {
 
 		$post_type_object = get_post_type_object( ccp_get_project_post_type() );
 		$is_sticky = ccp_is_project_sticky( $post->ID );
-		$label = $is_sticky ? esc_html__( 'Sticky', 'custom-content-portfolio' ) : esc_html__( 'Normal', 'custom-content-portfolio' ); ?>
+		$label = $is_sticky ? esc_html__( 'Sticky', 'custom-content-portfolio' ) : esc_html__( 'Not Sticky', 'custom-content-portfolio' ); ?>
 
-		<div class="misc-pub-section curtime misc-pub-project-type">
+		<div class="misc-pub-section curtime misc-pub-project-sticky">
+
+			<?php wp_nonce_field( 'ccp_project_publish_box_nonce', 'ccp_project_publish_box' ); ?>
+
 			<i class="dashicons dashicons-sticky"></i>
-			<?php printf( esc_html__( 'Sticky: %s', 'custom-content-portfolio' ), "<strong class='ccp-current-project-type'>{$label}</strong>" ); ?>
+			<?php printf( esc_html__( 'Sticky: %s', 'custom-content-portfolio' ), "<strong class='ccp-sticky-status'>{$label}</strong>" ); ?>
 
 			<?php if ( current_user_can( $post_type_object->cap->publish_posts ) ) : ?>
 
-				<a href="#ccp-project-type-select" class="ccp-edit-project-type"><span aria-hidden="true"><?php esc_html_e( 'Edit', 'custom-content-portfolio' ); ?></span> <span class="screen-reader-text"><?php esc_html_e( 'Edit sticky status', 'custom-content-portfolio' ); ?></span></a>
+				<a href="#ccp-sticky-edit" class="ccp-edit-sticky"><span aria-hidden="true"><?php esc_html_e( 'Edit', 'custom-content-portfolio' ); ?></span> <span class="screen-reader-text"><?php esc_html_e( 'Edit sticky status', 'custom-content-portfolio' ); ?></span></a>
 
-				<div id="ccp-project-type-select" class="hide-if-js">
-					<select name="ccp_project_type" id="ccp-project-type">
-						<option value="" <?php selected( ! $is_sticky ); ?>><?php esc_html_e( 'Normal', 'custom-content-portfolio' ); ?></option>
-						<option value="sticky" <?php selected( $is_sticky ); ?>><?php esc_html_e( 'Sticky', 'custom-content-portfolio' ); ?></option>
-					</select>
-					<a href="#ccp-project-type" class="ccp-save-project-type hide-if-no-js button"><?php esc_html_e( 'OK', 'custom-content-portolio' ); ?></a>
-					<a href="#ccp-project-type" class="ccp-cancel-project-type hide-if-no-js button-cancel"><?php esc_html_e( 'Cancel', 'custom-content-portolio' ); ?></a>
-				</div><!-- #ccp-project-type-select -->
+				<div id="ccp-sticky-edit" class="hide-if-js">
+					<label>
+						<input type="checkbox" name="ccp_project_sticky" id="ccp-project-sticky" <?php checked( $is_sticky ); ?> value="true" />
+						<?php esc_html_e( 'Stick to the portfolio page', 'custom-content-portfolio' ); ?>
+					</label>
+					<a href="#ccp-project-sticky" class="ccp-save-sticky hide-if-no-js button"><?php esc_html_e( 'OK', 'custom-content-portolio' ); ?></a>
+					<a href="#ccp-project-sticky" class="ccp-cancel-sticky hide-if-no-js button-cancel"><?php esc_html_e( 'Cancel', 'custom-content-portolio' ); ?></a>
+				</div><!-- #ccp-sticky-edit -->
 
 			<?php endif; ?>
 
@@ -196,12 +199,19 @@ final class CCP_Project_Edit {
 
 		$this->manager->update( $post_id );
 
-		$should_stick = sanitize_key( $_POST['ccp_project_type'] );
+		// Verify the nonce.
+		if ( ! isset( $_POST['ccp_project_publish_box'] ) || ! wp_verify_nonce( $_POST['ccp_project_publish_box'], 'ccp_project_publish_box_nonce' ) )
+			return;
 
-		if ( 'sticky' === $should_stick && ! ccp_is_project_sticky( $post_id ) )
+		// Is the sticky checkbox checked?
+		$should_stick = ! empty( $_POST['ccp_project_sticky'] );
+
+		// If checked, add the project if it is not sticky.
+		if ( $should_stick && ! ccp_is_project_sticky( $post_id ) )
 			ccp_add_sticky_project( $post_id );
 
-		elseif ( '' === $should_stick && ccp_is_project_sticky( $post_id ) )
+		// If not checked, remove the project if it is sticky.
+		elseif ( ! $should_stick && ccp_is_project_sticky( $post_id ) )
 			ccp_remove_sticky_project( $post_id );
 	}
 
