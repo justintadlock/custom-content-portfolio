@@ -1,6 +1,10 @@
 
 /* ====== Edit/New Role Screen. ====== */
 
+.misc-pub-project-type .dashicons {
+	color: rgb( 130, 135, 140 );
+}
+
 /* === Edit Capabilities Tabs === */
 
 /* Wrapper box */

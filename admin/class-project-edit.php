@@ -72,6 +72,10 @@ final class CCP_Project_Edit {
 		// Add/Remove meta boxes.
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 
+		//do_action( 'post_submitbox_misc_actions', $post );
+		// Add custom option to the publish/submit meta box.
+		add_action( 'post_submitbox_misc_actions', array( $this, 'submitbox_misc_actions' ) );
+
 		// Save metadata on post save.
 		add_action( 'save_post', array( $this, 'update' ) );
 
@@ -99,6 +103,37 @@ final class CCP_Project_Edit {
 		// Set the help sidebar.
 		$screen->set_help_sidebar( ccp_get_help_sidebar_text() );
 	}
+
+	public function submitbox_misc_actions( $post = '' ) {
+
+		// Pre-4.4.0 compatibility.
+		if ( ! $post ) {
+			global $post;
+		}
+
+		$post_type_object = get_post_type_object( $post->post_type );
+
+		if ( ! current_user_can( $post_type_object->cap->publish_posts ) )
+			return;
+
+		$project_type = ccp_get_project_meta( $post->ID, 'type' );
+
+		$stickies = get_option( 'ccp_sticky_projects', array() ); ?>
+
+		<div class="misc-pub-section curtime misc-pub-project-type">
+			<i class="dashicons dashicons-sticky"></i>
+			<?php printf( esc_html__( 'Type: %s', 'custom-content-portfolio' ), '<strong class="ccp-current-project-type">' . ccp_get_project_type_object( ccp_get_project_type( $post->ID ) )->label . '</strong>' ); ?>
+			<a href="#ccp-project-type-select" class="ccp-edit-project-type"><?php esc_html_e( 'Edit', 'custom-content-portfolio' ); ?></a>
+
+			<div id="ccp-project-type-select" class="hide-if-js">
+
+<?php ccp_dropdown_project_type( array( 'selected' => ccp_get_project_type( $post->ID ) ) ); ?>
+<a href="#ccp-project-type" class="ccp-save-project-type hide-if-no-js button">OK</a>
+<a href="#ccp-project-type" class="ccp-cancel-project-type hide-if-no-js button-cancel">Cancel</a>
+			</div>
+
+		</div>
+	<?php }
 
 	/**
 	 * Load scripts and styles.
@@ -158,6 +193,21 @@ final class CCP_Project_Edit {
 	public function update( $post_id ) {
 
 		$this->manager->update( $post_id );
+
+		// Get the new project type.
+		$project_type = sanitize_key( $_POST['ccp_project_type'] );
+
+		if ( ccp_get_project_type( $post_id ) !== $project_type && ccp_project_type_exists( $project_type ) ) {
+
+			if ( 'sticky' === $project_type )
+				ccp_add_sticky_project( $post_id );
+
+			elseif ( 'sticky' !== $project_type && ccp_is_project_sticky( $post_id ) )
+				ccp_remove_sticky_project( $post_id );
+
+			// Set the new project type.
+			ccp_set_project_type( $post_id, $project_type );
+		}
 	}
 
 	/**

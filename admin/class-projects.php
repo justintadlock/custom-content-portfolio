@@ -28,6 +28,9 @@ final class CCP_Admin_Projects {
 	private function __construct() {
 
 		add_action( 'load-edit.php', array( $this, 'load' ) );
+
+		// Hook the handler to the manage projects load screen.
+		add_action( 'ccp_load_manage_projects', array( $this, 'handler' ), 0 );
 	}
 
 	/**
@@ -47,6 +50,18 @@ final class CCP_Admin_Projects {
 		if ( empty( $screen->post_type ) || $project_type !== $screen->post_type )
 			return;
 
+		// Custom action for loading the manage projects screen.
+		do_action( 'ccp_load_manage_projects' );
+
+		// Filter the `request` vars.
+		add_filter( 'request', array( $this, 'request' ) );
+
+		// Add custom admin notices.
+		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+
+		// Add custom views.
+		add_filter( "views_edit-{$project_type}", array( $this, 'views' ) );
+
 		// Category and tag table filters.
 		add_action( 'restrict_manage_posts', array( $this, 'categories_dropdown' ) );
 		add_action( 'restrict_manage_posts', array( $this, 'tags_dropdown'       ) );
@@ -57,6 +72,12 @@ final class CCP_Admin_Projects {
 
 		// Print custom styles.
 		add_action( 'admin_head', array( $this, 'print_styles' ) );
+
+		// Filter post states (shown next to post title).
+		add_filter( 'display_post_states', array( $this, 'display_post_states' ), 0, 2 );
+
+		// Filter the row actions (shown below title).
+		add_filter( 'post_row_actions', array( $this, 'row_actions' ), 10, 2 );
 
 		// Overview help tab.
 		$screen->add_help_tab(
@@ -90,6 +111,29 @@ final class CCP_Admin_Projects {
 	}
 
 	/**
+	 * Filter on the `request` hook to change what posts are loaded.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array  $vars
+	 * @return array
+	 */
+	public function request( $vars ) {
+
+		$new_vars = array();
+
+		// Get projects with a specific type. */
+		if ( isset( $_GET['project_type'] ) && ccp_project_type_exists( $_GET['project_type'] ) ) {
+
+			$new_vars['meta_key']   = 'project_type';
+			$new_vars['meta_value'] = sanitize_key( $_GET['project_type'] );
+		}
+
+		// Return the vars, merging with the new ones.
+		return array_merge( $vars, $new_vars );
+	}
+
+	/**
 	 * Print styles.
 	 *
 	 * @since  1.0.0
@@ -105,6 +149,36 @@ final class CCP_Admin_Projects {
 			.fixed .column-taxonomy-portfolio_tag { width: 15%; }
 		}</style>
 	<?php }
+
+	/**
+	 * Add custom views (status list).
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array  $views
+	 * @return array
+	 */
+	public function views( $views ) {
+
+		$post_type = ccp_get_project_post_type();
+
+		foreach ( ccp_get_project_type_objects() as $type ) {
+
+			if ( $type->show_in_status_list && $type->count_callback && function_exists( $type->count_callback ) ) {
+
+				$count = call_user_func( $type->count_callback );
+
+				if ( 0 < $count ) {
+
+					$text = sprintf( translate_nooped_plural( $type->label_count, $count, 'custom-content-portfolio' ), number_format_i18n( $count ) );
+
+					$views[ $type->name ] = sprintf( '<a href="%s">%s</a>', add_query_arg( array( 'post_type' => $post_type, 'project_type' => $type->name ), admin_url( 'edit.php' ) ), $text );
+				}
+			}
+		}
+
+		return $views;
+	}
 
 	/**
 	 * Renders a categories dropdown below the table nav.
@@ -199,6 +273,153 @@ final class CCP_Admin_Projects {
 
 			elseif ( function_exists( 'get_the_image' ) )
 				get_the_image( array( 'scan' => true, 'width' => 75, 'link' => false ) );
+		}
+	}
+
+	/**
+	 * Filter for the `post_states` hook.  We're going to add the project type.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array   $states
+	 * @param  object  $post
+	 */
+	public function display_post_states( $states, $post ) {
+
+		$project_type = ccp_get_project_type( $post->ID );
+
+		foreach ( ccp_get_project_type_objects() as $type ) {
+
+			if ( $type->show_in_post_states && $project_type === $type->name )
+				$states[ $type->name ] = esc_html( $type->label );
+		}
+
+		return $states;
+	}
+
+	/**
+	 * Custom row actions below the post title.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array   $actions
+	 * @param  object  $post
+	 * @return array
+	 */
+	function row_actions( $actions, $post ) {
+
+		$project_id = ccp_get_project_id( $post->ID );
+		$project_type = ccp_get_project_type( $project_id );
+
+		if ( 'trash' === get_post_status( $project_id ) )
+			return $actions;
+
+		$current_url = remove_query_arg( array( 'project_id', 'ccp_project_notice' ) );
+
+		foreach ( ccp_get_project_type_objects() as $type ) {
+
+			if ( current_user_can( $type->capability ) && $type->show_in_row_actions ) {
+			//if ( current_user_can( 'super_project', $project_id ) && ! in_array( $project_status, $icky_sticky ) ) {
+
+				// Build text.
+				$text  = $project_type === $type->name ? $type->label_undo : $type->label;
+
+				// Build toggle URL.
+				$url = add_query_arg( array( 'project_id' => $project_id, 'action' => 'ccp_toggle_project_type', 'ccp_project_type' => $type->name ), $current_url );
+				$url = wp_nonce_url( $url, "ccp_toggle_project_type_{$project_id}" );
+
+				$actions[ "ccp_toggle_{$type->name}" ] = sprintf( '<a href="%s" class="%s">%s</a>', esc_url( $url ), esc_attr( $type->name ), esc_html( $text ) );
+			}
+		}
+
+		// Move view action to the end.
+		if ( isset( $actions['view'] ) ) {
+			$view_action = $actions['view'];
+			unset( $actions['view'] );
+
+			$actions['view'] = $view_action;
+		}
+
+		return $actions;
+	}
+
+	/**
+	 * Callback function for handling post status changes.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function handler() {
+
+		// Checks if the sticky toggle link was clicked.
+		if ( isset( $_GET['action'] ) && $_GET['action'] && 'ccp_toggle_project_type' === $_GET['action'] && isset( $_GET['project_id'] ) ) {
+
+			if ( ! isset( $_GET['ccp_project_type'] ) || ! ccp_project_type_exists( $_GET['ccp_project_type'] ) )
+				return;
+
+			$new_type_object = ccp_get_project_type_object( $_GET['ccp_project_type'] );
+
+			$project_id = absint( ccp_get_project_id( $_GET['project_id'] ) );
+			$project_type = ccp_get_project_type( $project_id );
+
+			// Verify the nonce.
+			check_admin_referer( "ccp_toggle_project_type_{$project_id}" );
+
+			// Assume the changed failed.
+			$notice = 'failure';
+
+			if ( ccp_get_sticky_project_type() === $new_type_object->name ) {
+
+				if ( ccp_is_project_sticky( $project_id ) )
+					$updated = ccp_remove_sticky_project( $project_id );
+				else
+					$updated = ccp_add_sticky_project( $project_id );
+			}
+
+			if ( $project_type !== $new_type_object->name ) {
+				ccp_set_project_type( $project_id, $new_type_object->name );
+				$updated = true;
+
+			} else if ( ccp_get_normal_project_type() !== $new_type_object->name ) {
+				ccp_set_project_type( $project_id, ccp_get_normal_project_type() );
+				$updated = true;
+			}
+
+			// If the type was updated, add notice slug.
+			if ( $updated && ! is_wp_error( $updated ) )
+				$notice = 'project_type_updated';
+
+			// Redirect to correct admin page.
+			$redirect = add_query_arg( array( 'project_id' => $project_id, 'ccp_project_notice' => $notice ), remove_query_arg( array( 'action', 'project_id', 'ccp_project_type', '_wpnonce' ) ) );
+			wp_safe_redirect( $redirect );
+
+			// Always exit for good measure.
+			exit();
+		}
+	}
+
+	/**
+	 * Displays admin notices for the edit forum screen.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function admin_notices() {
+
+		$allowed_notices = array( 'project_type_updated' );
+
+		if ( isset( $_GET['ccp_project_notice'] ) && in_array( $_GET['ccp_project_notice'], $allowed_notices ) && isset( $_GET['project_id'] ) ) {
+
+			$notice   = $_GET['ccp_project_notice'];
+			$project_id = ccp_get_project_id( absint( $_GET['project_id'] ) );
+
+			if ( 'project_type_updated' === $notice )
+				$text = sprintf( __( 'Project type successfully updated.', 'custom-content-portolio' ), get_the_title( $project_id ) );
+
+			if ( ! empty( $text ) )
+				printf( '<div class="updated"><p>%s</p></div>', $text );
 		}
 	}
 
