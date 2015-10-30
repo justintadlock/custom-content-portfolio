@@ -121,12 +121,13 @@ final class CCP_Admin_Projects {
 	public function request( $vars ) {
 
 		$new_vars = array();
+		$type_tax = ccp_get_type_taxonomy();
 
-		// Get projects with a specific type. */
-		if ( isset( $_GET['project_type'] ) && ccp_project_type_exists( $_GET['project_type'] ) ) {
+		// Get projects with a specific type.
+		// Note that core will only handle taxonomies with `public` set to `true`.
+		if ( isset( $_GET[ $type_tax ] ) && ccp_project_type_exists( $_GET[ $type_tax ] ) ) {
 
-			$new_vars['meta_key']   = 'project_type';
-			$new_vars['meta_value'] = sanitize_key( $_GET['project_type'] );
+			$new_vars[ $type_tax ] = sanitize_key( $_GET[ $type_tax ] );
 		}
 
 		// Return the vars, merging with the new ones.
@@ -160,20 +161,23 @@ final class CCP_Admin_Projects {
 	 */
 	public function views( $views ) {
 
+		$type_tax  = ccp_get_type_taxonomy();
+		$terms     = get_terms( $type_tax );
 		$post_type = ccp_get_project_post_type();
+		$types     = ccp_get_project_type_objects();
 
-		foreach ( ccp_get_project_type_objects() as $type ) {
+		foreach ( $terms as $term ) {
 
-			if ( $type->show_in_status_list && $type->count_callback && function_exists( $type->count_callback ) ) {
+			if ( ! isset( $types[ $term->name ] ) )
+				continue;
 
-				$count = call_user_func( $type->count_callback );
+			$type = $types[ $term->name ];
 
-				if ( 0 < $count ) {
+			if ( $type->show_in_status_list && 0 < $term->count ) {
 
-					$text = sprintf( translate_nooped_plural( $type->label_count, $count, 'custom-content-portfolio' ), number_format_i18n( $count ) );
+				$text = sprintf( translate_nooped_plural( $type->label_count, $term->count, $type->label_count['domain'] ), number_format_i18n( $term->count ) );
 
-					$views[ $type->name ] = sprintf( '<a href="%s">%s</a>', add_query_arg( array( 'post_type' => $post_type, 'project_type' => $type->name ), admin_url( 'edit.php' ) ), $text );
-				}
+				$views[ $type->name ] = sprintf( '<a href="%s">%s</a>', add_query_arg( array( 'post_type' => $post_type, $type_tax => $type->name ), admin_url( 'edit.php' ) ), $text );
 			}
 		}
 
@@ -286,13 +290,10 @@ final class CCP_Admin_Projects {
 	 */
 	public function display_post_states( $states, $post ) {
 
-		$project_type = ccp_get_project_type( $post->ID );
+		$type = ccp_get_project_type_object( ccp_get_project_type( $post->ID ) );
 
-		foreach ( ccp_get_project_type_objects() as $type ) {
-
-			if ( $type->show_in_post_states && $project_type === $type->name )
-				$states[ $type->name ] = esc_html( $type->label );
-		}
+		if ( $type->show_in_post_states )
+			$states[ $type->name ] = esc_html( $type->label );
 
 		return $states;
 	}
@@ -308,18 +309,18 @@ final class CCP_Admin_Projects {
 	 */
 	function row_actions( $actions, $post ) {
 
-		$project_id = ccp_get_project_id( $post->ID );
+		$tax_object   = get_taxonomy( ccp_get_type_taxonomy() );
+		$project_id   = ccp_get_project_id( $post->ID );
 		$project_type = ccp_get_project_type( $project_id );
 
-		if ( 'trash' === get_post_status( $project_id ) )
+		if ( 'trash' === get_post_status( $project_id ) || ! current_user_can( $tax_object->cap->assign_terms ) )
 			return $actions;
 
 		$current_url = remove_query_arg( array( 'project_id', 'ccp_project_notice' ) );
 
 		foreach ( ccp_get_project_type_objects() as $type ) {
 
-			if ( current_user_can( $type->capability ) && $type->show_in_row_actions ) {
-			//if ( current_user_can( 'super_project', $project_id ) && ! in_array( $project_status, $icky_sticky ) ) {
+			if ( $type->show_in_row_actions ) {
 
 				// Build text.
 				$text  = $project_type === $type->name ? $type->label_undo : $type->label;

@@ -209,6 +209,9 @@ function ccp_get_type_labels() {
 		'separate_items_with_commas' => __( 'Separate types with commas',      'custom-content-portfolio' ),
 		'add_or_remove_items'        => __( 'Add or remove types',             'custom-content-portfolio' ),
 		'choose_from_most_used'      => __( 'Choose from the most used types', 'custom-content-portfolio' ),
+
+		// Custom labels.
+		'ccp_name_colon_item'        => __( 'Type: %s', 'custom-content-portfolio' ),
 	);
 
 	return apply_filters( 'ccp_get_type_labels', $labels );

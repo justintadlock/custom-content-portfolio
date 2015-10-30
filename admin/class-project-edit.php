@@ -111,28 +111,26 @@ final class CCP_Project_Edit {
 			global $post;
 		}
 
-		$post_type_object = get_post_type_object( $post->post_type );
-
-		if ( ! current_user_can( $post_type_object->cap->publish_posts ) )
-			return;
-
-		$project_type = ccp_get_project_meta( $post->ID, 'type' );
-
-		$stickies = get_option( 'ccp_sticky_projects', array() ); ?>
+		$tax_object   = get_taxonomy( ccp_get_type_taxonomy() );
+		$project_type = ccp_get_project_type( $post->ID ); ?>
 
 		<div class="misc-pub-section curtime misc-pub-project-type">
 			<i class="dashicons dashicons-sticky"></i>
-			<?php printf( esc_html__( 'Type: %s', 'custom-content-portfolio' ), '<strong class="ccp-current-project-type">' . ccp_get_project_type_object( ccp_get_project_type( $post->ID ) )->label . '</strong>' ); ?>
-			<a href="#ccp-project-type-select" class="ccp-edit-project-type"><?php esc_html_e( 'Edit', 'custom-content-portfolio' ); ?></a>
+			<?php printf( esc_html( $tax_object->labels->ccp_name_colon_item ), '<strong class="ccp-current-project-type">' . ccp_get_project_type_object( ccp_get_project_type( $post->ID ) )->label . '</strong>' ); ?>
 
-			<div id="ccp-project-type-select" class="hide-if-js">
+			<?php if ( current_user_can( $tax_object->cap->assign_terms ) ) : ?>
 
-<?php ccp_dropdown_project_type( array( 'selected' => ccp_get_project_type( $post->ID ) ) ); ?>
-<a href="#ccp-project-type" class="ccp-save-project-type hide-if-no-js button">OK</a>
-<a href="#ccp-project-type" class="ccp-cancel-project-type hide-if-no-js button-cancel">Cancel</a>
-			</div>
+				<a href="#ccp-project-type-select" class="ccp-edit-project-type"><span aria-hidden="true"><?php esc_html_e( 'Edit', 'custom-content-portfolio' ); ?></span> <span class="screen-reader-text"><?php echo esc_html( $tax_object->labels->edit_item ); ?></span></a>
 
-		</div>
+				<div id="ccp-project-type-select" class="hide-if-js">
+					<?php ccp_dropdown_project_type( array( 'selected' => ccp_get_project_type( $post->ID ) ) ); ?>
+					<a href="#ccp-project-type" class="ccp-save-project-type hide-if-no-js button"><?php esc_html_e( 'OK', 'custom-content-portolio' ); ?></a>
+					<a href="#ccp-project-type" class="ccp-cancel-project-type hide-if-no-js button-cancel"><?php esc_html_e( 'Cancel', 'custom-content-portolio' ); ?></a>
+				</div><!-- #ccp-project-type-select -->
+
+			<?php endif; ?>
+
+		</div><!-- .misc-pub-project-type -->
 	<?php }
 
 	/**
@@ -199,10 +197,10 @@ final class CCP_Project_Edit {
 
 		if ( ccp_get_project_type( $post_id ) !== $project_type && ccp_project_type_exists( $project_type ) ) {
 
-			if ( 'sticky' === $project_type )
+			if ( ccp_get_sticky_project_type() === $project_type && ! ccp_is_project_sticky( $post_id ) )
 				ccp_add_sticky_project( $post_id );
 
-			elseif ( 'sticky' !== $project_type && ccp_is_project_sticky( $post_id ) )
+			elseif ( ccp_get_sticky_project_type() !== $project_type && ccp_is_project_sticky( $post_id ) )
 				ccp_remove_sticky_project( $post_id );
 
 			// Set the new project type.

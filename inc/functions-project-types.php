@@ -59,7 +59,6 @@ function ccp_register_project_types() {
 		'show_in_status_list' => false,
 		'show_in_row_actions' => false,
 		'show_in_post_states' => false,
-		'capability'      => $post_type_object->cap->edit_posts,
 		'label'           => __( 'Normal', 'custom-content-portfolio' ),
 		'label_count'     => _n_noop( 'Normal <span class="count">(%s)</span>', 'Normal <span class="count">(%s)</span>', 'custom-content-portfolio' ),
 	);
@@ -68,8 +67,6 @@ function ccp_register_project_types() {
 	$sticky_args = array(
 		'_builtin'        => true,
 		'_internal'       => false,
-		'count_callback'  => 'ccp_get_sticky_project_count',
-		'capability'      => $post_type_object->cap->publish_posts,
 		'label'           => __( 'Sticky', 'custom-content-portfolio' ),
 		'label_count'     => _n_noop( 'Sticky <span class="count">(%s)</span>', 'Sticky <span class="count">(%s)</span>', 'custom-content-portfolio' ),
 		'label_undo'      => __( 'Unsticky', 'custom-content-portfolio' ),
@@ -199,8 +196,6 @@ function ccp_project_type( $project_id = 0 ) {
 function ccp_get_project_type( $project_id = 0 ) {
 	$project_id = ccp_get_project_id( $project_id );
 
-	//$project_type = $project_id ? ccp_get_project_meta( $project_id, 'project_type' ) : '';
-
 	$project_type = wp_get_post_terms( $project_id, ccp_get_type_taxonomy() );
 
 	if ( $project_type && ! is_wp_error( $project_type ) )
@@ -225,8 +220,6 @@ function ccp_set_project_type( $project_id, $type ) {
 	$type = ccp_project_type_exists( $type ) ? $type : ccp_get_normal_project_type();
 
 	return wp_set_post_terms( $project_id, $type, ccp_get_type_taxonomy(), false );
-
-	return ccp_set_project_meta( $project_id, 'project_type', $type );
 }
 
 /**
@@ -287,28 +280,14 @@ function ccp_dropdown_project_type( $args = array() ) {
 		'echo'      => true
 	);
 
-	$args = wp_parse_args( $args, $defaults );
-
+	$args  = wp_parse_args( $args, $defaults );
 	$types = ccp_get_project_type_objects();
+	$out   = '';
 
-	$out = sprintf( '<select name="%s" id="%s">', sanitize_html_class( $args['name'] ), sanitize_html_class( $args['id'] ) );
-
-	if ( ! empty( $args['selected'] ) && ! current_user_can( ccp_get_project_type_object( $args['selected'] )->capability ) ) {
-
-		$type = ccp_get_project_type_object( $args['selected'] );
+	foreach ( $types as $type )
 		$out .= sprintf( '<option value="%s"%s>%s</option>', esc_attr( $type->name ), selected( $type->name, $args['selected'], false ), $type->label );
 
-	} else {
-		foreach ( $types as $type ) {
-
-			if ( ! current_user_can( $type->capability ) )
-				continue;
-
-			$out .= sprintf( '<option value="%s"%s>%s</option>', esc_attr( $type->name ), selected( $type->name, $args['selected'], false ), $type->label );
-		}
-	}
-
-	$out .= '</select>';
+	$out = sprintf( '<select name="%s" id="%s">%s</select>', sanitize_html_class( $args['name'] ), sanitize_html_class( $args['id'] ), $out );
 
 	if ( ! $args['echo'] )
 		return $out;
@@ -325,15 +304,4 @@ function ccp_dropdown_project_type( $args = array() ) {
  */
 function ccp_get_sticky_projects() {
 	return apply_filters( 'ccp_get_sticky_projects', get_option( 'ccp_sticky_projects', array() ) );
-}
-
-/**
- * Returns the sticky project count.
- *
- * @since  1.0.0
- * @access public
- * @return array
- */
-function ccp_get_sticky_project_count() {
-	return count( ccp_get_sticky_projects() );
 }
