@@ -190,25 +190,7 @@ function ccp_get_type_labels() {
 	$labels = array(
 		'name'                       => __( 'Types',                           'custom-content-portfolio' ),
 		'singular_name'              => __( 'Type',                            'custom-content-portfolio' ),
-		'menu_name'                  => __( 'Types',                           'custom-content-portfolio' ),
-		'name_admin_bar'             => __( 'Type',                            'custom-content-portfolio' ),
-		'search_items'               => __( 'Search Types',                    'custom-content-portfolio' ),
-		'popular_items'              => __( 'Popular Types',                   'custom-content-portfolio' ),
-		'all_items'                  => __( 'All Types',                       'custom-content-portfolio' ),
 		'edit_item'                  => __( 'Edit Type',                       'custom-content-portfolio' ),
-		'view_item'                  => __( 'View Type',                       'custom-content-portfolio' ),
-		'update_item'                => __( 'Update Type',                     'custom-content-portfolio' ),
-		'add_new_item'               => __( 'Add New Type',                    'custom-content-portfolio' ),
-		'new_item_name'              => __( 'New Type Name',                   'custom-content-portfolio' ),
-		'not_found'                  => __( 'No types found.',                 'custom-content-portfolio' ),
-		'no_terms'                   => __( 'No types',                        'custom-content-portfolio' ),
-		'pagination'                 => __( 'Types list navigation',           'custom-content-portfolio' ),
-		'list'                       => __( 'Types list',                      'custom-content-portfolio' ),
-
-		// Non-hierarchical only.
-		'separate_items_with_commas' => __( 'Separate types with commas',      'custom-content-portfolio' ),
-		'add_or_remove_items'        => __( 'Add or remove types',             'custom-content-portfolio' ),
-		'choose_from_most_used'      => __( 'Choose from the most used types', 'custom-content-portfolio' ),
 
 		// Custom labels.
 		'ccp_name_colon_item'        => __( 'Type: %s', 'custom-content-portfolio' ),
