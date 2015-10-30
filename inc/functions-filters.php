@@ -10,6 +10,9 @@
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
+# Add sticky posts to the front of the line.
+add_filter( 'the_posts', 'ccp_posts_sticky_filter', 10, 2 );
+
 # Filter the post type archive title.
 add_filter( 'post_type_archive_title', 'ccp_post_type_archive_title' );
 
@@ -28,6 +31,90 @@ add_action( 'save_post', 'ccp_force_term_selection' );
 
 # Filter the Breadcrumb Trail plugin args.
 add_filter( 'breadcrumb_trail_args', 'ccp_breadcrumb_trail_args', 15 );
+
+/**
+ * Filter on `the_posts` for the project archive. Moves sticky posts to the top of 
+ * the project archive list.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  array  $posts
+ * @param  object $query
+ * @return array
+ */
+function ccp_posts_sticky_filter( $posts, $query ) {
+
+	if ( $query->is_main_query() && ! is_admin() && ccp_is_project_archive() ) {
+
+		remove_filter( 'the_posts', 'ccp_posts_sticky_filter' );
+
+		$posts = ccp_add_stickies( $posts, ccp_get_sticky_projects() );
+	}
+
+	return $posts;
+}
+
+/**
+ * Adds sticky posts to the front of the line with any given set of posts and stickies.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  array  $posts         Array of post objects.
+ * @param  array  $sticky_posts  Array of post IDs.
+ * @return array
+ */
+function ccp_add_stickies( $posts, $sticky_posts ) {
+
+	// Only do this if on the first page and we indeed have stickies.
+	if ( ! is_paged() && ! empty( $sticky_posts ) ) {
+
+		$num_posts     = count( $posts );
+		$sticky_offset = 0;
+
+		// Loop over posts and relocate stickies to the front.
+		for ( $i = 0; $i < $num_posts; $i++ ) {
+
+			if ( in_array( $posts[ $i ]->ID, $sticky_posts ) ) {
+
+				$sticky_post = $posts[ $i ];
+
+				// Remove sticky from current position.
+				array_splice( $posts, $i, 1);
+
+				// Move to front, after other stickies.
+				array_splice( $posts, $sticky_offset, 0, array( $sticky_post ) );
+
+				// Increment the sticky offset. The next sticky will be placed at this offset.
+				$sticky_offset++;
+
+				// Remove post from sticky posts array.
+				$offset = array_search( $sticky_post->ID, $sticky_posts );
+
+				unset( $sticky_posts[ $offset ] );
+			}
+		}
+
+		// Fetch sticky posts that weren't in the query results.
+		if ( ! empty( $sticky_posts ) ) {
+
+			$args = array(
+					'post__in'    => $sticky_posts,
+					'post_type'   => ccp_get_project_post_type(),
+					'post_status' => 'publish',
+					'nopaging'    => true
+			);
+
+			$stickies = get_posts( $args );
+
+			foreach ( $stickies as $sticky_post ) {
+				array_splice( $posts, $sticky_offset, 0, array( $sticky_post ) );
+				$sticky_offset++;
+			}
+		}
+	}
+
+	return $posts;
+}
 
 /**
  * Filter on 'post_type_archive_title' to allow for the use of the 'archive_title' label that isn't supported
