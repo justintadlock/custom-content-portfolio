@@ -121,14 +121,10 @@ final class CCP_Admin_Projects {
 	public function request( $vars ) {
 
 		$new_vars = array();
-		$type_tax = ccp_get_type_taxonomy();
 
-		// Get projects with a specific type.
-		// Note that core will only handle taxonomies with `public` set to `true`.
-		if ( isset( $_GET[ $type_tax ] ) && ccp_project_type_exists( $_GET[ $type_tax ] ) ) {
-
-			$new_vars[ $type_tax ] = sanitize_key( $_GET[ $type_tax ] );
-		}
+		// If viewing sticky projects.
+		if ( isset( $_GET['sticky'] ) && 1 == $_GET['sticky'] )
+			$new_vars['post__in'] = ccp_get_sticky_projects();
 
 		// Return the vars, merging with the new ones.
 		return array_merge( $vars, $new_vars );
@@ -161,24 +157,16 @@ final class CCP_Admin_Projects {
 	 */
 	public function views( $views ) {
 
-		$type_tax  = ccp_get_type_taxonomy();
-		$terms     = get_terms( $type_tax );
-		$post_type = ccp_get_project_post_type();
-		$types     = ccp_get_project_type_objects();
+		$count = count( ccp_get_sticky_projects() );
 
-		foreach ( $terms as $term ) {
+		if ( 0 < $count ) {
+			$post_type = ccp_get_project_post_type();
 
-			if ( ! isset( $types[ $term->name ] ) )
-				continue;
+			$noop = _n_noop( 'Sticky <span class="count">(%s)</span>', 'Sticky <span class="count">(%s)</span>', 'custom-content-portfolio' );
 
-			$type = $types[ $term->name ];
+			$text = sprintf( translate_nooped_plural( $noop, $count, 'custom-content-portfolio' ), number_format_i18n( $count ) );
 
-			if ( $type->show_in_status_list && 0 < $term->count ) {
-
-				$text = sprintf( translate_nooped_plural( $type->label_count, $term->count, $type->label_count['domain'] ), number_format_i18n( $term->count ) );
-
-				$views[ $type->name ] = sprintf( '<a href="%s">%s</a>', add_query_arg( array( 'post_type' => $post_type, $type_tax => $type->name ), admin_url( 'edit.php' ) ), $text );
-			}
+			$views['sticky'] = sprintf( '<a href="%s">%s</a>', add_query_arg( array( 'post_type' => $post_type, 'sticky' => 1 ), admin_url( 'edit.php' ) ), $text );
 		}
 
 		return $views;
@@ -290,10 +278,8 @@ final class CCP_Admin_Projects {
 	 */
 	public function display_post_states( $states, $post ) {
 
-		$type = ccp_get_project_type_object( ccp_get_project_type( $post->ID ) );
-
-		if ( $type->show_in_post_states )
-			$states[ $type->name ] = esc_html( $type->label );
+		if ( ccp_is_project_sticky( $post->ID ) )
+			$states['sticky'] = esc_html__( 'Sticky', 'custom-content-portfolio' );
 
 		return $states;
 	}
@@ -309,29 +295,23 @@ final class CCP_Admin_Projects {
 	 */
 	function row_actions( $actions, $post ) {
 
-		$tax_object   = get_taxonomy( ccp_get_type_taxonomy() );
-		$project_id   = ccp_get_project_id( $post->ID );
-		$project_type = ccp_get_project_type( $project_id );
+		$post_type_object = get_post_type_object( ccp_get_project_post_type() );
+		$project_id = ccp_get_project_id( $post->ID );
 
-		if ( 'trash' === get_post_status( $project_id ) || ! current_user_can( $tax_object->cap->assign_terms ) )
+		if ( 'trash' === get_post_status( $project_id ) || ! current_user_can( $post_type_object->cap->publish_posts ) )
 			return $actions;
 
 		$current_url = remove_query_arg( array( 'project_id', 'ccp_project_notice' ) );
 
-		foreach ( ccp_get_project_type_objects() as $type ) {
+		// Build text.
+		$text = ccp_is_project_sticky( $project_id ) ? esc_html__( 'Unsticky', 'custom-content-portfolio' ) : esc_html__( 'Sticky', 'custom-content-portfolio' );
 
-			if ( $type->show_in_row_actions ) {
+		// Build toggle URL.
+		$url = add_query_arg( array( 'project_id' => $project_id, 'action' => 'ccp_toggle_sticky' ), $current_url );
+		$url = wp_nonce_url( $url, "ccp_toggle_sticky_{$project_id}" );
 
-				// Build text.
-				$text  = $project_type === $type->name ? $type->label_undo : $type->label;
-
-				// Build toggle URL.
-				$url = add_query_arg( array( 'project_id' => $project_id, 'action' => 'ccp_toggle_project_type', 'ccp_project_type' => $type->name ), $current_url );
-				$url = wp_nonce_url( $url, "ccp_toggle_project_type_{$project_id}" );
-
-				$actions[ "ccp_toggle_{$type->name}" ] = sprintf( '<a href="%s" class="%s">%s</a>', esc_url( $url ), esc_attr( $type->name ), esc_html( $text ) );
-			}
-		}
+		// Add sticky action.
+		$actions['sticky'] = sprintf( '<a href="%s" class="%s">%s</a>', esc_url( $url ), 'sticky', esc_html( $text ) );
 
 		// Move view action to the end.
 		if ( isset( $actions['view'] ) ) {
@@ -354,50 +334,34 @@ final class CCP_Admin_Projects {
 	public function handler() {
 
 		// Checks if the sticky toggle link was clicked.
-		if ( isset( $_GET['action'] ) && $_GET['action'] && 'ccp_toggle_project_type' === $_GET['action'] && isset( $_GET['project_id'] ) ) {
-
-			if ( ! isset( $_GET['ccp_project_type'] ) || ! ccp_project_type_exists( $_GET['ccp_project_type'] ) )
-				return;
-
-			$new_type_object = ccp_get_project_type_object( $_GET['ccp_project_type'] );
+		if ( isset( $_GET['action'] ) && $_GET['action'] && 'ccp_toggle_sticky' === $_GET['action'] && isset( $_GET['project_id'] ) ) {
 
 			$project_id = absint( ccp_get_project_id( $_GET['project_id'] ) );
-			$project_type = ccp_get_project_type( $project_id );
 
 			// Verify the nonce.
-			check_admin_referer( "ccp_toggle_project_type_{$project_id}" );
+			check_admin_referer( "ccp_toggle_sticky_{$project_id}" );
 
 			// Assume the changed failed.
 			$notice = 'failure';
 
-			if ( ccp_get_sticky_project_type() === $new_type_object->name ) {
-
-				if ( ccp_is_project_sticky( $project_id ) )
-					$updated = ccp_remove_sticky_project( $project_id );
-				else
-					$updated = ccp_add_sticky_project( $project_id );
-			}
-
-			if ( $project_type !== $new_type_object->name ) {
-				ccp_set_project_type( $project_id, $new_type_object->name );
-				$updated = true;
-
-			} else if ( ccp_get_normal_project_type() !== $new_type_object->name ) {
-				ccp_set_project_type( $project_id, ccp_get_normal_project_type() );
-				$updated = true;
-			}
+			if ( ccp_is_project_sticky( $project_id ) )
+				$updated = ccp_remove_sticky_project( $project_id );
+			else
+				$updated = ccp_add_sticky_project( $project_id );
 
 			// If the type was updated, add notice slug.
 			if ( $updated && ! is_wp_error( $updated ) )
-				$notice = 'project_type_updated';
+				$notice = 'sticky_updated';
 
 			// Redirect to correct admin page.
-			$redirect = add_query_arg( array( 'project_id' => $project_id, 'ccp_project_notice' => $notice ), remove_query_arg( array( 'action', 'project_id', 'ccp_project_type', '_wpnonce' ) ) );
+			$redirect = add_query_arg( array( 'project_id' => $project_id, 'ccp_project_notice' => $notice ), remove_query_arg( array( 'action', 'project_id', 'ccp_toggle_sticky', '_wpnonce' ) ) );
 			wp_safe_redirect( $redirect );
 
 			// Always exit for good measure.
 			exit();
 		}
+
+		return;
 	}
 
 	/**
@@ -409,15 +373,15 @@ final class CCP_Admin_Projects {
 	 */
 	public function admin_notices() {
 
-		$allowed_notices = array( 'project_type_updated' );
+		$allowed_notices = array( 'sticky_updated' );
 
 		if ( isset( $_GET['ccp_project_notice'] ) && in_array( $_GET['ccp_project_notice'], $allowed_notices ) && isset( $_GET['project_id'] ) ) {
 
 			$notice   = $_GET['ccp_project_notice'];
 			$project_id = ccp_get_project_id( absint( $_GET['project_id'] ) );
 
-			if ( 'project_type_updated' === $notice )
-				$text = sprintf( __( 'Project type successfully updated.', 'custom-content-portolio' ), get_the_title( $project_id ) );
+			if ( 'sticky_updated' === $notice )
+				$text = sprintf( __( 'Project sticky status successfully updated.', 'custom-content-portolio' ), get_the_title( $project_id ) );
 
 			if ( ! empty( $text ) )
 				printf( '<div class="updated"><p>%s</p></div>', $text );

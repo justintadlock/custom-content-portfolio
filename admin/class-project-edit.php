@@ -111,19 +111,23 @@ final class CCP_Project_Edit {
 			global $post;
 		}
 
-		$tax_object   = get_taxonomy( ccp_get_type_taxonomy() );
-		$project_type = ccp_get_project_type( $post->ID ); ?>
+		$post_type_object = get_post_type_object( ccp_get_project_post_type() );
+		$is_sticky = ccp_is_project_sticky( $post->ID );
+		$label = $is_sticky ? esc_html__( 'Sticky', 'custom-content-portfolio' ) : esc_html__( 'Normal', 'custom-content-portfolio' ); ?>
 
 		<div class="misc-pub-section curtime misc-pub-project-type">
 			<i class="dashicons dashicons-sticky"></i>
-			<?php printf( esc_html( $tax_object->labels->ccp_name_colon_item ), '<strong class="ccp-current-project-type">' . ccp_get_project_type_object( ccp_get_project_type( $post->ID ) )->label . '</strong>' ); ?>
+			<?php printf( esc_html__( 'Sticky: %s', 'custom-content-portfolio' ), "<strong class='ccp-current-project-type'>{$label}</strong>" ); ?>
 
-			<?php if ( current_user_can( $tax_object->cap->assign_terms ) ) : ?>
+			<?php if ( current_user_can( $post_type_object->cap->publish_posts ) ) : ?>
 
 				<a href="#ccp-project-type-select" class="ccp-edit-project-type"><span aria-hidden="true"><?php esc_html_e( 'Edit', 'custom-content-portfolio' ); ?></span> <span class="screen-reader-text"><?php echo esc_html( $tax_object->labels->edit_item ); ?></span></a>
 
 				<div id="ccp-project-type-select" class="hide-if-js">
-					<?php ccp_dropdown_project_type( array( 'selected' => ccp_get_project_type( $post->ID ) ) ); ?>
+					<select name="ccp_project_type" id="ccp-project-type">
+						<option value="" <?php selected( ! $is_sticky ); ?>><?php esc_html_e( 'Normal', 'custom-content-portfolio' ); ?></option>
+						<option value="sticky" <?php selected( $is_sticky ); ?>><?php esc_html_e( 'Sticky', 'custom-content-portfolio' ); ?></option>
+					</select>
 					<a href="#ccp-project-type" class="ccp-save-project-type hide-if-no-js button"><?php esc_html_e( 'OK', 'custom-content-portolio' ); ?></a>
 					<a href="#ccp-project-type" class="ccp-cancel-project-type hide-if-no-js button-cancel"><?php esc_html_e( 'Cancel', 'custom-content-portolio' ); ?></a>
 				</div><!-- #ccp-project-type-select -->
@@ -192,20 +196,13 @@ final class CCP_Project_Edit {
 
 		$this->manager->update( $post_id );
 
-		// Get the new project type.
-		$project_type = sanitize_key( $_POST['ccp_project_type'] );
+		$should_stick = sanitize_key( $_POST['ccp_project_type'] );
 
-		if ( ccp_get_project_type( $post_id ) !== $project_type && ccp_project_type_exists( $project_type ) ) {
+		if ( 'sticky' === $should_stick && ! ccp_is_project_sticky( $post_id ) )
+			ccp_add_sticky_project( $post_id );
 
-			if ( ccp_get_sticky_project_type() === $project_type && ! ccp_is_project_sticky( $post_id ) )
-				ccp_add_sticky_project( $post_id );
-
-			elseif ( ccp_get_sticky_project_type() !== $project_type && ccp_is_project_sticky( $post_id ) )
-				ccp_remove_sticky_project( $post_id );
-
-			// Set the new project type.
-			ccp_set_project_type( $post_id, $project_type );
-		}
+		elseif ( '' === $should_stick && ccp_is_project_sticky( $post_id ) )
+			ccp_remove_sticky_project( $post_id );
 	}
 
 	/**
