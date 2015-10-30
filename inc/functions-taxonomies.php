@@ -38,6 +38,18 @@ function ccp_get_tag_taxonomy() {
 }
 
 /**
+ * Returns the name of the portfolio type taxonomy.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return string
+ */
+function ccp_get_type_taxonomy() {
+
+	return apply_filters( 'ccp_get_type_taxonomy', 'portfolio_type' );
+}
+
+/**
  * Returns the capabilities for the portfolio category taxonomy.
  *
  * @since  1.0.0
@@ -73,6 +85,25 @@ function ccp_get_tag_capabilities() {
 	);
 
 	return apply_filters( 'ccp_get_tag_capabilities', $caps );
+}
+
+/**
+ * Returns the capabilities for the portfolio type taxonomy.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return array
+ */
+function ccp_get_type_capabilities() {
+
+	$caps = array(
+		'manage_terms' => 'do_not_allow',
+		'edit_terms'   => 'do_not_allow',
+		'delete_terms' => 'do_not_allow',
+		'assign_terms' => 'publish_portfolio_projects',
+	);
+
+	return apply_filters( 'ccp_get_type_capabilities', $caps );
 }
 
 /**
@@ -148,6 +179,42 @@ function ccp_get_tag_labels() {
 }
 
 /**
+ * Returns the labels for the portfolio tag taxonomy.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return array
+ */
+function ccp_get_type_labels() {
+
+	$labels = array(
+		'name'                       => __( 'Types',                           'custom-content-portfolio' ),
+		'singular_name'              => __( 'Type',                            'custom-content-portfolio' ),
+		'menu_name'                  => __( 'Types',                           'custom-content-portfolio' ),
+		'name_admin_bar'             => __( 'Type',                            'custom-content-portfolio' ),
+		'search_items'               => __( 'Search Types',                    'custom-content-portfolio' ),
+		'popular_items'              => __( 'Popular Types',                   'custom-content-portfolio' ),
+		'all_items'                  => __( 'All Types',                       'custom-content-portfolio' ),
+		'edit_item'                  => __( 'Edit Type',                       'custom-content-portfolio' ),
+		'view_item'                  => __( 'View Type',                       'custom-content-portfolio' ),
+		'update_item'                => __( 'Update Type',                     'custom-content-portfolio' ),
+		'add_new_item'               => __( 'Add New Type',                    'custom-content-portfolio' ),
+		'new_item_name'              => __( 'New Type Name',                   'custom-content-portfolio' ),
+		'not_found'                  => __( 'No types found.',                 'custom-content-portfolio' ),
+		'no_terms'                   => __( 'No types',                        'custom-content-portfolio' ),
+		'pagination'                 => __( 'Types list navigation',           'custom-content-portfolio' ),
+		'list'                       => __( 'Types list',                      'custom-content-portfolio' ),
+
+		// Non-hierarchical only.
+		'separate_items_with_commas' => __( 'Separate types with commas',      'custom-content-portfolio' ),
+		'add_or_remove_items'        => __( 'Add or remove types',             'custom-content-portfolio' ),
+		'choose_from_most_used'      => __( 'Choose from the most used types', 'custom-content-portfolio' ),
+	);
+
+	return apply_filters( 'ccp_get_type_labels', $labels );
+}
+
+/**
  * Register taxonomies for the plugin.
  *
  * @since  0.1.0
@@ -198,7 +265,24 @@ function ccp_register_taxonomies() {
 		),
 	);
 
+	// Set up the arguments for the portfolio type taxonomy.
+	$type_args = array(
+		'public'            => false,
+		'show_ui'           => false,
+		'show_in_nav_menus' => false,
+		'show_tagcloud'     => true,
+		'show_admin_column' => false,
+		'hierarchical'      => false,
+		'query_var'         => ccp_get_type_taxonomy(),
+		'capabilities'      => ccp_get_type_capabilities(),
+		'labels'            => ccp_get_type_labels(),
+
+		// The rewrite handles the URL structure.
+		'rewrite' => false,
+	);
+
 	// Register the taxonomies.
 	register_taxonomy( ccp_get_category_taxonomy(), ccp_get_project_post_type(), apply_filters( 'ccp_category_taxonomy_args', $cat_args ) );
 	register_taxonomy( ccp_get_tag_taxonomy(),      ccp_get_project_post_type(), apply_filters( 'ccp_tag_taxonomy_args',      $tag_args ) );
+	register_taxonomy( ccp_get_type_taxonomy(),     ccp_get_project_post_type(), apply_filters( 'ccp_type_taxonomy_args',     $type_args ) );
 }

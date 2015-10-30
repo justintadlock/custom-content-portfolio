@@ -199,9 +199,14 @@ function ccp_project_type( $project_id = 0 ) {
 function ccp_get_project_type( $project_id = 0 ) {
 	$project_id = ccp_get_project_id( $project_id );
 
-	$project_type = $project_id ? ccp_get_project_meta( $project_id, 'project_type' ) : '';
+	//$project_type = $project_id ? ccp_get_project_meta( $project_id, 'project_type' ) : '';
 
-	$project_type = $project_type && ccp_project_type_exists( $project_type ) ? $project_type : ccp_get_normal_project_type();
+	$project_type = wp_get_post_terms( $project_id, ccp_get_type_taxonomy() );
+
+	if ( $project_type && ! is_wp_error( $project_type ) )
+		$project_type = array_shift( $project_type );
+
+	$project_type = $project_type && ! is_wp_error( $project_type ) && ccp_project_type_exists( $project_type->name ) ? $project_type->name : ccp_get_normal_project_type();
 
 	return apply_filters( 'ccp_get_project_type', $project_type, $project_id );
 }
@@ -218,6 +223,8 @@ function ccp_get_project_type( $project_id = 0 ) {
 function ccp_set_project_type( $project_id, $type ) {
 
 	$type = ccp_project_type_exists( $type ) ? $type : ccp_get_normal_project_type();
+
+	return wp_set_post_terms( $project_id, $type, ccp_get_type_taxonomy(), false );
 
 	return ccp_set_project_meta( $project_id, 'project_type', $type );
 }
