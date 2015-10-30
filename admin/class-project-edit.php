@@ -121,7 +121,7 @@ final class CCP_Project_Edit {
 
 			<?php if ( current_user_can( $post_type_object->cap->publish_posts ) ) : ?>
 
-				<a href="#ccp-project-type-select" class="ccp-edit-project-type"><span aria-hidden="true"><?php esc_html_e( 'Edit', 'custom-content-portfolio' ); ?></span> <span class="screen-reader-text"><?php echo esc_html( $tax_object->labels->edit_item ); ?></span></a>
+				<a href="#ccp-project-type-select" class="ccp-edit-project-type"><span aria-hidden="true"><?php esc_html_e( 'Edit', 'custom-content-portfolio' ); ?></span> <span class="screen-reader-text"><?php esc_html_e( 'Edit sticky status', 'custom-content-portfolio' ); ?></span></a>
 
 				<div id="ccp-project-type-select" class="hide-if-js">
 					<select name="ccp_project_type" id="ccp-project-type">
