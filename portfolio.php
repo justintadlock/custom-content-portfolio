@@ -56,7 +56,22 @@ final class CCP_Plugin {
 	 */
 	public $dir_uri = '';
 
+	/**
+	 * JavaScript directory URI.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
 	public $js_uri = '';
+
+	/**
+	 * CSS directory URI.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
 	public $css_uri = '';
 
 	/**
@@ -221,7 +236,7 @@ final class CCP_Plugin {
 	 * @global $wpdb
 	 * @return void
 	 */
-	function activation() {
+	public function activation() {
 
 		// Temp. code to make sure post types and taxonomies are correct.
 		global $wpdb;
