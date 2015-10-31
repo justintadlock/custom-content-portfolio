@@ -80,7 +80,7 @@ function ccp_is_project( $post_id = '' ) {
 function ccp_is_project_sticky( $project_id = 0 ) {
 	$project_id = ccp_get_project_id( $project_id );
 
-	return in_array( $project_id, ccp_get_sticky_projects() );
+	return apply_filters( 'ccp_is_project_sticky', in_array( $project_id, ccp_get_sticky_projects() ), $project_id );
 }
 
 /**
