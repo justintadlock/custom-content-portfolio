@@ -28,15 +28,6 @@ final class CCP_Settings_Page {
 	public $settings_page = '';
 
 	/**
-	 * Holds an array the plugin settings.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @var    array
-	 */
-	public $settings = array();
-
-	/**
 	 * Sets up the needed actions for adding and saving the meta boxes.
 	 *
 	 * @since  1.0.0
@@ -84,9 +75,6 @@ final class CCP_Settings_Page {
 	 * @return void
 	 */
 	function register_settings() {
-
-		// Get the current plugin settings w/o the defaults.
-		$this->settings = get_option( 'ccp_settings', ccp_get_default_settings() );
 
 		// Register the setting.
 		register_setting( 'ccp_settings', 'ccp_settings', array( $this, 'validate_settings' ) );
