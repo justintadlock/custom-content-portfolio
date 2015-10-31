@@ -189,9 +189,7 @@ final class CCP_Plugin {
 
 		// Load template files.
 		require_once( $this->dir_path . 'inc/template-project.php'  );
-		require_once( $this->dir_path . 'inc/template-category.php' );
-		require_once( $this->dir_path . 'inc/template-tag.php'      );
-		require_once( $this->dir_path . 'inc/template-user.php'     );
+		require_once( $this->dir_path . 'inc/template-general.php'  );
 
 		// Load admin files.
 		if ( is_admin() ) {
