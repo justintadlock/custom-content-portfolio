@@ -6,6 +6,8 @@
  * Version:     1.0.0-beta-1
  * Author:      Justin Tadlock
  * Author URI:  http://justintadlock.com
+ * Text Domain: custom-content-portfolio
+ * Domain Path: /languages
  *
  * The Custom Content Portfolio plugin was created to solve the problem of theme developers continuing
  * to incorrectly add custom post types to handle portfolios within their themes.  This plugin allows
