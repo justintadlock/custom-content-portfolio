@@ -109,12 +109,12 @@ final class CCP_Settings_Page {
 	function validate_settings( $settings ) {
 
 		// Text boxes that cannot be empty.
-		$settings['portfolio_rewrite_base'] = $settings['portfolio_rewrite_base'] ? strip_tags( $settings['portfolio_rewrite_base'] ) : 'portfolio';
-		$settings['project_rewrite_base']   = $settings['project_rewrite_base']   ? strip_tags( $settings['project_rewrite_base']   ) : '';
-		$settings['category_rewrite_base']  = $settings['category_rewrite_base']  ? strip_tags( $settings['category_rewrite_base']  ) : 'categories';
-		$settings['tag_rewrite_base']       = $settings['tag_rewrite_base']       ? strip_tags( $settings['tag_rewrite_base']       ) : 'tags';
-		$settings['author_rewrite_base']    = $settings['author_rewrite_base']    ? strip_tags( $settings['author_rewrite_base']    ) : 'authors';
-		$settings['portfolio_title']        = $settings['portfolio_title']        ? strip_tags( $settings['portfolio_title'] )        : esc_html__( 'Portfolio', 'custom-content-portfolio' );
+		$settings['portfolio_rewrite_base'] = $settings['portfolio_rewrite_base'] ? trim( strip_tags( $settings['portfolio_rewrite_base'] ), '/' ) : 'portfolio';
+		$settings['project_rewrite_base']   = $settings['project_rewrite_base']   ? trim( strip_tags( $settings['project_rewrite_base']   ), '/' ) : '';
+		$settings['category_rewrite_base']  = $settings['category_rewrite_base']  ? trim( strip_tags( $settings['category_rewrite_base']  ), '/' ) : 'categories';
+		$settings['tag_rewrite_base']       = $settings['tag_rewrite_base']       ? trim( strip_tags( $settings['tag_rewrite_base']       ), '/' ) : 'tags';
+		$settings['author_rewrite_base']    = $settings['author_rewrite_base']    ? trim( strip_tags( $settings['author_rewrite_base']    ), '/' ) : 'authors';
+		$settings['portfolio_title']        = $settings['portfolio_title']        ? strip_tags( $settings['portfolio_title'] )                     : esc_html__( 'Portfolio', 'custom-content-portfolio' );
 
 		// Kill evil scripts.
 		$settings['portfolio_description'] = stripslashes( wp_filter_post_kses( addslashes( $settings['portfolio_description'] ) ) );
