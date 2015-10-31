@@ -70,6 +70,20 @@ function ccp_is_project( $post_id = '' ) {
 }
 
 /**
+ * Conditional check to see if a project has the "sticky" type.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  int    $project_id
+ * @return bool
+ */
+function ccp_is_project_sticky( $project_id = 0 ) {
+	$project_id = ccp_get_project_id( $project_id );
+
+	return in_array( $project_id, ccp_get_sticky_projects() );
+}
+
+/**
  * Checks if the project has the "complete" post status.
  *
  * @since  1.0.0
