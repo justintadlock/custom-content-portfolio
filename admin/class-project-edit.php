@@ -78,7 +78,6 @@ final class CCP_Project_Edit {
 		// Add/Remove meta boxes.
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 
-		//do_action( 'post_submitbox_misc_actions', $post );
 		// Add custom option to the publish/submit meta box.
 		add_action( 'post_submitbox_misc_actions', array( $this, 'submitbox_misc_actions' ) );
 
@@ -88,42 +87,6 @@ final class CCP_Project_Edit {
 		// Filter the post author drop-down.
 		add_filter( 'wp_dropdown_users_args', array( $this, 'dropdown_users_args' ), 10, 2 );
 	}
-
-	public function submitbox_misc_actions( $post = '' ) {
-
-		// Pre-4.4.0 compatibility.
-		if ( ! $post ) {
-			global $post;
-		}
-
-		$post_type_object = get_post_type_object( ccp_get_project_post_type() );
-		$is_sticky = ccp_is_project_sticky( $post->ID );
-		$label = $is_sticky ? esc_html__( 'Sticky', 'custom-content-portfolio' ) : esc_html__( 'Not Sticky', 'custom-content-portfolio' ); ?>
-
-		<div class="misc-pub-section curtime misc-pub-project-sticky">
-
-			<?php wp_nonce_field( 'ccp_project_publish_box_nonce', 'ccp_project_publish_box' ); ?>
-
-			<i class="dashicons dashicons-sticky"></i>
-			<?php printf( esc_html__( 'Sticky: %s', 'custom-content-portfolio' ), "<strong class='ccp-sticky-status'>{$label}</strong>" ); ?>
-
-			<?php if ( current_user_can( $post_type_object->cap->publish_posts ) ) : ?>
-
-				<a href="#ccp-sticky-edit" class="ccp-edit-sticky"><span aria-hidden="true"><?php esc_html_e( 'Edit', 'custom-content-portfolio' ); ?></span> <span class="screen-reader-text"><?php esc_html_e( 'Edit sticky status', 'custom-content-portfolio' ); ?></span></a>
-
-				<div id="ccp-sticky-edit" class="hide-if-js">
-					<label>
-						<input type="checkbox" name="ccp_project_sticky" id="ccp-project-sticky" <?php checked( $is_sticky ); ?> value="true" />
-						<?php esc_html_e( 'Stick to the portfolio page', 'custom-content-portfolio' ); ?>
-					</label>
-					<a href="#ccp-project-sticky" class="ccp-save-sticky hide-if-no-js button"><?php esc_html_e( 'OK', 'custom-content-portolio' ); ?></a>
-					<a href="#ccp-project-sticky" class="ccp-cancel-sticky hide-if-no-js button-cancel"><?php esc_html_e( 'Cancel', 'custom-content-portolio' ); ?></a>
-				</div><!-- #ccp-sticky-edit -->
-
-			<?php endif; ?>
-
-		</div><!-- .misc-pub-project-type -->
-	<?php }
 
 	/**
 	 * Load scripts and styles.
@@ -150,6 +113,57 @@ final class CCP_Project_Edit {
 
 		remove_meta_box( 'postexcerpt', $post_type, 'normal' );
 	}
+
+	/**
+	 * Callback on the `post_submitbox_misc_actions` hook (submit meta box). This handles 
+	 * the output of the sticky project feature.
+	 *
+	 * @note   Prior to WP 4.4.0, the `$post` parameter was not passed.
+	 * @since  1.0.0
+	 * @access public
+	 * @param  object  $post
+	 * @return void
+	 */
+	public function submitbox_misc_actions( $post = '' ) {
+
+		// Pre-4.4.0 compatibility.
+		if ( ! $post ) {
+			global $post;
+		}
+
+		// Get the post type object.
+		$post_type_object = get_post_type_object( ccp_get_project_post_type() );
+
+		// Is the project sticky?
+		$is_sticky = ccp_is_project_sticky( $post->ID );
+
+		// Set the label based on whether the project is sticky.
+		$label = $is_sticky ? esc_html__( 'Sticky', 'custom-content-portfolio' ) : esc_html__( 'Not Sticky', 'custom-content-portfolio' ); ?>
+
+		<div class="misc-pub-section curtime misc-pub-project-sticky">
+
+			<?php wp_nonce_field( 'ccp_project_publish_box_nonce', 'ccp_project_publish_box' ); ?>
+
+			<i class="dashicons dashicons-sticky"></i>
+			<?php printf( esc_html__( 'Sticky: %s', 'custom-content-portfolio' ), "<strong class='ccp-sticky-status'>{$label}</strong>" ); ?>
+
+			<?php if ( current_user_can( $post_type_object->cap->publish_posts ) ) : ?>
+
+				<a href="#ccp-sticky-edit" class="ccp-edit-sticky"><span aria-hidden="true"><?php esc_html_e( 'Edit', 'custom-content-portfolio' ); ?></span> <span class="screen-reader-text"><?php esc_html_e( 'Edit sticky status', 'custom-content-portfolio' ); ?></span></a>
+
+				<div id="ccp-sticky-edit" class="hide-if-js">
+					<label>
+						<input type="checkbox" name="ccp_project_sticky" id="ccp-project-sticky" <?php checked( $is_sticky ); ?> value="true" />
+						<?php esc_html_e( 'Stick to the portfolio page', 'custom-content-portfolio' ); ?>
+					</label>
+					<a href="#ccp-project-sticky" class="ccp-save-sticky hide-if-no-js button"><?php esc_html_e( 'OK', 'custom-content-portolio' ); ?></a>
+					<a href="#ccp-project-sticky" class="ccp-cancel-sticky hide-if-no-js button-cancel"><?php esc_html_e( 'Cancel', 'custom-content-portolio' ); ?></a>
+				</div><!-- #ccp-sticky-edit -->
+
+			<?php endif; ?>
+
+		</div><!-- .misc-pub-project-sticky -->
+	<?php }
 
 	/**
 	 * Output the project details box.
