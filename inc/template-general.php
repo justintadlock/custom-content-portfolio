@@ -83,5 +83,6 @@ function ccp_single_author_title() {
  * @return void
  */
 function ccp_get_single_author_title() {
-	return get_the_author_meta( 'display_name', absint( get_query_var( 'author' ) ) );
+
+	return apply_filters( 'ccp_get_single_author_title', get_the_author_meta( 'display_name', absint( get_query_var( 'author' ) ) ) );
 }
