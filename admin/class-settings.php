@@ -73,26 +73,7 @@ final class CCP_Settings_Page {
 
 			// Add help tabs.
 			add_action( "load-{$this->settings_page}", array( $this, 'add_help_tabs' ) );
-
-			// Enqueue scripts/styles.
-		//	add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		}
-	}
-
-	/**
-	 * Enqueue scripts/styles.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @param  string  $hook_suffix
-	 * @return void
-	 */
-	public function enqueue( $hook_suffix ) {
-
-		if ( $this->settings_page !== $hook_suffix )
-			return;
-
-	//	wp_enqueue_script( 'members-settings' );
 	}
 
 	/**
