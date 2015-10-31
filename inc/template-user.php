@@ -22,3 +22,25 @@ function ccp_is_author( $author = '' ) {
 
 	return apply_filters( 'ccp_is_author', ccp_is_project_archive() && is_author( $author ) );
 }
+
+/**
+ * Print the author archive title.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return void
+ */
+function ccp_single_author_title() {
+	echo ccp_get_single_author_title();
+}
+
+/**
+ * Retrieve the author archive title.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return void
+ */
+function ccp_get_single_author_title() {
+	return get_the_author_meta( 'display_name', absint( get_query_var( 'author' ) ) );
+}

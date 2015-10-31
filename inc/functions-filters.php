@@ -13,6 +13,9 @@
 # Add sticky posts to the front of the line.
 add_filter( 'the_posts', 'ccp_posts_sticky_filter', 10, 2 );
 
+# Filter the document title.
+add_filter( 'document_title_parts', 'ccp_document_title_parts', 5 );
+
 # Filter the post type archive title.
 add_filter( 'post_type_archive_title', 'ccp_post_type_archive_title' );
 
@@ -33,7 +36,7 @@ add_action( 'save_post', 'ccp_force_term_selection' );
 add_filter( 'breadcrumb_trail_args', 'ccp_breadcrumb_trail_args', 15 );
 
 /**
- * Filter on `the_posts` for the project archive. Moves sticky posts to the top of 
+ * Filter on `the_posts` for the project archive. Moves sticky posts to the top of
  * the project archive list.
  *
  * @since  1.0.0
@@ -117,6 +120,22 @@ function ccp_add_stickies( $posts, $sticky_posts ) {
 }
 
 /**
+ * Filter on `document_title_parts` (WP 4.4.0).
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  array  $title
+ * @return array
+ */
+function ccp_document_title_parts( $title ) {
+
+	if ( ccp_is_author() )
+		$title['title'] = ccp_get_single_author_title();
+
+	return $title;
+}
+
+/**
  * Filter on 'post_type_archive_title' to allow for the use of the 'archive_title' label that isn't supported
  * by WordPress.  That's okay since we can roll our own labels.
  *
@@ -141,7 +160,13 @@ function ccp_post_type_archive_title( $title ) {
  */
 function ccp_get_the_archive_title( $title ) {
 
-	return ccp_is_project_archive() ? post_type_archive_title( '', false ) : $title;
+	if ( ccp_is_author() )
+		$title = ccp_get_single_author_title();
+
+	else if ( ccp_is_project_archive() )
+		$title = post_type_archive_title( '', false );
+
+	return $title;
 }
 
 /**
@@ -154,7 +179,13 @@ function ccp_get_the_archive_title( $title ) {
  */
 function ccp_get_the_archive_description( $desc ) {
 
-	return ccp_is_project_archive() && ! $desc ? ccp_get_portfolio_description() : $desc;
+	if ( ccp_is_author() )
+		$desc = get_the_author_meta( 'description', get_query_var( 'author' ) );
+
+	else if ( cp_is_project_archive() && ! $desc )
+		$desc = ccp_get_portfolio_description();
+
+	return $desc;
 }
 
 /**
