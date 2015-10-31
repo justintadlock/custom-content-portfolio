@@ -47,7 +47,7 @@ add_filter( 'breadcrumb_trail_args', 'ccp_breadcrumb_trail_args', 15 );
  */
 function ccp_posts_sticky_filter( $posts, $query ) {
 
-	if ( $query->is_main_query() && ! is_admin() && ccp_is_project_archive() ) {
+	if ( $query->is_main_query() && ! is_admin() && ccp_is_project_archive() && ! ccp_is_author() ) {
 
 		remove_filter( 'the_posts', 'ccp_posts_sticky_filter' );
 
