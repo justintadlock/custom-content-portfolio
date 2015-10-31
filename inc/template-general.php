@@ -11,6 +11,21 @@
  */
 
 /**
+ * Conditional tag to check if viewing any portfolio page.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  mixed  $term
+ * @return bool
+ */
+function ccp_is_portfolio() {
+
+	$is_portfolio = ccp_is_project_archive() || ccp_is_single_project() || ccp_is_author() || ccp_is_category() || ccp_is_tag();
+
+	return apply_filters( 'ccp_is_portfolio', $is_portfolio );
+}
+
+/**
  * Conditional tag to check if viewing a portfolio category archive.
  *
  * @since  1.0.0
