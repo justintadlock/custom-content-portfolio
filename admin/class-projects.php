@@ -16,7 +16,7 @@
  * @since  1.0.0
  * @access public
  */
-final class CCP_Admin_Projects {
+final class CCP_Manage_Projects {
 
 	/**
 	 * Sets up the needed actions.
@@ -443,4 +443,4 @@ final class CCP_Admin_Projects {
 	}
 }
 
-CCP_Admin_Projects::get_instance();
+CCP_Manage_Projects::get_instance();
