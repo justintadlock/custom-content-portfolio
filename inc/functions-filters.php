@@ -47,7 +47,11 @@ add_filter( 'breadcrumb_trail_args', 'ccp_breadcrumb_trail_args', 15 );
  */
 function ccp_posts_sticky_filter( $posts, $query ) {
 
-	if ( $query->is_main_query() && ! is_admin() && ccp_is_project_archive() && ! ccp_is_author() ) {
+	// Allow devs to filter when to show sticky projects.
+	$show_stickies = apply_filters( 'ccp_show_stickies', $query->is_main_query() && ! is_admin() && ccp_is_project_archive() && ! ccp_is_author() && ! is_paged() );
+
+	// If we should show stickies, let's get them.
+	if ( $show_stickies ) {
 
 		remove_filter( 'the_posts', 'ccp_posts_sticky_filter' );
 
@@ -69,7 +73,7 @@ function ccp_posts_sticky_filter( $posts, $query ) {
 function ccp_add_stickies( $posts, $sticky_posts ) {
 
 	// Only do this if on the first page and we indeed have stickies.
-	if ( ! is_paged() && ! empty( $sticky_posts ) ) {
+	if ( ! empty( $sticky_posts ) ) {
 
 		$num_posts     = count( $posts );
 		$sticky_offset = 0;
