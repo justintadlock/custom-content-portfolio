@@ -31,6 +31,9 @@ final class CCP_Admin_Projects {
 
 		// Hook the handler to the manage projects load screen.
 		add_action( 'ccp_load_manage_projects', array( $this, 'handler' ), 0 );
+
+		// Add the help tabs.
+		add_action( 'ccp_load_manage_projects', array( $this, 'add_help_tabs' ) );
 	}
 
 	/**
@@ -78,36 +81,6 @@ final class CCP_Admin_Projects {
 
 		// Filter the row actions (shown below title).
 		add_filter( 'post_row_actions', array( $this, 'row_actions' ), 10, 2 );
-
-		// Overview help tab.
-		$screen->add_help_tab(
-			array(
-				'id'       => 'overview',
-				'title'    => esc_html__( 'Overview', 'custom-content-portfolio' ),
-				'callback' => array( $this, 'help_tab_overview' )
-			)
-		);
-
-		// Screen content help tab.
-		$screen->add_help_tab(
-			array(
-				'id'       => 'screen_content',
-				'title'    => esc_html__( 'Screen Content', 'custom-content-portfolio' ),
-				'callback' => array( $this, 'help_tab_screen_content' )
-			)
-		);
-
-		// Available actions help tab.
-		$screen->add_help_tab(
-			array(
-				'id'       => 'available_actions',
-				'title'    => esc_html__( 'Available Actions', 'custom-content-portfolio' ),
-				'callback' => array( $this, 'help_tab_available_actions' )
-			)
-		);
-
-		// Set the help sidebar.
-		$screen->set_help_sidebar( ccp_get_help_sidebar_text() );
 	}
 
 	/**
@@ -386,6 +359,48 @@ final class CCP_Admin_Projects {
 			if ( ! empty( $text ) )
 				printf( '<div class="updated"><p>%s</p></div>', $text );
 		}
+	}
+
+	/**
+	 * Adds custom help tabs.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function add_help_tabs() {
+
+		$screen = get_current_screen();
+
+		// Overview help tab.
+		$screen->add_help_tab(
+			array(
+				'id'       => 'overview',
+				'title'    => esc_html__( 'Overview', 'custom-content-portfolio' ),
+				'callback' => array( $this, 'help_tab_overview' )
+			)
+		);
+
+		// Screen content help tab.
+		$screen->add_help_tab(
+			array(
+				'id'       => 'screen_content',
+				'title'    => esc_html__( 'Screen Content', 'custom-content-portfolio' ),
+				'callback' => array( $this, 'help_tab_screen_content' )
+			)
+		);
+
+		// Available actions help tab.
+		$screen->add_help_tab(
+			array(
+				'id'       => 'available_actions',
+				'title'    => esc_html__( 'Available Actions', 'custom-content-portfolio' ),
+				'callback' => array( $this, 'help_tab_available_actions' )
+			)
+		);
+
+		// Set the help sidebar.
+		$screen->set_help_sidebar( ccp_get_help_sidebar_text() );
 	}
 
 	/**

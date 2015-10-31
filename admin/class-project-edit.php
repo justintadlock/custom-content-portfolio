@@ -38,6 +38,9 @@ final class CCP_Project_Edit {
 
 		add_action( 'load-post.php',     array( $this, 'load' ) );
 		add_action( 'load-post-new.php', array( $this, 'load' ) );
+
+		// Add the help tabs.
+		add_action( 'ccp_load_project_edit', array( $this, 'add_help_tabs' ) );
 	}
 
 	/**
@@ -56,6 +59,9 @@ final class CCP_Project_Edit {
 		// Bail if not on the projects screen.
 		if ( empty( $screen->post_type ) || $project_type !== $screen->post_type )
 			return;
+
+		// Custom action for loading the edit project screen.
+		do_action( 'ccp_load_project_edit' );
 
 		// Load the fields manager.
 		require_once( ccp_plugin()->dir_path . 'admin/fields-manager/class-manager.php' );
@@ -81,27 +87,6 @@ final class CCP_Project_Edit {
 
 		// Filter the post author drop-down.
 		add_filter( 'wp_dropdown_users_args', array( $this, 'dropdown_users_args' ), 10, 2 );
-
-		// Title and editor help tab.
-		$screen->add_help_tab(
-			array(
-				'id'       => 'title_editor',
-				'title'    => esc_html__( 'Title and Editor', 'custom-content-portfolio' ),
-				'callback' => array( $this, 'help_tab_title_editor' )
-			)
-		);
-
-		// Project details help tab.
-		$screen->add_help_tab(
-			array(
-				'id'       => 'project_details',
-				'title'    => esc_html__( 'Project Details', 'custom-content-portfolio' ),
-				'callback' => array( $this, 'help_tab_project_details' )
-			)
-		);
-
-		// Set the help sidebar.
-		$screen->set_help_sidebar( ccp_get_help_sidebar_text() );
 	}
 
 	public function submitbox_misc_actions( $post = '' ) {
@@ -258,6 +243,39 @@ final class CCP_Project_Edit {
 		}
 
 		return $args;
+	}
+
+	/**
+	 * Adds custom help tabs.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function add_help_tabs() {
+
+		$screen = get_current_screen();
+
+		// Title and editor help tab.
+		$screen->add_help_tab(
+			array(
+				'id'       => 'title_editor',
+				'title'    => esc_html__( 'Title and Editor', 'custom-content-portfolio' ),
+				'callback' => array( $this, 'help_tab_title_editor' )
+			)
+		);
+
+		// Project details help tab.
+		$screen->add_help_tab(
+			array(
+				'id'       => 'project_details',
+				'title'    => esc_html__( 'Project Details', 'custom-content-portfolio' ),
+				'callback' => array( $this, 'help_tab_project_details' )
+			)
+		);
+
+		// Set the help sidebar.
+		$screen->set_help_sidebar( ccp_get_help_sidebar_text() );
 	}
 
 	/**
