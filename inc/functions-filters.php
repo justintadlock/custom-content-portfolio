@@ -182,7 +182,7 @@ function ccp_get_the_archive_description( $desc ) {
 	if ( ccp_is_author() )
 		$desc = get_the_author_meta( 'description', get_query_var( 'author' ) );
 
-	else if ( cp_is_project_archive() && ! $desc )
+	else if ( ccp_is_project_archive() && ! $desc )
 		$desc = ccp_get_portfolio_description();
 
 	return $desc;
