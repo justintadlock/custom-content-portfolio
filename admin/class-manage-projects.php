@@ -175,21 +175,24 @@ final class CCP_Manage_Projects {
 	 */
 	public function terms_dropdown( $taxonomy ) {
 
-		$tax_object = get_taxonomy( $taxonomy );
-
-		$value = isset( $_GET[ $taxonomy ] ) ? esc_attr( $_GET[ $taxonomy ] ) : '';
-		$terms = get_terms( $taxonomy );
-
-		if ( $terms ) {
-			printf( '<select name="%s" class="postform">', esc_attr( $taxonomy ) );
-
-			printf( '<option value=""%s>%s</option>', selected( '', $value, false ), $tax_object->labels->all_items );
-
-			foreach ( $terms as $term )
-				printf( '<option value="%s"%s>%s (%s)</option>', esc_attr( $term->slug ), selected( $term->slug, $value, false ), esc_html( $term->name ), esc_html( $term->count ) );
-
-			echo '</select>';
-		}
+		wp_dropdown_categories(
+			array(
+				'show_option_all' => false,
+				'show_option_none'    => get_taxonomy( $taxonomy )->labels->all_items,
+				'option_none_value'  => '',
+				'orderby'            => 'name',
+				'order'              => 'ASC',
+				'show_count'         => true,
+				'selected'           => isset( $_GET[ $taxonomy ] ) ? esc_attr( $_GET[ $taxonomy ] ) : '',
+				'hierarchical'       => true,
+				'name'               => $taxonomy,
+				'id'                 => '',
+				'class'              => 'postform',
+				'taxonomy'           => $taxonomy,
+				'hide_if_empty'      => true,
+				'value_field'	     => 'slug',
+			)
+		);
 	}
 
 	/**
