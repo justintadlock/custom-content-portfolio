@@ -48,7 +48,7 @@ add_filter( 'breadcrumb_trail_args', 'ccp_breadcrumb_trail_args', 15 );
 function ccp_posts_sticky_filter( $posts, $query ) {
 
 	// Allow devs to filter when to show sticky projects.
-	$show_stickies = apply_filters( 'ccp_show_stickies', $query->is_main_query() && ! is_admin() && ccp_is_project_archive() && ! ccp_is_author() && ! is_paged() );
+	$show_stickies = apply_filters( 'ccp_show_stickies', $query->is_main_query() && ! is_admin() && ccp_is_project_archive() && ! is_paged() );
 
 	// If we should show stickies, let's get them.
 	if ( $show_stickies ) {

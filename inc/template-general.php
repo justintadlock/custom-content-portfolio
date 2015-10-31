@@ -61,7 +61,7 @@ function ccp_is_tag( $term = '' ) {
  */
 function ccp_is_author( $author = '' ) {
 
-	return apply_filters( 'ccp_is_author', ccp_is_project_archive() && is_author( $author ) );
+	return apply_filters( 'ccp_is_author', is_post_type_archive( ccp_get_project_post_type() ) && is_author( $author ) );
 }
 
 /**

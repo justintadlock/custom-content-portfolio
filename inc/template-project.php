@@ -51,7 +51,7 @@ function ccp_is_single_project( $post = '' ) {
  */
 function ccp_is_project_archive() {
 
-	return apply_filters( 'ccp_is_project_archive', is_post_type_archive( ccp_get_project_post_type() ) );
+	return apply_filters( 'ccp_is_project_archive', is_post_type_archive( ccp_get_project_post_type() ) && ! ccp_is_author() );
 }
 
 /**
