@@ -16,8 +16,9 @@ add_action( 'init', 'ccp_register_post_types' );
 # Filter the "enter title here" text.
 add_filter( 'enter_title_here', 'ccp_enter_title_here', 10, 2 );
 
-# Filter the post updated messages.
-add_filter( 'post_updated_messages', 'ccp_post_updated_messages' );
+# Filter the bulk and post updated messages.
+add_filter( 'bulk_post_updated_messages', 'ccp_bulk_post_updated_messages', 5, 2 );
+add_filter( 'post_updated_messages',      'ccp_post_updated_messages',      5    );
 
 /**
  * Returns the name of the project post type.
@@ -224,6 +225,28 @@ function ccp_post_updated_messages( $messages ) {
 		 9 => sprintf( esc_html__( 'Project scheduled for: %s.', 'custom-content-portfolio' ), "<strong>{$scheduled_date}</strong>" ) . $scheduled_link,
 		10 => esc_html__( 'Project draft updated.', 'custom-content-portfolio' ) . $preview_link,
 	);
+
+	return $messages;
+}
+
+/**
+ * Adds custom bulk post updated messages on the manage projects screen.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  array  $messages
+ * @param  array  $counts
+ * @return array
+ */
+function ccp_bulk_post_updated_messages( $messages, $counts ) {
+
+	$type = ccp_get_project_post_type();
+
+	$messages[ $type ]['updated']   = _n( '%s project updated.',                             '%s projects updated.',                               $counts['updated'],   'custom-content-portfolio' );
+	$messages[ $type ]['locked']    = _n( '%s project not updated, somebody is editing it.', '%s projects not updated, somebody is editing them.', $counts['locked'],    'custom-content-portfolio' );
+	$messages[ $type ]['deleted']   = _n( '%s project permanently deleted.',                 '%s projects permanently deleted.',                   $counts['deleted'],   'custom-content-portfolio' );
+	$messages[ $type ]['trashed']   = _n( '%s project moved to the Trash.',                  '%s projects moved to the trash.',                    $counts['trashed'],   'custom-content-portfolio' );
+	$messages[ $type ]['untrashed'] = _n( '%s project restored from the Trash.',             '%s projects restored from the trash.',               $counts['untrashed'], 'custom-content-portfolio' );
 
 	return $messages;
 }

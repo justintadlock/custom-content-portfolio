@@ -59,9 +59,6 @@ final class CCP_Admin_Projects {
 		// Filter the `request` vars.
 		add_filter( 'request', array( $this, 'request' ) );
 
-		// Add custom admin notices.
-		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
-
 		// Add custom views.
 		add_filter( "views_edit-{$project_type}", array( $this, 'views' ) );
 
@@ -307,58 +304,27 @@ final class CCP_Admin_Projects {
 	public function handler() {
 
 		// Checks if the sticky toggle link was clicked.
-		if ( isset( $_GET['action'] ) && $_GET['action'] && 'ccp_toggle_sticky' === $_GET['action'] && isset( $_GET['project_id'] ) ) {
+		if ( isset( $_GET['action'] ) && 'ccp_toggle_sticky' === $_GET['action'] && isset( $_GET['project_id'] ) ) {
 
 			$project_id = absint( ccp_get_project_id( $_GET['project_id'] ) );
 
 			// Verify the nonce.
 			check_admin_referer( "ccp_toggle_sticky_{$project_id}" );
 
-			// Assume the changed failed.
-			$notice = 'failure';
-
 			if ( ccp_is_project_sticky( $project_id ) )
-				$updated = ccp_remove_sticky_project( $project_id );
+				ccp_remove_sticky_project( $project_id );
 			else
-				$updated = ccp_add_sticky_project( $project_id );
-
-			// If the type was updated, add notice slug.
-			if ( $updated && ! is_wp_error( $updated ) )
-				$notice = 'sticky_updated';
+				ccp_add_sticky_project( $project_id );
 
 			// Redirect to correct admin page.
-			$redirect = add_query_arg( array( 'project_id' => $project_id, 'ccp_project_notice' => $notice ), remove_query_arg( array( 'action', 'project_id', 'ccp_toggle_sticky', '_wpnonce' ) ) );
-			wp_safe_redirect( $redirect );
+			$redirect = add_query_arg( array( 'updated' => 1 ), remove_query_arg( array( 'action', 'project_id', '_wpnonce' ) ) );
+			wp_safe_redirect( esc_url_raw( $redirect ) );
 
 			// Always exit for good measure.
 			exit();
 		}
 
 		return;
-	}
-
-	/**
-	 * Displays admin notices for the edit forum screen.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function admin_notices() {
-
-		$allowed_notices = array( 'sticky_updated' );
-
-		if ( isset( $_GET['ccp_project_notice'] ) && in_array( $_GET['ccp_project_notice'], $allowed_notices ) && isset( $_GET['project_id'] ) ) {
-
-			$notice   = $_GET['ccp_project_notice'];
-			$project_id = ccp_get_project_id( absint( $_GET['project_id'] ) );
-
-			if ( 'sticky_updated' === $notice )
-				$text = sprintf( __( 'Project sticky status successfully updated.', 'custom-content-portolio' ), get_the_title( $project_id ) );
-
-			if ( ! empty( $text ) )
-				printf( '<div class="updated"><p>%s</p></div>', $text );
-		}
 	}
 
 	/**
