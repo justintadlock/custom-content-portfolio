@@ -17,7 +17,7 @@ add_filter( 'the_posts', 'ccp_posts_sticky_filter', 10, 2 );
 add_filter( 'document_title_parts', 'ccp_document_title_parts', 5 );
 
 # Filter the post type archive title.
-add_filter( 'post_type_archive_title', 'ccp_post_type_archive_title' );
+add_filter( 'post_type_archive_title', 'ccp_post_type_archive_title', 5, 2 );
 
 # Filter the archive title and description.
 add_filter( 'get_the_archive_title',       'ccp_get_the_archive_title',       5 );
@@ -145,12 +145,15 @@ function ccp_document_title_parts( $title ) {
  *
  * @since  0.1.0
  * @access public
- * @param  string $title
+ * @param  string  $title
+ * @param  string  $post_type
  * @return string
  */
-function ccp_post_type_archive_title( $title ) {
+function ccp_post_type_archive_title( $title, $post_type ) {
 
-	return ccp_is_project_archive() ? get_post_type_object( ccp_get_project_post_type() )->labels->archive_title : $title;
+	$project_type = ccp_get_project_post_type();
+
+	return $project_type === $post_type ? get_post_type_object( ccp_get_project_post_type() )->labels->archive_title : $title;
 }
 
 /**
