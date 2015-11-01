@@ -13,6 +13,9 @@
 # Register taxonomies on the 'init' hook.
 add_action( 'init', 'ccp_register_taxonomies', 9 );
 
+# Filter the term updated messages.
+add_filter( 'term_updated_messages', 'ccp_term_updated_messages', 5 );
+
 /**
  * Returns the name of the portfolio category taxonomy.
  *
@@ -201,4 +204,42 @@ function ccp_register_taxonomies() {
 	// Register the taxonomies.
 	register_taxonomy( ccp_get_category_taxonomy(), ccp_get_project_post_type(), apply_filters( 'ccp_category_taxonomy_args', $cat_args ) );
 	register_taxonomy( ccp_get_tag_taxonomy(),      ccp_get_project_post_type(), apply_filters( 'ccp_tag_taxonomy_args',      $tag_args ) );
+}
+
+/**
+ * Filters the term updated messages in the admin.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  array  $messages
+ * @return array
+ */
+function ccp_term_updated_messages( $messages ) {
+
+	$cat_taxonomy = ccp_get_category_taxonomy();
+	$tag_taxonomy = ccp_get_tag_taxonomy();
+
+	// Add the portfolio category messages.
+	$messages[ $cat_taxonomy ] = array(
+		0 => '',
+		1 => __( 'Category added.',       'custom-content-portfolio' ),
+		2 => __( 'Category deleted.',     'custom-content-portfolio' ),
+		3 => __( 'Category updated.',     'custom-content-portfolio' ),
+		4 => __( 'Category not added.',   'custom-content-portfolio' ),
+		5 => __( 'Category not updated.', 'custom-content-portfolio' ),
+		6 => __( 'Categories deleted.',   'custom-content-portfolio' ),
+	);
+
+	// Add the portfolio tag messages.
+	$messages[ $tag_taxonomy ] = array(
+		0 => '',
+		1 => __( 'Tag added.',       'custom-content-portfolio' ),
+		2 => __( 'Tag deleted.',     'custom-content-portfolio' ),
+		3 => __( 'Tag updated.',     'custom-content-portfolio' ),
+		4 => __( 'Tag not added.',   'custom-content-portfolio' ),
+		5 => __( 'Tag not updated.', 'custom-content-portfolio' ),
+		6 => __( 'Tags deleted.',    'custom-content-portfolio' ),
+	);
+
+	return $messages;
 }
