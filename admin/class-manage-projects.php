@@ -112,8 +112,8 @@ final class CCP_Manage_Projects {
 
 		<style type="text/css">@media only screen and (min-width: 783px) {
 			.fixed .column-thumbnail { width: 100px; }
-			.fixed .column-taxonomy-portfolio_category,
-			.fixed .column-taxonomy-portfolio_tag { width: 15%; }
+			.fixed .column-taxonomy-<?php echo esc_attr( ccp_get_category_taxonomy() ); ?>,
+			.fixed .column-taxonomy-<?php echo esc_attr( ccp_get_tag_taxonomy() ); ?> { width: 15%; }
 		}</style>
 	<?php }
 
