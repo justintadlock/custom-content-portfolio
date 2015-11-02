@@ -22,9 +22,9 @@ This plugin was created because of the rising need from users who are downloadin
 * **Project Details:** Add custom project details such as a project image, URL, client, location, start/end dates, and a description.
 * **Custom Permalinks:** Customize your portfolio permalinks to your own liking.
 * **Sticky Projects:** Stick projects to the portfolio page.
-* **Post Formats:** If your theme supports the, projects can have the audio, gallery, image, or video formats.
+* **Post Formats:** If your theme supports them, projects can have the audio, gallery, image, or video formats.
 
-For more info, vist the [Avatars Meta Box plugin home page](http://themehybrid.com/plugin/avatars-meta-box).
+For more info, vist the [Custom Content Portfolio](http://themehybrid.com/plugin/custom-content-portfolio) plugin home page.
 
 ### Like this plugin?
 
@@ -86,9 +86,15 @@ While Jetpack can certainly be a useful plugin, its portolio module is not even 
 
 The plugin should work fine with any theme that's coded to WordPress standards.  However, some features may not appear on the front end without direct integration by your theme author.
 
+= How do I add theme support? =
+
+If you're a theme author, you can declare theme support with the following code in your theme setup function:
+
+	add_theme_support( 'custom-content-portfolio' );
+
 = Where can I get support? =
 
-The official support forum for this plugin is located at [Theme Hybrid](http://themehybrid.com/support). 
+The official support forum for this plugin is located at [Theme Hybrid](http://themehybrid.com/board/topics). 
 
 == Screenshots ==
 
