@@ -1,10 +1,10 @@
-# Copyright (C) 2015 
-# This file is distributed under the same license as the  package.
+# Copyright (C) 2015 Custom Content Portfolio
+# This file is distributed under the same license as the Custom Content Portfolio package.
 msgid ""
 msgstr ""
-"Project-Id-Version:  \n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/custom-content-portfolio\n"
-"POT-Creation-Date: 2015-10-31 20:43:58+00:00\n"
+"Project-Id-Version: Custom Content Portfolio 1.0.0-beta-1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-content-portfolio\n"
+"POT-Creation-Date: 2015-11-02 19:24:10+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,77 +18,81 @@ msgid_plural "Sticky <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/class-manage-projects.php:207 inc/functions-post-types.php:84
+#: admin/class-manage-projects.php:209 inc/functions-post-types.php:84
 #: inc/functions-post-types.php:86
 msgid "Project"
 msgstr ""
 
-#: admin/class-manage-projects.php:211
+#: admin/class-manage-projects.php:213
 msgid "Thumbnail"
 msgstr ""
 
-#: admin/class-manage-projects.php:252 admin/class-manage-projects.php:277
-#: admin/class-project-edit.php:141 admin/functions-admin.php:40
+#: admin/class-manage-projects.php:254 admin/class-project-edit.php:141
+#: admin/functions-admin.php:40
 msgid "Sticky"
 msgstr ""
 
-#: admin/class-manage-projects.php:277
-msgid "Unsticky"
+#: admin/class-manage-projects.php:279
+msgid "Unstick"
 msgstr ""
 
-#: admin/class-manage-projects.php:345
+#: admin/class-manage-projects.php:279
+msgid "Stick"
+msgstr ""
+
+#: admin/class-manage-projects.php:347
 msgid "Overview"
 msgstr ""
 
-#: admin/class-manage-projects.php:354
+#: admin/class-manage-projects.php:356
 msgid "Screen Content"
 msgstr ""
 
-#: admin/class-manage-projects.php:363
+#: admin/class-manage-projects.php:365
 msgid "Available Actions"
 msgstr ""
 
-#: admin/class-manage-projects.php:382
+#: admin/class-manage-projects.php:384
 msgid "This screen provides access to all of your portfolio projects. You can customize the display of this screen to suit your workflow."
 msgstr ""
 
-#: admin/class-manage-projects.php:396
+#: admin/class-manage-projects.php:398
 msgid "You can customize the display of this screen's contents in a number of ways:"
 msgstr ""
 
-#: admin/class-manage-projects.php:400
+#: admin/class-manage-projects.php:402
 msgid "You can hide/display columns based on your needs and decide how many projects to list per screen using the Screen Options tab."
 msgstr ""
 
-#: admin/class-manage-projects.php:401
+#: admin/class-manage-projects.php:403
 msgid "You can filter the list of projects by post status using the text links in the upper left to show All, Published, Draft, or Trashed projects. The default view is to show all projects."
 msgstr ""
 
-#: admin/class-manage-projects.php:402
+#: admin/class-manage-projects.php:404
 msgid "You can view projects in a simple title list or with an excerpt. Choose the view you prefer by clicking on the icons at the top of the list on the right."
 msgstr ""
 
-#: admin/class-manage-projects.php:403
+#: admin/class-manage-projects.php:405
 msgid "You can refine the list to show only projects in a specific category, with a specific tag, or from a specific month by using the dropdown menus above the projects list. Click the Filter button after making your selection. You also can refine the list by clicking on the project author, category or tag in the posts list."
 msgstr ""
 
-#: admin/class-manage-projects.php:417
+#: admin/class-manage-projects.php:419
 msgid "Hovering over a row in the projects list will display action links that allow you to manage your project. You can perform the following actions:"
 msgstr ""
 
-#: admin/class-manage-projects.php:421
+#: admin/class-manage-projects.php:423
 msgid "<strong>Edit</strong> takes you to the editing screen for that project. You can also reach that screen by clicking on the project title."
 msgstr ""
 
-#: admin/class-manage-projects.php:422
+#: admin/class-manage-projects.php:424
 msgid "<strong>Quick Edit</strong> provides inline access to the metadata of your project, allowing you to update project details without leaving this screen."
 msgstr ""
 
-#: admin/class-manage-projects.php:423
+#: admin/class-manage-projects.php:425
 msgid "<strong>Trash</strong> removes your project from this list and places it in the trash, from which you can permanently delete it."
 msgstr ""
 
-#: admin/class-manage-projects.php:424
+#: admin/class-manage-projects.php:426
 msgid "<strong>Preview</strong> will show you what your draft project will look like if you publish it. View will take you to your live site to view the project. Which link is available depends on your project's status."
 msgstr ""
 
@@ -168,113 +172,113 @@ msgstr ""
 msgid "<strong>Description:</strong> A short summary of the project. Some themes may show this on archive pages."
 msgstr ""
 
-#: admin/class-settings.php:62 admin/class-settings.php:295
+#: admin/class-settings.php:53 admin/class-settings.php:283
 msgid "Portfolio Settings"
 msgstr ""
 
-#: admin/class-settings.php:63
+#: admin/class-settings.php:54
 msgid "Settings"
 msgstr ""
 
-#: admin/class-settings.php:96 admin/class-settings.php:324
+#: admin/class-settings.php:84 admin/class-settings.php:312
 msgid "General Settings"
 msgstr ""
 
-#: admin/class-settings.php:97 admin/class-settings.php:333
+#: admin/class-settings.php:85 admin/class-settings.php:321
 msgid "Permalinks"
 msgstr ""
 
-#: admin/class-settings.php:102
+#: admin/class-settings.php:90
 msgid "Title"
 msgstr ""
 
-#: admin/class-settings.php:103 admin/functions-admin.php:91
+#: admin/class-settings.php:91 admin/functions-admin.php:91
 #: admin/functions-admin.php:135
 msgid "Description"
 msgstr ""
 
-#: admin/class-settings.php:106
+#: admin/class-settings.php:94
 msgid "Portfolio Base"
 msgstr ""
 
-#: admin/class-settings.php:107
+#: admin/class-settings.php:95
 msgid "Project Slug"
 msgstr ""
 
-#: admin/class-settings.php:108
+#: admin/class-settings.php:96
 msgid "Category Slug"
 msgstr ""
 
-#: admin/class-settings.php:109
+#: admin/class-settings.php:97
 msgid "Tag Slug"
 msgstr ""
 
-#: admin/class-settings.php:110
+#: admin/class-settings.php:98
 msgid "Author Slug"
 msgstr ""
 
-#: admin/class-settings.php:129 inc/functions-options.php:139
+#: admin/class-settings.php:117 inc/functions-options.php:139
 #: inc/functions-post-types.php:85
 msgid "Portfolio"
 msgstr ""
 
-#: admin/class-settings.php:148
+#: admin/class-settings.php:136
 msgid "General portfolio settings for your site."
 msgstr ""
 
-#: admin/class-settings.php:164
+#: admin/class-settings.php:152
 msgid "The name of your portfolio. May be used for the portfolio page title and other places, depending on your theme."
 msgstr ""
 
-#: admin/class-settings.php:188
+#: admin/class-settings.php:176
 msgid "Your portfolio description. This may be shown by your theme on the portfolio page."
 msgstr ""
 
-#: admin/class-settings.php:202
+#: admin/class-settings.php:190
 msgid "Set up custom permalinks for the portfolio section on your site."
 msgstr ""
 
-#: admin/class-settings.php:302
+#: admin/class-settings.php:290
 msgid "Update Settings"
 msgstr ""
 
-#: admin/class-settings.php:352
+#: admin/class-settings.php:340
 msgid "<strong>Title:</strong> Allows you to set the title for the portfolio section on your site. This is general shown on the portfolio projects archive, but themes and other plugins may use it in other ways."
 msgstr ""
 
-#: admin/class-settings.php:353
+#: admin/class-settings.php:341
 msgid "<strong>Description:</strong> This is the description for your portfolio. Some themes may display this on the portfolio projects archive."
 msgstr ""
 
-#: admin/class-settings.php:367
+#: admin/class-settings.php:355
 msgid "<strong>Portfolio Base:</strong> The primary URL for the portfolio section on your site. It lists your portfolio projects."
 msgstr ""
 
-#: admin/class-settings.php:369
+#: admin/class-settings.php:357
 msgid "<strong>Project Slug:</strong> The slug for single portfolio projects. You can use something custom, leave this field empty, or use one of the following tags:"
 msgstr ""
 
-#: admin/class-settings.php:371
+#: admin/class-settings.php:359
 msgid "%s - The project author name."
 msgstr ""
 
-#: admin/class-settings.php:372
+#: admin/class-settings.php:360
 msgid "%s - The project category."
 msgstr ""
 
-#: admin/class-settings.php:373
+#: admin/class-settings.php:361
 msgid "%s - The project tag."
 msgstr ""
 
-#: admin/class-settings.php:376
+#: admin/class-settings.php:364
 msgid "<strong>Category Slug:</strong> The base slug used for portfolio category archives."
 msgstr ""
 
-#: admin/class-settings.php:377
+#: admin/class-settings.php:365
 msgid "<strong>Tag Slug:</strong> The base slug used for portfolio tag archives."
 msgstr ""
 
-#: admin/class-settings.php:378
+#: admin/class-settings.php:366
 msgid "<strong>Author Slug:</strong> The base slug used for portfolio author archives."
 msgstr ""
 
@@ -362,16 +366,36 @@ msgstr ""
 msgid "Write a short description (excerpt) of the project."
 msgstr ""
 
-#: admin/functions-admin.php:214
+#: admin/functions-admin.php:230
 msgid "Documentation"
 msgstr ""
 
-#: admin/functions-admin.php:215
+#: admin/functions-admin.php:231
 msgid "Support Forums"
 msgstr ""
 
-#: admin/functions-admin.php:220
+#: admin/functions-admin.php:236
 msgid "For more information:"
+msgstr ""
+
+#: inc/functions-filters.php:124
+msgid "Visit Project"
+msgstr ""
+
+#: inc/functions-filters.php:125
+msgid "Client: %s"
+msgstr ""
+
+#: inc/functions-filters.php:126
+msgid "Location: %s"
+msgstr ""
+
+#: inc/functions-filters.php:127
+msgid "Started: %s"
+msgstr ""
+
+#: inc/functions-filters.php:128
+msgid "Completed: %s"
 msgstr ""
 
 #: inc/functions-post-types.php:83 inc/functions-post-types.php:95
@@ -520,140 +544,188 @@ msgid_plural "%s projects restored from the trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions-taxonomies.php:88 inc/functions-taxonomies.php:90
+#: inc/functions-taxonomies.php:91 inc/functions-taxonomies.php:93
 msgid "Categories"
 msgstr ""
 
-#: inc/functions-taxonomies.php:89 inc/functions-taxonomies.php:91
+#: inc/functions-taxonomies.php:92 inc/functions-taxonomies.php:94
 msgid "Category"
 msgstr ""
 
-#: inc/functions-taxonomies.php:92
+#: inc/functions-taxonomies.php:95
 msgid "Search Categories"
 msgstr ""
 
-#: inc/functions-taxonomies.php:93
+#: inc/functions-taxonomies.php:96
 msgid "Popular Categories"
 msgstr ""
 
-#: inc/functions-taxonomies.php:94
+#: inc/functions-taxonomies.php:97
 msgid "All Categories"
 msgstr ""
 
-#: inc/functions-taxonomies.php:95
+#: inc/functions-taxonomies.php:98
 msgid "Edit Category"
 msgstr ""
 
-#: inc/functions-taxonomies.php:96
+#: inc/functions-taxonomies.php:99
 msgid "View Category"
 msgstr ""
 
-#: inc/functions-taxonomies.php:97
+#: inc/functions-taxonomies.php:100
 msgid "Update Category"
 msgstr ""
 
-#: inc/functions-taxonomies.php:98
+#: inc/functions-taxonomies.php:101
 msgid "Add New Category"
 msgstr ""
 
-#: inc/functions-taxonomies.php:99
+#: inc/functions-taxonomies.php:102
 msgid "New Category Name"
 msgstr ""
 
-#: inc/functions-taxonomies.php:100
+#: inc/functions-taxonomies.php:103
 msgid "No categories found."
 msgstr ""
 
-#: inc/functions-taxonomies.php:101
+#: inc/functions-taxonomies.php:104
 msgid "No categories"
 msgstr ""
 
-#: inc/functions-taxonomies.php:102
+#: inc/functions-taxonomies.php:105
 msgid "Categories list navigation"
 msgstr ""
 
-#: inc/functions-taxonomies.php:103
+#: inc/functions-taxonomies.php:106
 msgid "Categories list"
 msgstr ""
 
-#: inc/functions-taxonomies.php:106
+#: inc/functions-taxonomies.php:109
 msgid "Select Category"
 msgstr ""
 
-#: inc/functions-taxonomies.php:107
+#: inc/functions-taxonomies.php:110
 msgid "Parent Category"
 msgstr ""
 
-#: inc/functions-taxonomies.php:108
+#: inc/functions-taxonomies.php:111
 msgid "Parent Category:"
 msgstr ""
 
-#: inc/functions-taxonomies.php:124 inc/functions-taxonomies.php:126
+#: inc/functions-taxonomies.php:127 inc/functions-taxonomies.php:129
 msgid "Tags"
 msgstr ""
 
-#: inc/functions-taxonomies.php:125 inc/functions-taxonomies.php:127
+#: inc/functions-taxonomies.php:128 inc/functions-taxonomies.php:130
 msgid "Tag"
 msgstr ""
 
-#: inc/functions-taxonomies.php:128
+#: inc/functions-taxonomies.php:131
 msgid "Search Tags"
 msgstr ""
 
-#: inc/functions-taxonomies.php:129
+#: inc/functions-taxonomies.php:132
 msgid "Popular Tags"
 msgstr ""
 
-#: inc/functions-taxonomies.php:130
+#: inc/functions-taxonomies.php:133
 msgid "All Tags"
 msgstr ""
 
-#: inc/functions-taxonomies.php:131
+#: inc/functions-taxonomies.php:134
 msgid "Edit Tag"
 msgstr ""
 
-#: inc/functions-taxonomies.php:132
+#: inc/functions-taxonomies.php:135
 msgid "View Tag"
 msgstr ""
 
-#: inc/functions-taxonomies.php:133
+#: inc/functions-taxonomies.php:136
 msgid "Update Tag"
 msgstr ""
 
-#: inc/functions-taxonomies.php:134
+#: inc/functions-taxonomies.php:137
 msgid "Add New Tag"
 msgstr ""
 
-#: inc/functions-taxonomies.php:135
+#: inc/functions-taxonomies.php:138
 msgid "New Tag Name"
 msgstr ""
 
-#: inc/functions-taxonomies.php:136
+#: inc/functions-taxonomies.php:139
 msgid "No tags found."
 msgstr ""
 
-#: inc/functions-taxonomies.php:137
+#: inc/functions-taxonomies.php:140
 msgid "No tags"
 msgstr ""
 
-#: inc/functions-taxonomies.php:138
+#: inc/functions-taxonomies.php:141
 msgid "Tags list navigation"
 msgstr ""
 
-#: inc/functions-taxonomies.php:139
+#: inc/functions-taxonomies.php:142
 msgid "Tags list"
 msgstr ""
 
-#: inc/functions-taxonomies.php:142
+#: inc/functions-taxonomies.php:145
 msgid "Separate tags with commas"
 msgstr ""
 
-#: inc/functions-taxonomies.php:143
+#: inc/functions-taxonomies.php:146
 msgid "Add or remove tags"
 msgstr ""
 
-#: inc/functions-taxonomies.php:144
+#: inc/functions-taxonomies.php:147
 msgid "Choose from the most used tags"
+msgstr ""
+
+#: inc/functions-taxonomies.php:225
+msgid "Category added."
+msgstr ""
+
+#: inc/functions-taxonomies.php:226
+msgid "Category deleted."
+msgstr ""
+
+#: inc/functions-taxonomies.php:227
+msgid "Category updated."
+msgstr ""
+
+#: inc/functions-taxonomies.php:228
+msgid "Category not added."
+msgstr ""
+
+#: inc/functions-taxonomies.php:229
+msgid "Category not updated."
+msgstr ""
+
+#: inc/functions-taxonomies.php:230
+msgid "Categories deleted."
+msgstr ""
+
+#: inc/functions-taxonomies.php:236
+msgid "Tag added."
+msgstr ""
+
+#: inc/functions-taxonomies.php:237
+msgid "Tag deleted."
+msgstr ""
+
+#: inc/functions-taxonomies.php:238
+msgid "Tag updated."
+msgstr ""
+
+#: inc/functions-taxonomies.php:239
+msgid "Tag not added."
+msgstr ""
+
+#: inc/functions-taxonomies.php:240
+msgid "Tag not updated."
+msgstr ""
+
+#: inc/functions-taxonomies.php:241
+msgid "Tags deleted."
 msgstr ""
 
 #: portfolio.php:128 portfolio.php:139
@@ -666,4 +738,23 @@ msgstr ""
 
 #: uninstall.php:14
 msgid "%s should only be called when uninstalling the plugin."
+msgstr ""
+#. Plugin Name of the plugin/theme
+msgid "Custom Content Portfolio"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://themehybrid.com/plugins/custom-content-portfolio"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Portfolio manager for WordPress.  This plugin allows you to manage, edit, and create new portfolio items in an unlimited number of portfolios."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Justin Tadlock"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://themehybrid.com"
 msgstr ""
