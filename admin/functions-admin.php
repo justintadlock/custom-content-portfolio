@@ -227,7 +227,7 @@ function ccp_default_post_format_filter( $format ) {
 function ccp_get_help_sidebar_text() {
 
 	// Get docs and help links.
-	$docs_link = sprintf( '<li><a href="https://github.com/justintadlock/custom-content-portfolio/blob/master/readme.md">%s</a></li>', esc_html__( 'Documentation', 'custom-cotent-portfolio' ) );
+	$docs_link = sprintf( '<li><a href="http://themehybrid.com/docs">%s</a></li>', esc_html__( 'Documentation', 'custom-cotent-portfolio' ) );
 	$help_link = sprintf( '<li><a href="http://themehybrid.com/board/topics">%s</a></li>', esc_html__( 'Support Forums', 'custom-content-portfolio' ) );
 
 	// Return the text.
