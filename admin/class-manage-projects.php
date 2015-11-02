@@ -276,7 +276,7 @@ final class CCP_Manage_Projects {
 		$current_url = remove_query_arg( array( 'project_id', 'ccp_project_notice' ) );
 
 		// Build text.
-		$text = ccp_is_project_sticky( $project_id ) ? esc_html__( 'Unsticky', 'custom-content-portfolio' ) : esc_html__( 'Sticky', 'custom-content-portfolio' );
+		$text = ccp_is_project_sticky( $project_id ) ? esc_html__( 'Unstick', 'custom-content-portfolio' ) : esc_html__( 'Stick', 'custom-content-portfolio' );
 
 		// Build toggle URL.
 		$url = add_query_arg( array( 'project_id' => $project_id, 'action' => 'ccp_toggle_sticky' ), $current_url );
