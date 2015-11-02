@@ -132,9 +132,8 @@ final class CCP_Manage_Projects {
 		if ( 0 < $count ) {
 			$post_type = ccp_get_project_post_type();
 
-			$noop = _n_noop( 'Sticky <span class="count">(%s)</span>', 'Sticky <span class="count">(%s)</span>', 'custom-content-portfolio' );
-
-			$text = sprintf( translate_nooped_plural( $noop, $count, 'custom-content-portfolio' ), number_format_i18n( $count ) );
+			$noop = _n( 'Sticky <span class="count">(%s)</span>', 'Sticky <span class="count">(%s)</span>', $count, 'custom-content-portfolio' );
+			$text = sprintf( $noop, number_format_i18n( $count ) );
 
 			$views['sticky'] = sprintf( '<a href="%s">%s</a>', add_query_arg( array( 'post_type' => $post_type, 'sticky' => 1 ), admin_url( 'edit.php' ) ), $text );
 		}
