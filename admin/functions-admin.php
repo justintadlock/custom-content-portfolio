@@ -187,7 +187,7 @@ function ccp_post_format_support_filter() {
 
 		$formats = get_theme_support( 'post-formats' );
 
-		// If we have formats, add t
+		// If we have formats, add theme support for only the allowed formats.
 		if ( isset( $formats[0] ) ) {
 			$new_formats = array_intersect( $formats[0], ccp_get_allowed_project_formats() );
 
@@ -199,6 +199,22 @@ function ccp_post_format_support_filter() {
 				add_theme_support( 'post-formats', $new_formats );
 		}
 	}
+
+	// Filter the default post format.
+	add_filter( 'option_default_post_format', 'ccp_default_post_format_filter', 95 );
+}
+
+/**
+ * Filters the default post format to make sure that it's in our list of supported formats.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  string  $format
+ * @return string
+ */
+function ccp_default_post_format_filter( $format ) {
+
+	return in_array( $format, ccp_get_allowed_project_formats() ) ? $format : 'standard';
 }
 
 /**
