@@ -280,18 +280,8 @@ function ccp_post_type_link( $post_link, $post ) {
  * @return string
  */
 function ccp_author_link_filter( $url, $author_id, $nicename ) {
-	global $wp_rewrite;
 
-	if ( $nicename && ccp_is_project() ) {
-
-		if ( $wp_rewrite->using_permalinks() )
-			$url = home_url( user_trailingslashit( trailingslashit( ccp_get_author_rewrite_slug() ) . $nicename ) );
-
-		else
-			$url = add_query_arg( array( 'post_type' => ccp_get_project_post_type(), 'author_name' => $nicename ), home_url( '/' ) );
-	}
-
-	return $url;
+	return ccp_is_project() ? ccp_get_author_url( $author_id ) : $url;
 }
 
 /**
