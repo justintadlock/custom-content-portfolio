@@ -1,46 +1,62 @@
-=== Members ===
+=== Custom Content Portfolio ===
 Contributors: greenshady
 Donate link: http://themehybrid.com/donate
 Tags: portfolio, images, image, post type, taxonomy
-Requires at least: 3.5
-Tested up to: 3.5.1
-Stable tag: 0.1
+Requires at least: 4.3
+Stable tag: 1.0.0
 License: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
-A complete portfolio plugin for creative people (built with custom post types and taxonomies).
+A complete portfolio solution for creative people.
 
 == Description ==
-
-**Support Questions:**  The official support forum for this plugin is located at <a href="http://themehybrid.com/support">Theme Hybrid</a>.
 
 Custom Content Portfolio is a portfolio management plugin for creative people such as artists, photographers, and Web designers to showcase their work.  Just like what bbPress is doing for forums and BuddyPress is doing for social networks, Custom Content Portfolio is doing for portfolios.
 
 This plugin was created because of the rising need from users who are downloading WordPress themes with portfolio management built in (not a good idea for content portability).  I wanted users to be able to switch themes without losing their content.  This will also allow any theme developer to build a theme on top of this plugin.
 
-If you're looking for a theme that was designed specifically to work with this plugin, there's already two available from day one (with more to come):
+### Features
 
-* <a href="http://themehybrid.com/themes/chun">Chun</a>
-* <a href="http://themehybrid.com/themes/adroa">Adroa</a>
+* **Projects:** Create individual projects for your portfolio.
+* **Categories:** Categorize portfolio projects.
+* **Tags:** Tag individual portfolio projects.
+* **Project Details:** Add custom project details such as a project image, URL, client, location, start/end dates, and a description.
+* **Custom Permalinks:** Customize your portfolio permalinks to your own liking.
+* **Sticky Projects:** Stick projects to the portfolio page.
+* **Post Formats:** If your theme supports the, projects can have the audio, gallery, image, or video formats.
 
-Just because your theme isn't designed to work with this plugin doesn't mean it won't work.  You might just have to tinker around with some CSS to make it look good on your site.  Or, better yet, ask your theme developer to support this plugin.
+For more info, vist the [Avatars Meta Box plugin home page](http://themehybrid.com/plugin/avatars-meta-box).
 
-**Plugin Features**
+### Like this plugin?
 
-* Portfolio Items:  Allows you to create portfolio items to put into an unlimited number of portfolios.
-* Portfolios:  Organize your projects how you see fit (they work sort of like tags and categories).
-* Admin:  Everything is built right into the WordPress admin.  It'll look and feel just like adding posts and pages, so there's not a huge learning curve.
+Please consider helping the cause by:
 
-**Credits**
+* [Making a donation](http://themehybrid.com/donate).
+* [Signing up at my site](http://themehybrid.com/club).
+* [Rating the plugin](https://wordpress.org/support/view/plugin-reviews/custom-content-portfolio?rate=5#postform).
 
-Special thanks to WooThemes for their <a href="http://www.woothemes.com/2009/09/woofunction-178-amazing-web-design-icon">icon set</a> (released under the <a href="http://www.gnu.org/licenses/gpl.html">GPL license</a>).  The folder icon is used for the admin menu and screen.
+### Professional Support
+
+If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/board/topics), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 60,000+ users (and growing).
+
+### Plugin Development
+
+If you're a theme author, plugin author, or just a code hobbyist, you can follow the development of this plugin on it's [GitHub repository](https://github.com/justintadlock/custom-content-portfolio). 
 
 == Installation ==
 
 1. Upload `custom-content-portfolio` to the `/wp-content/plugins/` directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
-1. Go to "Settings > Permalinks" in the admin to re-save your permalinks.
+1. Go to "Portfolio > Settings" in the admin to set up your portfolio.
 
 == Frequently Asked Questions ==
+
+= Upgrading from pre-1.0.0. What's the deal? =
+
+CCP underwent a complete rewrite from the ground up.  There's very little about the plugin that's even remotely close to the original version.
+
+The biggest thing to note is that this plugin writes directly to the database to change some post type, taxonomy, and post metadata values.  I've tested this extensively, but I still encourage you to **make a backup of your database** prior to upgrading in case anything goes wrong.
+
+Also, you'll want to set your permalinks via "Portfolio > Settings > Permalinks" in the admin.
 
 = Why was this plugin created? =
 
@@ -48,29 +64,31 @@ I hate when themes authors lock users into using the same theme forever or risk 
 
 = How do I use it? =
 
-It works just like posts or pages.  You'll get a new menu item in the admin called "Portfolio".  From there, you can create new portfolios (sort of like tags) and portfolio items (sort of like posts).
+It works just like posts or pages.  You'll get a new menu item in the admin called "Portfolio".  From there, you can create new projects (sort of like posts/pages).
 
 = I'm getting 404 errors. How can I fix this? =
 
-Just visit "Settings > Permalinks" in your WordPress admin.  It will flush your rewrite rules.  After that, you shouldn't have any 404 issues.
+You need to save your portfolio permalinks by visiting "Portfolio > Settings" in the admin.  There's a section titled "Permalinks" that will allow you to set up your portfolio rewrite rules.  After saving, any 404s should disappear.
 
 = I don't see the "Portfolio" section. =
 
-It should be located just below "Media" in the WordPress admin menu.  By default, only administrators can see this menu item.  If you are an administrator and can't see it after activating the plugin, deactivate and reactivate the plugin.  This should add the required permissions to your administrator role.
+By default, only administrators can see this menu item.  If you are an administrator and can't see it after activating the plugin, deactivate and reactivate the plugin.  This should add the required permissions to your administrator role.
 
 = How can I allow other users to create portfolio items on my site? =
 
-By default, the "administrator" role is the only role allowed to edit portfolio-related things.  However, you can install a role management plugin like <a href="http://wordpress.org/extend/plugins/members">Members</a> to give more users access to portfolios.
+By default, the "administrator" role is the only role allowed to edit portfolio-related things.  However, you can install a role management plugin like [Members](http://wordpress.org/plugins/members) to give more users access to portfolio.
 
-The three capabilities you'll need to add to other roles are:
+= How does this compare with Jetpack portfolios? =
 
-* `manage_portfolio`:  Allows management of the entire portfolio section (only for trusted users).
-* `edit_portfolio_items`:  Allows users to edit (not publish) portfolio items and assign portfolios to those items.
-* `create_portfolio_items`:  Allows users to publish portfolio items.
+While Jetpack can certainly be a useful plugin, its portolio module is not even in the same league.  Jetpack offers some of the same basic stuff that you can do with a custom post type, but that's where the similarities end.  CCP is a complete portfolio solution.
+
+= Will it work with my theme? =
+
+The plugin should work fine with any theme that's coded to WordPress standards.  However, some features may not appear on the front end without direct integration by your theme author.
 
 = Where can I get support? =
 
-The official support forum for this plugin is located at <a href="http://themehybrid.com/support">Theme Hybrid</a>.  I don't generally have time to answer questions on the WordPress.org forums.  Theme Hybrid is my fulltime day job.
+The official support forum for this plugin is located at [Theme Hybrid](http://themehybrid.com/support). 
 
 == Screenshots ==
 
@@ -80,8 +98,10 @@ The official support forum for this plugin is located at <a href="http://themehy
 4. Portfolio settings admin screen.
 5. Screenshot of the portfolio on the front end.
 
+== Upgrade Notice ==
+
+If upgrading from a version prior to 1.0.0, please read the FAQ before upgrading.
+
 == Changelog ==
 
-**Version 0.1**
-
-* Plugin launch.  Everything's new!
+The change log is located in the `changelog.md` file in the plugin folder.  You may also [view the change log](https://github.com/justintadlock/custom-content-portfolio/blob/master/changelog.md) online.

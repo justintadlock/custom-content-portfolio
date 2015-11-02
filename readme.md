@@ -9,6 +9,8 @@ Custom Content Portfolio is a complete portfolio solution for artists, freelance
 * **Tags:** Tag individual portfolio projects.
 * **Project Details:** Add custom project details such as a project image, URL, client, location, start/end dates, and a description.
 * **Custom Permalinks:** Customize your portfolio permalinks to your own liking.
+* **Sticky Projects:** Stick projects to the portfolio page.
+* **Post Formats:** If your theme supports the, projects can have the audio, gallery, image, or video formats.
 
 ## Professional Support
 
@@ -18,8 +20,4 @@ If you need professional plugin support from me, the plugin author, you can acce
 
 This project is licensed under the [GNU GPL](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html), version 2 or later.
 
-2015 &copy; [Justin Tadlock](http://justintadlock.com).
-
-## Documentation
-
-Will happen at some point.
+2013-2015 &copy; [Justin Tadlock](http://justintadlock.com).
