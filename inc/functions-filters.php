@@ -10,6 +10,9 @@
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
+# Check theme support.
+add_action( 'wp_loaded', 'ccp_check_theme_support', 0 );
+
 # Add sticky posts to the front of the line.
 add_filter( 'the_posts', 'ccp_posts_sticky_filter', 10, 2 );
 
@@ -34,6 +37,48 @@ add_action( 'save_post', 'ccp_force_term_selection' );
 
 # Filter the Breadcrumb Trail plugin args.
 add_filter( 'breadcrumb_trail_args', 'ccp_breadcrumb_trail_args', 15 );
+
+/**
+ * Checks if the theme supports `custom-content-portfolio`.  If not, it runs specific filters
+ * to make themes without support work a little better.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return void
+ */
+function ccp_check_theme_support() {
+
+	if ( ! current_theme_supports( 'custom-content-portfolio' ) )
+		add_filter( 'the_content', 'ccp_the_content_filter', 25 );
+}
+
+/**
+ * Filter on `the_content` for themes that don't support the plugin.  This filter outputs the basic
+ * project metadata only.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  string  $content
+ * @return string
+ */
+function ccp_the_content_filter( $content ) {
+
+	if ( in_the_loop() && ccp_is_single_project() && ccp_is_project() && ! post_password_required() ) {
+
+		$project_meta = '';
+
+		$project_meta .= ccp_get_project_link(       array( 'text' => esc_html__( 'Visit Project', 'custom-content-portfolio' ), 'after' => '<br />' ) );
+		$project_meta .= ccp_get_project_client(     array( 'text' => esc_html__( 'Client: %s',    'custom-content-portfolio' ), 'after' => '<br />' ) );
+		$project_meta .= ccp_get_project_location(   array( 'text' => esc_html__( 'Location: %s',  'custom-content-portfolio' ), 'after' => '<br />' ) );
+		$project_meta .= ccp_get_project_start_date( array( 'text' => esc_html__( 'Started: %s',   'custom-content-portfolio' ), 'after' => '<br />' ) );
+		$project_meta .= ccp_get_project_end_date(   array( 'text' => esc_html__( 'Completed: %s', 'custom-content-portfolio' ) ) );
+
+		if ( $project_meta )
+			$content .= sprintf( '<p class="project-meta">%s</p>', $project_meta );
+	}
+
+	return $content;
+}
 
 /**
  * Filter on `the_posts` for the project archive. Moves sticky posts to the top of

@@ -256,7 +256,7 @@ function ccp_get_project_client( $args = array() ) {
 
 	if ( $client ) {
 
-		$text = sprintf( $args['text'], $client );
+		$text = sprintf( $args['text'], sprintf( '<span class="project-data">%s</span>', $client ) );
 
 		$html .= $args['before'];
 		$html .= sprintf( $args['wrap'], 'class="project-client"', $text );
@@ -304,7 +304,7 @@ function ccp_get_project_location( $args = array() ) {
 
 	if ( $location ) {
 
-		$text = sprintf( $args['text'], $location );
+		$text = sprintf( $args['text'], sprintf( '<span class="project-data">%s</span>', $location ) );
 
 		$html .= $args['before'];
 		$html .= sprintf( $args['wrap'], 'class="project-location"', $text );
@@ -344,7 +344,7 @@ function ccp_get_project_start_date( $args = array() ) {
 		'format'  => get_option( 'date_format' ),
 		'before'  => '',
 		'after'   => '',
-		'wrap'    => '<time %s>%s</time>',
+		'wrap'    => '<span %s>%s</span>',
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -353,12 +353,14 @@ function ccp_get_project_start_date( $args = array() ) {
 
 	if ( $start_date ) {
 
-		$text = sprintf( $args['text'], mysql2date( $args['format'], $start_date, true ) );
-
 		$datetime = sprintf( 'datetime="%s"', mysql2date( 'Y-m-d\TH:i:sP', $start_date, true ) );
 
+		$text = sprintf( '<time class="project-data" %s>%s</time>', $datetime, mysql2date( $args['format'], $start_date, true ) );
+
+		$text = sprintf( $args['text'], $text );
+
 		$html .= $args['before'];
-		$html .= sprintf( $args['wrap'], 'class="project-start-date" ' . $datetime, $text );
+		$html .= sprintf( $args['wrap'], 'class="project-start-date"', $text );
 		$html .= $args['after'];
 	}
 
@@ -395,7 +397,7 @@ function ccp_get_project_end_date( $args = array() ) {
 		'format'  => get_option( 'date_format' ),
 		'before'  => '',
 		'after'   => '',
-		'wrap'    => '<time %s>%s</time>',
+		'wrap'    => '<span %s>%s</span>',
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -404,12 +406,14 @@ function ccp_get_project_end_date( $args = array() ) {
 
 	if ( $end_date ) {
 
-		$text = sprintf( $args['text'], mysql2date( $args['format'], $end_date, true ) );
-
 		$datetime = sprintf( 'datetime="%s"', mysql2date( 'Y-m-d\TH:i:sP', $end_date, true ) );
 
+		$text = sprintf( '<time class="project-data" %s>%s</time>', $datetime, mysql2date( $args['format'], $end_date, true ) );
+
+		$text = sprintf( $args['text'], $text );
+
 		$html .= $args['before'];
-		$html .= sprintf( $args['wrap'], 'class="project-end-date" ' . $datetime, $text );
+		$html .= sprintf( $args['wrap'], 'class="project-end-date"', $text );
 		$html .= $args['after'];
 	}
 
