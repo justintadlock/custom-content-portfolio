@@ -13,6 +13,9 @@
 # Check theme support.
 add_action( 'wp_loaded', 'ccp_check_theme_support', 0 );
 
+# Template hierarchy.
+add_filter( 'template_include', 'ccp_template_include', 5 );
+
 # Add sticky posts to the front of the line.
 add_filter( 'the_posts', 'ccp_posts_sticky_filter', 10, 2 );
 
@@ -50,6 +53,57 @@ function ccp_check_theme_support() {
 
 	if ( ! current_theme_supports( 'custom-content-portfolio' ) )
 		add_filter( 'the_content', 'ccp_the_content_filter', 25 );
+}
+
+/**
+ * Basic top-level template hierarchy. I generally prefer to leave this functionality up to
+ * themes.  This is just a foundation to build upon if needed.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  string  $template
+ * @return string
+ */
+function ccp_template_include( $template ) {
+
+	// Bail if not a portfolio page.
+	if ( ! ccp_is_portfolio() )
+		return $template;
+
+	$templates = array();
+
+	// Author archive.
+	if ( ccp_is_author() ) {
+		$templates[] = 'portfolio-author.php';
+		$templates[] = 'portfolio-archive.php';
+
+	// Category archive.
+	} else if ( ccp_is_category() ) {
+		$templates[] = 'portfolio-category.php';
+		$templates[] = 'portfolio-archive.php';
+
+	// Tag archive.
+	} else if ( ccp_is_tag() ) {
+		$templates[] = 'portfolio-tag.php';
+		$templates[] = 'portfolio-archive.php';
+
+	// Project archive.
+	} else if ( ccp_is_project_archive() ) {
+		$templates[] = 'portfolio-archive.php';
+
+	// Single project.
+	} else if ( ccp_is_single_project() ) {
+		$templates[] = 'portfolio-project.php';
+	}
+
+	// Fallback template.
+	$templates[] = 'portfolio.php';
+
+	// Check if we have a template.
+	$has_template = locate_template( apply_filters( 'ccp_template_hierarchy', $templates ) );
+
+	// Return the template.
+	return $has_template ? $has_template : $template;
 }
 
 /**
