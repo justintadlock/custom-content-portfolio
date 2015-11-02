@@ -5,7 +5,7 @@
  * Description: Portfolio manager for WordPress.  This plugin allows you to manage, edit, and create new portfolio items in an unlimited number of portfolios.
  * Version:     1.0.0-beta-1
  * Author:      Justin Tadlock
- * Author URI:  http://justintadlock.com
+ * Author URI:  http://themehybrid.com
  * Text Domain: custom-content-portfolio
  * Domain Path: /languages
  *
