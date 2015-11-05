@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.0.1] - 2015-11-05
+
+### Fixed
+
+* Allow for an empty project, category, tag, or author rewrite base but handle conflicts when more than one are empty.
+
 ## [1.0.0] - 2015-11-02
 
 ### Added
