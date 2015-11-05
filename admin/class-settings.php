@@ -59,7 +59,7 @@ final class CCP_Settings_Page {
 
 		if ( $this->settings_page ) {
 
-			// Register setings.
+			// Register settings.
 			add_action( 'admin_init', array( $this, 'register_settings' ) );
 
 			// Add help tabs.
@@ -108,16 +108,42 @@ final class CCP_Settings_Page {
 	 */
 	function validate_settings( $settings ) {
 
-		// Text boxes that cannot be empty.
+		// Text boxes.
 		$settings['portfolio_rewrite_base'] = $settings['portfolio_rewrite_base'] ? trim( strip_tags( $settings['portfolio_rewrite_base'] ), '/' ) : 'portfolio';
 		$settings['project_rewrite_base']   = $settings['project_rewrite_base']   ? trim( strip_tags( $settings['project_rewrite_base']   ), '/' ) : '';
-		$settings['category_rewrite_base']  = $settings['category_rewrite_base']  ? trim( strip_tags( $settings['category_rewrite_base']  ), '/' ) : 'categories';
-		$settings['tag_rewrite_base']       = $settings['tag_rewrite_base']       ? trim( strip_tags( $settings['tag_rewrite_base']       ), '/' ) : 'tags';
-		$settings['author_rewrite_base']    = $settings['author_rewrite_base']    ? trim( strip_tags( $settings['author_rewrite_base']    ), '/' ) : 'authors';
+		$settings['category_rewrite_base']  = $settings['category_rewrite_base']  ? trim( strip_tags( $settings['category_rewrite_base']  ), '/' ) : '';
+		$settings['tag_rewrite_base']       = $settings['tag_rewrite_base']       ? trim( strip_tags( $settings['tag_rewrite_base']       ), '/' ) : '';
+		$settings['author_rewrite_base']    = $settings['author_rewrite_base']    ? trim( strip_tags( $settings['author_rewrite_base']    ), '/' ) : '';
 		$settings['portfolio_title']        = $settings['portfolio_title']        ? strip_tags( $settings['portfolio_title'] )                     : esc_html__( 'Portfolio', 'custom-content-portfolio' );
 
 		// Kill evil scripts.
 		$settings['portfolio_description'] = stripslashes( wp_filter_post_kses( addslashes( $settings['portfolio_description'] ) ) );
+
+		/* === Handle Permalink Conflicts ===*/
+
+		// No project or category base, projects win.
+		if ( ! $settings['project_rewrite_base'] && ! $settings['category_rewrite_base'] )
+			$settings['category_rewrite_base'] = 'categories';
+
+		// No project or tag base, projects win.
+		if ( ! $settings['project_rewrite_base'] && ! $settings['tag_rewrite_base'] )
+			$settings['tag_rewrite_base'] = 'tags';
+
+		// No project or author base, projects win.
+		if ( ! $settings['project_rewrite_base'] && ! $settings['author_rewrite_base'] )
+			$settings['author_rewrite_base'] = 'authors';
+
+		// No category or tag base, categories win.
+		if ( ! $settings['category_rewrite_base'] && ! $settings['tag_rewrite_base'] )
+			$settings['tag_rewrite_base'] = 'tags';
+
+		// No category or author base, categories win.
+		if ( ! $settings['category_rewrite_base'] && ! $settings['author_rewrite_base'] )
+			$settings['author_rewrite_base'] = 'authors';
+
+		// No author or tag base, authors win.
+		if ( ! $settings['author_rewrite_base'] && ! $settings['tag_rewrite_base'] )
+			$settings['tag_rewrite_base'] = 'tags';
 
 		// Return the validated/sanitized settings.
 		return $settings;
