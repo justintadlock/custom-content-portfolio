@@ -3,7 +3,7 @@ Contributors: greenshady
 Donate link: http://themehybrid.com/donate
 Tags: portfolio, images, image, post type, taxonomy
 Requires at least: 4.3
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 A complete portfolio solution for creative people.
@@ -56,7 +56,9 @@ CCP underwent a complete rewrite from the ground up.  There's very little about 
 
 The biggest thing to note is that this plugin writes directly to the database to change some post type, taxonomy, and post metadata values.  I've tested this extensively, but I still encourage you to **make a backup of your database** prior to upgrading in case anything goes wrong.
 
-Also, you'll want to set your permalinks via "Portfolio > Settings > Permalinks" in the admin.
+The second biggest thing is that you might need to deactivate and reactivate the plugin if you're missing an admin items under "Portfolio".  This should correct any issues.
+
+The third and final item is that you'll want to set your permalinks via "Portfolio > Settings > Permalinks" in the admin.
 
 = Why was this plugin created? =
 
