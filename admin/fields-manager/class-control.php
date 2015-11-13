@@ -255,11 +255,6 @@ class CCP_Fields_Control {
 				<br />
 			<?php endif; ?>
 
-			<?php if ( $this->description ) : ?>
-				<span class="ccp-fields-description description"><?php echo $this->description; ?></span>
-				<br />
-			<?php endif; ?>
-
 			<select <?php $this->attr(); ?>>
 
 				<?php foreach ( $this->choices as $choice => $label ) : ?>
@@ -269,6 +264,11 @@ class CCP_Fields_Control {
 				<?php endforeach; ?>
 
 			</select>
+			
+			<?php if ( $this->description ) : ?>
+				<span class="ccp-fields-description description"><?php echo $this->description; ?></span>
+				<br />
+			<?php endif; ?>
 		</label>
 	<?php }
 
@@ -287,11 +287,6 @@ class CCP_Fields_Control {
 			<br />
 		<?php endif; ?>
 
-		<?php if ( $this->description ) : ?>
-			<span class="ccp-fields-description description"><?php echo $this->description; ?></span>
-			<br />
-		<?php endif; ?>
-
 		<?php foreach ( $this->choices as $choice => $label ) : ?>
 
 			<label>
@@ -300,6 +295,11 @@ class CCP_Fields_Control {
 			</label>
 
 		<?php endforeach; ?>
+		
+		<?php if ( $this->description ) : ?>
+			<span class="ccp-fields-description description"><?php echo $this->description; ?></span>
+			<br />
+		<?php endif; ?>
 	<?php }
 
 	/**
@@ -313,11 +313,11 @@ class CCP_Fields_Control {
 	public function template_checkbox( $post_id ) { ?>
 
 		<label>
-			<input type="checkbox" value="<?php echo esc_attr( $this->get_value( $post_id ) ); ?>" <?php $this->attr(); ?><?php selected( $this->get_value( $post_id ) ); ?> />
-
 			<?php if ( $this->label ) : ?>
 				<span class="ccp-fields-label"><?php echo esc_html( $this->label ); ?></span>
 			<?php endif; ?>
+			
+			<input type="checkbox" value="<?php echo esc_attr( $this->get_value( $post_id ) ); ?>" <?php $this->attr(); ?><?php selected( $this->get_value( $post_id ) ); ?> />
 
 			<?php if ( $this->description ) : ?>
 				<br />
