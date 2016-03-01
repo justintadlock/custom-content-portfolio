@@ -33,7 +33,8 @@ function ccp_admin_register_scripts() {
 
 	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-	wp_register_script( 'ccp-edit-project', ccp_plugin()->js_uri . "edit-project{$min}.js", array( 'jquery' ), '', true );
+	wp_register_script( 'ccp-settings', ccp_plugin()->js_uri . "settings{$min}.js", array( 'jquery' ), ccp_plugin()->version, true );
+	wp_register_script( 'ccp-edit-project', ccp_plugin()->js_uri . "edit-project{$min}.js", array( 'jquery' ), ccp_plugin()->version, true );
 
 	// Localize our script with some text we want to pass in.
 	$i18n = array(
@@ -42,6 +43,8 @@ function ccp_admin_register_scripts() {
 	);
 
 	wp_localize_script( 'ccp-edit-project', 'ccp_i18n', $i18n );
+
+
 }
 
 /**

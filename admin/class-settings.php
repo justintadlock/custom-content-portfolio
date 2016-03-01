@@ -64,6 +64,9 @@ final class CCP_Settings_Page {
 
 			// Add help tabs.
 			add_action( "load-{$this->settings_page}", array( $this, 'add_help_tabs' ) );
+
+			// Enqueue scripts and styles.
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		}
 	}
 
@@ -74,7 +77,7 @@ final class CCP_Settings_Page {
 	 * @access public
 	 * @return void
 	 */
-	function register_settings() {
+	public function register_settings() {
 
 		// Register the setting.
 		register_setting( 'ccp_settings', 'ccp_settings', array( $this, 'validate_settings' ) );
@@ -106,7 +109,7 @@ final class CCP_Settings_Page {
 	 * @param  array  $input
 	 * @return array
 	 */
-	function validate_settings( $settings ) {
+	public function validate_settings( $settings ) {
 
 		// Text boxes.
 		$settings['portfolio_rewrite_base'] = $settings['portfolio_rewrite_base'] ? trim( strip_tags( $settings['portfolio_rewrite_base'] ), '/' ) : 'portfolio';
@@ -224,11 +227,22 @@ final class CCP_Settings_Page {
 	 * @access public
 	 * @return void
 	 */
-	public function field_portfolio_rewrite_base() { ?>
+	public function field_portfolio_rewrite_base() {
 
+		$pages       = get_pages();
+		$page_id     = ccp_get_portfolio_page_id();
+		$page_exists = in_array( $page_id, wp_list_pluck( $pages, 'ID' ) );
+		?>
+
+		<select id="ccp_portfolio_page_id" name="ccp_settings[portfolio_page_id]">
+			<option value="">&mdash; <?php esc_html_e( 'Custom', 'custom-content-portfolio' ); ?> &mdash;</option>
+			<?php foreach ( $pages as $page ) : ?>
+				<option value="<?php echo absint( $page->ID ); ?>" data-slug="<?php echo esc_attr( $page->post_name ); ?>" <?php selected( $page->ID, $page_id ); ?>><?php echo esc_html( $page->post_title ); ?></option>
+			<?php endforeach; ?>
+		</select>
 		<label>
 			<code><?php echo esc_url( home_url( '/' ) ); ?></code>
-			<input type="text" class="regular-text code" name="ccp_settings[portfolio_rewrite_base]" value="<?php echo esc_attr( ccp_get_portfolio_rewrite_base() ); ?>" />
+			<input type="text" class="regular-text code" name="ccp_settings[portfolio_rewrite_base]" value="<?php echo esc_attr( ccp_get_portfolio_rewrite_base() ); ?>" data-default="portfolio" <?php disabled( $page_exists && '' !== $page_id ); ?> />
 		</label>
 	<?php }
 
@@ -242,7 +256,7 @@ final class CCP_Settings_Page {
 	public function field_project_rewrite_base() { ?>
 
 		<label>
-			<code><?php echo esc_url( home_url( ccp_get_portfolio_rewrite_base() . '/' ) ); ?></code>
+			<code><?php echo esc_url( home_url( '/' ) ); ?><span><?php echo esc_html( ccp_get_portfolio_rewrite_base() ); ?></span>/</code>
 			<input type="text" class="regular-text code" name="ccp_settings[project_rewrite_base]" value="<?php echo esc_attr( ccp_get_project_rewrite_base() ); ?>" />
 		</label>
 	<?php }
@@ -257,7 +271,7 @@ final class CCP_Settings_Page {
 	public function field_category_rewrite_base() { ?>
 
 		<label>
-			<code><?php echo esc_url( home_url( ccp_get_portfolio_rewrite_base() . '/' ) ); ?></code>
+			<code><?php echo esc_url( home_url( '/' ) ); ?><span><?php echo esc_html( ccp_get_portfolio_rewrite_base() ); ?></span>/</code>
 			<input type="text" class="regular-text code" name="ccp_settings[category_rewrite_base]" value="<?php echo esc_attr( ccp_get_category_rewrite_base() ); ?>" />
 		</label>
 	<?php }
@@ -272,7 +286,7 @@ final class CCP_Settings_Page {
 	public function field_tag_rewrite_base() { ?>
 
 		<label>
-			<code><?php echo esc_url( home_url( ccp_get_portfolio_rewrite_base() . '/' ) ); ?></code>
+			<code><?php echo esc_url( home_url( '/' ) ); ?><span><?php echo esc_html( ccp_get_portfolio_rewrite_base() ); ?></span>/</code>
 			<input type="text" class="regular-text code" name="ccp_settings[tag_rewrite_base]" value="<?php echo esc_attr( ccp_get_tag_rewrite_base() ); ?>" />
 		</label>
 	<?php }
@@ -287,7 +301,7 @@ final class CCP_Settings_Page {
 	public function field_author_rewrite_base() { ?>
 
 		<label>
-			<code><?php echo esc_url( home_url( ccp_get_portfolio_rewrite_base() . '/' ) ); ?></code>
+			<code><?php echo esc_url( home_url( '/' ) ); ?><span><?php echo esc_html( ccp_get_portfolio_rewrite_base() ); ?></span>/</code>
 			<input type="text" class="regular-text code" name="ccp_settings[author_rewrite_base]" value="<?php echo esc_attr( ccp_get_author_rewrite_base() ); ?>" />
 		</label>
 	<?php }
@@ -351,6 +365,17 @@ final class CCP_Settings_Page {
 
 		// Set the help sidebar.
 		$screen->set_help_sidebar( ccp_get_help_sidebar_text() );
+	}
+
+	/**
+	 * Load scripts.
+	 *
+	 * @since  1.0.2
+	 * @access public
+	 * @return void
+	 */
+	public function enqueue() {
+		wp_enqueue_script( 'ccp-settings' );
 	}
 
 	/**

@@ -13,6 +13,9 @@
 # Register custom post types on the 'init' hook.
 add_action( 'init', 'ccp_register_post_types' );
 
+# Set the portolio archive as the front page using the 'pre_get_posts' hook.
+add_action( 'pre_get_posts', 'ccp_front_page_archive' );
+
 # Filter the "enter title here" text.
 add_filter( 'enter_title_here', 'ccp_enter_title_here', 10, 2 );
 
@@ -167,6 +170,33 @@ function ccp_register_post_types() {
 
 	// Register the post types.
 	register_post_type( ccp_get_project_post_type(), apply_filters( 'ccp_project_post_type_args', $project_args ) );
+}
+
+/**
+ * Set the portfolio archive as the front page.
+ *
+ * @since  1.0.2
+ * @access public
+ * @param  WP_Query $query
+ * @return WP_Query
+ */
+function ccp_front_page_archive( $query ) {
+
+	$page_on_front = (int) get_option( 'page_on_front' );
+
+	if ( is_admin() || ccp_get_portfolio_page_id() !== $page_on_front || (int) $query->get( 'page_id' ) !== $page_on_front ) {
+		return;
+	}
+
+	$query->set( 'post_type', ccp_get_project_post_type() );
+	$query->set( 'page_id',    '' );
+
+	$query->is_page              = 0;
+	$query->is_singular          = 0;
+	$query->is_post_type_archive = 1;
+	$query->is_archive           = 1;
+
+	return $query;
 }
 
 /**

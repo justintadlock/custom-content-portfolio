@@ -33,6 +33,17 @@ function ccp_get_portfolio_description() {
 }
 
 /**
+ * Returns the ID of the page to be used as the portfolio rewrite base.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return int
+ */
+function ccp_get_portfolio_page_id() {
+	return (int) apply_filters( 'ccp_get_portfolio_page_id', ccp_get_setting( 'portfolio_page_id' ) );
+}
+
+/**
  * Returns the portfolio rewrite base. Used for the project archive and as a prefix for taxonomy,
  * author, and any other slugs.
  *
@@ -41,7 +52,10 @@ function ccp_get_portfolio_description() {
  * @return string
  */
 function ccp_get_portfolio_rewrite_base() {
-	return apply_filters( 'ccp_get_portfolio_rewrite_base', ccp_get_setting( 'portfolio_rewrite_base' ) );
+
+	$page = get_post( ccp_get_portfolio_page_id() );
+
+	return apply_filters( 'ccp_get_portfolio_rewrite_base', ( isset( $page->post_status ) && 'publish' === $page->post_status ) ? $page->post_name : ccp_get_setting( 'portfolio_rewrite_base' ) );
 }
 
 /**
@@ -138,6 +152,7 @@ function ccp_get_default_settings() {
 	$settings = array(
 		'portfolio_title'        => __( 'Portfolio', 'custom-content-portfolio' ),
 		'portfolio_description'  => '',
+		'portfolio_page_id'      => '',
 		'portfolio_rewrite_base' => 'portfolio',
 		'project_rewrite_base'   => 'projects',
 		'category_rewrite_base'  => 'categories',
