@@ -195,6 +195,10 @@ final class CCP_Project_Edit {
 	 * @return void
 	 */
 	public function update( $post_id ) {
+		
+		// If we're on multisite with a switched context we don't save anything (as it would end up on the wrong site)
+		if ( is_multisite() && ms_is_switched() ) 
+			return;
 
 		$this->manager->update( $post_id );
 
