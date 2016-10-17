@@ -89,6 +89,7 @@ function ccp_get_project_labels() {
 		'edit_item'             => __( 'Edit Project',               'custom-content-portfolio' ),
 		'new_item'              => __( 'New Project',                'custom-content-portfolio' ),
 		'view_item'             => __( 'View Project',               'custom-content-portfolio' ),
+		'view_items'            => __( 'View Projects',              'custom-content-portfolio' ),
 		'search_items'          => __( 'Search Projects',            'custom-content-portfolio' ),
 		'not_found'             => __( 'No projects found',          'custom-content-portfolio' ),
 		'not_found_in_trash'    => __( 'No projects found in trash', 'custom-content-portfolio' ),
