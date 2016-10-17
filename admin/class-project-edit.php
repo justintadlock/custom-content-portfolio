@@ -19,15 +19,6 @@
 final class CCP_Project_Edit {
 
 	/**
-	 * Holds the fields manager instance.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @var    object
-	 */
-	public $manager = '';
-
-	/**
 	 * Sets up the needed actions.
 	 *
 	 * @since  1.0.0
@@ -63,17 +54,8 @@ final class CCP_Project_Edit {
 		// Custom action for loading the edit project screen.
 		do_action( 'ccp_load_project_edit' );
 
-		// Load the fields manager.
-		require_once( ccp_plugin()->dir_path . 'admin/fields-manager/class-manager.php' );
-
-		// Create a new project details manager.
-		$this->manager = new CCP_Fields_Manager( 'project_details' );
-
 		// Enqueue scripts and styles.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
-
-		// Output the project details box.
-		add_action( 'edit_form_after_editor', array( $this, 'project_details_box' ) );
 
 		// Add/Remove meta boxes.
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
@@ -115,7 +97,7 @@ final class CCP_Project_Edit {
 	}
 
 	/**
-	 * Callback on the `post_submitbox_misc_actions` hook (submit meta box). This handles 
+	 * Callback on the `post_submitbox_misc_actions` hook (submit meta box). This handles
 	 * the output of the sticky project feature.
 	 *
 	 * @note   Prior to WP 4.4.0, the `$post` parameter was not passed.
@@ -168,23 +150,13 @@ final class CCP_Project_Edit {
 	/**
 	 * Output the project details box.
 	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @param  object  $post
-	 * @return void
+	 * @since      1.0.0
+	 * @deprecated 2.0.0
+	 * @access     public
+	 * @param      object  $post
+	 * @return     void
 	 */
-	public function project_details_box( $post ) { ?>
-
-		<div id="ccp-project-tabs" class="postbox">
-
-			<h3><?php printf( esc_html__( 'Project Details: %s', 'members' ), '<span class="ccp-which-tab"></span>' ); ?></h3>
-
-			<div class="inside">
-				<?php $this->manager->display( $post->ID ); ?>
-			</div><!-- .inside -->
-
-		</div><!-- .postbox -->
-	<?php }
+	public function project_details_box( $post ) {}
 
 	/**
 	 * Save project details settings on post save.
@@ -195,8 +167,6 @@ final class CCP_Project_Edit {
 	 * @return void
 	 */
 	public function update( $post_id ) {
-
-		$this->manager->update( $post_id );
 
 		// Verify the nonce.
 		if ( ! isset( $_POST['ccp_project_publish_box'] ) || ! wp_verify_nonce( $_POST['ccp_project_publish_box'], 'ccp_project_publish_box_nonce' ) )

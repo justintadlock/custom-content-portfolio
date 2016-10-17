@@ -193,6 +193,7 @@ final class CCP_Plugin {
 
 		// Load admin files.
 		if ( is_admin() ) {
+			require_once( $this->dir_path . 'admin/butterbean/butterbean.php' );
 			require_once( $this->dir_path . 'admin/functions-admin.php'       );
 			require_once( $this->dir_path . 'admin/class-manage-projects.php' );
 			require_once( $this->dir_path . 'admin/class-project-edit.php'    );

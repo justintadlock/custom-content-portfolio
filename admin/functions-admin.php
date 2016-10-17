@@ -15,7 +15,7 @@ add_action( 'admin_enqueue_scripts', 'ccp_admin_register_scripts', 0 );
 add_action( 'admin_enqueue_scripts', 'ccp_admin_register_styles',  0 );
 
 # Registers project details box sections, controls, and settings.
-add_action( 'ccp_project_details_manager_register', 'ccp_project_details_register', 5 );
+add_action( 'butterbean_register', 'ccp_project_details_register', 5, 2 );
 
 # Filter post format support for projects.
 add_action( 'load-post.php',     'ccp_post_format_support_filter' );
@@ -33,7 +33,7 @@ function ccp_admin_register_scripts() {
 
 	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-	wp_register_script( 'ccp-edit-project', ccp_plugin()->js_uri . "edit-project{$min}.js", array( 'jquery' ), '', true );
+	wp_register_script( 'ccp-edit-project', ccp_plugin()->js_uri . "edit-project{$min}.js", array( 'jquery', 'wp-util' ), '', true );
 
 	// Localize our script with some text we want to pass in.
 	$i18n = array(
@@ -65,7 +65,21 @@ function ccp_admin_register_styles() {
  * @access public
  * @return void
  */
-function ccp_project_details_register( $manager ) {
+function ccp_project_details_register( $butterbean, $post_type ) {
+
+	if ( $post_type !== ccp_get_project_post_type() )
+		return;
+
+	$butterbean->register_manager( 'ccp-project',
+		array(
+			'post_type' => $post_type,
+			'context'   => 'normal',
+			'priority'  => 'high',
+			'label'     => esc_html__( 'Project Details:', 'custom-content-portfolio' )
+		)
+	);
+
+	$manager = $butterbean->get_manager( 'ccp-project' );
 
 	/* === Register Sections === */
 
@@ -93,9 +107,10 @@ function ccp_project_details_register( $manager ) {
 		)
 	);
 
-	/* === Register Controls === */
+	/* === Register Fields === */
 
 	$url_args = array(
+		'type'        => 'url',
 		'section'     => 'general',
 		'attr'        => array( 'class' => 'widefat', 'placeholder' => 'http://themehybrid.com' ),
 		'label'       => esc_html__( 'URL', 'custom-content-portfolio' ),
@@ -103,6 +118,7 @@ function ccp_project_details_register( $manager ) {
 	);
 
 	$client_args = array(
+		'type'        => 'text',
 		'section'     => 'general',
 		'attr'        => array( 'class' => 'widefat', 'placeholder' => __( 'Jane Doe', 'custom-content-portfolio' ) ),
 		'label'       => esc_html__( 'Client', 'custom-content-portfolio' ),
@@ -110,6 +126,7 @@ function ccp_project_details_register( $manager ) {
 	);
 
 	$location_args = array(
+		'type'        => 'text',
 		'section'     => 'general',
 		'attr'        => array( 'class' => 'widefat', 'placeholder' => __( 'Highland Home, AL', 'custom-content-portfolio' ) ),
 		'label'       => esc_html__( 'Location', 'custom-content-portfolio' ),
@@ -117,40 +134,38 @@ function ccp_project_details_register( $manager ) {
 	);
 
 	$start_date_args = array(
+		'type'        => 'datetime',
 		'section'     => 'date',
+		'show_time'   => false,
 		'label'       => esc_html__( 'Start Date', 'custom-content-portfolio' ),
 		'description' => esc_html__( 'Select the date the project began.', 'custom-content-portfolio' )
 	);
 
 	$end_date_args = array(
+		'type'        => 'datetime',
 		'section'     => 'date',
+		'show_time'   => false,
 		'label'       => esc_html__( 'End Date', 'custom-content-portfolio' ),
 		'description' => esc_html__( 'Select the date the project was completed.', 'custom-content-portfolio' )
 	);
 
+	$manager->register_field( 'url',      $url_args,      array( 'sanitize_callback' => 'esc_url_raw'       ) );
+	$manager->register_field( 'client',   $client_args,   array( 'sanitize_callback' => 'wp_strip_all_tags' ) );
+	$manager->register_field( 'location', $location_args, array( 'sanitize_callback' => 'wp_strip_all_tags' ) );
+
+	$manager->register_field( 'start_date', $start_date_args, array( 'type' => 'datetime' ) );
+	$manager->register_field( 'end_date',   $end_date_args,   array( 'type' => 'datetime' ) );
+
+	/* === Register Controls === */
+
 	$excerpt_args = array(
+		'type'        => 'excerpt',
 		'section'     => 'description',
-		'type'        => 'textarea',
-		'attr'        => array( 'id' => 'excerpt', 'name' => 'excerpt' ),
 		'label'       => esc_html__( 'Description', 'custom-content-portfolio' ),
 		'description' => esc_html__( 'Write a short description (excerpt) of the project.', 'custom-content-portfolio' )
 	);
 
-	$manager->register_control( new CCP_Fields_Control(         $manager, 'url',        $url_args        ) );
-	$manager->register_control( new CCP_Fields_Control(         $manager, 'client',     $client_args     ) );
-	$manager->register_control( new CCP_Fields_Control(         $manager, 'location',   $location_args   ) );
-	$manager->register_control( new CCP_Fields_Control_Date(    $manager, 'start_date', $start_date_args ) );
-	$manager->register_control( new CCP_Fields_Control_Date(    $manager, 'end_date',   $end_date_args   ) );
-	$manager->register_control( new CCP_Fields_Control_Excerpt( $manager, 'excerpt',    $excerpt_args    ) );
-
-	/* === Register Settings === */
-
-	$manager->register_setting( 'url',      array( 'sanitize_callback' => 'esc_url_raw'       ) );
-	$manager->register_setting( 'client',   array( 'sanitize_callback' => 'wp_strip_all_tags' ) );
-	$manager->register_setting( 'location', array( 'sanitize_callback' => 'wp_strip_all_tags' ) );
-
-	$manager->register_setting( new CCP_Fields_Setting_Date( $manager, 'start_date' ) );
-	$manager->register_setting( new CCP_Fields_Setting_Date( $manager, 'end_date' ) );
+	$manager->register_control( 'excerpt', $excerpt_args );
 }
 
 /**
