@@ -102,8 +102,8 @@ function ccp_get_category_labels() {
 		'new_item_name'              => __( 'New Category Name',                    'custom-content-portfolio' ),
 		'not_found'                  => __( 'No categories found.',                 'custom-content-portfolio' ),
 		'no_terms'                   => __( 'No categories',                        'custom-content-portfolio' ),
-		'pagination'                 => __( 'Categories list navigation',           'custom-content-portfolio' ),
-		'list'                       => __( 'Categories list',                      'custom-content-portfolio' ),
+		'items_list_navigation'      => __( 'Categories list navigation',           'custom-content-portfolio' ),
+		'items_list'                 => __( 'Categories list',                      'custom-content-portfolio' ),
 
 		// Hierarchical only.
 		'select_name'                => __( 'Select Category',                      'custom-content-portfolio' ),
@@ -138,8 +138,8 @@ function ccp_get_tag_labels() {
 		'new_item_name'              => __( 'New Tag Name',                   'custom-content-portfolio' ),
 		'not_found'                  => __( 'No tags found.',                 'custom-content-portfolio' ),
 		'no_terms'                   => __( 'No tags',                        'custom-content-portfolio' ),
-		'pagination'                 => __( 'Tags list navigation',           'custom-content-portfolio' ),
-		'list'                       => __( 'Tags list',                      'custom-content-portfolio' ),
+		'items_list_navigation'      => __( 'Tags list navigation',           'custom-content-portfolio' ),
+		'items_list'                 => __( 'Tags list',                      'custom-content-portfolio' ),
 
 		// Non-hierarchical only.
 		'separate_items_with_commas' => __( 'Separate tags with commas',      'custom-content-portfolio' ),
