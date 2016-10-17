@@ -99,9 +99,9 @@ function ccp_get_project_labels() {
 		'use_featured_image'    => __( 'Use as project image',       'custom-content-portfolio' ),
 		'insert_into_item'      => __( 'Insert into project',        'custom-content-portfolio' ),
 		'uploaded_to_this_item' => __( 'Uploaded to this project',   'custom-content-portfolio' ),
-		'views'                 => __( 'Filter projects list',       'custom-content-portfolio' ),
-		'pagination'            => __( 'Projects list navigation',   'custom-content-portfolio' ),
-		'list'                  => __( 'Projects list',              'custom-content-portfolio' ),
+		'filter_items_list'     => __( 'Filter projects list',       'custom-content-portfolio' ),
+		'items_list_navigation' => __( 'Projects list navigation',   'custom-content-portfolio' ),
+		'items_list'            => __( 'Projects list',              'custom-content-portfolio' ),
 
 		// Custom labels b/c WordPress doesn't have anything to handle this.
 		'archive_title'         => ccp_get_portfolio_title(),
