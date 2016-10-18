@@ -76,7 +76,7 @@ class ButterBean_Control_Datetime extends ButterBean_Control {
 		// Year
 		$this->json['year'] = array(
 			'value' => esc_attr( $year ),
-			'label' => esc_html__( 'Year', 'butterbean' ),
+			'label' => esc_html__( 'Year', 'custom-content-portfolio' ),
 			'name'  => esc_attr( "{$field_name}_year" ),
 			'attr'  => sprintf( 'placeholder="%s" size="4" maxlength="4" autocomplete="off"', esc_attr( date_i18n( 'Y' ) ) )
 		);
@@ -85,7 +85,7 @@ class ButterBean_Control_Datetime extends ButterBean_Control {
 		$this->json['month'] = array(
 			'value'   => esc_attr( $month ),
 			'name'    => esc_attr( "{$field_name}_month" ),
-			'label'   => esc_html__( 'Month', 'butterbean' ),
+			'label'   => esc_html__( 'Month', 'custom-content-portfolio' ),
 			'choices' => array(
 				array(
 					'num'   => '',
@@ -109,7 +109,7 @@ class ButterBean_Control_Datetime extends ButterBean_Control {
 		$this->json['day'] = array(
 			'value' => esc_attr( $day ),
 			'name'  => esc_attr( "{$field_name}_day" ),
-			'label' => esc_html__( 'Day', 'butterbean' ),
+			'label' => esc_html__( 'Day', 'custom-content-portfolio' ),
 			'attr'  => sprintf( 'placeholder="%s" size="2" maxlength="2" autocomplete="off"', esc_attr( date_i18n( 'd' ) ) )
 		);
 
@@ -117,7 +117,7 @@ class ButterBean_Control_Datetime extends ButterBean_Control {
 		$this->json['hour'] = array(
 			'value' => esc_attr( $hour ),
 			'name'  => esc_attr( "{$field_name}_hour" ),
-			'label' => esc_html__( 'Hour', 'butterbean' ),
+			'label' => esc_html__( 'Hour', 'custom-content-portfolio' ),
 			'attr'  => 'placeholder="00" size="2" maxlength="2" autocomplete="off"'
 		);
 
@@ -125,7 +125,7 @@ class ButterBean_Control_Datetime extends ButterBean_Control {
 		$this->json['minute'] = array(
 			'value' => esc_attr( $minute ),
 			'name'  => esc_attr( "{$field_name}_minute" ),
-			'label' => esc_html__( 'Minute', 'butterbean' ),
+			'label' => esc_html__( 'Minute', 'custom-content-portfolio' ),
 			'attr'  => 'placeholder="00" size="2" maxlength="2" autocomplete="off"'
 		);
 
@@ -133,7 +133,7 @@ class ButterBean_Control_Datetime extends ButterBean_Control {
 		$this->json['second'] = array(
 			'value' => esc_attr( $second ),
 			'name'  => esc_attr( "{$field_name}_second" ),
-			'label' => esc_html__( 'Second', 'butterbean' ),
+			'label' => esc_html__( 'Second', 'custom-content-portfolio' ),
 			'attr'  => 'placeholder="00" size="2" maxlength="2" autocomplete="off"'
 		);
 	}
