@@ -53,7 +53,7 @@ final class CCP_Settings_Page {
 			esc_html__( 'Portfolio Settings', 'custom-content-portfolio' ),
 			esc_html__( 'Settings',           'custom-content-portfolio' ),
 			apply_filters( 'ccp_settings_capability', 'manage_options' ),
-			'settings',
+			'ccp-settings',
 			array( $this, 'settings_page' )
 		);
 
