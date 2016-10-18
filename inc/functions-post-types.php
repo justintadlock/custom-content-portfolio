@@ -204,7 +204,7 @@ function ccp_post_updated_messages( $messages ) {
 
 	// Get permalink and preview URLs.
 	$permalink   = get_permalink( $post_ID );
-	$preview_url = function_exists( 'get_preview_post_link' ) ? get_preview_post_link( $post ) : apply_filters( 'preview_post_link', add_query_arg( array( 'preview' => true ), $permalink ), $post );
+	$preview_url = get_preview_post_link( $post );
 
 	// Translators: Scheduled project date format. See http://php.net/date
 	$scheduled_date = date_i18n( __( 'M j, Y @ H:i', 'custom-content-portfolio' ), strtotime( $post->post_date ) );
