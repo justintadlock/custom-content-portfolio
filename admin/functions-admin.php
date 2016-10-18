@@ -165,6 +165,20 @@ function ccp_project_details_register( $butterbean, $post_type ) {
 }
 
 /**
+ * Helper function for getting the correct slug for the settings page.  This is useful
+ * for add-on plugins that need to add custom setting sections or fields to the settings
+ * screen for the plugin.
+ *
+ * @since  2.0.0
+ * @access public
+ * @return string
+ */
+function ccp_get_settings_page_slug() {
+
+	return sprintf( '%s_page_ccp-settings', ccp_get_project_post_type() );
+}
+
+/**
  * Returns an array of post formats allowed for the project post type.
  *
  * @since  1.0.0
