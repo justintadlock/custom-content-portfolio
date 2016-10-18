@@ -20,9 +20,23 @@
  */
 function ccp_is_portfolio() {
 
-	$is_portfolio = ccp_is_project_archive() || ccp_is_single_project() || ccp_is_author() || ccp_is_category() || ccp_is_tag();
+	$is_portfolio = ccp_is_archive() || ccp_is_single_project();
 
 	return apply_filters( 'ccp_is_portfolio', $is_portfolio );
+}
+
+/**
+ * Conditional tag to check if viewing any type of portfolio archive page.
+ *
+ * @since  2.0.0
+ * @access public
+ * @return bool
+ */
+function ccp_is_archive() {
+
+	$is_archive = ccp_is_project_archive() || ccp_is_author() || ccp_is_category() || ccp_is_tag();
+
+	return apply_filters( 'ccp_is_archive', $is_archive );
 }
 
 /**
