@@ -57,6 +57,9 @@ final class CCP_Project_Edit {
 		// Enqueue scripts and styles.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 
+		// Print custom styles.
+		add_action( 'admin_head', array( $this, 'print_styles' ) );
+
 		// Add/Remove meta boxes.
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 
@@ -79,9 +82,30 @@ final class CCP_Project_Edit {
 	 */
 	public function enqueue() {
 
-		wp_enqueue_style( 'ccp-admin' );
 		wp_enqueue_script( 'ccp-edit-project' );
 	}
+
+	/**
+	 * Print styles.
+	 *
+	 * @since  2.0.0
+	 * @access public
+	 * @param  string  $hook_suffix
+	 * @return void
+	 */
+	public function print_styles() { ?>
+
+		<style type="text/css">
+			.misc-pub-project-sticky .dashicons {
+				color: rgb( 130, 135, 140 );
+			}
+
+			.misc-pub-project-sticky label {
+				display: block;
+				margin:  8px 0 8px 2px;
+			}
+		</style>
+	<?php }
 
 	/**
 	 * Adds/Removes meta boxes.

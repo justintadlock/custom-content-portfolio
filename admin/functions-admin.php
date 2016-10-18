@@ -12,7 +12,7 @@
 
 # Register scripts and styles.
 add_action( 'admin_enqueue_scripts', 'ccp_admin_register_scripts', 0 );
-add_action( 'admin_enqueue_scripts', 'ccp_admin_register_styles',  0 );
+// add_action( 'admin_enqueue_scripts', 'ccp_admin_register_styles',  0 );
 
 # Registers project details box sections, controls, and settings.
 add_action( 'butterbean_register', 'ccp_project_details_register', 5, 2 );
@@ -47,16 +47,12 @@ function ccp_admin_register_scripts() {
 /**
  * Registers admin styles.
  *
- * @since  1.0.0
- * @access public
- * @return void
+ * @since       1.0.0
+ * @deprecated  2.0.0  Note: May need function in the future.
+ * @access      public
+ * @return      void
  */
-function ccp_admin_register_styles() {
-
-	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
-	wp_register_style( 'ccp-admin', ccp_plugin()->css_uri . "admin{$min}.css" );
-}
+function ccp_admin_register_styles() {}
 
 /**
  * Registers the default cap groups.
