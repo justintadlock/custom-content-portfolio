@@ -90,7 +90,6 @@ final class CCP_Project_Edit {
 	 *
 	 * @since  2.0.0
 	 * @access public
-	 * @param  string  $hook_suffix
 	 * @return void
 	 */
 	public function print_styles() { ?>
