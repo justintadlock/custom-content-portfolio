@@ -1,178 +1,234 @@
-# Copyright (C) 2015 Custom Content Portfolio
+# Copyright (C) 2016 Custom Content Portfolio
 # This file is distributed under the same license as the Custom Content Portfolio package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Custom Content Portfolio 1.0.0-beta-1\n"
+"Project-Id-Version: Custom Content Portfolio 1.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-content-portfolio\n"
-"POT-Creation-Date: 2015-11-02 19:24:10+00:00\n"
+"POT-Creation-Date: 2016-10-18 21:32:44+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: admin/class-manage-projects.php:135
+#: admin/butterbean/inc/controls/class-control-datetime.php:79
+msgid "Year"
+msgstr ""
+
+#: admin/butterbean/inc/controls/class-control-datetime.php:88
+msgid "Month"
+msgstr ""
+
+#: admin/butterbean/inc/controls/class-control-datetime.php:112
+msgid "Day"
+msgstr ""
+
+#: admin/butterbean/inc/controls/class-control-datetime.php:120
+msgid "Hour"
+msgstr ""
+
+#: admin/butterbean/inc/controls/class-control-datetime.php:128
+msgid "Minute"
+msgstr ""
+
+#: admin/butterbean/inc/controls/class-control-datetime.php:136
+msgid "Second"
+msgstr ""
+
+#: admin/butterbean/inc/controls/class-control-image.php:66
+msgid "Add image"
+msgstr ""
+
+#: admin/butterbean/inc/controls/class-control-image.php:67
+msgid "Set as image"
+msgstr ""
+
+#: admin/butterbean/inc/controls/class-control-image.php:68
+msgid "Choose image"
+msgstr ""
+
+#: admin/butterbean/inc/controls/class-control-image.php:69
+msgid "Change image"
+msgstr ""
+
+#: admin/butterbean/inc/controls/class-control-image.php:70
+msgid "Remove image"
+msgstr ""
+
+#: admin/butterbean/inc/controls/class-control-image.php:71
+msgid "No image selected"
+msgstr ""
+
+#. Translators: 1: month, 2: day, 3: year, 4: hour, 5: minute, 6: second.
+
+#: admin/butterbean/tmpl/control-datetime.php:46
+msgid "%1$s %2$s, %3$s @ %4$s:%5$s:%6$s"
+msgstr ""
+
+#. Translators: 1: month, 2: day, 3: year.
+
+#: admin/butterbean/tmpl/control-datetime.php:52
+msgid "%1$s %2$s, %3$s"
+msgstr ""
+
+#: admin/class-manage-projects.php:134
 msgid "Sticky <span class=\"count\">(%s)</span>"
 msgid_plural "Sticky <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/class-manage-projects.php:209 inc/functions-post-types.php:84
+#: admin/class-manage-projects.php:208 inc/functions-post-types.php:84
 #: inc/functions-post-types.php:86
 msgid "Project"
 msgstr ""
 
-#: admin/class-manage-projects.php:213
+#: admin/class-manage-projects.php:212
 msgid "Thumbnail"
 msgstr ""
 
-#: admin/class-manage-projects.php:254 admin/class-project-edit.php:141
+#: admin/class-manage-projects.php:253 admin/class-project-edit.php:146
 #: admin/functions-admin.php:40
 msgid "Sticky"
 msgstr ""
 
-#: admin/class-manage-projects.php:279
+#: admin/class-manage-projects.php:278
 msgid "Unstick"
 msgstr ""
 
-#: admin/class-manage-projects.php:279
+#: admin/class-manage-projects.php:278
 msgid "Stick"
 msgstr ""
 
-#: admin/class-manage-projects.php:347
+#: admin/class-manage-projects.php:346
 msgid "Overview"
 msgstr ""
 
-#: admin/class-manage-projects.php:356
+#: admin/class-manage-projects.php:355
 msgid "Screen Content"
 msgstr ""
 
-#: admin/class-manage-projects.php:365
+#: admin/class-manage-projects.php:364
 msgid "Available Actions"
 msgstr ""
 
-#: admin/class-manage-projects.php:384
+#: admin/class-manage-projects.php:383
 msgid "This screen provides access to all of your portfolio projects. You can customize the display of this screen to suit your workflow."
 msgstr ""
 
-#: admin/class-manage-projects.php:398
+#: admin/class-manage-projects.php:397
 msgid "You can customize the display of this screen's contents in a number of ways:"
 msgstr ""
 
-#: admin/class-manage-projects.php:402
+#: admin/class-manage-projects.php:401
 msgid "You can hide/display columns based on your needs and decide how many projects to list per screen using the Screen Options tab."
 msgstr ""
 
-#: admin/class-manage-projects.php:403
+#: admin/class-manage-projects.php:402
 msgid "You can filter the list of projects by post status using the text links in the upper left to show All, Published, Draft, or Trashed projects. The default view is to show all projects."
 msgstr ""
 
-#: admin/class-manage-projects.php:404
+#: admin/class-manage-projects.php:403
 msgid "You can view projects in a simple title list or with an excerpt. Choose the view you prefer by clicking on the icons at the top of the list on the right."
 msgstr ""
 
-#: admin/class-manage-projects.php:405
+#: admin/class-manage-projects.php:404
 msgid "You can refine the list to show only projects in a specific category, with a specific tag, or from a specific month by using the dropdown menus above the projects list. Click the Filter button after making your selection. You also can refine the list by clicking on the project author, category or tag in the posts list."
 msgstr ""
 
-#: admin/class-manage-projects.php:419
+#: admin/class-manage-projects.php:418
 msgid "Hovering over a row in the projects list will display action links that allow you to manage your project. You can perform the following actions:"
 msgstr ""
 
-#: admin/class-manage-projects.php:423
+#: admin/class-manage-projects.php:422
 msgid "<strong>Edit</strong> takes you to the editing screen for that project. You can also reach that screen by clicking on the project title."
 msgstr ""
 
-#: admin/class-manage-projects.php:424
+#: admin/class-manage-projects.php:423
 msgid "<strong>Quick Edit</strong> provides inline access to the metadata of your project, allowing you to update project details without leaving this screen."
 msgstr ""
 
-#: admin/class-manage-projects.php:425
+#: admin/class-manage-projects.php:424
 msgid "<strong>Trash</strong> removes your project from this list and places it in the trash, from which you can permanently delete it."
 msgstr ""
 
-#: admin/class-manage-projects.php:426
+#: admin/class-manage-projects.php:425
 msgid "<strong>Preview</strong> will show you what your draft project will look like if you publish it. View will take you to your live site to view the project. Which link is available depends on your project's status."
 msgstr ""
 
-#: admin/class-project-edit.php:141 admin/functions-admin.php:41
+#: admin/class-project-edit.php:146 admin/functions-admin.php:41
 msgid "Not Sticky"
 msgstr ""
 
-#: admin/class-project-edit.php:148
+#: admin/class-project-edit.php:153
 msgid "Sticky: %s"
 msgstr ""
 
-#: admin/class-project-edit.php:152
+#: admin/class-project-edit.php:157
 msgid "Edit"
 msgstr ""
 
-#: admin/class-project-edit.php:152
+#: admin/class-project-edit.php:157
 msgid "Edit sticky status"
 msgstr ""
 
-#: admin/class-project-edit.php:157
+#: admin/class-project-edit.php:162
 msgid "Stick to the portfolio page"
 msgstr ""
 
-#: admin/class-project-edit.php:159
+#: admin/class-project-edit.php:164
 msgid "OK"
 msgstr ""
 
-#: admin/class-project-edit.php:160
+#: admin/class-project-edit.php:165
 msgid "Cancel"
 msgstr ""
 
-#: admin/class-project-edit.php:180
-msgid "Project Details: %s"
-msgstr ""
-
-#: admin/class-project-edit.php:277
+#: admin/class-project-edit.php:266
 msgid "Title and Editor"
 msgstr ""
 
-#: admin/class-project-edit.php:286
+#: admin/class-project-edit.php:275
 msgid "Project Details"
 msgstr ""
 
-#: admin/class-project-edit.php:305
+#: admin/class-project-edit.php:294
 msgid "<strong>Title:</strong> Enter a title for your project. After you enter a title, you'll see the permalink below, which you can edit."
 msgstr ""
 
-#: admin/class-project-edit.php:306
+#: admin/class-project-edit.php:295
 msgid "<strong>Editor:</strong> The editor allows you to add or edit content for your project. You can insert text, media, or shortcodes."
 msgstr ""
 
-#: admin/class-project-edit.php:320
+#: admin/class-project-edit.php:309
 msgid "The Project Details meta box allows you to customize the details of your project. All fields are optional."
 msgstr ""
 
-#: admin/class-project-edit.php:324
+#: admin/class-project-edit.php:313
 msgid "<strong>URL:</strong> The URL to the Web site or page associated with the project, such as a client Web site."
 msgstr ""
 
-#: admin/class-project-edit.php:325
+#: admin/class-project-edit.php:314
 msgid "<strong>Client:</strong> The name of the client the project was built for."
 msgstr ""
 
-#: admin/class-project-edit.php:326
+#: admin/class-project-edit.php:315
 msgid "<strong>Location:</strong> A physical location where the project took place (e.g., Highland Home, AL, USA)."
 msgstr ""
 
-#: admin/class-project-edit.php:327
+#: admin/class-project-edit.php:316
 msgid "<strong>Start Date:</strong> The date the project began."
 msgstr ""
 
-#: admin/class-project-edit.php:328
+#: admin/class-project-edit.php:317
 msgid "<strong>End Date:</strong> The date the project was completed."
 msgstr ""
 
-#: admin/class-project-edit.php:329
+#: admin/class-project-edit.php:318
 msgid "<strong>Description:</strong> A short summary of the project. Some themes may show this on archive pages."
 msgstr ""
 
-#: admin/class-settings.php:53 admin/class-settings.php:283
+#: admin/class-settings.php:53 admin/class-settings.php:309
 msgid "Portfolio Settings"
 msgstr ""
 
@@ -180,11 +236,11 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: admin/class-settings.php:84 admin/class-settings.php:312
+#: admin/class-settings.php:84 admin/class-settings.php:338
 msgid "General Settings"
 msgstr ""
 
-#: admin/class-settings.php:85 admin/class-settings.php:321
+#: admin/class-settings.php:85 admin/class-settings.php:347
 msgid "Permalinks"
 msgstr ""
 
@@ -192,8 +248,8 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: admin/class-settings.php:91 admin/functions-admin.php:91
-#: admin/functions-admin.php:135
+#: admin/class-settings.php:91 admin/functions-admin.php:101
+#: admin/functions-admin.php:160
 msgid "Description"
 msgstr ""
 
@@ -222,159 +278,139 @@ msgstr ""
 msgid "Portfolio"
 msgstr ""
 
-#: admin/class-settings.php:136
+#: admin/class-settings.php:162
 msgid "General portfolio settings for your site."
 msgstr ""
 
-#: admin/class-settings.php:152
+#: admin/class-settings.php:178
 msgid "The name of your portfolio. May be used for the portfolio page title and other places, depending on your theme."
 msgstr ""
 
-#: admin/class-settings.php:176
+#: admin/class-settings.php:202
 msgid "Your portfolio description. This may be shown by your theme on the portfolio page."
 msgstr ""
 
-#: admin/class-settings.php:190
+#: admin/class-settings.php:216
 msgid "Set up custom permalinks for the portfolio section on your site."
 msgstr ""
 
-#: admin/class-settings.php:290
+#: admin/class-settings.php:316
 msgid "Update Settings"
 msgstr ""
 
-#: admin/class-settings.php:340
+#: admin/class-settings.php:366
 msgid "<strong>Title:</strong> Allows you to set the title for the portfolio section on your site. This is general shown on the portfolio projects archive, but themes and other plugins may use it in other ways."
 msgstr ""
 
-#: admin/class-settings.php:341
+#: admin/class-settings.php:367
 msgid "<strong>Description:</strong> This is the description for your portfolio. Some themes may display this on the portfolio projects archive."
 msgstr ""
 
-#: admin/class-settings.php:355
+#: admin/class-settings.php:381
 msgid "<strong>Portfolio Base:</strong> The primary URL for the portfolio section on your site. It lists your portfolio projects."
 msgstr ""
 
-#: admin/class-settings.php:357
+#: admin/class-settings.php:383
 msgid "<strong>Project Slug:</strong> The slug for single portfolio projects. You can use something custom, leave this field empty, or use one of the following tags:"
 msgstr ""
 
-#: admin/class-settings.php:359
+#: admin/class-settings.php:385
 msgid "%s - The project author name."
 msgstr ""
 
-#: admin/class-settings.php:360
+#: admin/class-settings.php:386
 msgid "%s - The project category."
 msgstr ""
 
-#: admin/class-settings.php:361
+#: admin/class-settings.php:387
 msgid "%s - The project tag."
 msgstr ""
 
-#: admin/class-settings.php:364
+#: admin/class-settings.php:390
 msgid "<strong>Category Slug:</strong> The base slug used for portfolio category archives."
 msgstr ""
 
-#: admin/class-settings.php:365
+#: admin/class-settings.php:391
 msgid "<strong>Tag Slug:</strong> The base slug used for portfolio tag archives."
 msgstr ""
 
-#: admin/class-settings.php:366
+#: admin/class-settings.php:392
 msgid "<strong>Author Slug:</strong> The base slug used for portfolio author archives."
 msgstr ""
 
-#. Translators: 1: month, 2: day, 3: year.
-
-#: admin/fields-manager/class-control-date.php:50
-msgid "%1$s %2$s, %3$s"
+#: admin/functions-admin.php:74
+msgid "Project Details:"
 msgstr ""
 
-#: admin/fields-manager/class-control-date.php:72
-msgid "Year"
-msgstr ""
-
-#. Translators: 1: month number (01, 02, etc.), 2: month abbreviation.
-
-#: admin/fields-manager/class-control-date.php:104
-msgid "%1$s-%2$s"
-msgstr ""
-
-#: admin/fields-manager/class-control-date.php:110
-msgid "Month"
-msgstr ""
-
-#: admin/fields-manager/class-control-date.php:129
-msgid "Day"
-msgstr ""
-
-#: admin/functions-admin.php:75
+#: admin/functions-admin.php:85
 msgid "General"
 msgstr ""
 
-#: admin/functions-admin.php:83
+#: admin/functions-admin.php:93
 msgid "Date"
 msgstr ""
 
-#: admin/functions-admin.php:101
+#: admin/functions-admin.php:112
 msgid "URL"
 msgstr ""
 
-#: admin/functions-admin.php:102
+#: admin/functions-admin.php:113
 msgid "Enter the URL of the project Web page."
 msgstr ""
 
-#: admin/functions-admin.php:107
+#: admin/functions-admin.php:119
 msgid "Jane Doe"
 msgstr ""
 
-#: admin/functions-admin.php:108
+#: admin/functions-admin.php:120
 msgid "Client"
 msgstr ""
 
-#: admin/functions-admin.php:109
+#: admin/functions-admin.php:121
 msgid "Enter the name of the client for the project."
 msgstr ""
 
-#: admin/functions-admin.php:114
+#: admin/functions-admin.php:127
 msgid "Highland Home, AL"
 msgstr ""
 
-#: admin/functions-admin.php:115
+#: admin/functions-admin.php:128
 msgid "Location"
 msgstr ""
 
-#: admin/functions-admin.php:116
+#: admin/functions-admin.php:129
 msgid "Enter the physical location of the project."
 msgstr ""
 
-#: admin/functions-admin.php:121
+#: admin/functions-admin.php:136
 msgid "Start Date"
 msgstr ""
 
-#: admin/functions-admin.php:122
+#: admin/functions-admin.php:137
 msgid "Select the date the project began."
 msgstr ""
 
-#: admin/functions-admin.php:127
+#: admin/functions-admin.php:144
 msgid "End Date"
 msgstr ""
 
-#: admin/functions-admin.php:128
+#: admin/functions-admin.php:145
 msgid "Select the date the project was completed."
 msgstr ""
 
-#: admin/functions-admin.php:136
+#: admin/functions-admin.php:161
 msgid "Write a short description (excerpt) of the project."
 msgstr ""
 
-#: admin/functions-admin.php:230
+#: admin/functions-admin.php:255
 msgid "Documentation"
 msgstr ""
 
-#: admin/functions-admin.php:231
+#: admin/functions-admin.php:256
 msgid "Support Forums"
 msgstr ""
 
-#: admin/functions-admin.php:236
+#: admin/functions-admin.php:261
 msgid "For more information:"
 msgstr ""
 
@@ -398,7 +434,7 @@ msgstr ""
 msgid "Completed: %s"
 msgstr ""
 
-#: inc/functions-post-types.php:83 inc/functions-post-types.php:95
+#: inc/functions-post-types.php:83 inc/functions-post-types.php:96
 msgid "Projects"
 msgstr ""
 
@@ -419,126 +455,130 @@ msgid "View Project"
 msgstr ""
 
 #: inc/functions-post-types.php:92
-msgid "Search Projects"
+msgid "View Projects"
 msgstr ""
 
 #: inc/functions-post-types.php:93
-msgid "No projects found"
+msgid "Search Projects"
 msgstr ""
 
 #: inc/functions-post-types.php:94
+msgid "No projects found"
+msgstr ""
+
+#: inc/functions-post-types.php:95
 msgid "No projects found in trash"
 msgstr ""
 
-#: inc/functions-post-types.php:96
+#: inc/functions-post-types.php:97
 msgid "Project Image"
 msgstr ""
 
-#: inc/functions-post-types.php:97
+#: inc/functions-post-types.php:98
 msgid "Set project image"
 msgstr ""
 
-#: inc/functions-post-types.php:98
+#: inc/functions-post-types.php:99
 msgid "Remove project image"
 msgstr ""
 
-#: inc/functions-post-types.php:99
+#: inc/functions-post-types.php:100
 msgid "Use as project image"
 msgstr ""
 
-#: inc/functions-post-types.php:100
+#: inc/functions-post-types.php:101
 msgid "Insert into project"
 msgstr ""
 
-#: inc/functions-post-types.php:101
+#: inc/functions-post-types.php:102
 msgid "Uploaded to this project"
 msgstr ""
 
-#: inc/functions-post-types.php:102
+#: inc/functions-post-types.php:103
 msgid "Filter projects list"
 msgstr ""
 
-#: inc/functions-post-types.php:103
+#: inc/functions-post-types.php:104
 msgid "Projects list navigation"
 msgstr ""
 
-#: inc/functions-post-types.php:104
+#: inc/functions-post-types.php:105
 msgid "Projects list"
 msgstr ""
 
-#: inc/functions-post-types.php:183
+#: inc/functions-post-types.php:184
 msgid "Enter project title"
 msgstr ""
 
 #. Translators: Scheduled project date format. See http:php.net/date
 
-#: inc/functions-post-types.php:209
+#: inc/functions-post-types.php:210
 msgid "M j, Y @ H:i"
 msgstr ""
 
-#: inc/functions-post-types.php:212 inc/functions-post-types.php:213
+#: inc/functions-post-types.php:213 inc/functions-post-types.php:214
 msgid "Preview project"
 msgstr ""
 
-#: inc/functions-post-types.php:214
+#: inc/functions-post-types.php:215
 msgid "View project"
 msgstr ""
 
-#: inc/functions-post-types.php:218 inc/functions-post-types.php:219
+#: inc/functions-post-types.php:219 inc/functions-post-types.php:220
 msgid "Project updated."
 msgstr ""
 
 #. Translators: %s is the date and time of the revision.
 
-#: inc/functions-post-types.php:221
+#: inc/functions-post-types.php:222
 msgid "Project restored to revision from %s."
 msgstr ""
 
-#: inc/functions-post-types.php:222
+#: inc/functions-post-types.php:223
 msgid "Project published."
 msgstr ""
 
-#: inc/functions-post-types.php:223
+#: inc/functions-post-types.php:224
 msgid "Project saved."
 msgstr ""
 
-#: inc/functions-post-types.php:224
+#: inc/functions-post-types.php:225
 msgid "Project submitted."
 msgstr ""
 
-#: inc/functions-post-types.php:225
+#: inc/functions-post-types.php:226
 msgid "Project scheduled for: %s."
 msgstr ""
 
-#: inc/functions-post-types.php:226
+#: inc/functions-post-types.php:227
 msgid "Project draft updated."
 msgstr ""
 
-#: inc/functions-post-types.php:245
+#: inc/functions-post-types.php:246
 msgid "%s project updated."
 msgid_plural "%s projects updated."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions-post-types.php:246
+#: inc/functions-post-types.php:247
 msgid "%s project not updated, somebody is editing it."
 msgid_plural "%s projects not updated, somebody is editing them."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions-post-types.php:247
+#: inc/functions-post-types.php:248
 msgid "%s project permanently deleted."
 msgid_plural "%s projects permanently deleted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions-post-types.php:248
+#: inc/functions-post-types.php:249
 msgid "%s project moved to the Trash."
 msgid_plural "%s projects moved to the trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions-post-types.php:249
+#: inc/functions-post-types.php:250
 msgid "%s project restored from the Trash."
 msgid_plural "%s projects restored from the trash."
 msgstr[0] ""
