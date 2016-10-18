@@ -22,11 +22,60 @@ add_action( 'init', 'ccp_register_meta' );
  */
 function ccp_register_meta() {
 
-	register_meta( 'post', 'url',        'esc_url_raw',       '__return_false' );
-	register_meta( 'post', 'client',     'wp_strip_all_tags', '__return_false' );
-	register_meta( 'post', 'location',   'wp_strip_all_tags', '__return_false' );
-	register_meta( 'post', 'start_date', 'wp_strip_all_tags', '__return_false' );
-	register_meta( 'post', 'end_date',   'wp_strip_all_tags', '__return_false' );
+	register_meta(
+		'post',
+		'url',
+		array(
+			'sanitize_callback' => 'esc_url_raw',
+			'auth_callback'     => '__return_false',
+			'single'            => true,
+			'show_in_rest'      => true
+		)
+	);
+
+	register_meta(
+		'post',
+		'client',
+		array(
+			'sanitize_callback' => 'wp_strip_all_tags',
+			'auth_callback'     => '__return_false',
+			'single'            => true,
+			'show_in_rest'      => true
+		)
+	);
+
+	register_meta(
+		'post',
+		'location',
+		array(
+			'sanitize_callback' => 'wp_strip_all_tags',
+			'auth_callback'     => '__return_false',
+			'single'            => true,
+			'show_in_rest'      => true
+		)
+	);
+
+	register_meta(
+		'post',
+		'start_date',
+		array(
+			'sanitize_callback' => 'wp_strip_all_tags',
+			'auth_callback'     => '__return_false',
+			'single'            => true,
+			'show_in_rest'      => true
+		)
+	);
+
+	register_meta(
+		'post',
+		'end_date',
+		array(
+			'sanitize_callback' => 'wp_strip_all_tags',
+			'auth_callback'     => '__return_false',
+			'single'            => true,
+			'show_in_rest'      => true
+		)
+	);
 }
 
 /**
