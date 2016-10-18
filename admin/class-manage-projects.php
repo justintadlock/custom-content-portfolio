@@ -105,7 +105,6 @@ final class CCP_Manage_Projects {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  string  $hook_suffix
 	 * @return void
 	 */
 	public function print_styles() { ?>
