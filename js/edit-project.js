@@ -17,7 +17,7 @@ jQuery( document ).ready( function() {
 			jQuery( this ).hide();
 
 			// Open the sticky edit.
-			jQuery( '#ccp-sticky-edit' ).slideToggle();
+			jQuery( '#ccp-sticky-edit' ).slideToggle( 'fast' );
 		}
 	);
 
@@ -27,7 +27,7 @@ jQuery( document ).ready( function() {
 			j.preventDefault();
 
 			// Close the sticky edit.
-			jQuery( '#ccp-sticky-edit' ).slideToggle();
+			jQuery( '#ccp-sticky-edit' ).slideToggle( 'fast' );
 
 			// Show the hidden "Edit" link.
 			jQuery( 'a.ccp-edit-sticky' ).show();
@@ -40,7 +40,7 @@ jQuery( document ).ready( function() {
 			j.preventDefault();
 
 			// Close the sticky edit.
-			jQuery( '#ccp-sticky-edit' ).slideToggle();
+			jQuery( '#ccp-sticky-edit' ).slideToggle( 'fast' );
 
 			// Show the hidden "Edit" link.
 			jQuery( 'a.ccp-edit-sticky' ).show();
