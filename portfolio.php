@@ -25,8 +25,8 @@
  *
  * @package   CustomContentPortfolio
  * @version   1.0.1
- * @author    Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2013-2015, Justin Tadlock
+ * @author    Justin Tadlock <justintadlock@gmail.com>
+ * @copyright Copyright (c) 2013-2016, Justin Tadlock
  * @link      http://themehybrid.com/plugins/custom-content-portfolio
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */

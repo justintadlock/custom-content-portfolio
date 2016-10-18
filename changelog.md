@@ -1,5 +1,23 @@
 # Change Log
 
+## [2.0.0] -
+
+### Added
+
+* New `ccp_is_archive()` conditional tag for checking if on archive.
+* New `ccp_get_settings_page_slug()` for add-ons to get the appropriate settings page when adding custom sections and fields.
+
+### Changed
+
+* ButterBean framework replaced the fields manager code. Note that this breaks back-compat with any custom code for the meta box.
+* Calls to `register_meta()` are now in line with WP 4.6+.
+
+### Fixed
+
+* Settings page slug changed to `ccp-settings` from `settings` to avoid conflicts with other plugins.  Note that this is a breaking change for add-ons with custom settings sections or fields.
+* Corrected post type labels.
+* Corrected taxonomy labels.
+
 ## [1.0.1] - 2015-11-05
 
 ### Fixed
