@@ -222,10 +222,6 @@ final class CCP_Project_Edit {
 	function dropdown_users_args( $args, $r ) {
 		global $wp_roles, $post;
 
-		// WP version 4.4.0 check. Bail if we can't use the `role__in` argument.
-		if ( ! method_exists( 'WP_User_Query', 'fill_query_vars' ) )
-			return $args;
-
 		// Check that this is the correct drop-down.
 		if ( 'post_author_override' === $r['name'] && ccp_get_project_post_type() === $post->post_type ) {
 
