@@ -181,7 +181,7 @@ function ccp_register_post_types() {
  */
 function ccp_enter_title_here( $title, $post ) {
 
-	return ccp_get_project_post_type() === $post->post_type ? esc_html__( 'Enter project title', 'custom-content-portfolio' ) : '';
+	return ccp_get_project_post_type() === $post->post_type ? esc_html__( 'Enter project title', 'custom-content-portfolio' ) : $title;
 }
 
 /**
