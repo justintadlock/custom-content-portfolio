@@ -6,10 +6,11 @@
 
 * New `ccp_is_archive()` conditional tag for checking if on archive.
 * New `ccp_get_settings_page_slug()` for add-ons to get the appropriate settings page when adding custom sections and fields.
+* Meta fields are now registered to work with the REST API.
 
 ### Changed
 
-* ButterBean framework replaced the fields manager code. Note that this breaks back-compat with any custom code for the meta box.
+* [ButterBean framework](http://themehybrid.com/plugins/butterbean) replaced the fields manager code. Note that this breaks back-compat with any custom code for the meta box.
 * Calls to `register_meta()` are now in line with WP 4.6+.
 
 ### Fixed
