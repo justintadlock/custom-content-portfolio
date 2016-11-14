@@ -3,7 +3,7 @@ Contributors: greenshady
 Donate link: http://themehybrid.com/donate
 Tags: portfolio, images, image, post type, taxonomy
 Requires at least: 4.6
-Stable tag: 1.0.1
+Stable tag: 2.0.0
 License: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 A complete portfolio solution for creative people.
@@ -24,7 +24,7 @@ This plugin was created because of the rising need from users who are downloadin
 * **Sticky Projects:** Stick projects to the portfolio page.
 * **Post Formats:** If your theme supports them, projects can have the audio, gallery, image, or video formats.
 
-For more info, vist the [Custom Content Portfolio](http://themehybrid.com/plugin/custom-content-portfolio) plugin home page.
+For more info, visit the [Custom Content Portfolio](http://themehybrid.com/plugin/custom-content-portfolio) plugin home page.
 
 ### Like this plugin?
 
@@ -36,11 +36,11 @@ Please consider helping the cause by:
 
 ### Professional Support
 
-If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/board/topics), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 60,000+ users (and growing).
+If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/board/topics), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 70,000+ users (and growing).
 
 ### Plugin Development
 
-If you're a theme author, plugin author, or just a code hobbyist, you can follow the development of this plugin on it's [GitHub repository](https://github.com/justintadlock/custom-content-portfolio). 
+If you're a theme author, plugin author, or just a code hobbyist, you can follow the development of this plugin on it's [GitHub repository](https://github.com/justintadlock/custom-content-portfolio).
 
 == Installation ==
 
@@ -82,7 +82,7 @@ By default, the "administrator" role is the only role allowed to edit portfolio-
 
 = How does this compare with Jetpack portfolios? =
 
-While Jetpack can certainly be a useful plugin, its portolio module is not even in the same league.  Jetpack offers some of the same basic stuff that you can do with a custom post type, but that's where the similarities end.  CCP is a complete portfolio solution.
+While Jetpack can certainly be a useful plugin, its portfolio module is not even in the same league.  Jetpack offers some of the same basic stuff that you can do with a custom post type, but that's where the similarities end.  CCP is a complete portfolio solution.
 
 = Will it work with my theme? =
 
@@ -96,7 +96,7 @@ If you're a theme author, you can declare theme support with the following code 
 
 = Where can I get support? =
 
-The official support forum for this plugin is located at [Theme Hybrid](http://themehybrid.com/board/topics). 
+The official support forum for this plugin is located at [Theme Hybrid](http://themehybrid.com/board/topics).
 
 == Screenshots ==
 
