@@ -1,6 +1,12 @@
 # Change Log
 
-## [2.0.0] -
+## [2.0.1] - 2016-11-14
+
+### Fixed
+
+* Meta keys were switched on activation callback for correcting old portfolio project URLs.
+
+## [2.0.0] - 2016-11-14
 
 ### Added
 

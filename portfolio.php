@@ -242,9 +242,9 @@ final class CCP_Plugin {
 		// Temp. code to make sure post types and taxonomies are correct.
 		global $wpdb;
 
-		$wpdb->query( "UPDATE {$wpdb->posts}         SET post_type = 'portfolio_project'  WHERE post_type = 'portfolio_item'" );
-		$wpdb->query( "UPDATE {$wpdb->postmeta}      SET meta_key  = 'portfolio_item_url' WHERE meta_key  = 'url'"            );
-		$wpdb->query( "UPDATE {$wpdb->term_taxonomy} SET taxonomy  = 'portfolio_category' WHERE taxonomy  = 'portfolio'"      );
+		$wpdb->query( "UPDATE {$wpdb->posts}         SET post_type = 'portfolio_project'  WHERE post_type = 'portfolio_item'"     );
+		$wpdb->query( "UPDATE {$wpdb->postmeta}      SET meta_key  = 'url'                WHERE meta_key  = 'portfolio_item_url'" );
+		$wpdb->query( "UPDATE {$wpdb->term_taxonomy} SET taxonomy  = 'portfolio_category' WHERE taxonomy  = 'portfolio'"          );
 
 		// Get the administrator role.
 		$role = get_role( 'administrator' );
