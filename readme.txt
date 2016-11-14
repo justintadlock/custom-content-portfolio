@@ -3,7 +3,7 @@ Contributors: greenshady
 Donate link: http://themehybrid.com/donate
 Tags: portfolio, images, image, post type, taxonomy
 Requires at least: 4.6
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 A complete portfolio solution for creative people.
