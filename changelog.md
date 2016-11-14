@@ -17,6 +17,7 @@
 * Settings page slug changed to `ccp-settings` from `settings` to avoid conflicts with other plugins.  Note that this is a breaking change for add-ons with custom settings sections or fields.
 * Corrected post type labels.
 * Corrected taxonomy labels.
+* Make sure to not return an empty string on the `enter_title_here` hook when not our post type.
 
 ## [1.0.1] - 2015-11-05
 
