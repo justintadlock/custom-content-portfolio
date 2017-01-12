@@ -88,7 +88,7 @@ function ccp_get_tag_capabilities() {
 function ccp_get_category_labels() {
 
 	$labels = array(
-		'name'                       => __( 'Categories',                           'custom-content-portfolio' ),
+		'name'                       => __( 'CCP Categories',                           'custom-content-portfolio' ),
 		'singular_name'              => __( 'Category',                             'custom-content-portfolio' ),
 		'menu_name'                  => __( 'Categories',                           'custom-content-portfolio' ),
 		'name_admin_bar'             => __( 'Category',                             'custom-content-portfolio' ),
@@ -124,7 +124,7 @@ function ccp_get_category_labels() {
 function ccp_get_tag_labels() {
 
 	$labels = array(
-		'name'                       => __( 'Tags',                           'custom-content-portfolio' ),
+		'name'                       => __( 'CCP Tags',                           'custom-content-portfolio' ),
 		'singular_name'              => __( 'Tag',                            'custom-content-portfolio' ),
 		'menu_name'                  => __( 'Tags',                           'custom-content-portfolio' ),
 		'name_admin_bar'             => __( 'Tag',                            'custom-content-portfolio' ),
