@@ -82,7 +82,7 @@ function ccp_get_project_labels() {
 	$labels = array(
 		'name'                  => __( 'Projects',                   'custom-content-portfolio' ),
 		'singular_name'         => __( 'Project',                    'custom-content-portfolio' ),
-		'menu_name'             => __( 'Portfolio',                  'custom-content-portfolio' ),
+		'menu_name'             => __( 'CCP Portfolio',                  'custom-content-portfolio' ),
 		'name_admin_bar'        => __( 'Project',                    'custom-content-portfolio' ),
 		'add_new'               => __( 'New Project',                'custom-content-portfolio' ),
 		'add_new_item'          => __( 'Add New Project',            'custom-content-portfolio' ),
