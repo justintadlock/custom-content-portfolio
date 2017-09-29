@@ -7,7 +7,7 @@
  * Author:      Justin Tadlock
  * Author URI:  http://themehybrid.com
  * Text Domain: custom-content-portfolio
- * Domain Path: /languages
+ * Domain Path: /lang
  *
  * The Custom Content Portfolio plugin was created to solve the problem of theme developers continuing
  * to incorrectly add custom post types to handle portfolios within their themes.  This plugin allows
@@ -227,7 +227,7 @@ final class CCP_Plugin {
 	 */
 	public function i18n() {
 
-		load_plugin_textdomain( 'custom-content-portfolio', false, trailingslashit( dirname( plugin_basename( __FILE__ ) ) ) . 'languages' );
+		load_plugin_textdomain( 'custom-content-portfolio', false, trailingslashit( dirname( plugin_basename( __FILE__ ) ) ) . 'lang' );
 	}
 
 	/**
