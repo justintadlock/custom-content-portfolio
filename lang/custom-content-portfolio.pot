@@ -1,14 +1,14 @@
-# Copyright (C) 2016 Custom Content Portfolio
+# Copyright (C) 2017 Custom Content Portfolio
 # This file is distributed under the same license as the Custom Content Portfolio package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Custom Content Portfolio 1.0.1\n"
+"Project-Id-Version: Custom Content Portfolio 2.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-content-portfolio\n"
-"POT-Creation-Date: 2016-11-14 14:55:38+00:00\n"
+"POT-Creation-Date: 2017-09-29 19:47:41+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
@@ -273,8 +273,8 @@ msgstr ""
 msgid "Author Slug"
 msgstr ""
 
-#: admin/class-settings.php:117 inc/functions-options.php:139
-#: inc/functions-post-types.php:85
+#: admin/class-settings.php:117 inc/functions-capabilities.php:33
+#: inc/functions-options.php:139 inc/functions-post-types.php:85
 msgid "Portfolio"
 msgstr ""
 
@@ -414,6 +414,82 @@ msgstr ""
 msgid "For more information:"
 msgstr ""
 
+#: inc/functions-capabilities.php:52
+msgid "Create Projects"
+msgstr ""
+
+#: inc/functions-capabilities.php:53
+msgid "Edit Projects"
+msgstr ""
+
+#: inc/functions-capabilities.php:54
+msgid "Edit Others' Projects"
+msgstr ""
+
+#: inc/functions-capabilities.php:55
+msgid "Read Private Projects"
+msgstr ""
+
+#: inc/functions-capabilities.php:56
+msgid "Delete Projects"
+msgstr ""
+
+#: inc/functions-capabilities.php:57
+msgid "Delete Private Projects"
+msgstr ""
+
+#: inc/functions-capabilities.php:58
+msgid "Delete Published Projects"
+msgstr ""
+
+#: inc/functions-capabilities.php:59
+msgid "Delete Others' Projects"
+msgstr ""
+
+#: inc/functions-capabilities.php:60
+msgid "Edit Private Projects"
+msgstr ""
+
+#: inc/functions-capabilities.php:61
+msgid "Edit Published Projects"
+msgstr ""
+
+#: inc/functions-capabilities.php:62
+msgid "Publish Projects"
+msgstr ""
+
+#: inc/functions-capabilities.php:65
+msgid "Assign Project Categories"
+msgstr ""
+
+#: inc/functions-capabilities.php:66
+msgid "Delete Project Categories"
+msgstr ""
+
+#: inc/functions-capabilities.php:67
+msgid "Edit Project Categories"
+msgstr ""
+
+#: inc/functions-capabilities.php:68
+msgid "Manage Project Categories"
+msgstr ""
+
+#: inc/functions-capabilities.php:71
+msgid "Assign Project Tags"
+msgstr ""
+
+#: inc/functions-capabilities.php:72
+msgid "Delete Project Tags"
+msgstr ""
+
+#: inc/functions-capabilities.php:73
+msgid "Edit Project Tags"
+msgstr ""
+
+#: inc/functions-capabilities.php:74
+msgid "Manage Project Tags"
+msgstr ""
+
 #: inc/functions-filters.php:124
 msgid "Visit Project"
 msgstr ""
@@ -510,7 +586,7 @@ msgstr ""
 msgid "Enter project title"
 msgstr ""
 
-#. Translators: Scheduled project date format. See http:php.net/date
+#. Translators: Scheduled project date format. See http://php.net/date
 
 #: inc/functions-post-types.php:210
 msgid "M j, Y @ H:i"
@@ -584,11 +660,19 @@ msgid_plural "%s projects restored from the trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions-taxonomies.php:91 inc/functions-taxonomies.php:93
+#: inc/functions-taxonomies.php:91
+msgid "Project Categories"
+msgstr ""
+
+#: inc/functions-taxonomies.php:92
+msgid "Project Category"
+msgstr ""
+
+#: inc/functions-taxonomies.php:93
 msgid "Categories"
 msgstr ""
 
-#: inc/functions-taxonomies.php:92 inc/functions-taxonomies.php:94
+#: inc/functions-taxonomies.php:94
 msgid "Category"
 msgstr ""
 
@@ -652,11 +736,19 @@ msgstr ""
 msgid "Parent Category:"
 msgstr ""
 
-#: inc/functions-taxonomies.php:127 inc/functions-taxonomies.php:129
+#: inc/functions-taxonomies.php:127
+msgid "Project Tags"
+msgstr ""
+
+#: inc/functions-taxonomies.php:128
+msgid "Project Tag"
+msgstr ""
+
+#: inc/functions-taxonomies.php:129
 msgid "Tags"
 msgstr ""
 
-#: inc/functions-taxonomies.php:128 inc/functions-taxonomies.php:130
+#: inc/functions-taxonomies.php:130
 msgid "Tag"
 msgstr ""
 
