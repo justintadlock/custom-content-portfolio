@@ -260,7 +260,14 @@ final class CCP_Plugin {
 
 			// Taxonomy caps.
 			$role->add_cap( 'manage_portfolio_categories' );
+			$role->add_cap( 'edit_portfolio_categories'   );
+			$role->add_cap( 'delete_portfolio_categories' );
+			$role->add_cap( 'assign_portfolio_categories' );
+
 			$role->add_cap( 'manage_portfolio_tags'       );
+			$role->add_cap( 'edit_portfolio_tags'         );
+			$role->add_cap( 'delete_portfolio_tags'       );
+			$role->add_cap( 'assign_portfolio_tags'       );
 
 			// Post type caps.
 			$role->add_cap( 'create_portfolio_projects'           );

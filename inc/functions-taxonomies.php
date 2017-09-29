@@ -51,9 +51,9 @@ function ccp_get_category_capabilities() {
 
 	$caps = array(
 		'manage_terms' => 'manage_portfolio_categories',
-		'edit_terms'   => 'manage_portfolio_categories',
-		'delete_terms' => 'manage_portfolio_categories',
-		'assign_terms' => 'edit_portfolio_projects'
+		'edit_terms'   => 'edit_portfolio_categories',
+		'delete_terms' => 'delete_portfolio_categories',
+		'assign_terms' => 'assign_portfolio_categories'
 	);
 
 	return apply_filters( 'ccp_get_category_capabilities', $caps );
@@ -70,9 +70,9 @@ function ccp_get_tag_capabilities() {
 
 	$caps = array(
 		'manage_terms' => 'manage_portfolio_tags',
-		'edit_terms'   => 'manage_portfolio_tags',
-		'delete_terms' => 'manage_portfolio_tags',
-		'assign_terms' => 'edit_portfolio_projects',
+		'edit_terms'   => 'edit_portfolio_tags',
+		'delete_terms' => 'delete_portfolio_tags',
+		'assign_terms' => 'assign_portfolio_tags',
 	);
 
 	return apply_filters( 'ccp_get_tag_capabilities', $caps );
