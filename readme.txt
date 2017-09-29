@@ -1,7 +1,7 @@
 === Custom Content Portfolio ===
 
 Contributors: greenshady
-Donate link: http://themehybrid.com/donate
+Donate link: https://themehybrid.com/donate
 Tags: portfolio, projects
 Requires at least: 4.7
 Tested up to: 4.8.2
@@ -27,19 +27,19 @@ This plugin was created because of the rising need from users who are downloadin
 * **Sticky Projects:** Stick projects to the portfolio page.
 * **Post Formats:** If your theme supports them, projects can have the audio, gallery, image, or video formats.
 
-For more info, visit the [Custom Content Portfolio](http://themehybrid.com/plugin/custom-content-portfolio) plugin home page.
+For more info, visit the [Custom Content Portfolio](https://themehybrid.com/plugin/custom-content-portfolio) plugin home page.
 
 ### Like this plugin?
 
 Please consider helping the cause by:
 
-* [Making a donation](http://themehybrid.com/donate).
-* [Signing up at my site](http://themehybrid.com/club).
+* [Making a donation](https://themehybrid.com/donate).
+* [Signing up at my site](https://themehybrid.com/club).
 * [Rating the plugin](https://wordpress.org/support/view/plugin-reviews/custom-content-portfolio?rate=5#postform).
 
 ### Professional Support
 
-If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/board/topics), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 75,000+ users (and growing).
+If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](https://themehybrid.com/board/topics), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 75,000+ users (and growing).
 
 ### Plugin Development
 
@@ -99,7 +99,7 @@ If you're a theme author, you can declare theme support with the following code 
 
 ### Where can I get support?
 
-The official support forum for this plugin is located at [Theme Hybrid](http://themehybrid.com/board/topics).
+The official support forum for this plugin is located at [Theme Hybrid](https://themehybrid.com/board/topics).
 
 == Screenshots ==
 

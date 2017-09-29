@@ -5,8 +5,8 @@
  * @package    CustomContentPortfolio
  * @subpackage Admin
  * @author     Justin Tadlock <justintadlock@gmail.com>
- * @copyright  Copyright (c) 2013-2016, Justin Tadlock
- * @link       http://themehybrid.com/plugins/custom-content-portfolio
+ * @copyright  Copyright (c) 2013-2017, Justin Tadlock
+ * @link       https://themehybrid.com/plugins/custom-content-portfolio
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
@@ -108,7 +108,7 @@ function ccp_project_details_register( $butterbean, $post_type ) {
 	$url_args = array(
 		'type'        => 'url',
 		'section'     => 'general',
-		'attr'        => array( 'class' => 'widefat', 'placeholder' => 'http://themehybrid.com' ),
+		'attr'        => array( 'class' => 'widefat', 'placeholder' => 'https://themehybrid.com' ),
 		'label'       => esc_html__( 'URL', 'custom-content-portfolio' ),
 		'description' => esc_html__( 'Enter the URL of the project Web page.', 'custom-content-portfolio' )
 	);
@@ -252,8 +252,8 @@ function ccp_default_post_format_filter( $format ) {
 function ccp_get_help_sidebar_text() {
 
 	// Get docs and help links.
-	$docs_link = sprintf( '<li><a href="http://themehybrid.com/docs">%s</a></li>', esc_html__( 'Documentation', 'custom-content-portfolio' ) );
-	$help_link = sprintf( '<li><a href="http://themehybrid.com/board/topics">%s</a></li>', esc_html__( 'Support Forums', 'custom-content-portfolio' ) );
+	$docs_link = sprintf( '<li><a href="https://themehybrid.com/docs">%s</a></li>', esc_html__( 'Documentation', 'custom-content-portfolio' ) );
+	$help_link = sprintf( '<li><a href="https://themehybrid.com/board/topics">%s</a></li>', esc_html__( 'Support Forums', 'custom-content-portfolio' ) );
 
 	// Return the text.
 	return sprintf(
