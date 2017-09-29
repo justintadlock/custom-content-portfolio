@@ -178,14 +178,15 @@ final class CCP_Plugin {
 	private function includes() {
 
 		// Load functions files.
-		require_once( $this->dir_path . 'inc/functions-filters.php'    );
-		require_once( $this->dir_path . 'inc/functions-options.php'    );
-		require_once( $this->dir_path . 'inc/functions-meta.php'       );
-		require_once( $this->dir_path . 'inc/functions-rewrite.php'    );
-		require_once( $this->dir_path . 'inc/functions-post-types.php' );
-		require_once( $this->dir_path . 'inc/functions-taxonomies.php' );
-		require_once( $this->dir_path . 'inc/functions-project.php'    );
-		require_once( $this->dir_path . 'inc/functions-deprecated.php' );
+		require_once( $this->dir_path . 'inc/functions-capabilities.php' );
+		require_once( $this->dir_path . 'inc/functions-filters.php'      );
+		require_once( $this->dir_path . 'inc/functions-options.php'      );
+		require_once( $this->dir_path . 'inc/functions-meta.php'         );
+		require_once( $this->dir_path . 'inc/functions-rewrite.php'      );
+		require_once( $this->dir_path . 'inc/functions-post-types.php'   );
+		require_once( $this->dir_path . 'inc/functions-taxonomies.php'   );
+		require_once( $this->dir_path . 'inc/functions-project.php'      );
+		require_once( $this->dir_path . 'inc/functions-deprecated.php'   );
 
 		// Load template files.
 		require_once( $this->dir_path . 'inc/template-project.php'  );
