@@ -125,7 +125,7 @@ function ccp_register_post_types() {
 		'description'         => ccp_get_portfolio_description(),
 		'public'              => true,
 		'publicly_queryable'  => true,
-		'show_in_nav_menus'   => false,
+		'show_in_nav_menus'   => true,
 		'show_in_admin_bar'   => true,
 		'exclude_from_search' => false,
 		'show_ui'             => true,
