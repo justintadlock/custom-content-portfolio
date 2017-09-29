@@ -62,16 +62,16 @@ function ccp_register_caps() {
 	$caps['publish_portfolio_projects']          = __( 'Publish Projects',          'custom-content-portfolio' );
 
 	// Category caps.
-	$caps['assign_portfolio_categories'] = __( 'Assign Portfolio Categories', 'custom-content-portfolio' );
-	$caps['delete_portfolio_categories'] = __( 'Delete Portfolio Categories', 'custom-content-portfolio' );
-	$caps['edit_portfolio_categories']   = __( 'Edit Portfolio Categories',   'custom-content-portfolio' );
-	$caps['manage_portfolio_categories'] = __( 'Manage Portfolio Categories', 'custom-content-portfolio' );
+	$caps['assign_portfolio_categories'] = __( 'Assign Project Categories', 'custom-content-portfolio' );
+	$caps['delete_portfolio_categories'] = __( 'Delete Project Categories', 'custom-content-portfolio' );
+	$caps['edit_portfolio_categories']   = __( 'Edit Project Categories',   'custom-content-portfolio' );
+	$caps['manage_portfolio_categories'] = __( 'Manage Project Categories', 'custom-content-portfolio' );
 
 	// Tag caps.
-	$caps['assign_portfolio_tags'] = __( 'Assign Portfolio Tags', 'custom-content-portfolio' );
-	$caps['delete_portfolio_tags'] = __( 'Delete Portfolio Tags', 'custom-content-portfolio' );
-	$caps['edit_portfolio_tags']   = __( 'Edit Portfolio Tags',   'custom-content-portfolio' );
-	$caps['manage_portfolio_tags'] = __( 'Manage Portfolio Tags', 'custom-content-portfolio' );
+	$caps['assign_portfolio_tags'] = __( 'Assign Project Tags', 'custom-content-portfolio' );
+	$caps['delete_portfolio_tags'] = __( 'Delete Project Tags', 'custom-content-portfolio' );
+	$caps['edit_portfolio_tags']   = __( 'Edit Project Tags',   'custom-content-portfolio' );
+	$caps['manage_portfolio_tags'] = __( 'Manage Project Tags', 'custom-content-portfolio' );
 
 	// Register each of the capabilities.
 	foreach ( $caps as $name => $label )
