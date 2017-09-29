@@ -37,7 +37,14 @@ if ( ! is_null( $role ) ) {
 
 	// Taxonomy caps.
 	$role->remove_cap( 'manage_portfolio_categories' );
+	$role->remove_cap( 'edit_portfolio_categories'   );
+	$role->remove_cap( 'delete_portfolio_categories' );
+	$role->remove_cap( 'assign_portfolio_categories' );
+
 	$role->remove_cap( 'manage_portfolio_tags'       );
+	$role->remove_cap( 'edit_portfolio_tags'         );
+	$role->remove_cap( 'delete_portfolio_tags'       );
+	$role->remove_cap( 'assign_portfolio_tags'       );
 
 	// Post type caps.
 	$role->remove_cap( 'create_portfolio_projects'           );
