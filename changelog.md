@@ -1,5 +1,21 @@
 # Change Log
 
+## [2.1.0] - 2017-09-29
+
+### Added
+
+* Support for translatable capability labels in the [Members plugin](https://themehybrid.com/plugins/members).
+* Support for WP's newer taxonomy capabilities for both the `portfolio_category` and `portfolio_tag` taxonomies.  New caps are in the form of `assign_portfolio_*`, `edit_portfolio_*`, `delete_portfolio_*`, and the normal `manage_portfolio_*` cap.
+
+### Changed
+
+* `languages` folder renamed to `lang` for consistency with my other plugins.
+* "Category" and "Tag" singular and plural labels are now prefixed with "Project".  This helps differentiate them in taxonomy lists.
+
+### Fixed
+
+* Typo in textdomain for a single text string that couldn't be translated.
+
 ## [2.0.1] - 2016-11-14
 
 ### Fixed
